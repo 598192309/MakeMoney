@@ -14,7 +14,7 @@
 @property (strong, nonatomic)  UILabel *titleLabel;
 @property (strong, nonatomic)  UIImageView *imageV;
 
-
+@property (nonatomic, strong) ZhuanTiHomeItem *item;
 
 @end
 @implementation ZHuanTiCell
@@ -45,11 +45,13 @@
 
 - (void)refreshWithItem:(ZhuanTiHomeItem*)item{
 //    self.titleLabel.text = item.title;
-    
+    self.imageV.image = nil;
+    self.item  = item;
     __weak __typeof(self) weakSelf = self;
-    [HomeApi downImageWithType:@"s_imgs" paramTitle:@"sId" ID:item.ID key:@"zhuanti" Success:^(UIImage * _Nonnull img) {
-        
-        weakSelf.imageV.image = img;
+    [HomeApi downImageWithType:@"s_imgs" paramTitle:@"sId" ID:item.ID key:@"zhuanti" Success:^(UIImage * _Nonnull img,NSString *ID) {
+        if ([weakSelf.item.ID isEqualToString:ID]) {
+            weakSelf.imageV.image = img;
+        }
     } error:^(NSError *error, id resultObject) {
         
     }];
