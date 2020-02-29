@@ -40,52 +40,15 @@
 }
 
 
-#pragma mark - act
-- (void)downImage{
-    //循环下载
-    for (ZhuanTiHomeItem *item  in self.dataArr) {
-        [self requestImagesWithType:@"s_imgs" paramTitle:@"sId" ID:item.ID];
-    }
-}
 
-//刷新对应的数据
-- (void)refreshImageWithID:(NSString *)ID img:(NSString *)img{
-    __weak __typeof(self) weakSelf = self;
-    //下载好图片 对应cell刷新数据
-    __block NSInteger row = 0;
-    [weakSelf.dataArr enumerateObjectsUsingBlock:^(ZhuanTiHomeItem *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (obj) {
-                if ([obj.ID isEqualToString:ID]) {
-                    *stop = YES;//手动停止遍历
-                    row = idx;
-                }
-            }else{
-                NSLog(@"结束了，但没找到");
-            }
-        }];
-    ZhuanTiHomeItem *item = [weakSelf.dataArr safeObjectAtIndex:row];
-    UIImage *downImage = [UIImage base64stringToImage:img];
-    item.customImage = downImage;
-    //刷新对应的cell
-//        //一个section刷新
-//
-//        NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:2];
-//
-//        [tableview reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
 
-    //一个cell刷新
-
-    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:row inSection:0];
-
-    [weakSelf.customTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
-}
 #pragma mark -  net
 -(void)requestData{
     __weak __typeof(self) weakSelf = self;
-    [ZhuanTiApi requestZhuanTiHomeInfowithPageIndex:@"1" page_size:@"10" Success:^(NSArray * _Nonnull zhuanTiHomeItemArr, NSString * _Nonnull msg) {
+    [ZhuanTiApi requestZhuanTiHomeInfowithPageIndex:@"1" page_size:@"25" Success:^(NSArray * _Nonnull zhuanTiHomeItemArr, NSString * _Nonnull msg) {
         weakSelf.pageIndex = 2;
         weakSelf.dataArr = [NSMutableArray arrayWithArray:zhuanTiHomeItemArr];
-        if (zhuanTiHomeItemArr.count >= 10 ) {
+        if (zhuanTiHomeItemArr.count >= 25 ) {
             [weakSelf.customTableView addFooterWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
             [weakSelf.customTableView.mj_footer setHidden:NO];
     
@@ -94,7 +57,6 @@
             //消除尾部"没有更多数据"的状态
             [weakSelf.customTableView.mj_footer setHidden:YES];
         }
-        [weakSelf downImage];
         [weakSelf.customTableView endHeaderRefreshing];
         [weakSelf.customTableView reloadData];
     } error:^(NSError *error, id resultObject) {
@@ -107,30 +69,20 @@
 }
 
 
-//下载图片
-- (void)requestImagesWithType:(NSString *)type paramTitle:(NSString *)paramTitle ID:(NSString *)ID{
-    __weak __typeof(self) weakSelf = self;
-    [HomeApi downImageWithType:type paramTitle:paramTitle ID:ID Success:^(NSString * _Nonnull img) {
-        [weakSelf refreshImageWithID:ID img:img];
-    } error:^(NSError *error, id resultObject) {
-        
-    }];
-}
+
 
 - (void)requestMoreData{
     __weak __typeof(self) weakSelf = self;
-    [ZhuanTiApi requestZhuanTiHomeInfowithPageIndex:IntTranslateStr(self.pageIndex) page_size:@"10" Success:^(NSArray * _Nonnull zhuanTiHomeItemArr, NSString * _Nonnull msg) {
+    [ZhuanTiApi requestZhuanTiHomeInfowithPageIndex:IntTranslateStr(self.pageIndex) page_size:@"25" Success:^(NSArray * _Nonnull zhuanTiHomeItemArr, NSString * _Nonnull msg) {
         [weakSelf.dataArr addObjectsFromArray:zhuanTiHomeItemArr];
         [weakSelf.customTableView endFooterRefreshing];
         [weakSelf.customTableView reloadData];
-        if (zhuanTiHomeItemArr.count < 10) {
+        if (zhuanTiHomeItemArr.count < 25) {
             [weakSelf.customTableView endRefreshingWithNoMoreData];
         }else{
             weakSelf.pageIndex += 1;
             
         }
-        [weakSelf downImage];
-
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
         [weakSelf.customTableView endHeaderRefreshing];
@@ -138,11 +90,9 @@
 
     }];
 }
-#pragma mark - UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section

@@ -8,6 +8,7 @@
 
 #import "ZHuanTiCell.h"
 #import "ZhuanTiItem.h"
+#import "HomeApi.h"
 @interface ZHuanTiCell()
 @property (nonatomic,strong) UIView * cellBackgroundView;
 @property (strong, nonatomic)  UILabel *titleLabel;
@@ -43,8 +44,16 @@
 }
 
 - (void)refreshWithItem:(ZhuanTiHomeItem*)item{
-//    self.titleLabel.text = item.title;
-    self.imageV.image = item.customImage;
+    self.titleLabel.text = item.title;
+    
+    __weak __typeof(self) weakSelf = self;
+    [HomeApi downImageWithType:@"s_imgs" paramTitle:@"sId" ID:item.ID Success:^(UIImage * _Nonnull img) {
+        
+        weakSelf.imageV.image = img;
+    } error:^(NSError *error, id resultObject) {
+        
+    }];
+    
 }
 
 #pragma mark - act

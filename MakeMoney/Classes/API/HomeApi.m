@@ -162,12 +162,21 @@
 /*******************下载图片
  video_type: 是拼接在后的host 有v_imgs a_imgs
  *********************/
-+ (NetworkTask *)downImageWithType:(NSString *)video_type paramTitle:(NSString *)paramTitle ID:(NSString *)ID Success:(void(^)(NSString *img))successBlock error:(ErrorBlock)errorBlock{
++ (NetworkTask *)downImageWithType:(NSString *)video_type paramTitle:(NSString *)paramTitle ID:(NSString *)ID Success:(void(^)(UIImage *img))successBlock error:(ErrorBlock)errorBlock{
     NSString *apistr = [NSString stringWithFormat:@"/api/%@",video_type];
+    NSString *imageKey = [NSString stringWithFormat:@"%@-%@-%@",video_type,paramTitle,ID];
+    NSString *imageDir = [LqSandBox docDownloadImagePath];
+    NSString *imagePath = [imageDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",imageKey]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
+        successBlock([UIImage imageWithContentsOfFile:imagePath]);
+        return nil;
+    }
     return [NET POST:apistr parameters:@{paramTitle:SAFE_NIL_STRING(ID)} criticalValue:@{@"NoEncode":@YES} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
         NSString *img = resultObject;
+        UIImage *downImage = [UIImage base64stringToImage:img];
+        [UIImagePNGRepresentation(downImage) writeToFile:imagePath atomically:YES];
         if (successBlock) {
-            successBlock(img);
+            successBlock(downImage);
         }
     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
         if (errorBlock) {
@@ -175,4 +184,6 @@
         }
     }];
 }
+
+
 @end

@@ -77,7 +77,7 @@
 //下载图片
 - (void)requestImagesWithType:(NSString *)type paramTitle:(NSString *)paramTitle ID:(NSString *)ID{
     __weak __typeof(self) weakSelf = self;
-    [HomeApi downImageWithType:type paramTitle:paramTitle ID:ID Success:^(NSString * _Nonnull img) {
+    [HomeApi downImageWithType:type paramTitle:paramTitle ID:ID Success:^(UIImage * _Nonnull img) {
         
     } error:^(NSError *error, id resultObject) {
         

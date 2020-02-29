@@ -294,7 +294,7 @@ NSString * const ID = @"cycleCell";
 
 - (int)pageControlIndexWithCurrentCellIndex:(NSInteger)index
 {
-    return (int)index % self.imagePathsGroup.count;
+    return self.imagePathsGroup.count > 0 ? (int)index % self.imagePathsGroup.count : 0;
 }
 
 - (void)clearCache

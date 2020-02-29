@@ -539,6 +539,12 @@
     [logString appendFormat:@"\n\nHTTP URL:\n\t%@", task.originalRequest.URL];
     [logString appendFormat:@"\n\nHTTP Header:\n%@", task.originalRequest.allHTTPHeaderFields ? task.originalRequest.allHTTPHeaderFields : @"\t\t\t\t\tN/A"];
     NSString *bodyString = [[NSString alloc] initWithData:task.originalRequest.HTTPBody encoding:NSUTF8StringEncoding];
+//    //解密一下
+//    if ([bodyString containsString:@"{\"params\""]) {
+//        NSString *str = [bodyString componentsSeparatedByString:@"\"params\":\""].lastObject;
+//        str = [str substringToIndex:str.length - 3];
+//        bodyString = [RSAEncryptor decodeDesWithString:str];
+//    }
     [logString appendFormat:@"\n\nHTTP Body:\n\t%@", bodyString ? bodyString : @"\t\t\t\t\tN/A"];
 
     [logString appendFormat:@"\n\n==============================================================\n=                        Response End                        =\n==============================================================\n\n\n\n"];

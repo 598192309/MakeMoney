@@ -41,10 +41,10 @@
     return [paths objectAtIndex:0];
 }
 
-+ (NSString *)docRecordPath
++ (NSString *)docDownloadImagePath
 {
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path=[[paths objectAtIndex:0]  lq_subDirectory:@"FSRecord"];
+    NSString *path=[[paths objectAtIndex:0]  lq_subDirectory:@"downImage"];
     return path;
 }
 
@@ -117,5 +117,31 @@
     }
     return supportPath;
 }
+
++ (float)folderSizeAtPath:(NSString *)folderPath
+{
+    NSFileManager* manager = [NSFileManager defaultManager];
+    if (![manager fileExistsAtPath:folderPath]) return 0;
+    NSEnumerator *childFilesEnumerator = [[manager subpathsAtPath:folderPath] objectEnumerator];
+    NSString* fileName;
+    long long folderSize = 0;
+    while ((fileName = [childFilesEnumerator nextObject]) != nil)
+    {
+        NSString* fileAbsolutePath = [folderPath stringByAppendingPathComponent:fileName];
+        folderSize += [self fileSizeAtPath:fileAbsolutePath];
+    }
+    return folderSize/(1024.0*1024.0);
+}
+
++ (long long)fileSizeAtPath:(NSString*)filePath
+{
+    NSFileManager* manager = [NSFileManager defaultManager];
+    if ([manager fileExistsAtPath:filePath]){
+        return [[manager attributesOfItemAtPath:filePath error:nil] fileSize];
+    }
+    return 0;
+}
+
+
 
 @end

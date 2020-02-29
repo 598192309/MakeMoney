@@ -20,9 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *text;
 @property (nonatomic,strong)NSString *title;
 @property (nonatomic,assign)NSInteger type;
-
-@property (nonatomic,strong)UIImage *customImage;//通过下载图片api获取到的
-
 @end
 
 NS_ASSUME_NONNULL_END
