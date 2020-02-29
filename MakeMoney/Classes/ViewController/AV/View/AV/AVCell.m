@@ -20,7 +20,7 @@
 @property (strong, nonatomic)  UILabel *titleLable;
 
 
-
+@property (nonatomic, strong) HotItem *item;
 @end
 @implementation AVCell
 
@@ -49,6 +49,8 @@
 }
 
 - (void)refreshWithItem:(HotItem*)item{
+    self.item = item;
+    
     self.titleLable.text = item.title;
     self.vipLabel.text = item.v_channel ? lqStrings(@"VIP") : lqStrings(@"VIP");
     self.vipLabel.backgroundColor= 1 ? CustomPinkColor : LightYellowColor;
@@ -68,9 +70,11 @@
     /api/vt_imgs        vtId=                  全部分类
     /api/s_imgs         sId=                   专题
      */
-
-    [HomeApi downImageWithType:@"a_imgs" paramTitle:@"aId" ID:item.ID key:item.video_url Success:^(UIImage * _Nonnull img) {
-        weakSelf.imageV.image = img;
+    self.imageV.image = nil;
+    [HomeApi downImageWithType:@"a_imgs" paramTitle:@"aId" ID:item.ID key:item.video_url Success:^(UIImage * _Nonnull img,NSString *ID) {
+        if ([weakSelf.item.ID isEqualToString:ID]) {
+            weakSelf.imageV.image = img;
+        }
     } error:^(NSError *error, id resultObject) {
         
     }];
