@@ -16,7 +16,7 @@
 @property (nonatomic,strong)UITableView *customTableView;
 @property (nonatomic,assign)NSInteger pageIndex;
 @property (nonatomic,strong)NSMutableArray *dataArr;
-@property (nonatomic,strong)NSString *topAdsImageUrlStr;
+@property (nonatomic,strong)AdsItem *adsItem;
 @end
 
 @implementation AVViewController
@@ -47,7 +47,22 @@
 
 
 #pragma mark - act
+-(void)adsTap:(UITapGestureRecognizer *)gest{
+    if ([self.adsItem.url hasPrefix:@"http"]) {
+        UIApplication *application = [UIApplication sharedApplication];
+        if ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+            if (@available(iOS 10.0, *)) {
+                [application openURL:[NSURL URLWithString:self.adsItem.url] options:@{} completionHandler:nil];
+            } else {
+                [application openURL:[NSURL URLWithString:self.adsItem.url]];
+            }
+        }else{
+            [application openURL:[NSURL URLWithString:self.adsItem.url]];
 
+        }
+
+    }
+}
 
 #pragma mark -  net
 -(void)requestData{
@@ -74,6 +89,7 @@
     }];
 }
 
+
 -(void)requestMoreData{
     __weak __typeof(self) weakSelf = self;
 
@@ -99,8 +115,28 @@
     __weak __typeof(self) weakSelf = self;
     [HomeApi requestAdWithType:@"3" Success:^(NSArray * _Nonnull adsItemArr, NSString * _Nonnull msg) {
         AdsItem *item = adsItemArr.firstObject;
-        weakSelf.topAdsImageUrlStr = item.img;
+        weakSelf.adsItem = item;
         [weakSelf.customTableView reloadData];
+    } error:^(NSError *error, id resultObject) {
+        
+    }];
+}
+
+//收藏
+- (void)loveWithId:(NSString *)ID{
+    __weak __typeof(self) weakSelf = self;
+    [AVApi loveVedioWithVedioId:ID Success:^(NSInteger status, NSString * _Nonnull msg) {
+        
+    } error:^(NSError *error, id resultObject) {
+        
+    }];
+}
+
+//取消收藏
+- (void)cancleLoveWithID:(NSString *)ID{
+    __weak __typeof(self) weakSelf = self;
+    [AVApi cancleLoveVedioWithVedioId:ID Success:^(NSInteger status, NSString * _Nonnull msg) {
+        
     } error:^(NSError *error, id resultObject) {
         
     }];
@@ -136,12 +172,15 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIImageView *imageV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, LQScreemW, Adaptor_Value(80))];
-    [imageV sd_setImageWithURL:[NSURL URLWithString:self.topAdsImageUrlStr]];
+    [imageV sd_setImageWithURL:[NSURL URLWithString:self.adsItem.img]];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(adsTap:)];
+    imageV.userInteractionEnabled = YES;
+    [imageV addGestureRecognizer:tap];
     return imageV;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (self.topAdsImageUrlStr.length > 0) {
+    if (self.adsItem.img.length > 0) {
         return Adaptor_Value(80);
     }
     return 0.01;
