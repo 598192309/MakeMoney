@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class HotItem;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AVCell : UITableViewCell
-- (void)refreshWithItem:(NSObject*)item;
+- (void)refreshWithItem:(HotItem*)item;
 
 @end
 

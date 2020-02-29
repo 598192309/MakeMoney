@@ -164,7 +164,7 @@
  *********************/
 + (NetworkTask *)downImageWithType:(NSString *)video_type paramTitle:(NSString *)paramTitle ID:(NSString *)ID key:(NSString *)key Success:(void(^)(UIImage *img))successBlock error:(ErrorBlock)errorBlock{
     NSString *apistr = [NSString stringWithFormat:@"/api/%@",video_type];
-    NSString *imageKey = [NSString stringWithFormat:@"%@-%@-%@",video_type,paramTitle,ID];
+    NSString *imageKey = [RSAEncryptor MD5WithString:[NSString stringWithFormat:@"%@-%@-%@-%@",video_type,paramTitle,ID,key]];
     NSString *imageDir = [LqSandBox docDownloadImagePath];
     NSString *imagePath = [imageDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",imageKey]];
     if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
@@ -174,7 +174,7 @@
     return [NET POST:apistr parameters:@{paramTitle:SAFE_NIL_STRING(ID)} criticalValue:@{@"NoEncode":@YES} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
         NSString *img = resultObject;
         UIImage *downImage = [UIImage base64stringToImage:img];
-        [UIImagePNGRepresentation(downImage) writeToFile:imagePath atomically:YES];
+        BOOL success = [UIImagePNGRepresentation(downImage) writeToFile:imagePath atomically:YES];
         if (successBlock) {
             successBlock(downImage);
         }

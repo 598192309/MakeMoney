@@ -8,10 +8,15 @@
 
 #import "AVViewController.h"
 #import "AVCell.h"
+#import "AVItem.h"
+#import "AVApi.h"
+#import "HomeItem.h"
 
 @interface AVViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
-
+@property (nonatomic,assign)NSInteger pageIndex;
+@property (nonatomic,strong)NSMutableArray *dataArr;
+@property (nonatomic,strong)NSString *topAdsImageUrlStr;
 @end
 
 @implementation AVViewController
@@ -20,10 +25,13 @@
     [super viewDidLoad];
     
     [self configUI];
-        
-
+    
+    [self reqestTopAds];
+    
 }
-
+- (void)dealloc{
+    LQLog(@"dealloc -------%@",NSStringFromClass([self class]));
+}
 #pragma mark - ui
 - (void)configUI{
     __weak __typeof(self) weakSelf = self;
@@ -43,20 +51,59 @@
 
 #pragma mark -  net
 -(void)requestData{
-//    if (homeDataItem.lists.count >= 10 && !homeDataItem.have_follow) {
-//        [weakSelf.customTableView addFooterWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
-//        [weakSelf.customTableView.mj_footer setHidden:NO];
-//
-//    }else{
-//        [weakSelf.customTableView endHeaderRefreshing];
-//        //消除尾部"没有更多数据"的状态
-//        [weakSelf.customTableView.mj_footer setHidden:YES];
-//
-//    }
     __weak __typeof(self) weakSelf = self;
-    [weakSelf.customTableView endHeaderRefreshing];
-    [weakSelf.customTableView reloadData];
-    
+
+    [AVApi requestAVExtendwithPageIndex:@"1" page_size:@"10" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
+            weakSelf.pageIndex = 2;
+            weakSelf.dataArr = [NSMutableArray arrayWithArray:hotItemArr];
+            if (hotItemArr.count >= 10 ) {
+                [weakSelf.customTableView addFooterWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
+                [weakSelf.customTableView.mj_footer setHidden:NO];
+        
+            }else{
+                [weakSelf.customTableView endHeaderRefreshing];
+                //消除尾部"没有更多数据"的状态
+                [weakSelf.customTableView.mj_footer setHidden:YES];
+            }
+            [weakSelf.customTableView endHeaderRefreshing];
+            [weakSelf.customTableView reloadData];
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+        [weakSelf.customTableView endHeaderRefreshing];
+
+    }];
+}
+
+-(void)requestMoreData{
+    __weak __typeof(self) weakSelf = self;
+
+    [AVApi requestAVExtendwithPageIndex:IntTranslateStr(self.pageIndex) page_size:@"10" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
+        [weakSelf.dataArr addObjectsFromArray:hotItemArr];
+        [weakSelf.customTableView endFooterRefreshing];
+        [weakSelf.customTableView reloadData];
+        if (hotItemArr.count < 10) {
+            [weakSelf.customTableView endRefreshingWithNoMoreData];
+        }else{
+            weakSelf.pageIndex += 1;
+            
+        }
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+        [weakSelf.customTableView endHeaderRefreshing];
+
+    }];
+}
+
+//获取顶部广告
+- (void)reqestTopAds{
+    __weak __typeof(self) weakSelf = self;
+    [HomeApi requestAdWithType:@"3" Success:^(NSArray * _Nonnull adsItemArr, NSString * _Nonnull msg) {
+        AdsItem *item = adsItemArr.firstObject;
+        weakSelf.topAdsImageUrlStr = item.img;
+        [weakSelf.customTableView reloadData];
+    } error:^(NSError *error, id resultObject) {
+        
+    }];
 }
 #pragma mark - UITableViewDataSource
 
@@ -67,14 +114,15 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AVCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AVCell class]) forIndexPath:indexPath];
-    [cell refreshWithItem: nil];
+    AVCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AVCell class]) ];
+    HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
+    [cell refreshWithItem: item];
     return cell;
 
 
@@ -86,10 +134,31 @@
     [LSVProgressHUD showInfoWithStatus:@"点击"];
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIImageView *imageV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, LQScreemW, Adaptor_Value(80))];
+    [imageV sd_setImageWithURL:[NSURL URLWithString:self.topAdsImageUrlStr]];
+    return imageV;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (self.topAdsImageUrlStr.length > 0) {
+        return Adaptor_Value(80);
+    }
+    return 0.01;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    return [UIView new];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01;
+}
+
 #pragma mark - lazy
 - (UITableView *)customTableView{
     if (!_customTableView) {
-        _customTableView = [[UITableView alloc] init];
+        _customTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, LQScreemW, LQScreemH) style:UITableViewStyleGrouped];
         _customTableView.backgroundColor = ThemeBlackColor;
         _customTableView.dataSource = self;
         _customTableView.delegate = self;

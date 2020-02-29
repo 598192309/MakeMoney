@@ -33,7 +33,9 @@
     
     [self reqestBannerAds];
 }
-
+- (void)dealloc{
+    LQLog(@"dealloc -------%@",NSStringFromClass([self class]));
+}
 #pragma mark - ui
 - (void)configUI{
     __weak __typeof(self) weakSelf = self;

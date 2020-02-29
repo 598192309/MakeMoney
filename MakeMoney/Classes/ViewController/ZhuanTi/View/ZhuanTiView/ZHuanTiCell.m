@@ -44,7 +44,7 @@
 }
 
 - (void)refreshWithItem:(ZhuanTiHomeItem*)item{
-    self.titleLabel.text = item.title;
+//    self.titleLabel.text = item.title;
     
     __weak __typeof(self) weakSelf = self;
     [HomeApi downImageWithType:@"s_imgs" paramTitle:@"sId" ID:item.ID key:@"zhuanti" Success:^(UIImage * _Nonnull img) {

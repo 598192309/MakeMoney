@@ -25,7 +25,9 @@
     [self configUI];
         
 }
-
+- (void)dealloc{
+    LQLog(@"dealloc -------%@",NSStringFromClass([self class]));
+}
 #pragma mark - ui
 - (void)configUI{
     __weak __typeof(self) weakSelf = self;
@@ -119,7 +121,22 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [LSVProgressHUD showInfoWithStatus:@"点击"];
 }
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return [UIView new];
+}
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+   
+    return 0.01;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    return [UIView new];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01;
+}
 #pragma mark - lazy
 - (UITableView *)customTableView{
     if (!_customTableView) {

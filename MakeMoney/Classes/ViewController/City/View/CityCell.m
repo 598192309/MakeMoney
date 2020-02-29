@@ -40,7 +40,7 @@
 
 
 
-- (void)refreshWithItem:(NSObject *)item hiddenTitle:(BOOL)hiddenTitle{
+- (void)refreshWithItem:(NSObject *)item {
     _titleLabel.text = item ? @"我是你大爷 我是你大爷 我是你大爷" : @"我是你大爷";
     [_imageV sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@""]];
     

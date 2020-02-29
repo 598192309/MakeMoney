@@ -7,6 +7,7 @@
 //
 
 #import "AVCell.h"
+#import "AVItem.h"
 
 @interface AVCell()
 @property (nonatomic,strong) UIView * cellBackgroundView;
@@ -47,16 +48,32 @@
 - (void)layoutSub{
 }
 
-- (void)refreshWithItem:(NSObject*)item{
-    self.titleLable.text = lqStrings(@"你好o");
-    [_imageV sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@""]];
-    self.vipLabel.text = 1 ? lqStrings(@"VIP") : lqStrings(@"VIP");
+- (void)refreshWithItem:(HotItem*)item{
+    self.titleLable.text = item.title;
+    self.vipLabel.text = item.v_channel ? lqStrings(@"VIP") : lqStrings(@"VIP");
     self.vipLabel.backgroundColor= 1 ? CustomPinkColor : LightYellowColor;
 
-    self.timeLable.text = @"2020-2-2";
-    [self.seeTimesBtn setTitle:@"877" forState:UIControlStateNormal];
-    self.vedioTimesLable.text = @"01:24";
+    self.timeLable.text = [item.create_time lq_getTimeFromTimestampWithFormatter:@"yyyy-MM-dd"];
+    [self.seeTimesBtn setTitle:item.play forState:UIControlStateNormal];
+    self.vedioTimesLable.text = item.total_time;
+    self.loveBtn.selected = item.tag == 1;
+    
+    __weak __typeof(self) weakSelf = self;
+    /**
+     
+    对应参数如下
+    /api/v_imgs         vId=                   短视频
+    /api/a_imgs         aId=                   av
+    /api/qm_imgs      qmId=                同城
+    /api/vt_imgs        vtId=                  全部分类
+    /api/s_imgs         sId=                   专题
+     */
 
+    [HomeApi downImageWithType:@"a_imgs" paramTitle:@"aId" ID:item.ID key:item.video_url Success:^(UIImage * _Nonnull img) {
+        weakSelf.imageV.image = img;
+    } error:^(NSError *error, id resultObject) {
+        
+    }];
 }
 
 #pragma mark - act
@@ -68,15 +85,15 @@
 - (UIView *)cellBackgroundView{
     if (!_cellBackgroundView) {
         _cellBackgroundView = [UIView new];
-        _cellBackgroundView.backgroundColor = TitleWhiteColor;
+        _cellBackgroundView.backgroundColor = ThemeBlackColor;
         UIView *contentV = [UIView new];
         __weak __typeof(self) weakSelf = self;
         [_cellBackgroundView addSubview:contentV];
         [contentV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(weakSelf.cellBackgroundView);
-            
+            make.left.right.bottom.mas_equalTo(weakSelf.cellBackgroundView);
+            make.top.mas_equalTo(2);
         }];
-        contentV.backgroundColor = TitleWhiteColor;
+        contentV.backgroundColor = ThemeBlackColor;
         
         _imageV = [[UIImageView alloc] init];
         _imageV.backgroundColor = TitleGrayColor;
@@ -97,15 +114,24 @@
         
         _loveBtn = [[EnlargeTouchSizeButton alloc] init];
         [_loveBtn addTarget:self action:@selector(loveBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_loveBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        [_loveBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
-        _loveBtn.backgroundColor = [UIColor purpleColor];
+        [_loveBtn setImage:[UIImage imageNamed:@"icon_home_like_before"] forState:UIControlStateNormal];
+        [_loveBtn setImage:[UIImage imageNamed:@"icon_home_like_after"] forState:UIControlStateSelected];
         [contentV addSubview:_loveBtn];
         [_loveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.width.mas_equalTo(Adaptor_Value(40));
-            make.top.mas_equalTo(Adaptor_Value(15));
-            make.right.mas_equalTo(contentV).offset(-Adaptor_Value(15));
+            make.height.width.mas_equalTo(Adaptor_Value(20));
+            make.top.mas_equalTo(Adaptor_Value(25));
+            make.right.mas_equalTo(contentV).offset(-Adaptor_Value(25));
         }];
+        
+        UIView *loveBtnBackView = [UIView new];
+        loveBtnBackView.backgroundColor = [UIColor lq_colorWithHexString:@"ffffff" alpha:0.3];
+        [contentV insertSubview:loveBtnBackView belowSubview:_loveBtn];
+        [loveBtnBackView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.width.mas_equalTo(Adaptor_Value(40));
+            make.center.mas_equalTo(weakSelf.loveBtn);
+        }];
+        ViewRadius(loveBtnBackView, Adaptor_Value(20));
+        
 
         _timeLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_timeLable];
@@ -135,21 +161,33 @@
         }];
         
         UIView *alfaView  = [UIView new];
-        alfaView.backgroundColor = [UIColor lq_colorWithHexString:@"303030" alpha:0.2];
+        alfaView.backgroundColor = [UIColor lq_colorWithHexString:@"303030" alpha:0.4];
         [contentV insertSubview:alfaView belowSubview:_timeLable];
         [alfaView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(Adaptor_Value(Adaptor_Value(25)));
             make.left.right.bottom.mas_equalTo(weakSelf.imageV);
         }];
         
-        _titleLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleBlackColor fontSize:AdaptedFontSize(16) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
-        [contentV addSubview:_titleLable];
-        [_titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(Adaptor_Value(Adaptor_Value(40)));
-            make.right.bottom.mas_equalTo(contentV);
-            make.left.mas_equalTo(Adaptor_Value(14));
+        UIView *titleBackWhiteView = [UIView new];
+        titleBackWhiteView.backgroundColor = TitleWhiteColor;
+        [contentV addSubview:titleBackWhiteView];
+        [titleBackWhiteView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_greaterThanOrEqualTo(Adaptor_Value(Adaptor_Value(40)));
+            make.right.left.mas_equalTo(contentV);
             make.top.mas_equalTo(weakSelf.imageV.mas_bottom);
+            make.bottom.mas_equalTo(contentV);
         }];
+        
+        _titleLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleBlackColor fontSize:AdaptedFontSize(16) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [titleBackWhiteView addSubview:_titleLable];
+        [_titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
+            make.centerY.mas_equalTo(titleBackWhiteView);
+            make.left.mas_equalTo(Adaptor_Value(10));
+            make.top.mas_equalTo(Adaptor_Value(5));
+        }];
+        
+        
 
     }
     return _cellBackgroundView;
