@@ -162,7 +162,7 @@
 /*******************下载图片
  video_type: 是拼接在后的host 有v_imgs a_imgs
  *********************/
-+ (NetworkTask *)downImageWithType:(NSString *)video_type paramTitle:(NSString *)paramTitle ID:(NSString *)ID Success:(void(^)(UIImage *img))successBlock error:(ErrorBlock)errorBlock{
++ (NetworkTask *)downImageWithType:(NSString *)video_type paramTitle:(NSString *)paramTitle ID:(NSString *)ID key:(NSString *)key Success:(void(^)(UIImage *img))successBlock error:(ErrorBlock)errorBlock{
     NSString *apistr = [NSString stringWithFormat:@"/api/%@",video_type];
     NSString *imageKey = [NSString stringWithFormat:@"%@-%@-%@",video_type,paramTitle,ID];
     NSString *imageDir = [LqSandBox docDownloadImagePath];

@@ -54,7 +54,6 @@
         weakSelf.homeInfoDataItem = homeInfoItem;
         [weakSelf.collectionView endHeaderRefreshing];
         [weakSelf.collectionView reloadData];
-//        [weakSelf requestImagesWithType:@"v_imgs" vId:@"1189"];
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
         [weakSelf.collectionView endHeaderRefreshing];
@@ -75,9 +74,9 @@
     }];
 }
 //下载图片
-- (void)requestImagesWithType:(NSString *)type paramTitle:(NSString *)paramTitle ID:(NSString *)ID{
+- (void)requestImagesWithType:(NSString *)type paramTitle:(NSString *)paramTitle ID:(NSString *)ID key:(NSString *)key{
     __weak __typeof(self) weakSelf = self;
-    [HomeApi downImageWithType:type paramTitle:paramTitle ID:ID Success:^(UIImage * _Nonnull img) {
+    [HomeApi downImageWithType:type paramTitle:paramTitle ID:ID key:key Success:^(UIImage * _Nonnull img) {
         
     } error:^(NSError *error, id resultObject) {
         

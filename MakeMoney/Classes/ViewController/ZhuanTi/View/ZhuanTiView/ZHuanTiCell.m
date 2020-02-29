@@ -47,7 +47,7 @@
     self.titleLabel.text = item.title;
     
     __weak __typeof(self) weakSelf = self;
-    [HomeApi downImageWithType:@"s_imgs" paramTitle:@"sId" ID:item.ID Success:^(UIImage * _Nonnull img) {
+    [HomeApi downImageWithType:@"s_imgs" paramTitle:@"sId" ID:item.ID key:@"zhuanti" Success:^(UIImage * _Nonnull img) {
         
         weakSelf.imageV.image = img;
     } error:^(NSError *error, id resultObject) {

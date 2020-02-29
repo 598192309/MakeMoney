@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*******************下载图片
  video_type: 是拼接在后的host 有v_imgs a_imgs
  *********************/
-+ (NetworkTask *)downImageWithType:(NSString *)video_type paramTitle:(NSString *)paramTitle ID:(NSString *)ID Success:(void(^)(UIImage *img))successBlock error:(ErrorBlock)errorBlock;
++ (NetworkTask *)downImageWithType:(NSString *)video_type paramTitle:(NSString *)paramTitle ID:(NSString *)ID key:(NSString *)key Success:(void(^)(UIImage *img))successBlock error:(ErrorBlock)errorBlock;
 
 
 /// 计算下载的图片的大小
