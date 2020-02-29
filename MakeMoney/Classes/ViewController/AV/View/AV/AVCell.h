@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AVCell : UITableViewCell
 - (void)refreshWithItem:(HotItem*)item;
-
+/**收藏 取消 */
+@property (nonatomic, copy) void(^loveBlock)(EnlargeTouchSizeButton *sender);
 @end
 
 NS_ASSUME_NONNULL_END

@@ -68,10 +68,10 @@
 -(void)requestData{
     __weak __typeof(self) weakSelf = self;
 
-    [AVApi requestAVExtendwithPageIndex:@"1" page_size:@"10" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
-            weakSelf.pageIndex = 2;
+    [AVApi requestAVExtendwithPageIndex:@"0" page_size:@"25" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
+            weakSelf.pageIndex = hotItemArr.count;
             weakSelf.dataArr = [NSMutableArray arrayWithArray:hotItemArr];
-            if (hotItemArr.count >= 10 ) {
+            if (hotItemArr.count >= 25 ) {
                 [weakSelf.customTableView addFooterWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
                 [weakSelf.customTableView.mj_footer setHidden:NO];
         
@@ -93,14 +93,14 @@
 -(void)requestMoreData{
     __weak __typeof(self) weakSelf = self;
 
-    [AVApi requestAVExtendwithPageIndex:IntTranslateStr(self.pageIndex) page_size:@"10" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
+    [AVApi requestAVExtendwithPageIndex:IntTranslateStr(self.pageIndex) page_size:@"25" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
         [weakSelf.dataArr addObjectsFromArray:hotItemArr];
         [weakSelf.customTableView endFooterRefreshing];
         [weakSelf.customTableView reloadData];
-        if (hotItemArr.count < 10) {
+        if (hotItemArr.count < 25) {
             [weakSelf.customTableView endRefreshingWithNoMoreData];
         }else{
-            weakSelf.pageIndex += 1;
+            weakSelf.pageIndex = weakSelf.dataArr.count ;
             
         }
     } error:^(NSError *error, id resultObject) {
@@ -123,22 +123,32 @@
 }
 
 //收藏
-- (void)loveWithId:(NSString *)ID{
+- (void)loveWithId:(NSString *)ID sender:(UIButton *)sender{
     __weak __typeof(self) weakSelf = self;
+    sender.userInteractionEnabled = NO;
     [AVApi loveVedioWithVedioId:ID Success:^(NSInteger status, NSString * _Nonnull msg) {
-        
+        sender.userInteractionEnabled = YES;
+        [LSVProgressHUD showInfoWithStatus:msg];
+        sender.selected = !sender.selected;
     } error:^(NSError *error, id resultObject) {
-        
+        sender.userInteractionEnabled = YES;
+
     }];
 }
 
 //取消收藏
-- (void)cancleLoveWithID:(NSString *)ID{
+- (void)cancleLoveWithID:(NSString *)ID sender:(UIButton *)sender{
     __weak __typeof(self) weakSelf = self;
+    sender.userInteractionEnabled = NO;
+
     [AVApi cancleLoveVedioWithVedioId:ID Success:^(NSInteger status, NSString * _Nonnull msg) {
-        
+        sender.userInteractionEnabled = YES;
+        [LSVProgressHUD showInfoWithStatus:msg];
+        sender.selected = !sender.selected;
+
     } error:^(NSError *error, id resultObject) {
-        
+        sender.userInteractionEnabled = YES;
+
     }];
 }
 #pragma mark - UITableViewDataSource
@@ -159,6 +169,14 @@
     AVCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AVCell class]) ];
     HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
     [cell refreshWithItem: item];
+    __weak __typeof(self) weakSelf = self;
+    cell.loveBlock = ^(UIButton * _Nonnull sender) {
+        if (sender.selected) {
+            [weakSelf cancleLoveWithID:item.ID sender:sender];
+        }else{
+            [weakSelf loveWithId:item.ID sender:sender];
+        }
+    };
     return cell;
 
 

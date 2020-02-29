@@ -83,7 +83,9 @@
 #pragma mark - act
 //收藏
 - (void)loveBtnClick:(UIButton *)sender{
-    
+    if (self.loveBtn) {
+        self.loveBlock(sender);
+    }
 }
 #pragma mark - lazy
 - (UIView *)cellBackgroundView{
@@ -126,6 +128,7 @@
             make.top.mas_equalTo(Adaptor_Value(25));
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(25));
         }];
+        _loveBtn.touchSize = CGSizeMake(Adaptor_Value(50), Adaptor_Value(50));
         
         UIView *loveBtnBackView = [UIView new];
         loveBtnBackView.backgroundColor = [UIColor lq_colorWithHexString:@"ffffff" alpha:0.3];
@@ -140,18 +143,18 @@
         _timeLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_timeLable];
         [_timeLable mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(Adaptor_Value(Adaptor_Value(25)));
+            make.height.mas_equalTo(Adaptor_Value(Adaptor_Value(30)));
             make.left.mas_equalTo(Adaptor_Value(10));
             make.bottom.mas_equalTo(weakSelf.imageV);
         }];
         
         _seeTimesBtn = [[EnlargeTouchSizeButton alloc] init];
 //        [_seeTimesBtn addTarget:self action:@selector(seeTimesBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_seeTimesBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        [_seeTimesBtn setImage:[UIImage imageNamed:@"hot"] forState:UIControlStateNormal];
         _seeTimesBtn.titleLabel.font = AdaptedFontSize(12);
         [contentV addSubview:_seeTimesBtn];
         [_seeTimesBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(Adaptor_Value(Adaptor_Value(25)));
+            make.height.mas_equalTo(Adaptor_Value(Adaptor_Value(30)));
             make.centerY.mas_equalTo(weakSelf.timeLable);
             make.left.mas_equalTo(weakSelf.timeLable.mas_right).offset(Adaptor_Value(20));
         }];
@@ -159,7 +162,7 @@
         _vedioTimesLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentRight numberofLines:0];
         [contentV addSubview:_vedioTimesLable];
         [_vedioTimesLable mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(Adaptor_Value(Adaptor_Value(25)));
+            make.height.mas_equalTo(Adaptor_Value(Adaptor_Value(30)));
             make.right.mas_equalTo(-Adaptor_Value(10));
             make.bottom.mas_equalTo(weakSelf.imageV);
         }];
@@ -168,7 +171,7 @@
         alfaView.backgroundColor = [UIColor lq_colorWithHexString:@"303030" alpha:0.4];
         [contentV insertSubview:alfaView belowSubview:_timeLable];
         [alfaView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(Adaptor_Value(Adaptor_Value(25)));
+            make.height.mas_equalTo(Adaptor_Value(Adaptor_Value(30)));
             make.left.right.bottom.mas_equalTo(weakSelf.imageV);
         }];
         

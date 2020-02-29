@@ -47,8 +47,8 @@
 #pragma mark -  net
 -(void)requestData{
     __weak __typeof(self) weakSelf = self;
-    [ZhuanTiApi requestZhuanTiHomeInfowithPageIndex:@"1" page_size:@"25" Success:^(NSArray * _Nonnull zhuanTiHomeItemArr, NSString * _Nonnull msg) {
-        weakSelf.pageIndex = 2;
+    [ZhuanTiApi requestZhuanTiHomeInfowithPageIndex:@"0" page_size:@"25" Success:^(NSArray * _Nonnull zhuanTiHomeItemArr, NSString * _Nonnull msg) {
+        weakSelf.pageIndex = zhuanTiHomeItemArr.count ;
         weakSelf.dataArr = [NSMutableArray arrayWithArray:zhuanTiHomeItemArr];
         if (zhuanTiHomeItemArr.count >= 25 ) {
             [weakSelf.customTableView addFooterWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
@@ -82,7 +82,7 @@
         if (zhuanTiHomeItemArr.count < 25) {
             [weakSelf.customTableView endRefreshingWithNoMoreData];
         }else{
-            weakSelf.pageIndex += 1;
+            weakSelf.pageIndex = weakSelf.dataArr.count ;
             
         }
     } error:^(NSError *error, id resultObject) {
