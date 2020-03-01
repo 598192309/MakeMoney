@@ -9,6 +9,11 @@
 #import "CityItem.h"
 
 @implementation CityListItem
++ (NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{
+             @"ID":@"id"
+             };
+}
 
 @end
 

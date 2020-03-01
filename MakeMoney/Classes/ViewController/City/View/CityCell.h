@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class CityListItem;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CityCell : UICollectionViewCell
-- (void)refreshWithItem:(NSObject*)item;
+- (void)refreshWithItem:(CityListItem*)item;
 @end
 
 NS_ASSUME_NONNULL_END

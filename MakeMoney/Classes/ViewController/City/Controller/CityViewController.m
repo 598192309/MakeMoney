@@ -11,6 +11,7 @@
 #import "HomeCollectionTopHeaderView.h"
 #import "CityApi.h"
 #import "CityItem.h"
+#import "HomeCollectionHeaderView.h"
 @interface CityViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) UICollectionView *collectionView;//容器视图
@@ -53,6 +54,8 @@
         [weakSelf.collectionView reloadData];
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
+        [weakSelf.collectionView endHeaderRefreshing];
+
     }];
 }
 
@@ -73,17 +76,33 @@
 #pragma mark - UICollectionViewDataSource
 //设置容器中有多少个组
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 1;
+    return 3;
 }
 //设置每个组有多少个方块
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 10;
+    if (section == 0) {
+        return self.cityInfoDataItem.upmarketLists.count;
+    }else if (section == 1){
+        return self.cityInfoDataItem.hotLists.count;
+    }else if (section == 2){
+        return self.cityInfoDataItem.theNewLists.count;
+
+    }
+    return 0;
 }
 //设置方块的视图
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     //获取cell视图，内部通过去缓存池中取，如果缓存池中没有，就自动创建一个新的cell
     CityCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([CityCell class]) forIndexPath:indexPath];
-    [cell refreshWithItem:(indexPath.item % 2) ? [NSObject new] : nil];
+    CityListItem *item;
+    if (indexPath.section == 0) {
+        item = [self.cityInfoDataItem.upmarketLists safeObjectAtIndex:indexPath.row];
+    }else if (indexPath.section == 1) {
+        item = [self.cityInfoDataItem.hotLists safeObjectAtIndex:indexPath.row];
+    }else if (indexPath.section == 2) {
+        item = [self.cityInfoDataItem.theNewLists safeObjectAtIndex:indexPath.row];
+    }
+    [cell refreshWithItem:item];
     return cell;
 }
 //设置顶部视图和底部视图
@@ -92,10 +111,22 @@
         if (indexPath.section == 0) {
             //获取顶部视图
             HomeCollectionTopHeaderView *headerView=[HomeCollectionTopHeaderView headerViewWithCollectionView:collectionView forIndexPath:indexPath];
-            [headerView refreshUIWithTitle:lqStrings(@"你大爷") tipBtnTitle:lqStrings(@"点击查看更多") bannerImageUrlArr:self.bannerImageUrlArr];
+            [headerView refreshUIWithTitle:lqStrings(@"高端兼职") tipBtnTitle:lqStrings(@"按城市>>") bannerImageUrlArr:self.bannerImageUrlArr];
             return headerView;
         }
-
+        //获取顶部视图
+        NSString *title;
+        NSString *subTitle;
+        if (indexPath.section == 1) {
+            title = lqStrings(@"热门QM");
+            subTitle = lqStrings(@"按地区>>");
+        }else{
+            title = lqStrings(@"最新推荐");
+            subTitle = lqStrings(@"查看更多>>");
+        }
+       HomeCollectionHeaderView *headerView=[HomeCollectionHeaderView headerViewWithCollectionView:collectionView forIndexPath:indexPath];
+       [headerView refreshUIWithTitle:title tipBtnTitle:subTitle];
+       return headerView;
     }
     return nil;
 }
@@ -104,17 +135,26 @@
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     int row = 3;
     CGFloat w = (LQScreemW - 2 * Adaptor_Value(10) - Adaptor_Value(5)) / row;
-    CGFloat h = [self caculateCellHeight:indexPath];
+//    CGFloat h = [self caculateCellHeight:indexPath];
+    CGFloat h = Adaptor_Value(220);
     return CGSizeMake(w , h);
 
 }
 - (CGFloat)caculateCellHeight:(NSIndexPath *)indexPath{
     CGFloat w = (LQScreemW - 2 * Adaptor_Value(10) - Adaptor_Value(5)) / 3;
 
-    CGFloat h;
+    CGFloat h = 0;
     h += Adaptor_Value(180);//图片固定高度
     h += Adaptor_Value(5);
-    NSString *str = (indexPath.item % 2) ?  @"我是你大爷 我是你大爷 我是你大爷" : @"我是你大爷";
+    CityListItem *item;
+    if (indexPath.section == 0) {
+        item = [self.cityInfoDataItem.upmarketLists safeObjectAtIndex:indexPath.row];
+    }else if (indexPath.section == 1) {
+        item = [self.cityInfoDataItem.hotLists safeObjectAtIndex:indexPath.row];
+    }else if (indexPath.section == 2) {
+        item = [self.cityInfoDataItem.theNewLists safeObjectAtIndex:indexPath.row];
+    }
+    NSString *str = item.title;
     CGFloat titleH = [str boundingRectWithSize:CGSizeMake(w - AdaptedWidth(20) , MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:AdaptedFontSize(15)} context:nil].size.height;\
     h += titleH;
     h += 5;
@@ -127,7 +167,13 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-    return  CGSizeMake(LQScreemW, Adaptor_Value(20 + 150));
+    if (section == 0) {
+        return  CGSizeMake(LQScreemW, Adaptor_Value(30 + 150));
+    }else{
+       //设置顶部视图和底部视图的大小，当滚动方向为垂直时，设置宽度无效，当滚动方向为水平时，设置高度无效
+        return  CGSizeMake(LQScreemW, Adaptor_Value(20));
+    }
+    
 }
 #pragma mark - UICollectionViewDelegate
 //方块被选中会调用
@@ -150,8 +196,8 @@
         //设置顶部视图和底部视图的大小，当滚动方向为垂直时，设置宽度无效，当滚动方向为水平时，设置高度无效
 //        layout.headerReferenceSize = CGSizeMake(LQScreemW, Adaptor_Value(20));
         
-        layout.minimumLineSpacing = Adaptor_Value(5);
-        layout.minimumInteritemSpacing = Adaptor_Value(5);
+        layout.minimumLineSpacing = 0;
+        layout.minimumInteritemSpacing = 0;
         //创建容器视图
         _collectionView=[[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.delegate=self;//设置代理
@@ -168,6 +214,10 @@
         [_collectionView registerClass:[HomeCollectionTopHeaderView class]
            forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                   withReuseIdentifier:NSStringFromClass([HomeCollectionTopHeaderView class])];
+        
+        [_collectionView registerClass:[HomeCollectionHeaderView class]
+                  forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                         withReuseIdentifier:NSStringFromClass([HomeCollectionHeaderView class])];
 
         [_collectionView addHeaderWithRefreshingTarget:self refreshingAction:@selector(requestData)];
     }
