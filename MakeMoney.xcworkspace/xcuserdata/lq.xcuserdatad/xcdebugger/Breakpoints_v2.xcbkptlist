@@ -41,8 +41,8 @@
             filePath = "MakeMoney/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "AppDelegate"
             landmarkType = "3">
          </BreakpointContent>

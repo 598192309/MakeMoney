@@ -33,7 +33,7 @@
         [_btn setTitle:@">" forState:UIControlStateNormal];
     } else {
         _iconImgaView.hidden = NO;
-        _iconImgaView.image = [UIImage imageNamed:@"hot"];
+        _iconImgaView.image = [UIImage imageNamed:@"icon_hot_hot"];
         _titleLabel.text = @"人气热榜";
         [_btn setTitle:@"全部分类 >" forState:UIControlStateNormal];
     }

@@ -12,7 +12,7 @@
 @interface HomeCollectionTopHeaderView ()<SDCycleScrollViewDelegate>
 @property (nonatomic,strong)UIView *header;
 
-@property (strong, nonatomic) UILabel *tipLabel;
+@property (strong, nonatomic) EnlargeTouchSizeButton *titleBtn;
 
 @property (nonatomic,strong) EnlargeTouchSizeButton * tipBtn;
 @property (nonatomic,strong)SDCycleScrollView *infiniteView;//轮播
@@ -48,8 +48,10 @@
         make.top.mas_equalTo(weakSelf.infiniteView.mas_bottom);
     }];
 }
-- (void)refreshUIWithTitle:(NSString *)title tipBtnTitle:(NSString *)tipBtnTitle bannerImageUrlArr:(NSMutableArray  *)bannerImageUrlArr{
-    self.tipLabel.text = title;
+- (void)refreshUIWithTitle:(NSString *)title titleImageStr:(NSString *)titleImageStr tipBtnTitle:(NSString *)tipBtnTitle bannerImageUrlArr:(NSMutableArray  *)bannerImageUrlArr{
+    [self.titleBtn setTitle:title forState:UIControlStateNormal];
+    [self.titleBtn setImage:[UIImage imageNamed:titleImageStr] forState:UIControlStateNormal];
+
     [self.tipBtn setTitle:tipBtnTitle forState:UIControlStateNormal];
     self.infiniteView.imageURLStringsGroup = bannerImageUrlArr;
 }
@@ -80,11 +82,14 @@
         }];
         
         
-        _tipLabel = [UILabel lableWithText:lqStrings(@"") textColor:[UIColor whiteColor] fontSize:AdaptedBoldFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
-        [contentV addSubview:_tipLabel];
-        [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        _titleBtn = [[EnlargeTouchSizeButton alloc] init];
+        [_titleBtn setTitleColor:[UIColor whiteColor]  forState:UIControlStateNormal];
+        _titleBtn.titleLabel.font = AdaptedBoldFontSize(15);
+        [contentV addSubview:_titleBtn];
+        [_titleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(contentV);
             make.left.mas_equalTo(Adaptor_Value(15));
+            
         }];
         
         

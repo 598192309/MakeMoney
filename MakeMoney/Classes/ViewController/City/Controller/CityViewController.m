@@ -12,6 +12,8 @@
 #import "CityApi.h"
 #import "CityItem.h"
 #import "HomeCollectionHeaderView.h"
+#import "AdsHeaderView.h"
+
 @interface CityViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) UICollectionView *collectionView;//容器视图
@@ -19,6 +21,8 @@
 @property (nonatomic,strong)CityInfoItem *cityInfoDataItem;
 
 @property (nonatomic,strong)NSMutableArray *bannerImageUrlArr;
+
+@property (nonatomic,strong)NSArray *bottomAdsArr;
 @end
 
 @implementation CityViewController
@@ -31,6 +35,7 @@
     
     [self requestData];
     [self reqestBannerAds];
+    [self requestAds];
 }
 
 #pragma mark - ui
@@ -64,10 +69,21 @@
     __weak __typeof(self) weakSelf = self;
     [self.bannerImageUrlArr removeAllObjects];
 
-    [HomeApi requestAdWithType:@"0" Success:^(NSArray * _Nonnull adsItemArr, NSString * _Nonnull msg) {
+    [HomeApi requestAdWithType:@"1" Success:^(NSArray * _Nonnull adsItemArr, NSString * _Nonnull msg) {
         for (AdsItem *item  in adsItemArr) {
             [weakSelf.bannerImageUrlArr addObject:item.img];
         }
+        [weakSelf.collectionView reloadData];
+    } error:^(NSError *error, id resultObject) {
+        
+    }];
+}
+
+//获取广告
+- (void)requestAds{
+    __weak __typeof(self) weakSelf = self;
+    [HomeApi requestAdWithType:@"5" Success:^(NSArray * _Nonnull adsItemArr, NSString * _Nonnull msg) {
+        weakSelf.bottomAdsArr = adsItemArr;
         [weakSelf.collectionView reloadData];
     } error:^(NSError *error, id resultObject) {
         
@@ -113,24 +129,33 @@
         if (indexPath.section == 0) {
             //获取顶部视图
             HomeCollectionTopHeaderView *headerView=[HomeCollectionTopHeaderView headerViewWithCollectionView:collectionView forIndexPath:indexPath];
-            [headerView refreshUIWithTitle:lqStrings(@"高端兼职") tipBtnTitle:lqStrings(@"按城市>>") bannerImageUrlArr:self.bannerImageUrlArr];
+            [headerView refreshUIWithTitle:lqStrings(@"高端兼职") titleImageStr:@"icon_hot_man" tipBtnTitle:lqStrings(@"按城市>>") bannerImageUrlArr:self.bannerImageUrlArr];
             return headerView;
         }
         //获取顶部视图
         NSString *title;
         NSString *subTitle;
+        NSString *imageStr;
+
         if (indexPath.section == 1) {
             title = lqStrings(@"热门QM");
             subTitle = lqStrings(@"按地区>>");
+            imageStr = @"icon_hot_hot";
         }else{
             title = lqStrings(@"最新推荐");
             subTitle = lqStrings(@"查看更多>>");
+            imageStr = @"icon_hot_find";
+
         }
        HomeCollectionHeaderView *headerView=[HomeCollectionHeaderView headerViewWithCollectionView:collectionView forIndexPath:indexPath];
-       [headerView refreshUIWithTitle:title tipBtnTitle:subTitle];
+        [headerView refreshUIWithTitle:title titleImageStr:imageStr tipBtnTitle:subTitle];
        return headerView;
     }
-    return nil;
+    AdsHeaderView *footerView = [AdsHeaderView footerViewWithCollectionView:collectionView forIndexPath:indexPath];
+    footerView.backgroundColor = [UIColor redColor];
+    AdsItem *item = [self.bottomAdsArr safeObjectAtIndex:indexPath.section];
+    [footerView refreshUIWithImageStr:item.img];
+    return footerView;
 }
 #pragma mark - UICollectionViewDelegateFlowLayout
 //设置各个方块的大小尺寸
@@ -164,18 +189,27 @@
 }
 //设置每一组的上下左右间距
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(Adaptor_Value(5), Adaptor_Value(10), Adaptor_Value(5), Adaptor_Value(10));
+    return UIEdgeInsetsMake(0, Adaptor_Value(10), 0, Adaptor_Value(10));
 
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        return  CGSizeMake(LQScreemW, Adaptor_Value(30 + 150));
+        return  CGSizeMake(LQScreemW, Adaptor_Value(40 + 150));
     }else{
        //设置顶部视图和底部视图的大小，当滚动方向为垂直时，设置宽度无效，当滚动方向为水平时，设置高度无效
-        return  CGSizeMake(LQScreemW, Adaptor_Value(20));
+        return  CGSizeMake(LQScreemW, Adaptor_Value(40));
     }
     
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
+    AdsItem *item = [self.bottomAdsArr safeObjectAtIndex:section];
+    //根据url 获取图片尺寸
+    CGSize size = [UIImage getImageSizeWithURL:item.img];
+    
+    CGFloat h = LQScreemW / size.width * size.height;
+    return  CGSizeMake(LQScreemW,h);
 }
 #pragma mark - UICollectionViewDelegate
 //方块被选中会调用
@@ -220,6 +254,11 @@
         [_collectionView registerClass:[HomeCollectionHeaderView class]
                   forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                          withReuseIdentifier:NSStringFromClass([HomeCollectionHeaderView class])];
+        
+        [_collectionView registerClass:[AdsHeaderView class]
+                  forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+                         withReuseIdentifier:NSStringFromClass([AdsHeaderView class])];
+
 
         [_collectionView addHeaderWithRefreshingTarget:self refreshingAction:@selector(requestData)];
     }

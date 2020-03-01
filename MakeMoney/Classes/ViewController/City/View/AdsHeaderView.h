@@ -1,8 +1,8 @@
 //
-//  HomeCollectionHeaderView.h
+//  AdsHeaderView.h
 //  MakeMoney
 //
-//  Created by rabi on 2020/2/26.
+//  Created by 黎芹 on 2020/3/1.
 //  Copyright © 2020 lqq. All rights reserved.
 //
 
@@ -10,14 +10,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HomeCollectionHeaderView : UICollectionReusableView
+@interface AdsHeaderView : UICollectionReusableView
 //获取顶部视图对象
 + (instancetype)headerViewWithCollectionView:(UICollectionView *)collectionView forIndexPath:(NSIndexPath *)indexPath;
 
-- (void)refreshUIWithTitle:(NSString *)title titleImageStr:(NSString *)titleImageStr tipBtnTitle:(NSString *)tipBtnTitle;
+//获取底部视图对象
++ (instancetype)footerViewWithCollectionView:(UICollectionView *)collectionView forIndexPath:(NSIndexPath *)indexPath;
+
+- (void)refreshUIWithImageStr:(NSString *)titleImageStr;
 
 /**点击tipBtn*/
 @property(nonatomic,copy)void(^headerViewTipBtnClickBlock)(UIButton *sender);
+
+- (CGFloat)cellHeight;
 @end
 
 NS_ASSUME_NONNULL_END

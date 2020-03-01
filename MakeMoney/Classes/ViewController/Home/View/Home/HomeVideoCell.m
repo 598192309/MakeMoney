@@ -18,8 +18,8 @@
 
 -(void)awakeFromNib{
     [super awakeFromNib];
-    _imageV.layer.cornerRadius = 4;
-    _imageV.layer.masksToBounds = YES;
+ 
+    ViewRadius(_imageV, 4);
 }
 - (void)refreshCellWithItem:(HotItem *)item videoType:(VideoType)type{
     _item = item;
