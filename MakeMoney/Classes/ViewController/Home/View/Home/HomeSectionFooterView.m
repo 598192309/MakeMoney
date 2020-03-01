@@ -25,9 +25,7 @@
 
 - (void)refreshViewWith:(AdsItem *)item{
     _adItem = item;
-    [_adImageView sd_setImageWithURL:[NSURL URLWithString:item.img] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-    }];
+    [_adImageView sd_setImageWithURL:[NSURL URLWithString:item.img]];
 }
 
 - (void)clickedAdImage{

@@ -185,10 +185,9 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
     if (section % 2 == 0) {
         AdsItem *item = [_dataSource.ads safeObjectAtIndex:section / 2];
-        if (item.imageSize.width > 0) {
-            return CGSizeMake((LQScreemW - 20), (LQScreemW - 20) * item.imageSize.height / item.imageSize.width);
-        }
-        return CGSizeMake(LQScreemW, 100);
+        CGSize size = [UIImage getImageSizeWithURL:item.img];
+        CGFloat h = (LQScreemW - 20) / size.width * size.height;
+        return  CGSizeMake(LQScreemW,h);
     }
     return CGSizeZero;
 }
