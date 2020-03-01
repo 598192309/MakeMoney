@@ -80,6 +80,7 @@
 }
 //设置每个组有多少个方块
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+   
     if (section == 0) {
         return self.cityInfoDataItem.upmarketLists.count;
     }else if (section == 1){
@@ -108,6 +109,7 @@
 //设置顶部视图和底部视图
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+       
         if (indexPath.section == 0) {
             //获取顶部视图
             HomeCollectionTopHeaderView *headerView=[HomeCollectionTopHeaderView headerViewWithCollectionView:collectionView forIndexPath:indexPath];

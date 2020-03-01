@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 Maxicn. All rights reserved.
 //
 #import <CoreLocation/CoreLocation.h>
-
+#import "InitItem.h"
 
 #define RI ([RunInfo sharedInstance])
 @class CommonUserInfoItem;
@@ -26,6 +26,9 @@ extern NSString* const STAPPErrorDomain;
 //@property (strong,nonatomic  )NSString * nick_name;//昵称
 //@property (strong,nonatomic  )NSString * version;// 版本号
 
+@property (nonatomic,strong)BasicItem *basicItem;
+
+@property (nonatomic,strong)InitItem *infoInitItem;
 
 
 + (RunInfo *)sharedInstance;

@@ -22,6 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)appSupportPath;   //Library/Application Support目录，程序自动设置不备份到iCloud
 + (float)folderSizeAtPath:(NSString *)folderPath;//沙盒文件夹内容大小
 + (long long)fileSizeAtPath:(NSString*)filePath;//单个文件大小
+
+/** 删除沙盒里某个文件*/
++(BOOL)deleteFileAtPath:(NSString *)folderPath;
 @end
 
 

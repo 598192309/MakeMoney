@@ -142,6 +142,15 @@
     return 0;
 }
 
+/** 删除沙盒里某个文件*/
++(BOOL)deleteFileAtPath:(NSString *)folderPath{
+    NSString*imageDir = [NSString stringWithFormat:@"/%@", folderPath];
 
+    NSFileManager*fileManager = [NSFileManager defaultManager];
+
+    BOOL success =  [fileManager removeItemAtPath:imageDir error:nil];
+
+    return success;
+}
 
 @end

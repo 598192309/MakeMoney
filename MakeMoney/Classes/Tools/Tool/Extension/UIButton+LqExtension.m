@@ -275,20 +275,22 @@ static char *Mtitle = "mtitle";
     CGFloat img_H = self.imageView.frame.size.height;
     CGFloat tit_W = self.titleLabel.frame.size.width;
     CGFloat tit_H = self.titleLabel.frame.size.height;
-    
+
     self.titleEdgeInsets = (UIEdgeInsets){
         .top    =   (tit_H / 2 + Spacing / 2),
-        .left   = - (img_W / 2),
+        .left   = - img_W,
         .bottom = - (tit_H / 2 + Spacing / 2),
-        .right  =   (img_W / 2),
+        .right  =   0,
+    };
+
+    self.imageEdgeInsets = (UIEdgeInsets){
+
+        .top    = - (img_H / 2 + Spacing / 2),
+        .left   =   0,
+        .bottom =   (img_H / 2 + Spacing / 2),
+        .right  = -tit_W,
     };
     
-    self.imageEdgeInsets = (UIEdgeInsets){
-        .top    = - (img_H / 2 + Spacing / 2),
-        .left   =   (tit_W / 2),
-        .bottom =   (img_H / 2 + Spacing / 2),
-        .right  = - (tit_W / 2),
-    };
 }
 
 - (void)setIconInBottomWithSpacing:(CGFloat)Spacing

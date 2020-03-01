@@ -33,9 +33,7 @@
     [self.cellBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.top.bottom.left.mas_equalTo(self.contentView);
     }];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
-    [self.cellBackgroundView addGestureRecognizer:tap];
+   
 }
 
 
@@ -63,7 +61,7 @@
         }];
         contentV.backgroundColor = [UIColor lq_colorWithHexString:@"202020" alpha:0.5];
         
-        _titleLabel = [UILabel lableWithText:lqLocalized(@"",nil) textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        _titleLabel = [UILabel lableWithText:lqLocalized(@"",nil) textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
         [contentV addSubview:_titleLabel];
         [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(Adaptor_Value(15));
