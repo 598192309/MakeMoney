@@ -25,21 +25,6 @@
              };
 }
 
-- (void)setImg:(NSString *)img
-{
-    _img = img;
-    __weak __typeof(self) weakSelf = self;
-
-   
-//    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:img] options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-//        NSLog(@"receivedSize:%zd",receivedSize);
-//    } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-//        if (image) {
-//            weakSelf.imageSize = image.size;
-//        }
-//    }];
-}
-
 @end
 
 @implementation HomeVideoList
