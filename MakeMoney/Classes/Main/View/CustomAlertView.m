@@ -45,6 +45,12 @@
 
 }
 
+- (void)tap:(UITapGestureRecognizer *)gest{
+    if (self.CustomAlertViewBlock) {
+        self.CustomAlertViewBlock(5,nil);
+    }
+}
+
 #pragma  mark - 拖拽
 #pragma  mark - 类方法
 -(instancetype)init{
@@ -190,7 +196,9 @@
             make.edges.mas_equalTo(weakSelf.alertView);
             make.width.mas_greaterThanOrEqualTo(Adaptor_Value(225));
             make.width.mas_lessThanOrEqualTo(Adaptor_Value(300));
-            make.height.mas_greaterThanOrEqualTo(Adaptor_Value(150));
+//            make.height.mas_greaterThanOrEqualTo(Adaptor_Value(150));
+            make.height.mas_greaterThanOrEqualTo(Adaptor_Value(125));
+
         }];
         _contentView = contentV;
         _titlelabel = [UILabel lableWithText:@"" textColor:[UIColor lq_colorWithHexString:@"ffffff"] fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
@@ -285,6 +293,9 @@
     if (!_customCoverView) {
         _customCoverView = [UIView new];
         _customCoverView.backgroundColor = [UIColor lq_colorWithHexString:@"#14181A" alpha:0.5];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+        
+        [_customCoverView addGestureRecognizer:tap];
 
     }
     return _customCoverView;

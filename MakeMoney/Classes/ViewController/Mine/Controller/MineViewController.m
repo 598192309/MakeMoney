@@ -10,6 +10,8 @@
 #import "MineCustomHeaderView.h"
 #import "MineCell.h"
 #import "CustomAlertView.h"
+#import "MineApi.h"
+#import "MineItem.h"
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (strong, nonatomic) UITableView  *customTableView;
 @property (nonatomic,strong)MineCustomHeaderView *mineCustomHeaderView;
@@ -24,10 +26,12 @@
 #pragma mark - 生命周期
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    if (self.notFirstAppear) {
-//        [self requestData];
-//    }
-    
+    if (self.notFirstAppear) {
+        [self.mineCustomHeaderView configUIWithItem:nil finishi:^{
+            
+        }];
+    }
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,6 +43,9 @@
            // Fallback on earlier versions
            self.automaticallyAdjustsScrollViewInsets = NO;
        }
+    [self.mineCustomHeaderView configUIWithItem:nil finishi:^{
+        
+    }];
 }
 
 - (void)dealloc{
@@ -102,8 +109,11 @@
 }
 
 #pragma mark - net
+//更新播放次数
 - (void)requestData{
+    __weak __typeof(self) weakSelf = self;
     
+    [weakSelf.customTableView endHeaderRefreshing];
 }
 
 #pragma mark -  UITableViewDataSource
@@ -366,7 +376,15 @@
                 
             }else if(index == 2){
                 
-            }else if(index == 3){
+            }else if(index == 3){//清理缓存
+               BOOL success =  [LqSandBox deleteFileAtPath:[LqSandBox docDownloadImagePath]];
+                if (success) {
+                    [LSVProgressHUD showInfoWithStatus:lqStrings(@"清理成功")];
+                    [weakSelf.customTableView reloadData];
+                }else{
+                    [LSVProgressHUD showInfoWithStatus:lqStrings(@"清理失败")];
+
+                }
                 
             }
             

@@ -59,7 +59,18 @@
 
 #pragma mark - 刷新ui
 - (void)configUIWithItem:(NSObject *)item finishi:(void(^)(void))finishBlock{
-
+    NSString *str = [NSString stringWithFormat:lqLocalized(@"每日观看次数 %ld/%ld", nil),RI.infoInitItem.rest_free_times,RI.infoInitItem.max_free_times];
+    //字体局部变色
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:str];
+    if (str.length > 0) {
+        NSRange start  = [str rangeOfString:lqStrings(@"次数 ")];
+        NSRange end  = [str rangeOfString:lqStrings(@"/")];
+        if (start.length > 0 && end.length > 0) {
+            NSRange rangel = NSMakeRange(start.location + start.length , end.location - start.location- start.length );
+            [attr addAttribute:NSForegroundColorAttributeName value:CustomRedColor range:rangel];
+        }
+    }
+    self.timesLable.attributedText = attr;
     
     finishBlock();
 }
@@ -145,7 +156,7 @@
         }];
 
 
-        _nameLabel = [UILabel lableWithText:[NSString stringWithFormat:lqLocalized(@"hello,%@", nil),RI.infoInitItem.username]  textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        _nameLabel = [UILabel lableWithText:RI.infoInitItem.username.length > 0 ? [NSString stringWithFormat:lqLocalized(@"hello,%@", nil),RI.infoInitItem.username] : lqStrings(@"hello,撸友")  textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
         [contentV addSubview:_nameLabel];
         [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(weakSelf.iconImageV);
@@ -174,9 +185,8 @@
         [contentV addSubview:_vipLable];
         [_vipLable mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.mas_equalTo(weakSelf.vipLable.mas_right).offset(Adaptor_Value(5));
+            make.left.mas_equalTo(weakSelf.vipTipLable.mas_right).offset(Adaptor_Value(5));
             make.top.mas_equalTo(weakSelf.iDLable.mas_bottom).offset(Adaptor_Value(5));
-    
             
         }];
         
@@ -218,6 +228,7 @@
         [contentV addSubview:_yaoqingBtn];
         [_yaoqingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.bottom.mas_equalTo(contentV);
+//            make.width.mas_equalTo(LQScreemW / 5.0);
         }];
         [_yaoqingBtn setIconInTopWithSpacing:Adaptor_Value(25)];
 
@@ -267,8 +278,8 @@
         [_vipBtn addTarget:self action:@selector(vipBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_vipBtn setTitleColor:TitleWhiteColor forState:UIControlStateNormal];
         _vipBtn.titleLabel.font = AdaptedFontSize(12);
-        [_vipBtn setImage:[UIImage imageNamed:@"icon_daili"] forState:UIControlStateNormal];
-        [_vipBtn setTitle:lqStrings(@"推广赚钱") forState:UIControlStateNormal];
+        [_vipBtn setImage:[UIImage imageNamed:@"icon_exchange"] forState:UIControlStateNormal];
+        [_vipBtn setTitle:lqStrings(@"VIP兑换") forState:UIControlStateNormal];
         [contentV addSubview:_vipBtn];
         [_vipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.bottom.width.mas_equalTo(weakSelf.yaoqingBtn);
