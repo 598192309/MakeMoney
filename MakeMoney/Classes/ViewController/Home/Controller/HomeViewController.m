@@ -25,7 +25,7 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong)SDCycleScrollView *infiniteView;//轮播
-
+@property (nonatomic, strong) MJRefreshNormalHeader *refreshHeader;
 @property (strong, nonatomic) HomeInfoItem *dataSource;//容器视图
 @property (nonatomic,copy)NSArray<AdsItem *> *bannerList;
 @end
@@ -51,12 +51,11 @@
 - (void)configUI{
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestData)];
-    header.lastUpdatedTimeLabel.hidden = YES;
-    header.stateLabel.hidden = YES;
-    [header setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhite];//设置圆圈的颜色
-    header.ignoredScrollViewContentInsetTop = BannerHeight;
-    _collectionView.mj_header = header;
+    _refreshHeader = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestData)];
+    _refreshHeader.lastUpdatedTimeLabel.hidden = YES;
+    _refreshHeader.stateLabel.hidden = YES;
+    [_refreshHeader setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhite];//设置圆圈的颜色
+    _collectionView.mj_header = _refreshHeader;
     
     [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([HomeVideoCell class]) bundle:nil] forCellWithReuseIdentifier:NSStringFromClass([HomeVideoCell class])];
 
@@ -92,7 +91,9 @@
         }
         [weakSelf.collectionView addSubview:weakSelf.infiniteView];
         weakSelf.infiniteView.imageURLStringsGroup = bannerUrlList;
-        weakSelf.collectionView.mj_insetT = weakSelf.collectionView.contentInset.top + weakSelf.infiniteView.lq_height;
+        weakSelf.collectionView.mj_insetT =  weakSelf.infiniteView.lq_height;
+        weakSelf.refreshHeader.ignoredScrollViewContentInsetTop = BannerHeight;
+
     } error:^(NSError *error, id resultObject) {
         
     }];
