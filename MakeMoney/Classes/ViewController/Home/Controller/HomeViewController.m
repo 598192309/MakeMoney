@@ -6,111 +6,149 @@
 //  Copyright © 2018年 jayden. All rights reserved.
 //
 
+#define BannerHeight (LQScreemW * 340.0 / 640.0)
+
 #import "HomeViewController.h"
+#import "SDCycleScrollView.h"
+#import "HomeCategaryCell.h"
+#import "HomeSectionHeaderView.h"
+#import "HomeVideoCell.h"
+
+
 #import "HomeTopCell.h"
 #import "HomeCollectionHeaderView.h"
 #import "HomeCollectionTopHeaderView.h"
 #import "HomeItem.h"
 #import "HomeApi.h"
 
-@interface HomeViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface HomeViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,SDCycleScrollViewDelegate>
 
-@property (strong, nonatomic) UICollectionView *collectionView;//容器视图
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic,strong)SDCycleScrollView *infiniteView;//轮播
 
-@property (strong, nonatomic) HomeInfoItem *homeInfoDataItem;//容器视图
-@property (nonatomic,strong)NSMutableArray *bannerImageUrlArr;
+@property (strong, nonatomic) HomeInfoItem *dataSource;//容器视图
+@property (nonatomic,copy)NSArray<AdsItem *> *bannerList;
 @end
 
 @implementation HomeViewController
++ (instancetype)controller
+{
+    HomeViewController *vc = [[UIStoryboard storyboardWithName:@"Home" bundle:nil] instantiateViewControllerWithIdentifier:@"HomeViewController"];
+    return vc;
+}
 #pragma mark - life
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self configUI];
-        
-    
     [self requestData];
     
-    [self reqestBannerAds];
+    
 }
 - (void)dealloc{
     LQLog(@"dealloc -------%@",NSStringFromClass([self class]));
 }
 #pragma mark - ui
 - (void)configUI{
-    __weak __typeof(self) weakSelf = self;
-
+    _collectionView.delegate = self;
+    _collectionView.dataSource = self;
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.hidden = YES;
+    [header setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhite];//设置圆圈的颜色
+    header.ignoredScrollViewContentInsetTop = BannerHeight;
+    _collectionView.mj_header = header;
     
-    [self.view addSubview:self.collectionView];
-    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.mas_equalTo(weakSelf.view);
-        make.top.mas_equalTo(TopAdaptor_Value(25));
-    }];
+    [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([HomeVideoCell class]) bundle:nil] forCellWithReuseIdentifier:NSStringFromClass([HomeVideoCell class])];
 
 }
 
+
+
 #pragma mark - net
 - (void)requestData{
+    
+    //同时请求banner数据
+    [self reqestBannerAds];
+    
     __weak __typeof(self) weakSelf = self;
     [HomeApi requestHotListSuccess:^(HomeInfoItem * _Nonnull homeInfoItem, NSString * _Nonnull msg) {
-        weakSelf.homeInfoDataItem = homeInfoItem;
+        weakSelf.dataSource = homeInfoItem;
         [weakSelf.collectionView endHeaderRefreshing];
         [weakSelf.collectionView reloadData];
+
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
         [weakSelf.collectionView endHeaderRefreshing];
-
     }];
 }
 //获取顶部banner广告
 - (void)reqestBannerAds{
     __weak __typeof(self) weakSelf = self;
-    [self.bannerImageUrlArr removeAllObjects];
     [HomeApi requestAdWithType:@"0" Success:^(NSArray * _Nonnull adsItemArr, NSString * _Nonnull msg) {
+        weakSelf.bannerList = adsItemArr;
+        NSMutableArray *bannerUrlList = [NSMutableArray arrayWithCapacity:adsItemArr.count];
         for (AdsItem *item  in adsItemArr) {
-            [weakSelf.bannerImageUrlArr addObject:item.img];
+            [bannerUrlList addObject:item.img];
         }
-        [weakSelf.collectionView reloadData];
+        [weakSelf.collectionView addSubview:weakSelf.infiniteView];
+        weakSelf.infiniteView.imageURLStringsGroup = bannerUrlList;
+        weakSelf.collectionView.mj_insetT = weakSelf.collectionView.contentInset.top + weakSelf.infiniteView.lq_height;
     } error:^(NSError *error, id resultObject) {
         
     }];
 }
-//下载图片
-- (void)requestImagesWithType:(NSString *)type paramTitle:(NSString *)paramTitle ID:(NSString *)ID key:(NSString *)key{
-    __weak __typeof(self) weakSelf = self;
-    [HomeApi downImageWithType:type paramTitle:paramTitle ID:ID key:key Success:^(UIImage * _Nonnull img,NSString *ID) {
-        
-    } error:^(NSError *error, id resultObject) {
-        
-    }];
-}
+
 #pragma mark - UICollectionViewDataSource
 //设置容器中有多少个组
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 5;
+    return _dataSource.video.count + 1;
 }
 //设置每个组有多少个方块
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 10;
+    if (section == 0) {
+        return 3;
+    }
+    HomeVideoList *videoList = _dataSource.video[section - 1];
+    return videoList.lists.count;
 }
 //设置方块的视图
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    //获取cell视图，内部通过去缓存池中取，如果缓存池中没有，就自动创建一个新的cell
-    HomeTopCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([HomeTopCell class]) forIndexPath:indexPath];
+    if (indexPath.section == 0) {
+        HomeCategaryCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([HomeCategaryCell class]) forIndexPath:indexPath];
+        if (indexPath.row == 0) {
+            [cell refreshCellWithItem:_dataSource.most_new.firstObject des:@"最新上传"];
+        }else if (indexPath.row == 1) {
+            [cell refreshCellWithItem:_dataSource.most_play.firstObject des:@"最多播放"];
+
+        }else if (indexPath.row == 2) {
+            [cell refreshCellWithItem:_dataSource.most_love.firstObject des:@"最多点赞"];
+
+        }
+        return cell;
+
+    }
+    
+    HomeVideoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([HomeVideoCell class]) forIndexPath:indexPath];
+    HomeVideoList *videoList = _dataSource.video[indexPath.section - 1];
+    [cell refreshCellWithItem:videoList.lists[indexPath.row] videoType:videoList.type];
     return cell;
+    
 }
 //设置顶部视图和底部视图
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        HomeSectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([HomeSectionHeaderView class]) forIndexPath:indexPath];
         if (indexPath.section == 0) {
-            //获取顶部视图
-            HomeCollectionTopHeaderView *headerView=[HomeCollectionTopHeaderView headerViewWithCollectionView:collectionView forIndexPath:indexPath];
-            [headerView refreshUIWithTitle:lqStrings(@"你大爷") tipBtnTitle:lqStrings(@"点击查看更多") bannerImageUrlArr:self.bannerImageUrlArr];
-            return headerView;
+            [headerView refreshViewWithVideo:nil ad:nil];
+        } else {
+            HomeVideoList *video = _dataSource.video[indexPath.section - 1];
+            AdsItem *adItem;
+            
+            if (indexPath.section % 2 != 0) {//不插入广告
+                adItem = [_dataSource.ads safeObjectAtIndex:(indexPath.section - 1) / 2];
+            } 
+            [headerView refreshViewWithVideo:video ad:adItem];
         }
-        //获取顶部视图
-        HomeCollectionHeaderView *headerView=[HomeCollectionHeaderView headerViewWithCollectionView:collectionView forIndexPath:indexPath];
-        [headerView refreshUIWithTitle:lqStrings(@"你大爷") tipBtnTitle:lqStrings(@"点击查看更多")];
         return headerView;
     }
     return nil;
@@ -118,36 +156,28 @@
 #pragma mark - UICollectionViewDelegateFlowLayout
 //设置各个方块的大小尺寸
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    int row = 3;
     if (indexPath.section == 0) {
-        CGFloat w = (LQScreemW - (row + 1) * Adaptor_Value(15)) / row;
-        return CGSizeMake(w , Adaptor_Value(80));
-        
-    }else{
-        row = 2;
-        CGFloat w = (LQScreemW - (row + 1) * Adaptor_Value(10)) / row;
-        return CGSizeMake(w , Adaptor_Value(130));
+        return CGSizeMake((LQScreemW - 15*2 - 25) / 3, Adaptor_Value(80));
+
     }
+    return CGSizeMake((LQScreemW - 10*2 - 10) / 2 , Adaptor_Value(160));
 
 }
 //设置每一组的上下左右间距
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     if (section == 0) {
-        return UIEdgeInsetsMake(Adaptor_Value(10), Adaptor_Value(15), Adaptor_Value(10), Adaptor_Value(15));
+        return UIEdgeInsetsMake(0, 15, 20, 15);
     }else{
-        return UIEdgeInsetsMake(Adaptor_Value(10), Adaptor_Value(10), Adaptor_Value(10), Adaptor_Value(10));
-
+        return UIEdgeInsetsMake(0, 10, 20, 10);
     }
 
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-    if (section == 0) {
-        return  CGSizeMake(LQScreemW, Adaptor_Value(30 + 150));
-    }else{
-       //设置顶部视图和底部视图的大小，当滚动方向为垂直时，设置宽度无效，当滚动方向为水平时，设置高度无效
-        return  CGSizeMake(LQScreemW, Adaptor_Value(20));
+    if (section % 2 == 0) {
+        return CGSizeMake(LQScreemW, 50);
     }
+    return  CGSizeMake(LQScreemW, 50 + Adaptor_Value(100));
 }
 #pragma mark - UICollectionViewDelegate
 //方块被选中会调用
@@ -160,48 +190,27 @@
     NSLog(@"取消选择第%ld组，第%ld个方块",indexPath.section,indexPath.row);
 }
 
-#pragma mark - lazy
-- (UICollectionView *)collectionView{
-    if (!_collectionView) {
-        //创建布局对象
-        UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc]init];
-        //设置滚动方向为垂直滚动，说明方块是从左上到右下的布局排列方式
-        layout.scrollDirection=UICollectionViewScrollDirectionVertical;
-        //设置顶部视图和底部视图的大小，当滚动方向为垂直时，设置宽度无效，当滚动方向为水平时，设置高度无效
-//        layout.headerReferenceSize = CGSizeMake(LQScreemW, Adaptor_Value(20));
-        
-        layout.minimumLineSpacing = Adaptor_Value(15);
-        layout.minimumInteritemSpacing = Adaptor_Value(5);
-        //创建容器视图
-        _collectionView=[[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
-        _collectionView.delegate=self;//设置代理
-        _collectionView.dataSource=self;//设置数据源
-        _collectionView.backgroundColor = ThemeBlackColor;
-        
-        [_collectionView registerClass:[HomeTopCell class] forCellWithReuseIdentifier:NSStringFromClass([HomeTopCell class])];
-        _collectionView.delegate = self;
-        _collectionView.dataSource = self;
-        _collectionView.showsVerticalScrollIndicator = NO;
-        _collectionView.showsHorizontalScrollIndicator = NO;
-        
-        //注册容器视图中显示的顶部视图
-        [_collectionView registerClass:[HomeCollectionTopHeaderView class]
-           forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                  withReuseIdentifier:NSStringFromClass([HomeCollectionTopHeaderView class])];
-        
-        [_collectionView registerClass:[HomeCollectionHeaderView class]
-           forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                  withReuseIdentifier:NSStringFromClass([HomeCollectionHeaderView class])];
-        
-        [_collectionView addHeaderWithRefreshingTarget:self refreshingAction:@selector(requestData)];
-    }
-    return _collectionView;
+#pragma  mark - SDCycleScrollViewDelegate
+/** 点击图片回调 */
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
+    AdsItem *item = [self.bannerList safeObjectAtIndex:index];
+    [LqToolKit jumpAdventWithItem:item];
+
+    
 }
 
-- (NSMutableArray *)bannerImageUrlArr{
-    if (!_bannerImageUrlArr) {
-        _bannerImageUrlArr = [NSMutableArray array];
+
+#pragma mark  - Lazy
+- (SDCycleScrollView *)infiniteView{
+    if (!_infiniteView) {
+        _infiniteView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, -BannerHeight, LQScreemW, BannerHeight) delegate:self placeholderImage:nil];
+        _infiniteView.backgroundColor = [UIColor clearColor];
+        _infiniteView.boworrWidth = LQScreemW;
+        _infiniteView.bannerImageViewContentMode = UIViewContentModeScaleToFill;
+        _infiniteView.cellSpace = 0;
+        _infiniteView.showPageControl = YES;
     }
-    return _bannerImageUrlArr;
+    return _infiniteView;
 }
+
 @end

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
+#import "HomeItem.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -105,6 +105,14 @@ NS_ASSUME_NONNULL_BEGIN
 //下面两个方法为了RSAEncryptor里的
 + (NSString *)parseByte2HexString:(Byte *) bytes  :(int)len;
 +  (NSData *)convertHexStrToData:(NSString *)str ;
+
+
+
+#pragma MakeMoney
+
+/// 广告i跳转
+/// @param item 广告
++ (void)jumpAdventWithItem:(AdsItem *)item;
 @end
 
 NS_ASSUME_NONNULL_END

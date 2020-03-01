@@ -227,4 +227,39 @@
     NSLog(@"hexdata: %@", hexData);
     return hexData;
 }
+
+
+#pragma MakeMoney
+
+/// 广告i跳转
+/// @param item 广告
++ (void)jumpAdventWithItem:(AdsItem *)item {
+    switch (item.tag) {
+        case AdTag_Defult:
+        {
+            
+        }
+            break;
+        case AdTag_Safari:
+        {
+            NSURL *url = [NSURL URLWithString:item.url];
+            [[UIApplication sharedApplication] openURL:url];
+        }
+            break;
+        case AdTag_AVDetailVC:
+        {
+            [LSVProgressHUD showInfoWithStatus:@"跳转到AV详情页面"];
+        }
+            break;
+        case AdTag_QMDetailVC:
+        {
+            [LSVProgressHUD showInfoWithStatus:@"跳转到同城详情页面"];
+
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
 @end

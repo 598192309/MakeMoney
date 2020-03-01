@@ -27,6 +27,12 @@
 
 @end
 
+@implementation HomeVideoList
++ (NSDictionary *)mj_objectClassInArray{
+    return @{@"lists" :[HotItem class]};
+}
+@end
+
 
 @implementation HotItem
 + (NSDictionary *)mj_replacedKeyFromPropertyName{
@@ -44,7 +50,7 @@
              @"most_play" :[HotItem class],
              @"most_love" :[HotItem class],
              @"ads" :[AdsItem class],
-             @"video" :[HotItem class],
+             @"video" :[HomeVideoList class],
 
              };
 }

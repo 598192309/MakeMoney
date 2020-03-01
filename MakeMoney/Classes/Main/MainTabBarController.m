@@ -36,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    HomeViewController *vc1 = [[HomeViewController alloc] init];
+    HomeViewController *vc1 = [HomeViewController controller];
     [self addChildViewController:vc1 withImageName:@"home" selectedImageName:@"home" withTittle:lqLocalized(@"首页",nil)];
     
     ZhuanTiViewController *vc2 = [[ZhuanTiViewController alloc] init];

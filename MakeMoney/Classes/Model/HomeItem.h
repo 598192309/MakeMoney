@@ -10,6 +10,23 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+//typedef NS_ENUM(NSInteger, AdType) {
+//    AdType_HotBanner = 0,//热点页banner
+//    AdType_QM = 1,//同城Banner
+//    AdType_SVList=2,//短视频列表
+//    AdType_AVList=3,//AV列表
+//    AdType_AVDetail=4,//AV详情页
+//    AdType_QMBottom=5,//同城底部
+//    AdType_QMDetail=6,//
+//};
+
+typedef NS_ENUM(NSInteger,AdTag) {
+    AdTag_Defult,//默认
+    AdTag_Safari = 1,//跳转URL
+    AdTag_AVDetailVC=2,//跳转AV详情页
+    AdTag_QMDetailVC=3,//跳转同城详情页
+};
+
 
 
 /**公告 */
@@ -28,12 +45,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AdsItem : NSObject
 @property (nonatomic,strong)NSString *av_url;
 @property (nonatomic,strong)NSString *create_time;
+@property (nonatomic,strong)NSString *desc;
 @property (nonatomic,strong)NSString *end_time;
 @property (nonatomic,strong)NSString *ID;
 @property (nonatomic,strong)NSString *img;
 @property (nonatomic,assign)NSInteger qm_id;
 @property (nonatomic,assign)NSInteger status;
-@property (nonatomic,assign)NSInteger tag;
+@property (nonatomic,assign)AdTag tag;
 @property (nonatomic,assign)NSInteger time;
 @property (nonatomic,strong)NSString *title;
 @property (nonatomic,assign)NSInteger type;
@@ -69,13 +87,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+//视频类型
+typedef NS_ENUM(NSInteger, VideoType) {
+    VideoType_ShortVideo,//短视频
+    VideoType_AV,//AV
+};
+
+@interface HomeVideoList : NSObject
+@property (nonatomic,copy)NSString *title;
+@property (nonatomic, assign) int tag;
+@property (nonatomic, assign) VideoType type;
+@property (nonatomic, copy) NSArray<HotItem *> *lists;
+@end
+
 
 /********************首页 *********************/
 @interface HomeInfoItem : NSObject
-@property (nonatomic,strong)NSArray *most_new;
-@property (nonatomic,strong)NSArray *most_play;
-@property (nonatomic,strong)NSArray *most_love;
-@property (nonatomic,strong)NSArray *video;
+@property (nonatomic,strong)NSArray<HotItem *> *most_new;
+@property (nonatomic,strong)NSArray<HotItem *> *most_play;
+@property (nonatomic,strong)NSArray<HotItem *> *most_love;
+@property (nonatomic,strong)NSArray<AdsItem *> *ads;
+@property (nonatomic,strong)NSArray<HomeVideoList *> *video;
 
 @end
 

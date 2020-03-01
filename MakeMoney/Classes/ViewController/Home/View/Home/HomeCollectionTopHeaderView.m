@@ -109,8 +109,6 @@
         _infiniteView.boworrWidth = LQScreemW;
         _infiniteView.bannerImageViewContentMode = UIViewContentModeScaleToFill;
         _infiniteView.cellSpace = 0;
-//        _infiniteView.localizationImageNamesGroup = @[@"InfiniteScrollView-1",@"InfiniteScrollView-2",@"InfiniteScrollView-3",@"InfiniteScrollView-4"];
-
     }
     return _infiniteView;
 }
