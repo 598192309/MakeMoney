@@ -177,6 +177,7 @@
 		8BD545B9240BB4CC00C90A31 /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD545A2240BB4CC00C90A31 /* MJRefreshComponent.m */; };
 		8BD545BD240BE71700C90A31 /* HomeVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD545BB240BE71700C90A31 /* HomeVideoCell.m */; };
 		8BD545BE240BE71700C90A31 /* HomeVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD545BC240BE71700C90A31 /* HomeVideoCell.xib */; };
+		8BD545C1240C101E00C90A31 /* HomeSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD545C0240C101E00C90A31 /* HomeSectionFooterView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -523,6 +524,8 @@
 		8BD545BA240BE71700C90A31 /* HomeVideoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeVideoCell.h; sourceTree = "<group>"; };
 		8BD545BB240BE71700C90A31 /* HomeVideoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeVideoCell.m; sourceTree = "<group>"; };
 		8BD545BC240BE71700C90A31 /* HomeVideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeVideoCell.xib; sourceTree = "<group>"; };
+		8BD545BF240C101E00C90A31 /* HomeSectionFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeSectionFooterView.h; sourceTree = "<group>"; };
+		8BD545C0240C101E00C90A31 /* HomeSectionFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeSectionFooterView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -727,6 +730,8 @@
 				8BD5456D240BA7BA00C90A31 /* HomeCategaryCell.m */,
 				8BD5456F240BA80000C90A31 /* HomeSectionHeaderView.h */,
 				8BD54570240BA80000C90A31 /* HomeSectionHeaderView.m */,
+				8BD545BF240C101E00C90A31 /* HomeSectionFooterView.h */,
+				8BD545C0240C101E00C90A31 /* HomeSectionFooterView.m */,
 				8BD545BA240BE71700C90A31 /* HomeVideoCell.h */,
 				8BD545BB240BE71700C90A31 /* HomeVideoCell.m */,
 				8BD545BC240BE71700C90A31 /* HomeVideoCell.xib */,
@@ -1528,6 +1533,7 @@
 				09E72D2D2405641C0004B25C /* UIScrollView+LQRefresh.m in Sources */,
 				11105E6224066BC900521CB2 /* SafeControl.m in Sources */,
 				09E72C3824055F6E0004B25C /* IQPreviousNextView.m in Sources */,
+				8BD545C1240C101E00C90A31 /* HomeSectionFooterView.m in Sources */,
 				11105AEF24060EFA00521CB2 /* HomeTopCell.m in Sources */,
 				09E72CEF24055F8E0004B25C /* UIImage+MultiFormat.m in Sources */,
 				09E72CF624055F8E0004B25C /* UIView+WebCacheOperation.m in Sources */,
