@@ -199,7 +199,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (self.adsItem.img.length > 0) {
-        return Adaptor_Value(80);
+//        return Adaptor_Value(80);
+        //根据url 获取图片尺寸
+        CGSize size = [UIImage getImageSizeWithURL:self.adsItem.img];
+        
+        CGFloat h = LQScreemW / size.width * size.height;
+        return h;
     }
     return 0.01;
 }
