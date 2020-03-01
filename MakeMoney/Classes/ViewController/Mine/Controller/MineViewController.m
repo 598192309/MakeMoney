@@ -7,17 +7,12 @@
 //
 
 #import "MineViewController.h"
-
-
-
-
+#import "MineCustomHeaderView.h"
+#import "MineCell.h"
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView  *customTableView;
-
-
-
-
-
+@property (nonatomic,strong)MineCustomHeaderView *mineCustomHeaderView;
+@property (nonatomic,strong)UIImageView *backImageV;
 @end
 
 @implementation MineViewController
@@ -35,93 +30,153 @@
     [super viewDidLoad];
 
     [self configUI];
-    //监听用户登录成功
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI) name:kUserSignIn object:nil];
+    if (@available(iOS 11.0, *)) {
+           _customTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+       } else {
+           // Fallback on earlier versions
+           self.automaticallyAdjustsScrollViewInsets = NO;
+       }
+}
 
-    self. view.backgroundColor = LQRandColor;
-
+- (void)dealloc{
+    LQLog(@"dealloc -- %@",NSStringFromClass([self class]));
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 #pragma mark - ui
 - (void)configUI{
-    [self.view addSubview:self.customTableView];
     __weak __typeof(self) weakSelf = self;
+    [self.view addSubview:self.backImageV];
+    [self.backImageV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(weakSelf.view);
+    }];
+    
+    [self.view addSubview:self.customTableView];
     [self.customTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.right.mas_equalTo(weakSelf.view);
-        make.top.mas_equalTo(NavMaxY);
+        make.left.bottom.right.top.mas_equalTo(weakSelf.view);
     }];
     self.customTableView.contentInset = UIEdgeInsetsMake(0, 0, TabbarH, 0);
-//    UIView *tableHeaderView = [[UIView alloc] init];
-//    [tableHeaderView addSubview:self.mineNewCustomView];
-//    [self.mineNewCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.equalTo(tableHeaderView);
-//    }];
-//    CGFloat H = [tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-//    self.customTableView.tableHeaderView = tableHeaderView;
-//    self.customTableView.tableHeaderView.lq_height = H;
-//
-//    [self mineCustomViewAct];
+    UIView *tableHeaderView = [[UIView alloc] init];
+    [tableHeaderView addSubview:self.mineCustomHeaderView];
+    [self.mineCustomHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(tableHeaderView);
+    }];
+    CGFloat H = [tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    tableHeaderView.lq_height = H;
+    self.customTableView.tableHeaderView = tableHeaderView;
+    self.customTableView.tableHeaderView.lq_height = H;
 
-    
-    //导航栏
-    [self addNavigationView];
-    self.navigationTextLabel.text = lqLocalized(@"会下款", nil);
-    [self.navigationRightBtn setTitle:lqLocalized(@"联系客服", nil) forState:UIControlStateNormal];
-    self.navigationBackButton.hidden = YES;
+    [self mineCustomHeaderViewAct];
 }
 
 #pragma mark - act
 
-
+- (void)mineCustomHeaderViewAct{
+    __weak __typeof(self) weakSelf = self;
+    self.mineCustomHeaderView.mineCustomHeaderViewBlock = ^(NSDictionary *dict) {
+        
+    };
+}
 
 
 #pragma mark -  UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return 5;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    switch (section) {
+        case 0:
+            {
+                return 1;
+            }
+            break;
+
+        case 1:
+            {
+                return 1;
+            }
+            break;
+        case 2:
+            {
+                return 3;
+            }
+            break;
+        case 3:
+            {
+                return 1;
+            }
+            break;
+        case 4:
+            {
+                return 4;
+            }
+            break;
+            
+        default:
+            break;
+    }
     return 0;
 
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
-}
+    MineCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([MineCell class]) forIndexPath:indexPath];
+    NSString *title;
+    NSString *subTitle;
+    if (indexPath.section == 0) {
+        title = [NSString stringWithFormat:lqLocalized(@"官方邮箱%@", nil),@"***"];
+        subTitle = lqStrings(@"复制");
+    }else if (indexPath.section == 1){
+        title = lqStrings(@"我的收藏");
+        subTitle = nil;
+    }else if (indexPath.section == 2){
+        if (indexPath.row == 0) {
+            title = lqStrings(@"绑定手机号");
+            subTitle = lqStrings(@"未绑定");
+        }else  if (indexPath.row == 1) {
+            title = lqStrings(@"我的邀请人");
+            subTitle = lqStrings(@"未绑定");
+        }else  if (indexPath.row == 2) {
+            title = lqStrings(@"安全码设置");
+            subTitle = lqStrings(@"");
+        }
 
-
-
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 0.01;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0.01;
+    }else if (indexPath.section == 3){
+        title = lqStrings(@"密码锁");
+        subTitle = nil;
+    }else if (indexPath.section == 4){
+        if (indexPath.row == 0) {
+            title = lqStrings(@"清理缓存");
+            subTitle = lqStrings(@"多大");
+        }else  if (indexPath.row == 1) {
+            title = lqStrings(@"问题反馈");
+            subTitle = lqStrings(@"");
+        }else  if (indexPath.row == 2) {
+            title = lqStrings(@"使用者协定");
+            subTitle = lqStrings(@"");
+        }else  if (indexPath.row == 3) {
+            title = lqStrings(@"当前版本");
+            subTitle = lqStrings(@"");
+        }
+    }
+    [cell refreshUIWithTitle:title rightTitle:subTitle accessoryHidden:subTitle.length > 0];
+    return cell;
     
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    UIView *secHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Adaptor_Value(25))];
-//
-//    secHeader.backgroundColor = BackGroundColor;
-//    UILabel *lable = [[UILabel alloc] init];
-//
-//    [secHeader addSubview:lable];
-//    lable.textColor = TitleBlackColor;
-//    lable.font = RegularFONT(15);
-//    if (self.historyloanRecordArr.count > 0) {
-//        lable.text = lqLocalized(@"历史贷款", nil);
-//    }else{
-//        lable.text = nil;
-//    }
-//    [lable sizeToFit];
-//    lable.lq_x = Adaptor_Value(25);
-//
-//
-//    return secHeader;
-//
-//}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return Adaptor_Value(5);
+    
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *secHeader = [[UIView alloc] init];
+    secHeader.backgroundColor = [UIColor clearColor];
+    return secHeader;
+
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.01;
 }
@@ -135,17 +190,29 @@
         _customTableView.dataSource = self;
         _customTableView.showsVerticalScrollIndicator = NO;
         _customTableView.showsHorizontalScrollIndicator = NO;
-//        _customTableView.backgroundColor = BackGroundColor;
-//        _customTableView.separatorColor = BackGroundColor;
-        
-//        //下拉刷新
-//        [_customTableView addHeaderWithRefreshingTarget:self refreshingAction:@selector(requestData)];
-//        [_customTableView beginHeaderRefreshing];
-//        _customTableView.tableFooterView = [UIView new];
+        _customTableView.backgroundColor = [UIColor clearColor];
+        _customTableView.separatorColor = [UIColor clearColor];
+        [_customTableView registerClass:[MineCell class] forCellReuseIdentifier:NSStringFromClass([MineCell class])];
+
+        //下拉刷新
+        [_customTableView addHeaderWithRefreshingTarget:self refreshingAction:@selector(requestData)];
+        _customTableView.tableFooterView = [UIView new];
         
     }
     return _customTableView;
 }
 
+- (UIImageView *)backImageV{
+    if(!_backImageV ){
+        _backImageV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"app_bg"]];
+    }
+    return _backImageV;
+}
 
+- (MineCustomHeaderView *)mineCustomHeaderView{
+    if (!_mineCustomHeaderView) {
+        _mineCustomHeaderView = [MineCustomHeaderView new];
+    }
+    return _mineCustomHeaderView;
+}
 @end

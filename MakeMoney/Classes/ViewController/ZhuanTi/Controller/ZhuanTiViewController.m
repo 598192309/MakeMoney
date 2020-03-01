@@ -149,6 +149,9 @@
         _customTableView.showsHorizontalScrollIndicator = NO;
         
         [_customTableView registerClass:[ZHuanTiCell class] forCellReuseIdentifier:NSStringFromClass([ZHuanTiCell class])];
+        //高度自适应
+        _customTableView.estimatedRowHeight=Adaptor_Value(50);
+        _customTableView.rowHeight=UITableViewAutomaticDimension;
         
         //下拉刷新
         [_customTableView addHeaderWithRefreshingTarget:self refreshingAction:@selector(requestData)];

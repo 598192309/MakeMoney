@@ -25,6 +25,8 @@
 		09239ADA2403FFCE00A4F727 /* LorginApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 09239AD92403FFCE00A4F727 /* LorginApi.m */; };
 		093E58BF2406A87A004E5F72 /* SAMKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 093E58BB2406A879004E5F72 /* SAMKeychainQuery.m */; };
 		093E58C02406A87A004E5F72 /* SAMKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 093E58BD2406A879004E5F72 /* SAMKeychain.m */; };
+		096C7FB9240B8F3E00914E20 /* MineCustomHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C7FB5240B8F3E00914E20 /* MineCustomHeaderView.m */; };
+		096C7FBA240B8F3E00914E20 /* MineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C7FB6240B8F3E00914E20 /* MineCell.m */; };
 		09830AF7240819A700FBF2C7 /* UserData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 09830AF6240819A700FBF2C7 /* UserData.plist */; };
 		09830AFA2408207F00FBF2C7 /* AVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09830AF92408207F00FBF2C7 /* AVCell.m */; };
 		09E72AEB240559F40004B25C /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E72AE2240559F40004B25C /* AFURLResponseSerialization.m */; };
@@ -209,6 +211,10 @@
 		093E58BC2406A879004E5F72 /* SAMKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMKeychain.h; sourceTree = "<group>"; };
 		093E58BD2406A879004E5F72 /* SAMKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMKeychain.m; sourceTree = "<group>"; };
 		093E58BE2406A87A004E5F72 /* SAMKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMKeychainQuery.h; sourceTree = "<group>"; };
+		096C7FB5240B8F3E00914E20 /* MineCustomHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MineCustomHeaderView.m; path = Mine/MineCustomHeaderView.m; sourceTree = SOURCE_ROOT; };
+		096C7FB6240B8F3E00914E20 /* MineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MineCell.m; path = Mine/MineCell.m; sourceTree = SOURCE_ROOT; };
+		096C7FB7240B8F3E00914E20 /* MineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MineCell.h; path = Mine/MineCell.h; sourceTree = SOURCE_ROOT; };
+		096C7FB8240B8F3E00914E20 /* MineCustomHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MineCustomHeaderView.h; path = Mine/MineCustomHeaderView.h; sourceTree = SOURCE_ROOT; };
 		09830AF6240819A700FBF2C7 /* UserData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = UserData.plist; sourceTree = "<group>"; };
 		09830AF82408207F00FBF2C7 /* AVCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVCell.h; sourceTree = "<group>"; };
 		09830AF92408207F00FBF2C7 /* AVCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVCell.m; sourceTree = "<group>"; };
@@ -762,6 +768,10 @@
 		09239A8F2403FEE400A4F727 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				096C7FB7240B8F3E00914E20 /* MineCell.h */,
+				096C7FB6240B8F3E00914E20 /* MineCell.m */,
+				096C7FB8240B8F3E00914E20 /* MineCustomHeaderView.h */,
+				096C7FB5240B8F3E00914E20 /* MineCustomHeaderView.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1516,8 +1526,10 @@
 				11105E5E24066BC900521CB2 /* SystemAlertViewController.m in Sources */,
 				09E72C8024055F7E0004B25C /* MJExtensionConst.m in Sources */,
 				11105E5924066BC900521CB2 /* UIButton+LqExtension.m in Sources */,
+				096C7FBA240B8F3E00914E20 /* MineCell.m in Sources */,
 				09E72D1B240560210004B25C /* BaseViewController.m in Sources */,
 				11105E5C24066BC900521CB2 /* LqWGS84TOGCJ02.m in Sources */,
+				096C7FB9240B8F3E00914E20 /* MineCustomHeaderView.m in Sources */,
 				11105E5824066BC900521CB2 /* UILabel+LqExtension.m in Sources */,
 				09E72D17240560210004B25C /* BaseWebViewController.m in Sources */,
 				11105E8724067C3600521CB2 /* CityItem.m in Sources */,
