@@ -35,6 +35,7 @@
     
     [self requestData];
     [self reqestBannerAds];
+    [self requestAds];
 }
 
 #pragma mark - ui
@@ -150,7 +151,11 @@
         [headerView refreshUIWithTitle:title titleImageStr:imageStr tipBtnTitle:subTitle];
        return headerView;
     }
-    return nil;
+    AdsHeaderView *footerView = [AdsHeaderView footerViewWithCollectionView:collectionView forIndexPath:indexPath];
+    footerView.backgroundColor = [UIColor redColor];
+    AdsItem *item = [self.bottomAdsArr safeObjectAtIndex:indexPath.section];
+    [footerView refreshUIWithImageStr:item.img];
+    return footerView;
 }
 #pragma mark - UICollectionViewDelegateFlowLayout
 //设置各个方块的大小尺寸
@@ -197,6 +202,15 @@
     }
     
 }
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
+    AdsItem *item = [self.bottomAdsArr safeObjectAtIndex:section];
+    //根据url 获取图片尺寸
+    CGSize size = [UIImage getImageSizeWithURL:item.img];
+    
+    CGFloat h = LQScreemW / size.width * size.height;
+    return  CGSizeMake(LQScreemW,h);
+}
 #pragma mark - UICollectionViewDelegate
 //方块被选中会调用
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -240,6 +254,11 @@
         [_collectionView registerClass:[HomeCollectionHeaderView class]
                   forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                          withReuseIdentifier:NSStringFromClass([HomeCollectionHeaderView class])];
+        
+        [_collectionView registerClass:[AdsHeaderView class]
+                  forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+                         withReuseIdentifier:NSStringFromClass([AdsHeaderView class])];
+
 
         [_collectionView addHeaderWithRefreshingTarget:self refreshingAction:@selector(requestData)];
     }

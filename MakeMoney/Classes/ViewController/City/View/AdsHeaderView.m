@@ -23,6 +23,14 @@
     return headerView;
     
 }
+
+//获取底部视图对象
++ (instancetype)footerViewWithCollectionView:(UICollectionView *)collectionView forIndexPath:(NSIndexPath *)indexPath{
+    //从缓存池中寻找顶部视图对象，如果没有，该方法自动调用alloc/initWithFrame创建一个新的顶部视图返回
+    AdsHeaderView *headerView=[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:NSStringFromClass([AdsHeaderView class]) forIndexPath:indexPath];
+    return headerView;
+    
+}
 //注册了顶部视图后，当缓存池中没有顶部视图的对象时候，自动调用alloc/initWithFrame创建
 -(instancetype)initWithFrame:(CGRect)frame{
     self=[super initWithFrame:frame];
@@ -41,8 +49,20 @@
 }
 - (void)refreshUIWithImageStr:(NSString *)titleImageStr{
     [self.imageV sd_setImageWithURL:[NSURL URLWithString:titleImageStr]];
+  
 }
 
+ -(UIImage *) getImageFromURL:(NSString *)fileURL
+{
+    NSLog(@"执行图片下载函数");
+    UIImage * result;
+    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileURL]];
+    result = [UIImage imageWithData:data];
+    return result;
+}
+- (CGFloat)cellHeight{
+    return self.imageV.lq_height;
+}
 #pragma mark - act
 - (void)tipBtnClick:(EnlargeTouchSizeButton *)sender{
     if (self.headerViewTipBtnClickBlock) {
@@ -60,6 +80,7 @@
         
         [contentV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(weakSelf.header);
+            
         }];
         
         _imageV = [[UIImageView alloc] init];
@@ -67,6 +88,7 @@
         [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.right.bottom.mas_equalTo(contentV);
         }];
+        _imageV.contentMode = UIViewContentModeScaleAspectFill;
         
     }
     return _header;

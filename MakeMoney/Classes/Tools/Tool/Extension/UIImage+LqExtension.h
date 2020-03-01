@@ -53,6 +53,11 @@ NS_ASSUME_NONNULL_BEGIN
 /**图片转64base字符串*/
 + (NSString *)imageToBase64String:(UIImage *)image;
 
+
+/**
+ *  根据图片url获取图片尺寸
+ */
++ (CGSize)getImageSizeWithURL:(id)URL;
 @end
 
 NS_ASSUME_NONNULL_END
