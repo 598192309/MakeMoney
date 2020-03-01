@@ -22,13 +22,13 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="jaf-aU-EGk">
                                     <size key="itemSize" width="150" height="143"/>
-                                    <size key="headerReferenceSize" width="50" height="181"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="50" height="51"/>
+                                    <size key="footerReferenceSize" width="50" height="92"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeCategaryCell" id="C0e-jO-vve" customClass="HomeCategaryCell">
-                                        <rect key="frame" x="0.0" y="181" width="150" height="143"/>
+                                        <rect key="frame" x="0.0" y="51" width="150" height="143"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Qu6-Wg-J6d">
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="143"/>
@@ -61,11 +61,11 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeSectionHeaderView" id="GhF-FD-ZLh" customClass="HomeSectionHeaderView">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="181"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Fj-Pc-ALd">
-                                            <rect key="frame" x="0.0" y="131" width="414" height="50"/>
+                                            <rect key="frame" x="0.0" y="1" width="414" height="50"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hot" translatesAutoresizingMaskIntoConstraints="NO" id="R0U-re-pkc">
                                                     <rect key="frame" x="10" y="12.5" width="25" height="25"/>
@@ -100,24 +100,34 @@
                                                 <constraint firstItem="2bD-JO-RGP" firstAttribute="centerY" secondItem="4Fj-Pc-ALd" secondAttribute="centerY" id="zxz-14-Fjf"/>
                                             </constraints>
                                         </view>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oy3-KI-9qa">
-                                            <rect key="frame" x="10" y="0.0" width="394" height="131"/>
-                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="4Fj-Pc-ALd" firstAttribute="leading" secondItem="GhF-FD-ZLh" secondAttribute="leading" id="9KH-sM-VDG"/>
                                         <constraint firstAttribute="bottom" secondItem="4Fj-Pc-ALd" secondAttribute="bottom" id="Bvw-ro-msI"/>
-                                        <constraint firstItem="oy3-KI-9qa" firstAttribute="leading" secondItem="GhF-FD-ZLh" secondAttribute="leading" constant="10" id="HPk-3h-sGu"/>
-                                        <constraint firstAttribute="trailing" secondItem="oy3-KI-9qa" secondAttribute="trailing" constant="10" id="TKF-xH-o6d"/>
-                                        <constraint firstItem="oy3-KI-9qa" firstAttribute="top" secondItem="GhF-FD-ZLh" secondAttribute="top" id="aw6-B6-Rnk"/>
                                         <constraint firstAttribute="trailing" secondItem="4Fj-Pc-ALd" secondAttribute="trailing" id="sMP-03-TbD"/>
-                                        <constraint firstItem="4Fj-Pc-ALd" firstAttribute="top" secondItem="oy3-KI-9qa" secondAttribute="bottom" id="zvE-Iv-tHe"/>
                                     </constraints>
                                     <connections>
-                                        <outlet property="adImageView" destination="oy3-KI-9qa" id="ecd-8L-Zot"/>
                                         <outlet property="btn" destination="8xT-MU-jMh" id="Srr-uc-9yn"/>
                                         <outlet property="iconImgaView" destination="R0U-re-pkc" id="FoH-xU-k03"/>
                                         <outlet property="titleLabel" destination="2bD-JO-RGP" id="KB9-7W-3pW"/>
+                                    </connections>
+                                </collectionReusableView>
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeSectionFooterView" id="5Ph-3R-hqf" customClass="HomeSectionFooterView">
+                                    <rect key="frame" x="0.0" y="194" width="414" height="92"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="psT-A4-FGC">
+                                            <rect key="frame" x="10" y="0.0" width="394" height="92"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="psT-A4-FGC" secondAttribute="bottom" id="17R-n8-PwM"/>
+                                        <constraint firstItem="psT-A4-FGC" firstAttribute="leading" secondItem="5Ph-3R-hqf" secondAttribute="leading" constant="10" id="2oY-nn-bmL"/>
+                                        <constraint firstItem="psT-A4-FGC" firstAttribute="top" secondItem="5Ph-3R-hqf" secondAttribute="top" id="OK2-ae-Vna"/>
+                                        <constraint firstAttribute="trailing" secondItem="psT-A4-FGC" secondAttribute="trailing" constant="10" id="kxf-ga-fNe"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="adImageView" destination="psT-A4-FGC" id="Qq4-Zi-r2f"/>
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>

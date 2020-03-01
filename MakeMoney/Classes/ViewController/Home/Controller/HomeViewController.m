@@ -13,7 +13,7 @@
 #import "HomeCategaryCell.h"
 #import "HomeSectionHeaderView.h"
 #import "HomeVideoCell.h"
-
+#import "HomeSectionFooterView.h"
 
 #import "HomeTopCell.h"
 #import "HomeCollectionHeaderView.h"
@@ -140,17 +140,19 @@
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         HomeSectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([HomeSectionHeaderView class]) forIndexPath:indexPath];
         if (indexPath.section == 0) {
-            [headerView refreshViewWithVideo:nil ad:nil];
+            [headerView refreshViewWithVideo:nil];
         } else {
             HomeVideoList *video = _dataSource.video[indexPath.section - 1];
-            AdsItem *adItem;
-            
-            if (indexPath.section % 2 != 0) {//不插入广告
-                adItem = [_dataSource.ads safeObjectAtIndex:(indexPath.section - 1) / 2];
-            } 
-            [headerView refreshViewWithVideo:video ad:adItem];
+            [headerView refreshViewWithVideo:video];
         }
         return headerView;
+    } else {
+        if (indexPath.section % 2 == 0) {
+            AdsItem *item = [_dataSource.ads safeObjectAtIndex:indexPath.section / 2];
+            HomeSectionFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:NSStringFromClass([HomeSectionFooterView class]) forIndexPath:indexPath];
+            [footerView refreshViewWith:item];
+            return footerView;
+        }
     }
     return nil;
 }
@@ -174,11 +176,21 @@
 
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+//    if (section % 2 == 0) {
+//        return CGSizeMake(LQScreemW, 50);
+//    }
+//    return  CGSizeMake(LQScreemW, 50 + Adaptor_Value(100));
+//}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
     if (section % 2 == 0) {
-        return CGSizeMake(LQScreemW, 50);
+        AdsItem *item = [_dataSource.ads safeObjectAtIndex:section / 2];
+        if (item.imageSize.width > 0) {
+            return CGSizeMake((LQScreemW - 20), (LQScreemW - 20) * item.imageSize.height / item.imageSize.width);
+        }
+        return CGSizeMake(LQScreemW, 100);
     }
-    return  CGSizeMake(LQScreemW, 50 + Adaptor_Value(100));
+    return CGSizeZero;
 }
 #pragma mark - UICollectionViewDelegate
 //方块被选中会调用
