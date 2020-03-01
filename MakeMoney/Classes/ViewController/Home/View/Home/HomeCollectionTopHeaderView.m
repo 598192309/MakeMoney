@@ -91,7 +91,7 @@
         _tipBtn = [[EnlargeTouchSizeButton alloc] init];
         [_tipBtn addTarget:self action:@selector(tipBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_tipBtn setTitleColor:[UIColor whiteColor]  forState:UIControlStateNormal];
-        _tipBtn.titleLabel.font = AdaptedFontSize(17);
+        _tipBtn.titleLabel.font = AdaptedFontSize(12);
         [contentV addSubview:_tipBtn];
         [_tipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(contentV);

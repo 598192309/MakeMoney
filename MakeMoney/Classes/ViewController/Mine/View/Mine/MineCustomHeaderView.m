@@ -164,7 +164,7 @@
         }];
 
         
-        _iDLable = [UILabel lableWithText:[NSString stringWithFormat:lqLocalized(@"ID:%@", nil),RI.infoInitItem.user_id] textColor:TitleWhiteColor fontSize:AdaptedFontSize(14) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        _iDLable = [UILabel lableWithText:[NSString stringWithFormat:lqLocalized(@"ID:%@", nil),RI.infoInitItem.sex_id] textColor:TitleWhiteColor fontSize:AdaptedFontSize(14) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
         [contentV addSubview:_iDLable];
         [_iDLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(weakSelf.nameLabel.mas_bottom).offset(Adaptor_Value(5));
