@@ -63,6 +63,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setIconInRightWithSpacing:(CGFloat)Spacing;
 - (void)setIconInTopWithSpacing:(CGFloat)Spacing;
 - (void)setIconInBottomWithSpacing:(CGFloat)Spacing;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

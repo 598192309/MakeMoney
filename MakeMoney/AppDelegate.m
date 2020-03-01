@@ -26,9 +26,9 @@ static NSString  *YouMengKey = @"5e551f1c0cafb2fd5a00017b";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController = [[MainTabBarController alloc]init];
+//    self.window.rootViewController = [[MainTabBarController alloc]init];
     self.rootTabbar = [[MainTabBarController alloc]init];
-//    self.window.rootViewController = [LaunchingViewController new];
+    self.window.rootViewController = [LaunchingViewController new];
     
     
     //    // 判断下用户有没有最新的版本

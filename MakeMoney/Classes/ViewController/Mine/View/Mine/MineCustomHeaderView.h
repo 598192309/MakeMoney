@@ -14,4 +14,6 @@
 
 
 - (void)configUIWithItem:(NSObject *)item finishi:(void(^)(void))finishBlock;
+
+- (void)setAvter:(UIImage *)image;
 @end

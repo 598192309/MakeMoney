@@ -98,6 +98,8 @@
     dispatch_group_enter(group);
     [InitApi requestBasicInfoSuccess:^(BasicItem * _Nonnull basicItem, NSString * _Nonnull msg) {
         dispatch_group_leave(group);
+        
+        RI.basicItem = basicItem;
 
     } error:^(NSError *error, id resultObject) {
 //        [LSVProgressHUD showError:error];
@@ -111,6 +113,7 @@
     dispatch_group_enter(group);
     [InitApi initWithSyste:@"ios" Success:^(InitItem * _Nonnull initItem, NSString * _Nonnull msg) {
         dispatch_group_leave(group);
+        RI.infoInitItem = initItem;
     } error:^(NSError *error, id resultObject) {
 //        [LSVProgressHUD showError:error];
 //        dispatch_group_leave(group);

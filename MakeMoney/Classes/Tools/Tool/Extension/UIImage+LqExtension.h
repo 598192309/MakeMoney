@@ -52,6 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**图片转64base字符串*/
 + (NSString *)imageToBase64String:(UIImage *)image;
+
 @end
 
 NS_ASSUME_NONNULL_END
