@@ -26,6 +26,7 @@
 		096C7FC0240BC16800914E20 /* MineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C7FBC240BC16800914E20 /* MineCell.m */; };
 		096C7FC1240BC16800914E20 /* MineCustomHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C7FBF240BC16800914E20 /* MineCustomHeaderView.m */; };
 		096C7FC4240BC3D800914E20 /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C7FC3240BC3D800914E20 /* CustomAlertView.m */; };
+		096C7FC7240C0F6D00914E20 /* AdsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C7FC6240C0F6D00914E20 /* AdsHeaderView.m */; };
 		09830AF7240819A700FBF2C7 /* UserData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 09830AF6240819A700FBF2C7 /* UserData.plist */; };
 		09830AFA2408207F00FBF2C7 /* AVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09830AF92408207F00FBF2C7 /* AVCell.m */; };
 		09E72AEB240559F40004B25C /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E72AE2240559F40004B25C /* AFURLResponseSerialization.m */; };
@@ -218,6 +219,8 @@
 		096C7FBF240BC16800914E20 /* MineCustomHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineCustomHeaderView.m; sourceTree = "<group>"; };
 		096C7FC2240BC3D800914E20 /* CustomAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlertView.h; sourceTree = "<group>"; };
 		096C7FC3240BC3D800914E20 /* CustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlertView.m; sourceTree = "<group>"; };
+		096C7FC5240C0F6D00914E20 /* AdsHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdsHeaderView.h; sourceTree = "<group>"; };
+		096C7FC6240C0F6D00914E20 /* AdsHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdsHeaderView.m; sourceTree = "<group>"; };
 		09830AF6240819A700FBF2C7 /* UserData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = UserData.plist; sourceTree = "<group>"; };
 		09830AF82408207F00FBF2C7 /* AVCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVCell.h; sourceTree = "<group>"; };
 		09830AF92408207F00FBF2C7 /* AVCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVCell.m; sourceTree = "<group>"; };
@@ -806,6 +809,8 @@
 			children = (
 				1135C9D82408BA7800478696 /* CityCell.h */,
 				1135C9D92408BA7800478696 /* CityCell.m */,
+				096C7FC5240C0F6D00914E20 /* AdsHeaderView.h */,
+				096C7FC6240C0F6D00914E20 /* AdsHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1419,8 +1424,6 @@
 				09E72C3924055F6E0004B25C /* IQKeyboardManager.bundle in Resources */,
 				092399D62403FE1400A4F727 /* LaunchScreen.storyboard in Resources */,
 				8BD5456B240B9C0300C90A31 /* Home.storyboard in Resources */,
-				09239ACF2403FEE400A4F727 /* CustomAlertView.xib in Resources */,
-				09E72CBA24055F860004B25C /* MJRefresh.bundle in Resources */,
 				092399D32403FE1400A4F727 /* Assets.xcassets in Resources */,
 				09830AF7240819A700FBF2C7 /* UserData.plist in Resources */,
 				092399D12403FE0F00A4F727 /* Main.storyboard in Resources */,
@@ -1456,6 +1459,7 @@
 				09E72C6124055F770004B25C /* NSArray+MASAdditions.m in Sources */,
 				09E72C6424055F770004B25C /* MASViewConstraint.m in Sources */,
 				8BD545AA240BB4CC00C90A31 /* NSBundle+MJRefresh.m in Sources */,
+				096C7FC7240C0F6D00914E20 /* AdsHeaderView.m in Sources */,
 				09E72CF424055F8E0004B25C /* NSData+ImageContentType.m in Sources */,
 				8BD545AB240BB4CC00C90A31 /* UIView+MJExtension.m in Sources */,
 				09E72C6524055F770004B25C /* MASViewAttribute.m in Sources */,
