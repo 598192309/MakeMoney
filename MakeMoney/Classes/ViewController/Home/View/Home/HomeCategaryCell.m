@@ -27,6 +27,9 @@
     _desLabel.text = des;
     self.imageV.image = nil;
     __weak __typeof(self) weakSelf = self;
+    if (!item) {
+        return;
+    }
     [HomeApi downImageWithType:@"v_imgs" paramTitle:@"vId" ID:item.ID key:item.video_url Success:^(UIImage * _Nonnull img,NSString *ID) {
         if ([weakSelf.item.ID isEqualToString:ID]) {
             weakSelf.imageV.image = img;

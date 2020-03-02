@@ -48,6 +48,9 @@
     self.imageV.image = nil;
     self.item  = item;
     __weak __typeof(self) weakSelf = self;
+    if (!item) {
+        return;
+    }
     [HomeApi downImageWithType:@"s_imgs" paramTitle:@"sId" ID:item.ID key:@"zhuanti" Success:^(UIImage * _Nonnull img,NSString *ID) {
         if ([weakSelf.item.ID isEqualToString:ID]) {
             weakSelf.imageV.image = img;
