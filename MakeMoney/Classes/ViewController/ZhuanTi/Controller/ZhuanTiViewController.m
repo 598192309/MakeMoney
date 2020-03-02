@@ -106,7 +106,7 @@
 {
     ZHuanTiCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ZHuanTiCell class]) forIndexPath:indexPath];
     ZhuanTiHomeItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
-    [cell refreshWithItem: item];
+    [cell refreshWithItem: item downImageType:@"专题"];
     return cell;
 
 

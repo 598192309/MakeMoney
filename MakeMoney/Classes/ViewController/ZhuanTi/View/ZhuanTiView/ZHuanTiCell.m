@@ -43,7 +43,7 @@
 - (void)layoutSub{
 }
 
-- (void)refreshWithItem:(ZhuanTiHomeItem*)item{
+- (void)refreshWithItem:(ZhuanTiHomeItem*)item downImageType:(NSString *)downImageType{
 //    self.titleLabel.text = item.title;
     self.imageV.image = nil;
     self.item  = item;
@@ -51,7 +51,21 @@
     if (!item) {
         return;
     }
-    [HomeApi downImageWithType:@"s_imgs" paramTitle:@"sId" ID:item.ID key:@"zhuanti" Success:^(UIImage * _Nonnull img,NSString *ID) {
+    NSString *type;
+    NSString *paramTitle;
+    NSString *key;
+
+
+    if ([downImageType isEqualToString:@"分类"]) {
+        type = @"vt_imgs";
+        paramTitle = @"vtId";
+        key = @"category";
+    }else if ([downImageType isEqualToString:@"专题"]) {
+        type = @"s_imgs";
+        paramTitle = @"sId";
+        key = @"zhuanti";
+    }
+    [HomeApi downImageWithType:type paramTitle:paramTitle ID:item.ID key:key Success:^(UIImage * _Nonnull img,NSString *ID) {
         if ([weakSelf.item.ID isEqualToString:ID]) {
             weakSelf.imageV.image = img;
         }
