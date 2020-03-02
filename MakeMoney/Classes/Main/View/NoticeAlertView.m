@@ -201,13 +201,13 @@
         [contentV addSubview:_imageAlertViewBtn];
         [_imageAlertViewBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(contentV);
-            make.height.width.mas_equalTo(Adaptor_Value(30));
+            make.height.width.mas_equalTo(40);
             make.top.mas_equalTo(weakSelf.imageAlertViewImageV.mas_bottom).offset(Adaptor_Value(20));
             make.bottom.mas_equalTo(contentV);
         }];
         _imageAlertViewBtn.touchSize = CGSizeMake(Adaptor_Value(60), Adaptor_Value(60));
         
-        ViewBorderRadius(_imageAlertViewBtn, Adaptor_Value(15), kOnePX,TitleWhiteColor);
+        ViewBorderRadius(_imageAlertViewBtn, 20, kOnePX,TitleWhiteColor);
            
     }
        return _imageAlertView;
