@@ -154,6 +154,7 @@
 		1135C9DA2408BA7800478696 /* CityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1135C9D92408BA7800478696 /* CityCell.m */; };
 		11E860B4240CF27D00719378 /* AllCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B3240CF27D00719378 /* AllCategoryViewController.m */; };
 		11E860B7240D06D100719378 /* NoticeAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B6240D06D100719378 /* NoticeAlertView.m */; };
+		11E860BA240D142700719378 /* SYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B8240D142600719378 /* SYPageControl.m */; };
 		8BD5456B240B9C0300C90A31 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5456A240B9C0300C90A31 /* Home.storyboard */; };
 		8BD5456E240BA7BA00C90A31 /* HomeCategaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5456D240BA7BA00C90A31 /* HomeCategaryCell.m */; };
 		8BD54571240BA80000C90A31 /* HomeSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD54570240BA80000C90A31 /* HomeSectionHeaderView.m */; };
@@ -483,6 +484,8 @@
 		11E860B3240CF27D00719378 /* AllCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllCategoryViewController.m; sourceTree = "<group>"; };
 		11E860B5240D06D100719378 /* NoticeAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoticeAlertView.h; sourceTree = "<group>"; };
 		11E860B6240D06D100719378 /* NoticeAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoticeAlertView.m; sourceTree = "<group>"; };
+		11E860B8240D142600719378 /* SYPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYPageControl.m; sourceTree = "<group>"; };
+		11E860B9240D142700719378 /* SYPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYPageControl.h; sourceTree = "<group>"; };
 		8BD5456A240B9C0300C90A31 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		8BD5456C240BA7BA00C90A31 /* HomeCategaryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeCategaryCell.h; sourceTree = "<group>"; };
 		8BD5456D240BA7BA00C90A31 /* HomeCategaryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeCategaryCell.m; sourceTree = "<group>"; };
@@ -1281,6 +1284,8 @@
 			children = (
 				11105E652406721500521CB2 /* SDCycleScrollView.h */,
 				11105E642406721400521CB2 /* SDCycleScrollView.m */,
+				11E860B9240D142700719378 /* SYPageControl.h */,
+				11E860B8240D142600719378 /* SYPageControl.m */,
 			);
 			path = CustomVIew;
 			sourceTree = "<group>";
@@ -1487,6 +1492,7 @@
 				09E72C6124055F770004B25C /* NSArray+MASAdditions.m in Sources */,
 				09E72C6424055F770004B25C /* MASViewConstraint.m in Sources */,
 				8BD545AA240BB4CC00C90A31 /* NSBundle+MJRefresh.m in Sources */,
+				11E860BA240D142700719378 /* SYPageControl.m in Sources */,
 				096C7FC7240C0F6D00914E20 /* AdsHeaderView.m in Sources */,
 				09E72CF424055F8E0004B25C /* NSData+ImageContentType.m in Sources */,
 				8BD545AB240BB4CC00C90A31 /* UIView+MJExtension.m in Sources */,

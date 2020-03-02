@@ -8,6 +8,7 @@
 #import "SDCycleScrollView.h"
 #import "UIImageView+WebCache.h"
 #import "SDImageCache.h"
+#import "SYPageControl.h"
 #define Screen_Width  [UIScreen mainScreen].bounds.size.width
 #define kCycleScrollViewInitialPageControlDotSize CGSizeMake(10, 10)
 
@@ -21,7 +22,7 @@ NSString * const ID = @"cycleCell";
 @property (nonatomic, strong) NSArray *imagePathsGroup;
 @property (nonatomic, weak) NSTimer *timer;
 @property (nonatomic, assign) NSInteger totalItemsCount;
-@property (nonatomic, weak) UIControl *pageControl;
+@property (nonatomic,strong)SYPageControl *customPageControl;
 
 @property (nonatomic, strong) UIImageView *backgroundImageView; // 当imageURLs为空时的背景图
 
@@ -50,7 +51,7 @@ NSString * const ID = @"cycleCell";
 
 - (void)initialization
 {
-    _autoScrollTimeInterval = 4.0;
+    _autoScrollTimeInterval = 2.0;
     _titleLabelTextColor = [UIColor whiteColor];
     _titleLabelTextFont= [UIFont systemFontOfSize:14];
     _titleLabelBackgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
@@ -64,6 +65,8 @@ NSString * const ID = @"cycleCell";
     _bannerImageViewContentMode = UIViewContentModeScaleToFill;
     
     self.backgroundColor = [UIColor whiteColor];
+    
+
     
 }
 
@@ -120,6 +123,19 @@ NSString * const ID = @"cycleCell";
     [self addSubview:mainView];
     _mainView = mainView;
     [_mainView addObserver:self forKeyPath:@"scrolling" options:NSKeyValueObservingOptionOld context:nil];
+    
+    if (_showPageControl) {
+        [self addSubview:self.customPageControl];
+        __weak __typeof(self) weakSelf = self;
+        [self.customPageControl mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(weakSelf);
+            make.height.mas_equalTo(Adaptor_Value(10));
+            make.bottom.mas_equalTo(self).offset(-Adaptor_Value(10));
+            make.width.mas_equalTo(Adaptor_Value(150));
+        }];
+        
+//        self.customPageControl.numberOfPages = self.imageURLStringsGroup.count;
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -213,6 +229,8 @@ NSString * const ID = @"cycleCell";
         }
     }];
     self.imagePathsGroup = [temp copy];
+    
+    self.customPageControl.numberOfPages = self.imagePathsGroup.count;
 }
 
 - (void)setLocalizationImageNamesGroup:(NSArray *)localizationImageNamesGroup
@@ -433,13 +451,7 @@ NSString * const ID = @"cycleCell";
     int itemIndex = [self currentIndex];
     int indexOnPageControl = [self pageControlIndexWithCurrentCellIndex:itemIndex];
     
-//    if ([self.pageControl isKindOfClass:[TAPageControl class]]) {
-//        TAPageControl *pageControl = (TAPageControl *)_pageControl;
-//        pageControl.currentPage = indexOnPageControl;
-//    } else {
-//        UIPageControl *pageControl = (UIPageControl *)_pageControl;
-//        pageControl.currentPage = indexOnPageControl;
-//    }
+    self.customPageControl.currentPage = indexOnPageControl;
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -525,6 +537,24 @@ NSString * const ID = @"cycleCell";
     return -(shouldPage+1)/2*self.boworrWidth-self.cellSpace;
 }
 
+#pragma mark - lazy
+- (SYPageControl *)customPageControl{
+    if (!_customPageControl) {
+        _customPageControl = [[SYPageControl alloc] init];
+//        _customPageControl.backgroundColor = [UIColor redColor];
+        _customPageControl.numberOfPages = 0;
+        _customPageControl.currentPage = 0;
+        _customPageControl.pageControlType = SYPageControlTypeCircle;
+        _customPageControl.pageControlAlignment = SYPageControlAlignmentBottom;
+        _customPageControl.pageMargin = Adaptor_Value(10);
+        _customPageControl.pageSizeWidth = 6;
+        _customPageControl.pageIndicatorColor = [UIColor whiteColor];
+        _customPageControl.currentPageIndicatorColor = [UIColor lq_colorWithHexString:@"#00CD6A"];
+        _customPageControl.showPageNumber = NO;//显示 1 2 3 4 5
+
+    }
+    return _customPageControl;
+}
 
 @end
 
