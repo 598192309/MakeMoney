@@ -13,7 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HomeSectionHeaderView : UICollectionReusableView
 
 - (void)refreshViewWithVideo:(nullable HomeVideoList *)video;
-
+/**点击tipBtn*/
+@property(nonatomic,copy)void(^headerViewTipBtnClickBlock)(UIButton *sender);
 @end
 
 NS_ASSUME_NONNULL_END

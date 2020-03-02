@@ -149,8 +149,10 @@
 		11105E8A24067C4300521CB2 /* MineItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 11105E8924067C4300521CB2 /* MineItem.m */; };
 		11105E8D24067EDB00521CB2 /* InitApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 11105E8C24067EDB00521CB2 /* InitApi.m */; };
 		11105E9024067F1000521CB2 /* InitItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 11105E8F24067F1000521CB2 /* InitItem.m */; };
+		1118B7B2240C996E0098A1D4 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118B7B1240C996E0098A1D4 /* ListViewController.m */; };
 		1120F42524079F9D00550055 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1120F42224079F9D00550055 /* GTMBase64.m */; };
 		1135C9DA2408BA7800478696 /* CityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1135C9D92408BA7800478696 /* CityCell.m */; };
+		11E860B4240CF27D00719378 /* AllCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B3240CF27D00719378 /* AllCategoryViewController.m */; };
 		8BD5456B240B9C0300C90A31 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5456A240B9C0300C90A31 /* Home.storyboard */; };
 		8BD5456E240BA7BA00C90A31 /* HomeCategaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5456D240BA7BA00C90A31 /* HomeCategaryCell.m */; };
 		8BD54571240BA80000C90A31 /* HomeSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD54570240BA80000C90A31 /* HomeSectionHeaderView.m */; };
@@ -469,11 +471,15 @@
 		11105E8C24067EDB00521CB2 /* InitApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InitApi.m; sourceTree = "<group>"; };
 		11105E8E24067F1000521CB2 /* InitItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InitItem.h; sourceTree = "<group>"; };
 		11105E8F24067F1000521CB2 /* InitItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InitItem.m; sourceTree = "<group>"; };
+		1118B7B0240C996E0098A1D4 /* ListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
+		1118B7B1240C996E0098A1D4 /* ListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
 		1120F41F24079F9D00550055 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		1120F42124079F9D00550055 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		1120F42224079F9D00550055 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		1135C9D82408BA7800478696 /* CityCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityCell.h; sourceTree = "<group>"; };
 		1135C9D92408BA7800478696 /* CityCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityCell.m; sourceTree = "<group>"; };
+		11E860B2240CF27D00719378 /* AllCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllCategoryViewController.h; sourceTree = "<group>"; };
+		11E860B3240CF27D00719378 /* AllCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllCategoryViewController.m; sourceTree = "<group>"; };
 		8BD5456A240B9C0300C90A31 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		8BD5456C240BA7BA00C90A31 /* HomeCategaryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeCategaryCell.h; sourceTree = "<group>"; };
 		8BD5456D240BA7BA00C90A31 /* HomeCategaryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeCategaryCell.m; sourceTree = "<group>"; };
@@ -661,6 +667,7 @@
 		09239A732403FEE400A4F727 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				1118B7AF240C99560098A1D4 /* Common */,
 				09239A812403FEE400A4F727 /* BaseViewController */,
 				09239A7E2403FEE400A4F727 /* Launch */,
 				09239A742403FEE400A4F727 /* Lorgin */,
@@ -705,6 +712,8 @@
 			children = (
 				09239A7B2403FEE400A4F727 /* HomeViewController.h */,
 				09239A7A2403FEE400A4F727 /* HomeViewController.m */,
+				11E860B2240CF27D00719378 /* AllCategoryViewController.h */,
+				11E860B3240CF27D00719378 /* AllCategoryViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1271,6 +1280,15 @@
 			path = CustomVIew;
 			sourceTree = "<group>";
 		};
+		1118B7AF240C99560098A1D4 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1118B7B0240C996E0098A1D4 /* ListViewController.h */,
+				1118B7B1240C996E0098A1D4 /* ListViewController.m */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		8BD54574240BB4CC00C90A31 /* MJRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -1500,6 +1518,7 @@
 				11105E4E24066BC900521CB2 /* UIScrollView+LqExtension.m in Sources */,
 				11105E5324066BC900521CB2 /* UITextField+LqExtension.m in Sources */,
 				096C7FC4240BC3D800914E20 /* CustomAlertView.m in Sources */,
+				1118B7B2240C996E0098A1D4 /* ListViewController.m in Sources */,
 				09239ADA2403FFCE00A4F727 /* LorginApi.m in Sources */,
 				8BD5456E240BA7BA00C90A31 /* HomeCategaryCell.m in Sources */,
 				09E72AED240559F40004B25C /* AFURLSessionManager.m in Sources */,
@@ -1579,6 +1598,7 @@
 				09239ACD2403FEE400A4F727 /* MainTabBarController.m in Sources */,
 				11105E8124067C2100521CB2 /* ZhuanTiItem.m in Sources */,
 				8BD545AE240BB4CC00C90A31 /* MJRefreshBackNormalFooter.m in Sources */,
+				11E860B4240CF27D00719378 /* AllCategoryViewController.m in Sources */,
 				09E72AEF240559F40004B25C /* AFNetworkReachabilityManager.m in Sources */,
 				11105ADC2406005600521CB2 /* AVViewController.m in Sources */,
 				11105E5124066BC900521CB2 /* UIStoryboard+LqExtension.m in Sources */,

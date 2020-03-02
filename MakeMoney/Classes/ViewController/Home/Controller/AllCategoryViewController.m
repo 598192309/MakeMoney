@@ -1,29 +1,29 @@
 //
-//  ZhuanTiViewController.m
+//  AllCategoryViewController.m
 //  MakeMoney
 //
-//  Created by rabi on 2020/2/26.
+//  Created by rabi on 2020/3/2.
 //  Copyright © 2020 lqq. All rights reserved.
-//
+//  全部分类
 
-#import "ZhuanTiViewController.h"
+#import "AllCategoryViewController.h"
 #import "ZHuanTiCell.h"
-#import "ZhuanTiApi.h"
-#import "ZhuanTiItem.h"
-#import "ListViewController.h"
-@interface ZhuanTiViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "HomeApi.h"
+#import "HomeItem.h"
+@interface AllCategoryViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
 @property (nonatomic,assign)NSInteger pageIndex;
 @property (nonatomic,strong)NSMutableArray *dataArr;
 
 @end
 
-@implementation ZhuanTiViewController
+@implementation AllCategoryViewController
 #pragma mark - life
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self configUI];
+    [self setUpNav];
         
 }
 - (void)dealloc{
@@ -38,18 +38,23 @@
         make.left.bottom.right.mas_equalTo(weakSelf.view);
         make.top.mas_equalTo(TopAdaptor_Value(25));
     }];
-    
-    
+
 }
+
+- (void)setUpNav{
+    [self addNavigationView];
+    self.navigationTextLabel.text = lqStrings(@"全部分类");
+}
+
 
 
 #pragma mark -  net
 -(void)requestData{
     __weak __typeof(self) weakSelf = self;
-    [ZhuanTiApi requestZhuanTiHomeInfowithPageIndex:@"0" page_size:@"25" Success:^(NSArray * _Nonnull zhuanTiHomeItemArr, NSString * _Nonnull msg) {
-        weakSelf.pageIndex = zhuanTiHomeItemArr.count ;
-        weakSelf.dataArr = [NSMutableArray arrayWithArray:zhuanTiHomeItemArr];
-        if (zhuanTiHomeItemArr.count >= 25 ) {
+    [HomeApi requestAllHotListwithPageIndex:@"0" page_size:@"25" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
+        weakSelf.pageIndex = hotItemArr.count ;
+        weakSelf.dataArr = [NSMutableArray arrayWithArray:hotItemArr];
+        if (hotItemArr.count >= 25 ) {
             [weakSelf.customTableView addFooterWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
             [weakSelf.customTableView.mj_footer setHidden:NO];
     
@@ -63,22 +68,18 @@
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
         [weakSelf.customTableView endHeaderRefreshing];
-
     }];
 
     
 }
 
-
-
-
 - (void)requestMoreData{
     __weak __typeof(self) weakSelf = self;
-    [ZhuanTiApi requestZhuanTiHomeInfowithPageIndex:IntTranslateStr(self.pageIndex) page_size:@"25" Success:^(NSArray * _Nonnull zhuanTiHomeItemArr, NSString * _Nonnull msg) {
-        [weakSelf.dataArr addObjectsFromArray:zhuanTiHomeItemArr];
+    [HomeApi requestAllHotListwithPageIndex:IntTranslateStr(self.pageIndex) page_size:@"25" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
+        [weakSelf.dataArr addObjectsFromArray:hotItemArr];
         [weakSelf.customTableView endFooterRefreshing];
         [weakSelf.customTableView reloadData];
-        if (zhuanTiHomeItemArr.count < 25) {
+        if (hotItemArr.count < 25) {
             [weakSelf.customTableView endRefreshingWithNoMoreData];
         }else{
             weakSelf.pageIndex = weakSelf.dataArr.count ;
@@ -87,10 +88,9 @@
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
         [weakSelf.customTableView endHeaderRefreshing];
-        
-
     }];
 }
+
 
 
 #pragma mark - UITableViewDataSource
@@ -118,12 +118,8 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    ZhuanTiHomeItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
 
-    ListViewController *vc = [[ListViewController alloc] init];
-    vc.navTitle = item.title;
-    vc.tag = IntTranslateStr(item.tag);
-    [self.navigationController pushViewController:vc animated:YES];
+    [LSVProgressHUD showInfoWithStatus:@"跳转短视频播放器"];
     
 }
 

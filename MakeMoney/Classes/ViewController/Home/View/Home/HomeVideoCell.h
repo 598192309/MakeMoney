@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HomeVideoCell : UICollectionViewCell
 - (void)refreshCellWithItem:(HotItem *)item videoType:(VideoType)type;
 
+
 @end
 
 NS_ASSUME_NONNULL_END

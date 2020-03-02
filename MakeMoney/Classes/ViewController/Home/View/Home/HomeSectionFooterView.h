@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HomeSectionFooterView : UICollectionReusableView
 - (void)refreshViewWith:(AdsItem *)item;
 @property (nonatomic, copy) void(^imageLoadSuccess)();
+
+
 @end
 
 NS_ASSUME_NONNULL_END

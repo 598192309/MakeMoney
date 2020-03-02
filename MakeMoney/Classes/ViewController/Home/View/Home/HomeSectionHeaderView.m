@@ -39,10 +39,14 @@
     }
 }
 - (IBAction)eventAction:(id)sender {
-    if (_video) {
-        [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"跳转到%@分类",_video.title]];
-    } else {
-        [SVProgressHUD showInfoWithStatus:@"跳转到“全部分类”"];
+//    if (_video) {
+//        [LSVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"跳转到%@分类",_video.title]];
+//    } else {
+//        [LSVProgressHUD showInfoWithStatus:@"跳转到“全部分类”"];
+//    }
+    
+    if (self.headerViewTipBtnClickBlock) {
+        self.headerViewTipBtnClickBlock(sender);
     }
 }
 

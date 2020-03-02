@@ -20,6 +20,8 @@
 #import "HomeCollectionTopHeaderView.h"
 #import "HomeItem.h"
 #import "HomeApi.h"
+#import "ListViewController.h"
+#import "AllCategoryViewController.h"
 
 @interface HomeViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,SDCycleScrollViewDelegate>
 
@@ -137,14 +139,30 @@
 }
 //设置顶部视图和底部视图
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    __weak __typeof(self) weakSelf = self;
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         HomeSectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([HomeSectionHeaderView class]) forIndexPath:indexPath];
+
         if (indexPath.section == 0) {
             [headerView refreshViewWithVideo:nil];
         } else {
-            HomeVideoList *video = _dataSource.video[indexPath.section - 1];
+            HomeVideoList *video = [_dataSource.video safeObjectAtIndex:indexPath.section - 1];
+
             [headerView refreshViewWithVideo:video];
         }
+        headerView.headerViewTipBtnClickBlock = ^(UIButton * _Nonnull sender) {
+            if (indexPath.section == 0) {
+                AllCategoryViewController *vc = [[AllCategoryViewController alloc] init];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }else{
+                ListViewController *vc = [[ListViewController alloc] init];
+                HomeVideoList *videoItem = [weakSelf.dataSource.video safeObjectAtIndex:indexPath.section - 1];
+                vc.navTitle = videoItem.title;
+                vc.tag = IntTranslateStr(videoItem.tag);
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }
+
+        };
         return headerView;
     } else {
         if (indexPath.section % 2 == 0) {
@@ -195,6 +213,25 @@
 //方块被选中会调用
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"点击选择了第%ld组，第%ld个方块",indexPath.section,indexPath.row);
+    if (indexPath.section == 0) {
+        HotItem *item ;
+        NSString *title;
+        if (indexPath.row == 0) {
+            item = self.dataSource.most_new.firstObject;
+            title = lqStrings(@"最新上传");
+        }else if (indexPath.row == 1) {
+            item = self.dataSource.most_play.firstObject;
+            title = lqStrings(@"最多播放");
+
+        }else if (indexPath.row == 2) {
+            item = self.dataSource.most_love.firstObject;
+            title = lqStrings(@"最多点赞");
+
+        }
+        ListViewController *vc = [[ListViewController alloc] init];
+        vc.navTitle = title;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
 }
 //方块取消选中会调用
