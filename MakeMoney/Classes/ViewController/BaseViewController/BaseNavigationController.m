@@ -20,8 +20,8 @@
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController
 {
     if (self = [super initWithRootViewController:rootViewController]) {
-        
-//        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+        //状态栏颜色
+       
         NSDictionary *attributeDic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:20.0],NSFontAttributeName,[UIColor blackColor],NSForegroundColorAttributeName,nil];
         self.navigationBar.titleTextAttributes = attributeDic;
         self.navigationBar.translucent = NO;
@@ -179,10 +179,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
 
 
 @end

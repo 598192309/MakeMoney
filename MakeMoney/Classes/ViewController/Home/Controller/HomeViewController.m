@@ -159,6 +159,8 @@
                 HomeVideoList *videoItem = [weakSelf.dataSource.video safeObjectAtIndex:indexPath.section - 1];
                 vc.navTitle = videoItem.title;
                 vc.tag = IntTranslateStr(videoItem.tag);
+                vc.type = IntTranslateStr(videoItem.type);
+                vc.text = videoItem.text.length > 0 ? videoItem.text : @"51778";
                 [weakSelf.navigationController pushViewController:vc animated:YES];
             }
 

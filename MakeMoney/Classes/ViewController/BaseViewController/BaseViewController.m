@@ -20,6 +20,12 @@
 - (BOOL)gestureRecognizerShouldBegin{
     return YES;
 }
+
+//状态栏颜色
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 - (void)viewDidLoad {
     
     [super viewDidLoad];

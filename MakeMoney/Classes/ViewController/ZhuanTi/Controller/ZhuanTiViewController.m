@@ -123,6 +123,8 @@
     ListViewController *vc = [[ListViewController alloc] init];
     vc.navTitle = item.title;
     vc.tag = IntTranslateStr(item.tag);
+    vc.type = IntTranslateStr(item.type);
+    vc.text = item.text.length > 0 ? item.text : @"51778";
     [self.navigationController pushViewController:vc animated:YES];
     
 }

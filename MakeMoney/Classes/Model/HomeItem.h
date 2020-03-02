@@ -100,6 +100,8 @@ typedef NS_ENUM(NSInteger, VideoType) {
 
 @interface HomeVideoList : NSObject
 @property (nonatomic,copy)NSString *title;
+@property (nonatomic,copy)NSString *text;
+
 @property (nonatomic, assign) int tag;
 @property (nonatomic, assign) VideoType type;
 @property (nonatomic, copy) NSArray<HotItem *> *lists;
