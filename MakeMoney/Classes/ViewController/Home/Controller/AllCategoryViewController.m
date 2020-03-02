@@ -36,7 +36,7 @@
 
     [self.customTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.mas_equalTo(weakSelf.view);
-        make.top.mas_equalTo(TopAdaptor_Value(25));
+        make.top.mas_equalTo(NavMaxY);
     }];
 
 }
