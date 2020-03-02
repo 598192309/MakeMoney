@@ -36,7 +36,7 @@
 
     [self.customTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.mas_equalTo(weakSelf.view);
-        make.top.mas_equalTo(TopAdaptor_Value(25));
+        make.top.mas_equalTo(NavMaxY);
     }];
 
 }
@@ -106,7 +106,7 @@
 {
     ZHuanTiCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ZHuanTiCell class]) forIndexPath:indexPath];
     ZhuanTiHomeItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
-    [cell refreshWithItem: item];
+    [cell refreshWithItem: item  downImageType:@"分类"];
     return cell;
 
 

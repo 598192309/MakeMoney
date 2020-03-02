@@ -50,50 +50,92 @@
 
 
 #pragma mark -  net
--(void)requestData{
+//-(void)requestData{
+//    __weak __typeof(self) weakSelf = self;
+//    [HomeApi requestHotCategoryListwithType_id:self.tag pageIndex:@"0" page_size:@"25" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
+//            weakSelf.pageIndex = hotItemArr.count ;
+//            weakSelf.dataArr = [NSMutableArray arrayWithArray:hotItemArr];
+//            if (hotItemArr.count >= 25 ) {
+//                [weakSelf.customCollectionView addFooterWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
+//                [weakSelf.customCollectionView.mj_footer setHidden:NO];
+//
+//            }else{
+//                [weakSelf.customCollectionView endHeaderRefreshing];
+//                //消除尾部"没有更多数据"的状态
+//                [weakSelf.customCollectionView.mj_footer setHidden:YES];
+//            }
+//            [weakSelf.customCollectionView endHeaderRefreshing];
+//            [weakSelf.customCollectionView reloadData];
+//    } error:^(NSError *error, id resultObject) {
+//        [LSVProgressHUD showError:error];
+//        [weakSelf.customCollectionView endHeaderRefreshing];
+//    }];
+//
+//
+//}
+//
+//
+//- (void)requestMoreData{
+//    __weak __typeof(self) weakSelf = self;
+//    [HomeApi requestHotCategoryListwithType_id:self.tag pageIndex: page_size:@"25" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
+//        [weakSelf.dataArr addObjectsFromArray:hotItemArr];
+//        [weakSelf.customCollectionView endFooterRefreshing];
+//        [weakSelf.customCollectionView reloadData];
+//        if (hotItemArr.count < 25) {
+//            [weakSelf.customCollectionView endRefreshingWithNoMoreData];
+//        }else{
+//            weakSelf.pageIndex = weakSelf.dataArr.count ;
+//
+//        }
+//    } error:^(NSError *error, id resultObject) {
+//        [LSVProgressHUD showError:error];
+//        [weakSelf.customCollectionView endHeaderRefreshing];
+//    }];
+//}
+
+- (void)requestData{
     __weak __typeof(self) weakSelf = self;
-    [HomeApi requestHotCategoryListwithType_id:self.tag pageIndex:@"0" page_size:@"25" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
-            weakSelf.pageIndex = hotItemArr.count ;
-            weakSelf.dataArr = [NSMutableArray arrayWithArray:hotItemArr];
-            if (hotItemArr.count >= 25 ) {
-                [weakSelf.customCollectionView addFooterWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
-                [weakSelf.customCollectionView.mj_footer setHidden:NO];
-        
-            }else{
-                [weakSelf.customCollectionView endHeaderRefreshing];
-                //消除尾部"没有更多数据"的状态
-                [weakSelf.customCollectionView.mj_footer setHidden:YES];
-            }
+    [HomeApi requestHotListMorewithTag:self.tag text:self.text type:self.type pageIndex:@"0" page_size:@"15" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
+        weakSelf.pageIndex = hotItemArr.count ;
+        weakSelf.dataArr = [NSMutableArray arrayWithArray:hotItemArr];
+        if (hotItemArr.count >= 15 ) {
+            [weakSelf.customCollectionView addFooterWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
+            [weakSelf.customCollectionView.mj_footer setHidden:NO];
+
+        }else{
             [weakSelf.customCollectionView endHeaderRefreshing];
-            [weakSelf.customCollectionView reloadData];
+            //消除尾部"没有更多数据"的状态
+            [weakSelf.customCollectionView.mj_footer setHidden:YES];
+        }
+        [weakSelf.customCollectionView endHeaderRefreshing];
+        [weakSelf.customCollectionView reloadData];
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
         [weakSelf.customCollectionView endHeaderRefreshing];
     }];
-
-    
 }
-
-
-
 
 - (void)requestMoreData{
     __weak __typeof(self) weakSelf = self;
-    [HomeApi requestHotCategoryListwithType_id:self.tag pageIndex:@"0" page_size:@"25" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
-        [weakSelf.dataArr addObjectsFromArray:hotItemArr];
-        [weakSelf.customCollectionView endFooterRefreshing];
-        [weakSelf.customCollectionView reloadData];
-        if (hotItemArr.count < 25) {
-            [weakSelf.customCollectionView endRefreshingWithNoMoreData];
-        }else{
-            weakSelf.pageIndex = weakSelf.dataArr.count ;
-            
-        }
+    [HomeApi requestHotListMorewithTag:self.tag text:self.text type:self.type pageIndex:IntTranslateStr(self.pageIndex) page_size:@"15" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
+       [weakSelf.dataArr addObjectsFromArray:hotItemArr];
+       [weakSelf.customCollectionView endFooterRefreshing];
+       [weakSelf.customCollectionView reloadData];
+       if (hotItemArr.count < 15) {
+           [weakSelf.customCollectionView endRefreshingWithNoMoreData];
+       }else{
+           weakSelf.pageIndex = weakSelf.dataArr.count ;
+
+       }
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
         [weakSelf.customCollectionView endHeaderRefreshing];
     }];
 }
+
+
+
+
  
 
 #pragma mark - UICollectionViewDataSource
@@ -111,7 +153,7 @@
 
     HomeVideoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([HomeVideoCell class]) forIndexPath:indexPath];
     HotItem *hotItem = [self.dataArr safeObjectAtIndex:indexPath.row];
-    [cell refreshCellWithItem:hotItem videoType:hotItem.tag];
+    [cell refreshCellWithItem:hotItem videoType:self.type.integerValue];
     return cell;
     
 }

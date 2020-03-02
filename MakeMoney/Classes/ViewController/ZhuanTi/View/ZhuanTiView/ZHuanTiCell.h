@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZHuanTiCell : UITableViewCell
-- (void)refreshWithItem:(ZhuanTiHomeItem*)item;
+- (void)refreshWithItem:(ZhuanTiHomeItem*)item downImageType:(NSString *)downImageType;
 @end
 
 NS_ASSUME_NONNULL_END
