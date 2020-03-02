@@ -17,9 +17,13 @@
 #import "CityViewController.h"
 #import "ZhuanTiViewController.h"
 #import "AVViewController.h"
+#import "HomeApi.h"
+#import "HomeItem.h"
+#import "NoticeAlertView.h"
 
 
 @interface MainTabBarController ()<UITabBarControllerDelegate>
+@property(nonatomic,strong)NoticeAlertView *infoAlert;//弹窗
 
 @end
 
@@ -53,6 +57,8 @@
     
     [self setupBasic];
     self.delegate = self;
+    
+    [self requestData];//获取公告
 
 }
 
@@ -68,6 +74,21 @@
 
 -(void)dealloc {
     
+}
+
+#pragma mark - net
+//获取公告
+- (void)requestData{
+    __weak __typeof(self) weakSelf = self;
+    [HomeApi requestGongGaoSuccess:^(GongGaoItem * _Nonnull gongGaoItem, NSString * _Nonnull msg) {
+        [weakSelf.infoAlert refreshUIWithTitle:gongGaoItem.title subTitle:gongGaoItem.content];
+        [[UIApplication sharedApplication].keyWindow addSubview:weakSelf.infoAlert];
+        [weakSelf.infoAlert mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
+        }];
+    } error:^(NSError *error, id resultObject) {
+//        [LSVProgressHUD showError:error];
+    }];
 }
 
 #pragma mark - act
@@ -107,5 +128,24 @@
     [super didReceiveMemoryWarning];
     [[SDImageCache sharedImageCache] clearMemory];
 }
+#pragma mark - lazy
+- (NoticeAlertView *)infoAlert{
+    if (_infoAlert == nil) {
+        _infoAlert = [[NoticeAlertView alloc] init];
 
+        __weak __typeof(self) weakSelf = self;
+        UITabBarController *rootVC  = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        NSInteger a = rootVC.selectedIndex;
+        UINavigationController *mineVC = [rootVC.childViewControllers safeObjectAtIndex:rootVC.selectedIndex];
+        UIViewController *currentVc = mineVC.viewControllers.lastObject;
+    
+        _infoAlert.noticeAlertViewBlock = ^(UIButton * _Nonnull sender) {
+            [weakSelf.infoAlert removeFromSuperview];
+            weakSelf.infoAlert = nil;
+        };
+    }
+    
+    return _infoAlert;
+    
+}
 @end

@@ -153,6 +153,7 @@
 		1120F42524079F9D00550055 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1120F42224079F9D00550055 /* GTMBase64.m */; };
 		1135C9DA2408BA7800478696 /* CityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1135C9D92408BA7800478696 /* CityCell.m */; };
 		11E860B4240CF27D00719378 /* AllCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B3240CF27D00719378 /* AllCategoryViewController.m */; };
+		11E860B7240D06D100719378 /* NoticeAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B6240D06D100719378 /* NoticeAlertView.m */; };
 		8BD5456B240B9C0300C90A31 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5456A240B9C0300C90A31 /* Home.storyboard */; };
 		8BD5456E240BA7BA00C90A31 /* HomeCategaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5456D240BA7BA00C90A31 /* HomeCategaryCell.m */; };
 		8BD54571240BA80000C90A31 /* HomeSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD54570240BA80000C90A31 /* HomeSectionHeaderView.m */; };
@@ -480,6 +481,8 @@
 		1135C9D92408BA7800478696 /* CityCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityCell.m; sourceTree = "<group>"; };
 		11E860B2240CF27D00719378 /* AllCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllCategoryViewController.h; sourceTree = "<group>"; };
 		11E860B3240CF27D00719378 /* AllCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllCategoryViewController.m; sourceTree = "<group>"; };
+		11E860B5240D06D100719378 /* NoticeAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoticeAlertView.h; sourceTree = "<group>"; };
+		11E860B6240D06D100719378 /* NoticeAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoticeAlertView.m; sourceTree = "<group>"; };
 		8BD5456A240B9C0300C90A31 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		8BD5456C240BA7BA00C90A31 /* HomeCategaryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeCategaryCell.h; sourceTree = "<group>"; };
 		8BD5456D240BA7BA00C90A31 /* HomeCategaryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeCategaryCell.m; sourceTree = "<group>"; };
@@ -660,6 +663,8 @@
 			children = (
 				096C7FC2240BC3D800914E20 /* CustomAlertView.h */,
 				096C7FC3240BC3D800914E20 /* CustomAlertView.m */,
+				11E860B5240D06D100719378 /* NoticeAlertView.h */,
+				11E860B6240D06D100719378 /* NoticeAlertView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1510,6 +1515,7 @@
 				09E72C8424055F7E0004B25C /* MJPropertyKey.m in Sources */,
 				09E72C6024055F770004B25C /* MASLayoutConstraint.m in Sources */,
 				8BD545B8240BB4CC00C90A31 /* MJRefreshAutoFooter.m in Sources */,
+				11E860B7240D06D100719378 /* NoticeAlertView.m in Sources */,
 				11105E7E24067C1400521CB2 /* HomeItem.m in Sources */,
 				8BD545B7240BB4CC00C90A31 /* MJRefreshBackFooter.m in Sources */,
 				09E72C7F24055F7E0004B25C /* NSObject+MJCoding.m in Sources */,
