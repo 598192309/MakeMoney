@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class GongGaoItem;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NoticeAlertView : UIView
--(void)refreshUIWithTitle:(NSString *)title  subTitle:(NSString *)subTitle;
-@property(nonatomic,copy)void(^noticeAlertViewBlock)(UIButton *sender);
+-(void)refreshUIWithItme:(GongGaoItem *)item;
+@property(nonatomic,copy)void(^noticeAlertViewRemoveBlock)(UIButton *sender);
+@property(nonatomic,copy)void(^noticeAlertViewJumpBlock)(void);
+
 
 @end
 

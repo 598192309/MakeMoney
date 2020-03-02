@@ -32,6 +32,12 @@
         titleStr = @"aId";
     }
     __weak __typeof(self) weakSelf = self;
+//    if (item.ID.length == 0) {
+//        LQLog(@"这个item ID为空  %@",[item mj_JSONObject]);
+//    }
+    if (!item) {
+        return;
+    }
     [HomeApi downImageWithType:typeStr paramTitle:titleStr ID:item.ID key:item.video_url Success:^(UIImage * _Nonnull img,NSString *ID) {
         if ([weakSelf.item.ID isEqualToString:ID]) {
             weakSelf.imageV.image = img;

@@ -171,6 +171,9 @@
         successBlock([UIImage imageWithContentsOfFile:imagePath],ID);
         return nil;
     }
+    if (ID.length == 0) {
+           LQLog(@"这个item ID为空 ");
+       }
     return [NET POST:apistr parameters:@{paramTitle:SAFE_NIL_STRING(ID)} criticalValue:@{@"NoEncode":@YES} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
         NSString *img = resultObject;
         UIImage *downImage = [UIImage base64stringToImage:img];

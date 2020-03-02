@@ -24,7 +24,7 @@
 
 @interface MainTabBarController ()<UITabBarControllerDelegate>
 @property(nonatomic,strong)NoticeAlertView *infoAlert;//弹窗
-
+@property (nonatomic,strong)GongGaoItem *gongGaoItem;
 @end
 
 @implementation MainTabBarController
@@ -81,7 +81,9 @@
 - (void)requestData{
     __weak __typeof(self) weakSelf = self;
     [HomeApi requestGongGaoSuccess:^(GongGaoItem * _Nonnull gongGaoItem, NSString * _Nonnull msg) {
-        [weakSelf.infoAlert refreshUIWithTitle:gongGaoItem.title subTitle:gongGaoItem.content];
+        //type  0  公告，1 图片广告
+        weakSelf.gongGaoItem = gongGaoItem;
+        [weakSelf.infoAlert refreshUIWithItme:gongGaoItem];
         [[UIApplication sharedApplication].keyWindow addSubview:weakSelf.infoAlert];
         [weakSelf.infoAlert mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
@@ -134,14 +136,15 @@
         _infoAlert = [[NoticeAlertView alloc] init];
 
         __weak __typeof(self) weakSelf = self;
-        UITabBarController *rootVC  = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-        NSInteger a = rootVC.selectedIndex;
-        UINavigationController *mineVC = [rootVC.childViewControllers safeObjectAtIndex:rootVC.selectedIndex];
-        UIViewController *currentVc = mineVC.viewControllers.lastObject;
-    
-        _infoAlert.noticeAlertViewBlock = ^(UIButton * _Nonnull sender) {
+        _infoAlert.noticeAlertViewRemoveBlock = ^(UIButton * _Nonnull sender) {
             [weakSelf.infoAlert removeFromSuperview];
             weakSelf.infoAlert = nil;
+        };
+        
+        _infoAlert.noticeAlertViewJumpBlock = ^{
+            NSURL *url = [NSURL URLWithString:weakSelf.gongGaoItem.url];
+            [[UIApplication sharedApplication] openURL:url];
+            
         };
     }
     

@@ -71,6 +71,9 @@
     /api/s_imgs         sId=                   专题
      */
     self.imageV.image = nil;
+    if (!item) {
+        return;
+    }
     [HomeApi downImageWithType:@"a_imgs" paramTitle:@"aId" ID:item.ID key:item.video_url Success:^(UIImage * _Nonnull img,NSString *ID) {
         if ([weakSelf.item.ID isEqualToString:ID]) {
             weakSelf.imageV.image = img;
