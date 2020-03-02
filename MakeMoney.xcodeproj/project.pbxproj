@@ -182,6 +182,8 @@
 		8B9B8C01240D4AED004B4704 /* ZFPortraitControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8BE2240D4AED004B4704 /* ZFPortraitControlView.m */; };
 		8B9B8C02240D4AED004B4704 /* UIImageView+ZFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8BE3240D4AED004B4704 /* UIImageView+ZFCache.m */; };
 		8B9B8C03240D4AED004B4704 /* KSMediaPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8BE7240D4AED004B4704 /* KSMediaPlayerManager.m */; };
+		8B9B8C07240D5211004B4704 /* AVPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8C06240D5211004B4704 /* AVPlayerController.m */; };
+		8B9B8C0D240D6E42004B4704 /* DouYinControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8C0C240D6E42004B4704 /* DouYinControlView.m */; };
 		8BD5456B240B9C0300C90A31 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5456A240B9C0300C90A31 /* Home.storyboard */; };
 		8BD5456E240BA7BA00C90A31 /* HomeCategaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5456D240BA7BA00C90A31 /* HomeCategaryCell.m */; };
 		8BD54571240BA80000C90A31 /* HomeSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD54570240BA80000C90A31 /* HomeSectionHeaderView.m */; };
@@ -568,6 +570,10 @@
 		8B9B8BE5240D4AED004B4704 /* ZFLandScapeControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFLandScapeControlView.h; sourceTree = "<group>"; };
 		8B9B8BE7240D4AED004B4704 /* KSMediaPlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSMediaPlayerManager.m; sourceTree = "<group>"; };
 		8B9B8BE8240D4AED004B4704 /* KSMediaPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSMediaPlayerManager.h; sourceTree = "<group>"; };
+		8B9B8C05240D5211004B4704 /* AVPlayerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVPlayerController.h; sourceTree = "<group>"; };
+		8B9B8C06240D5211004B4704 /* AVPlayerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVPlayerController.m; sourceTree = "<group>"; };
+		8B9B8C0B240D6E42004B4704 /* DouYinControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DouYinControlView.h; sourceTree = "<group>"; };
+		8B9B8C0C240D6E42004B4704 /* DouYinControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DouYinControlView.m; sourceTree = "<group>"; };
 		8BD5456A240B9C0300C90A31 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		8BD5456C240BA7BA00C90A31 /* HomeCategaryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeCategaryCell.h; sourceTree = "<group>"; };
 		8BD5456D240BA7BA00C90A31 /* HomeCategaryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeCategaryCell.m; sourceTree = "<group>"; };
@@ -757,6 +763,7 @@
 		09239A732403FEE400A4F727 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8B9B8C04240D5188004B4704 /* Player */,
 				1118B7AF240C99560098A1D4 /* Common */,
 				09239A812403FEE400A4F727 /* BaseViewController */,
 				09239A7E2403FEE400A4F727 /* Launch */,
@@ -1492,6 +1499,17 @@
 			path = KSYMediaPlayer;
 			sourceTree = "<group>";
 		};
+		8B9B8C04240D5188004B4704 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				8B9B8C05240D5211004B4704 /* AVPlayerController.h */,
+				8B9B8C06240D5211004B4704 /* AVPlayerController.m */,
+				8B9B8C0B240D6E42004B4704 /* DouYinControlView.h */,
+				8B9B8C0C240D6E42004B4704 /* DouYinControlView.m */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
 		8BD54574240BB4CC00C90A31 /* MJRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -1736,6 +1754,7 @@
 				096C7FC4240BC3D800914E20 /* CustomAlertView.m in Sources */,
 				8B9B8BEF240D4AED004B4704 /* ZFFloatView.m in Sources */,
 				1118B7B2240C996E0098A1D4 /* ListViewController.m in Sources */,
+				8B9B8C0D240D6E42004B4704 /* DouYinControlView.m in Sources */,
 				09239ADA2403FFCE00A4F727 /* LorginApi.m in Sources */,
 				8BD5456E240BA7BA00C90A31 /* HomeCategaryCell.m in Sources */,
 				8B9B8BF0240D4AED004B4704 /* ZFPlayerView.m in Sources */,
@@ -1836,6 +1855,7 @@
 				09E72C3B24055F6E0004B25C /* IQNSArray+Sort.m in Sources */,
 				09E72C3E24055F6E0004B25C /* IQUIScrollView+Additions.m in Sources */,
 				11105E8D24067EDB00521CB2 /* InitApi.m in Sources */,
+				8B9B8C07240D5211004B4704 /* AVPlayerController.m in Sources */,
 				8B9B8BF4240D4AED004B4704 /* ZFIJKPlayerManager.m in Sources */,
 				092399D92403FE1400A4F727 /* main.m in Sources */,
 				09E72C3624055F6E0004B25C /* IQBarButtonItem.m in Sources */,

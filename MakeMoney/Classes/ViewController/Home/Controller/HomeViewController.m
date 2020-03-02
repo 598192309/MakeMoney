@@ -14,6 +14,7 @@
 #import "HomeSectionHeaderView.h"
 #import "HomeVideoCell.h"
 #import "HomeSectionFooterView.h"
+#import "AVPlayerController.h"
 
 #import "HomeTopCell.h"
 #import "HomeCollectionHeaderView.h"
@@ -231,13 +232,15 @@
         ListViewController *vc = [[ListViewController alloc] init];
         vc.navTitle = title;
         [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        HomeVideoList *videoList = _dataSource.video[indexPath.section - 1];
+        HotItem *item = videoList.lists[indexPath.row];
+        AVPlayerController *vc = [AVPlayerController controllerWith:item];
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
 }
-//方块取消选中会调用
--(void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"取消选择第%ld组，第%ld个方块",indexPath.section,indexPath.row);
-}
+
 
 #pragma  mark - SDCycleScrollViewDelegate
 /** 点击图片回调 */

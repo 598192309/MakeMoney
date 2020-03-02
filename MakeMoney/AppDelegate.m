@@ -29,8 +29,8 @@ static NSString  *YouMengKey = @"5e551f1c0cafb2fd5a00017b";
 
     MainTabBarController *tabbarVC = [[MainTabBarController alloc]init];
     self.rootTabbar = tabbarVC;
-    self.window.rootViewController = tabbarVC;
-//    self.window.rootViewController = [LaunchingViewController new];
+//    self.window.rootViewController = tabbarVC;
+    self.window.rootViewController = [LaunchingViewController new];
     
     
     //    // 判断下用户有没有最新的版本
