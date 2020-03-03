@@ -8,6 +8,8 @@
 
 #import "TuiGuangViewController.h"
 #import "TuiGuangCustomView.h"
+#import "MineApi.h"
+#import "MineItem.h"
 
 @interface TuiGuangViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
@@ -86,7 +88,13 @@
 #pragma mark -  net
 -(void)requestData{
     __weak __typeof(self) weakSelf = self;
- 
+    [LSVProgressHUD show];
+    [MineApi requestExtendIncomeSuccess:^(ExtendDetailItem * _Nonnull extendDetailItem, NSString * _Nonnull msg) {
+        [weakSelf.tuiGuangCustomView configUIWithItem:extendDetailItem];
+        [LSVProgressHUD dismiss];
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+    }];
     
 }
 

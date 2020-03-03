@@ -295,10 +295,7 @@
             make.top.bottom.width.mas_equalTo(weakSelf.yaoqingBtn);
             make.left.mas_equalTo(weakSelf.tuiguangBtn.mas_right);
             make.right.mas_equalTo(contentV);
-            make.width.mas_equalTo(LQScreemW / 5.0);
         }];
-        _vipBtn.lq_width = LQScreemW / 5.0;
-        [_vipBtn.imageView sizeToFit];
         [_vipBtn setIconInTopWithSpacing:Adaptor_Value(25)];
 
     }

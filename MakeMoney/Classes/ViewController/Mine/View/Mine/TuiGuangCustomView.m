@@ -7,7 +7,7 @@
 //
 
 #import "TuiGuangCustomView.h"
-
+#import "MineItem.h"
 @interface TuiGuangCustomView()
 //头部view
 @property (nonatomic,strong)UIView *header;
@@ -61,6 +61,14 @@
 }
 
 #pragma mark - 刷新ui
+- (void)configUIWithItem:(ExtendDetailItem *)item{
+    self.moneyLabel.text = item.total_money;
+    self.remainderLabel.text = item.balance;
+    self.dailiLabel1.text = item.one_level;
+    self.dailiLabel2.text = item.two_level;
+    self.dailiLabel3.text = item.three_level;
+
+}
 #pragma mark - act
 - (void)detailBtnClick:(UIButton *)sender{
     if (self.tuiGuangCustomViewCheckBtnClickBlock) {
@@ -114,7 +122,7 @@
             make.centerX.mas_equalTo(totalView);
         }];
         
-        _moneyLabel = [UILabel lableWithText:lqStrings(@"0.0") textColor:TitleBlackColor fontSize:AdaptedBoldFontSize(20) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        _moneyLabel = [UILabel lableWithText:lqStrings(@"--") textColor:TitleBlackColor fontSize:AdaptedBoldFontSize(20) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [totalView addSubview:_moneyLabel];
         [_moneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(totalView.mas_centerY).offset(Adaptor_Value(5));
@@ -128,7 +136,7 @@
             make.centerX.mas_equalTo(remindarView);
         }];
         
-        _remainderLabel = [UILabel lableWithText:lqStrings(@"0.0") textColor:TitleBlackColor fontSize:AdaptedBoldFontSize(20) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        _remainderLabel = [UILabel lableWithText:lqStrings(@"--") textColor:TitleBlackColor fontSize:AdaptedBoldFontSize(20) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [remindarView addSubview:_remainderLabel];
         [_remainderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(remindarView.mas_centerY).offset(Adaptor_Value(5));
@@ -155,6 +163,73 @@
         ViewRadius(_dailiView, 20);
         
         UIView *oneView = [UIView new];
+        UIView *twoView = [UIView new];
+        UIView *threeView = [UIView new];
+        [_dailiView addSubview:oneView];
+        [_dailiView addSubview:twoView];
+        [_dailiView addSubview:threeView];
+        
+        [oneView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.bottom.mas_equalTo(weakSelf.dailiView);
+        }];
+        
+        [twoView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.width.mas_equalTo(oneView);
+            make.left.mas_equalTo(oneView.mas_right);
+        }];
+        [threeView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.width.mas_equalTo(oneView);
+            make.left.mas_equalTo(twoView.mas_right);
+            make.right.mas_equalTo(weakSelf.dailiView);
+        }];
+
+        _dailiTipLabel1 = [UILabel lableWithText:lqStrings(@"一级代理") textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [oneView addSubview:_dailiTipLabel1];
+        [_dailiTipLabel1 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(oneView.mas_centerY).offset(-Adaptor_Value(5));
+            make.centerX.mas_equalTo(oneView);
+
+        }];
+        
+        _dailiLabel1 = [UILabel lableWithText:lqStrings(@"") textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [oneView addSubview:_dailiLabel1];
+        [_dailiLabel1 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(oneView.mas_centerY).offset(Adaptor_Value(5));
+            make.centerX.mas_equalTo(oneView);
+
+        }];
+        
+        _dailiTipLabel2 = [UILabel lableWithText:lqStrings(@"二级代理") textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [twoView addSubview:_dailiTipLabel2];
+        [_dailiTipLabel2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(twoView.mas_centerY).offset(-Adaptor_Value(5));
+            make.centerX.mas_equalTo(twoView);
+
+        }];
+        
+        _dailiLabel2 = [UILabel lableWithText:lqStrings(@"") textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [twoView addSubview:_dailiLabel2];
+        [_dailiLabel2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(twoView.mas_centerY).offset(Adaptor_Value(5));
+            make.centerX.mas_equalTo(twoView);
+
+        }];
+        
+        _dailiTipLabel3 = [UILabel lableWithText:lqStrings(@"三级代理") textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [threeView addSubview:_dailiTipLabel3];
+        [_dailiTipLabel3 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(threeView.mas_centerY).offset(-Adaptor_Value(5));
+            make.centerX.mas_equalTo(threeView);
+
+        }];
+        
+        _dailiLabel3 = [UILabel lableWithText:lqStrings(@"") textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [threeView addSubview:_dailiLabel3];
+        [_dailiLabel3 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(threeView.mas_centerY).offset(Adaptor_Value(5));
+            make.centerX.mas_equalTo(threeView);
+
+        }];
         
         
 
@@ -172,7 +247,6 @@
         [_ruleView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(Adaptor_Value(15));
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(15));
-            make.height.mas_equalTo(Adaptor_Value(280));
             make.top.mas_equalTo(weakSelf.ruleLable.mas_bottom).offset(Adaptor_Value(10));
         }];
         ViewRadius(_ruleView, 20);
@@ -188,9 +262,10 @@
         _ruleImageV.contentMode = UIViewContentModeScaleAspectFill;
         [_ruleView addSubview:_ruleImageV];
         [_ruleImageV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(weakSelf.ruleTipLable.mas_bottom).offset(Adaptor_Value(10));
+            make.top.mas_equalTo(weakSelf.ruleTipLable.mas_bottom).offset(Adaptor_Value(20));
             make.right.left.mas_equalTo(weakSelf.ruleTipLable);
-            make.bottom.mas_equalTo(weakSelf.ruleView).offset(-Adaptor_Value(20));
+            make.height.mas_equalTo(Adaptor_Value(220));
+            make.bottom.mas_equalTo(weakSelf.ruleView.mas_bottom).offset(-Adaptor_Value(20));
         }];
         
         

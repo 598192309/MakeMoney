@@ -207,7 +207,7 @@
         }];
         _imageAlertViewBtn.touchSize = CGSizeMake(Adaptor_Value(60), Adaptor_Value(60));
         
-        ViewBorderRadius(_imageAlertViewBtn, 20, kOnePX,TitleWhiteColor);
+        ViewBorderRadius(_imageAlertViewBtn, 20, 1,TitleWhiteColor);
            
     }
        return _imageAlertView;
