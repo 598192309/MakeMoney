@@ -7,7 +7,6 @@
 //
 
 #import "MyShareCustomView.h"
-
 @interface MyShareCustomView()
 //头部view
 @property (nonatomic,strong)UIView *header;
@@ -38,6 +37,10 @@
         make.edges.mas_equalTo(weakSelf);
     }];
     
+    //生成对应的二维码
+    NSString *erweimaStr = [NSString stringWithFormat:@"%@/share.html?appkey=%@&code=%@",RI.basicItem.share_url,ErweimaShareKey,RI.infoInitItem.invite_code];
+    UIImage *image = [UIImage generateIconQRCodeWithString:erweimaStr Size:Adaptor_Value(200) icon:[UIImage imageNamed:@"ic_erweima"]];
+    self.erweimaImageV.image = image;
 
 }
 
@@ -59,7 +62,7 @@
 - (void)saveBtnClick:(EnlargeTouchSizeButton *)sender{
     [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
     if (self.myshareCustomHeaderViewSaveBtnClickBlock) {
-        self.myshareCustomHeaderViewSaveBtnClickBlock(sender,@{});
+        self.myshareCustomHeaderViewSaveBtnClickBlock(sender,self.erweimaImageV);
     }
 }
 
@@ -90,7 +93,7 @@
             make.centerX.mas_equalTo(contentV);
             make.top.mas_equalTo(Adaptor_Value(10));
             make.width.mas_equalTo(Adaptor_Value(240));
-            make.height.mas_equalTo(Adaptor_Value(300));
+            make.height.mas_equalTo(Adaptor_Value(280));
         }];
         ViewRadius(_erweimaView, 10);
         
@@ -101,10 +104,10 @@
            make.height.width.mas_equalTo(Adaptor_Value(200));
            make.top.mas_equalTo(TopAdaptor_Value(20));
         }];
-        _erweimaImageV.backgroundColor = [UIColor redColor];
+        _erweimaImageV.backgroundColor = TitleGrayColor;
         
         
-        _erweimaLable = [UILabel lableWithText:[NSString stringWithFormat:lqLocalized(@"我的推荐码: %@", nil),RI.infoInitItem.invite_code] textColor:TitleBlackColor fontSize:AdaptedFontSize(14) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        _erweimaLable = [UILabel lableWithText:[NSString stringWithFormat:lqLocalized(@"我的推荐码: %@", nil),RI.infoInitItem.invite_code] textColor:TitleBlackColor fontSize:AdaptedFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [_erweimaView addSubview:_erweimaLable];
         [_erweimaLable mas_makeConstraints:^(MASConstraintMaker *make) {
             

@@ -281,6 +281,8 @@ alpha:(a)]
 //网络状态监控地址
 #define kURL_Reachability__Address @"www.baidu.com"
 
+/**二维码key */
+#define  ErweimaShareKey @"ARBKR7HE27AFB2"
 
 #endif
 

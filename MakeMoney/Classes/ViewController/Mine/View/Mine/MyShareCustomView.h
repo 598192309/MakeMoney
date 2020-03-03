@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)void(^myshareCustomHeaderViewChangeBtnClickBlock)(EnlargeTouchSizeButton * sender,NSDictionary *dict);
 
 /**点击保存*/
-@property(nonatomic,copy)void(^myshareCustomHeaderViewSaveBtnClickBlock)(EnlargeTouchSizeButton * sender,NSDictionary *dict);
+@property(nonatomic,copy)void(^myshareCustomHeaderViewSaveBtnClickBlock)(EnlargeTouchSizeButton * sender,UIImageView *erweimaImageV);
 
 /**点击copy*/
 @property(nonatomic,copy)void(^myshareCustomHeaderViewCopyBtnClickBlock)(EnlargeTouchSizeButton * sender,NSDictionary *dict);

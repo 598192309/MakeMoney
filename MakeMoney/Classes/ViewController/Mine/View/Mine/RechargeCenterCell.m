@@ -7,7 +7,7 @@
 //
 
 #import "RechargeCenterCell.h"
-
+#import "MineItem.h"
 @interface RechargeCenterCell()
 @property (nonatomic,strong) UIView * cellBackgroundView;
 @property (strong, nonatomic)  UILabel *titleLabel;
@@ -40,10 +40,9 @@
 
 
 
-- (void)refreshUIWithItem:(NSObject *)item{
-    self.titleLabel.text = @"29元";
-    self.detailLable.text = @"20天无限观看";
-    
+- (void)refreshUIWithItem:(PayCenterInfotem *)item{
+    self.titleLabel.text = item.price;
+    self.detailLable.text = item.text;
     
 }
 #pragma mark - act
@@ -62,7 +61,7 @@
         [_cellBackgroundView addSubview:contentV];
         [contentV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(weakSelf.cellBackgroundView);
-            make.height.mas_equalTo(Adaptor_Value(100));
+            make.height.mas_equalTo(Adaptor_Value(90));
         }];
         contentV.backgroundColor = [UIColor clearColor];
 

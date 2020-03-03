@@ -297,7 +297,8 @@
             make.right.mas_equalTo(contentV);
             make.width.mas_equalTo(LQScreemW / 5.0);
         }];
-        [_vipBtn.superview layoutIfNeeded];
+        _vipBtn.lq_width = LQScreemW / 5.0;
+        [_vipBtn.imageView sizeToFit];
         [_vipBtn setIconInTopWithSpacing:Adaptor_Value(25)];
 
     }

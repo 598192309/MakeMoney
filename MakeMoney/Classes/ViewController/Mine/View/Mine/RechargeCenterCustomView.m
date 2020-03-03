@@ -82,9 +82,11 @@
         _orderTF.textColor = TitleWhiteColor;
         [_orderTF addTarget:self action:@selector(textFDidChange:) forControlEvents:UIControlEventEditingChanged];
         _orderTF.placeholder = lqStrings(@"请输入订单号");
+
           // "通过KVC修改placeholder的颜色"
     //        [_nameTextF setValue:TitleGrayColor forKeyPath:@"_placeholderLabel.textColor"];
         [_orderTF setPlaceholderColor:TitleGrayColor font:nil];
+//        _orderTF.backgroundColor = TitleWhiteColor;
         
         _checkBtn = [[UIButton alloc] init];
         [_checkBtn addTarget:self action:@selector(checkBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -96,6 +98,8 @@
             make.top.mas_equalTo(weakSelf.orderTF);
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(15));
             make.width.mas_equalTo(Adaptor_Value(120));
+            make.height.mas_equalTo(Adaptor_Value(40));
+
         }];
         
         [_checkBtn setBackgroundColor:TitleWhiteColor];

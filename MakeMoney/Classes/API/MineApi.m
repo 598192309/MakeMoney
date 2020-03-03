@@ -166,18 +166,5 @@
     }];
 }
 
-/*******************分享*********************/
-+ (NetworkTask *)shareSuccess:(void(^)(NSString *msg))successBlock error:(ErrorBlock)errorBlock{
-    return [NET POST:@"/api/check_card_pwd" parameters:@{@"code":SAFE_NIL_STRING(RI.infoInitItem.invite_code)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
 
-        NSString *msg = [resultObject safeObjectForKey:@"msg"];
-        if (successBlock) {
-            successBlock(msg);
-        }
-    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
-        if (errorBlock) {
-            errorBlock(error,resultObject);
-        }
-    }];
-}
 @end

@@ -58,6 +58,17 @@ NS_ASSUME_NONNULL_BEGIN
  *  根据图片url获取图片尺寸
  */
 + (CGSize)getImageSizeWithURL:(id)URL;
+
+/**生成二维码 */
+//生成二维码
++ (UIImage *)generateQRCodeWithString:(NSString *)string Size:(CGFloat)size;
+
+//二维码清晰;
++ (UIImage *)createNonInterpolatedUIImageFromCIImage:(CIImage *)image WithSize:(CGFloat)size;
+
+/**   生成带icon的二维码 */
++ (UIImage *)generateIconQRCodeWithString:(NSString *)string Size:(CGFloat)size icon:(UIImage *)icon;
+
 @end
 
 NS_ASSUME_NONNULL_END
