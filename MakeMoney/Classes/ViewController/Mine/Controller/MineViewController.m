@@ -14,6 +14,7 @@
 #import "MineItem.h"
 #import "MyShareViewController.h"
 #import "RechargeCenterViewController.h"
+#import "WalletViewController.h"
 
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (strong, nonatomic) UITableView  *customTableView;
@@ -117,6 +118,9 @@
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }else if ([[sender titleForState:UIControlStateNormal] isEqualToString:lqStrings(@"充值中心")]) {
             RechargeCenterViewController *vc = [[RechargeCenterViewController alloc] init];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }else if ([[sender titleForState:UIControlStateNormal] isEqualToString:lqStrings(@"我的钱包")]) {
+            WalletViewController *vc = [[WalletViewController alloc] init];
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }
     };

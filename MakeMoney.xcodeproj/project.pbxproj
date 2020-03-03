@@ -154,6 +154,8 @@
 		11111696240DFCEA00E9F781 /* RechargeCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11111695240DFCEA00E9F781 /* RechargeCenterViewController.m */; };
 		11111699240E00A400E9F781 /* RechargeCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11111698240E00A400E9F781 /* RechargeCenterCell.m */; };
 		1111169C240E084D00E9F781 /* RechargeCenterCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1111169B240E084D00E9F781 /* RechargeCenterCustomView.m */; };
+		1111169F240E3D9100E9F781 /* WalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1111169E240E3D9100E9F781 /* WalletViewController.m */; };
+		111116A2240E3DD200E9F781 /* WalletCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 111116A1240E3DD200E9F781 /* WalletCustomView.m */; };
 		1118B7B2240C996E0098A1D4 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118B7B1240C996E0098A1D4 /* ListViewController.m */; };
 		1120F42524079F9D00550055 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1120F42224079F9D00550055 /* GTMBase64.m */; };
 		1135C9DA2408BA7800478696 /* CityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1135C9D92408BA7800478696 /* CityCell.m */; };
@@ -517,6 +519,10 @@
 		11111698240E00A400E9F781 /* RechargeCenterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RechargeCenterCell.m; sourceTree = "<group>"; };
 		1111169A240E084D00E9F781 /* RechargeCenterCustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RechargeCenterCustomView.h; sourceTree = "<group>"; };
 		1111169B240E084D00E9F781 /* RechargeCenterCustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RechargeCenterCustomView.m; sourceTree = "<group>"; };
+		1111169D240E3D9100E9F781 /* WalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletViewController.h; sourceTree = "<group>"; };
+		1111169E240E3D9100E9F781 /* WalletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletViewController.m; sourceTree = "<group>"; };
+		111116A0240E3DD200E9F781 /* WalletCustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletCustomView.h; sourceTree = "<group>"; };
+		111116A1240E3DD200E9F781 /* WalletCustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletCustomView.m; sourceTree = "<group>"; };
 		1118B7B0240C996E0098A1D4 /* ListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
 		1118B7B1240C996E0098A1D4 /* ListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
 		1120F41F24079F9D00550055 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
@@ -904,6 +910,8 @@
 				1111168F240DF5C400E9F781 /* MyShareViewController.m */,
 				11111694240DFCEA00E9F781 /* RechargeCenterViewController.h */,
 				11111695240DFCEA00E9F781 /* RechargeCenterViewController.m */,
+				1111169D240E3D9100E9F781 /* WalletViewController.h */,
+				1111169E240E3D9100E9F781 /* WalletViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -982,6 +990,8 @@
 				11111698240E00A400E9F781 /* RechargeCenterCell.m */,
 				1111169A240E084D00E9F781 /* RechargeCenterCustomView.h */,
 				1111169B240E084D00E9F781 /* RechargeCenterCustomView.m */,
+				111116A0240E3DD200E9F781 /* WalletCustomView.h */,
+				111116A1240E3DD200E9F781 /* WalletCustomView.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1710,6 +1720,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				09E72C8524055F7E0004B25C /* MJFoundation.m in Sources */,
+				1111169F240E3D9100E9F781 /* WalletViewController.m in Sources */,
 				09E72C3D24055F6E0004B25C /* IQUITextFieldView+Additions.m in Sources */,
 				09E72C3A24055F6E0004B25C /* IQKeyboardManager.m in Sources */,
 				09E72D0424055F960004B25C /* SVProgressHUD.m in Sources */,
@@ -1859,6 +1870,7 @@
 				11105E8724067C3600521CB2 /* CityItem.m in Sources */,
 				09E72C5C24055F770004B25C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				09239AC72403FEE400A4F727 /* BaseApi.m in Sources */,
+				111116A2240E3DD200E9F781 /* WalletCustomView.m in Sources */,
 				096C7FC1240BC16800914E20 /* MineCustomHeaderView.m in Sources */,
 				1111169C240E084D00E9F781 /* RechargeCenterCustomView.m in Sources */,
 				11111690240DF5C400E9F781 /* MyShareViewController.m in Sources */,

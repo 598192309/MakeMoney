@@ -27,10 +27,10 @@ static NSString  *YouMengKey = @"5e551f1c0cafb2fd5a00017b";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
 
-//    MainTabBarController *tabbarVC = [[MainTabBarController alloc]init];
-//    self.rootTabbar = tabbarVC;
-//    self.window.rootViewController = tabbarVC;
-    self.window.rootViewController = [LaunchingViewController new];
+    MainTabBarController *tabbarVC = [[MainTabBarController alloc]init];
+    self.rootTabbar = tabbarVC;
+    self.window.rootViewController = tabbarVC;
+//    self.window.rootViewController = [LaunchingViewController new];
     
     
     //    // 判断下用户有没有最新的版本
