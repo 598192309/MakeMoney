@@ -229,7 +229,7 @@
         
         [contentV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(weakSelf.bottomView);
-            make.height.mas_equalTo(TopAdaptor_Value(90));
+            make.height.mas_equalTo(Adaptor_Value(90));
         }];
         
         _yaoqingBtn = [[LPButton alloc] init];
@@ -244,7 +244,7 @@
         }];
 //        [_yaoqingBtn setIconInTopWithSpacing:Adaptor_Value(25)];
         _yaoqingBtn.style = LPButtonStyleTop;
-        _yaoqingBtn.delta = Adaptor_Value(12);
+        _yaoqingBtn.delta = Adaptor_Value(15);
 
         _chongzhiBtn = [[LPButton alloc] init];
         [_chongzhiBtn addTarget:self action:@selector(chongzhiBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -259,7 +259,7 @@
         }];
 //        [_chongzhiBtn setIconInTopWithSpacing:Adaptor_Value(25)];
         _chongzhiBtn.style = LPButtonStyleTop;
-        _chongzhiBtn.delta = Adaptor_Value(12);
+        _chongzhiBtn.delta = Adaptor_Value(15);
 
         
         _qianbaoBtn = [[LPButton alloc] init];
@@ -275,7 +275,7 @@
         }];
 //        [_qianbaoBtn setIconInTopWithSpacing:Adaptor_Value(25)];
         _qianbaoBtn.style = LPButtonStyleTop;
-        _qianbaoBtn.delta = Adaptor_Value(12);
+        _qianbaoBtn.delta = Adaptor_Value(15);
 
         
         _tuiguangBtn = [[LPButton alloc] init];
@@ -291,7 +291,7 @@
         }];
 //        [_tuiguangBtn setIconInTopWithSpacing:Adaptor_Value(25)];
         _tuiguangBtn.style = LPButtonStyleTop;
-        _tuiguangBtn.delta = Adaptor_Value(12);
+        _tuiguangBtn.delta = Adaptor_Value(15);
 
         
         _vipBtn = [[LPButton alloc] init];
@@ -309,7 +309,7 @@
         }];
 //        [_vipBtn setIconInTopWithSpacing:Adaptor_Value(25)];
         _vipBtn.style = LPButtonStyleTop;
-        _vipBtn.delta = Adaptor_Value(12);
+        _vipBtn.delta = Adaptor_Value(15);
 
     }
     return _bottomView;

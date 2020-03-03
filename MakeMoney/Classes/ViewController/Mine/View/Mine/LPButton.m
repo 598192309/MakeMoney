@@ -79,7 +79,7 @@
              最后 设置 label 的 h 为 整个按钮的高度 - label 的 y - 一个内边距的值
              */
 //            imageH = (CGRectGetHeight(contentRect) - _delta * 2) * 0.65;
-            imageH = (CGRectGetWidth(contentRect) - _delta * 2) * 0.75;
+            imageH = (CGRectGetWidth(contentRect) - _delta * 2) * 0.8;
 
             imageW = imageH;
             
@@ -180,7 +180,7 @@
             
             titleX = 0;
 //            titleY = (CGRectGetHeight(contentRect) - _delta * 2) * 0.65 + _delta + _space;
-            titleY = (CGRectGetWidth(contentRect) - _delta * 2) * 0.75 + _delta + _space;
+            titleY = (CGRectGetWidth(contentRect) - _delta * 2) * 0.8 + _delta + _space;
 
             
             titleW = CGRectGetWidth(contentRect);
