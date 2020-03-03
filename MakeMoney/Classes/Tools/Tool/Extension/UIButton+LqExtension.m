@@ -271,6 +271,8 @@ static char *Mtitle = "mtitle";
 
 - (void)setIconInTopWithSpacing:(CGFloat)Spacing
 {
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
     CGFloat img_W = self.imageView.frame.size.width;
     CGFloat img_H = self.imageView.frame.size.height;
     CGFloat tit_W = self.titleLabel.frame.size.width;

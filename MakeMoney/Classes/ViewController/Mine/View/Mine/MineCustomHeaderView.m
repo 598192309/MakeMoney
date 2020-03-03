@@ -7,6 +7,8 @@
 //
 
 #import "MineCustomHeaderView.h"
+#import "LPButton.h"
+
 @interface MineCustomHeaderView()
 //头部view
 @property (nonatomic,strong)UIView *header;
@@ -23,11 +25,11 @@
 
 
 @property (nonatomic,strong)UIView *bottomView;
-@property (nonatomic,strong)UIButton *yaoqingBtn;
-@property (nonatomic,strong)UIButton *chongzhiBtn;
-@property (nonatomic,strong)UIButton *qianbaoBtn;
-@property (nonatomic,strong)UIButton *tuiguangBtn;
-@property (nonatomic,strong)UIButton *vipBtn;
+@property (nonatomic,strong)LPButton *yaoqingBtn;
+@property (nonatomic,strong)LPButton *chongzhiBtn;
+@property (nonatomic,strong)LPButton *qianbaoBtn;
+@property (nonatomic,strong)LPButton *tuiguangBtn;
+@property (nonatomic,strong)LPButton *vipBtn;
 
 
 @end
@@ -230,7 +232,7 @@
             make.height.mas_equalTo(TopAdaptor_Value(90));
         }];
         
-        _yaoqingBtn = [[UIButton alloc] init];
+        _yaoqingBtn = [[LPButton alloc] init];
         [_yaoqingBtn addTarget:self action:@selector(yaoqingBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_yaoqingBtn setTitleColor:TitleWhiteColor forState:UIControlStateNormal];
         _yaoqingBtn.titleLabel.font = AdaptedFontSize(12);
@@ -240,9 +242,10 @@
         [_yaoqingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.bottom.mas_equalTo(contentV);
         }];
-        [_yaoqingBtn setIconInTopWithSpacing:Adaptor_Value(25)];
+//        [_yaoqingBtn setIconInTopWithSpacing:Adaptor_Value(25)];
+        _yaoqingBtn.style = LPButtonStyleTop;
 
-        _chongzhiBtn = [[UIButton alloc] init];
+        _chongzhiBtn = [[LPButton alloc] init];
         [_chongzhiBtn addTarget:self action:@selector(chongzhiBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_chongzhiBtn setTitleColor:TitleWhiteColor forState:UIControlStateNormal];
         _chongzhiBtn.titleLabel.font = AdaptedFontSize(12);
@@ -253,10 +256,11 @@
             make.top.bottom.width.mas_equalTo(weakSelf.yaoqingBtn);
             make.left.mas_equalTo(weakSelf.yaoqingBtn.mas_right);
         }];
-        [_chongzhiBtn setIconInTopWithSpacing:Adaptor_Value(25)];
+//        [_chongzhiBtn setIconInTopWithSpacing:Adaptor_Value(25)];
+        _chongzhiBtn.style = LPButtonStyleTop;
 
         
-        _qianbaoBtn = [[UIButton alloc] init];
+        _qianbaoBtn = [[LPButton alloc] init];
         [_qianbaoBtn addTarget:self action:@selector(qianbaoBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_qianbaoBtn setTitleColor:TitleWhiteColor forState:UIControlStateNormal];
         _qianbaoBtn.titleLabel.font = AdaptedFontSize(12);
@@ -267,10 +271,11 @@
             make.top.bottom.width.mas_equalTo(weakSelf.yaoqingBtn);
             make.left.mas_equalTo(weakSelf.chongzhiBtn.mas_right);
         }];
-        [_qianbaoBtn setIconInTopWithSpacing:Adaptor_Value(25)];
+//        [_qianbaoBtn setIconInTopWithSpacing:Adaptor_Value(25)];
+        _qianbaoBtn.style = LPButtonStyleTop;
 
         
-        _tuiguangBtn = [[UIButton alloc] init];
+        _tuiguangBtn = [[LPButton alloc] init];
         [_tuiguangBtn addTarget:self action:@selector(tuiguangBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_tuiguangBtn setTitleColor:TitleWhiteColor forState:UIControlStateNormal];
         _tuiguangBtn.titleLabel.font = AdaptedFontSize(12);
@@ -281,10 +286,12 @@
             make.top.bottom.width.mas_equalTo(weakSelf.yaoqingBtn);
             make.left.mas_equalTo(weakSelf.qianbaoBtn.mas_right);
         }];
-        [_tuiguangBtn setIconInTopWithSpacing:Adaptor_Value(25)];
+//        [_tuiguangBtn setIconInTopWithSpacing:Adaptor_Value(25)];
+        _tuiguangBtn.style = LPButtonStyleTop;
 
         
-        _vipBtn = [[UIButton alloc] init];
+        _vipBtn = [[LPButton alloc] init];
+
         [_vipBtn addTarget:self action:@selector(vipBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_vipBtn setTitleColor:TitleWhiteColor forState:UIControlStateNormal];
         _vipBtn.titleLabel.font = AdaptedFontSize(12);
@@ -296,7 +303,8 @@
             make.left.mas_equalTo(weakSelf.tuiguangBtn.mas_right);
             make.right.mas_equalTo(contentV);
         }];
-        [_vipBtn setIconInTopWithSpacing:Adaptor_Value(25)];
+//        [_vipBtn setIconInTopWithSpacing:Adaptor_Value(25)];
+        _vipBtn.style = LPButtonStyleTop;
 
     }
     return _bottomView;

@@ -199,6 +199,7 @@
 		8B9B8C19240EA3DC004B4704 /* IncomeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8C18240EA3DC004B4704 /* IncomeDetailCell.m */; };
 		8B9B8C1C240EADA0004B4704 /* MyShareDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8C1B240EADA0004B4704 /* MyShareDetailViewController.m */; };
 		8B9B8C1F240EADDB004B4704 /* MyShareDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8C1E240EADDB004B4704 /* MyShareDetailCell.m */; };
+		8B9B8C22240EC0F8004B4704 /* LPButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8C21240EC0F8004B4704 /* LPButton.m */; };
 		8BD5456B240B9C0300C90A31 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5456A240B9C0300C90A31 /* Home.storyboard */; };
 		8BD5456E240BA7BA00C90A31 /* HomeCategaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5456D240BA7BA00C90A31 /* HomeCategaryCell.m */; };
 		8BD54571240BA80000C90A31 /* HomeSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD54570240BA80000C90A31 /* HomeSectionHeaderView.m */; };
@@ -619,6 +620,8 @@
 		8B9B8C1B240EADA0004B4704 /* MyShareDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyShareDetailViewController.m; sourceTree = "<group>"; };
 		8B9B8C1D240EADDB004B4704 /* MyShareDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyShareDetailCell.h; sourceTree = "<group>"; };
 		8B9B8C1E240EADDB004B4704 /* MyShareDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyShareDetailCell.m; sourceTree = "<group>"; };
+		8B9B8C20240EC0F8004B4704 /* LPButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPButton.h; sourceTree = "<group>"; };
+		8B9B8C21240EC0F8004B4704 /* LPButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPButton.m; sourceTree = "<group>"; };
 		8BD5456A240B9C0300C90A31 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		8BD5456C240BA7BA00C90A31 /* HomeCategaryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeCategaryCell.h; sourceTree = "<group>"; };
 		8BD5456D240BA7BA00C90A31 /* HomeCategaryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeCategaryCell.m; sourceTree = "<group>"; };
@@ -1016,6 +1019,8 @@
 				096C7FBC240BC16800914E20 /* MineCell.m */,
 				096C7FBD240BC16800914E20 /* MineCustomHeaderView.h */,
 				096C7FBF240BC16800914E20 /* MineCustomHeaderView.m */,
+				8B9B8C20240EC0F8004B4704 /* LPButton.h */,
+				8B9B8C21240EC0F8004B4704 /* LPButton.m */,
 				11111691240DF61600E9F781 /* MyShareCustomView.h */,
 				11111692240DF61600E9F781 /* MyShareCustomView.m */,
 				11111697240E00A400E9F781 /* RechargeCenterCell.h */,
@@ -1872,6 +1877,7 @@
 				09E72D35240569920004B25C /* Error+KF.m in Sources */,
 				8B9B8BEC240D4AED004B4704 /* ZFPlayerLogManager.m in Sources */,
 				09E72C3524055F6E0004B25C /* IQTitleBarButtonItem.m in Sources */,
+				8B9B8C22240EC0F8004B4704 /* LPButton.m in Sources */,
 				11105E662406721500521CB2 /* SDCycleScrollView.m in Sources */,
 				09E72D2D2405641C0004B25C /* UIScrollView+LQRefresh.m in Sources */,
 				11105E6224066BC900521CB2 /* SafeControl.m in Sources */,

@@ -52,13 +52,23 @@
     self.item = item;
     
     self.titleLable.text = item.title;
-    self.vipLabel.text = item.v_channel ? lqStrings(@"VIP") : lqStrings(@"VIP");
-    self.vipLabel.backgroundColor= 1 ? CustomPinkColor : LightYellowColor;
+    //AV 这里有3中状态，通过tag判断   0  VIP   1 限免    2 收费
+    if (item.tag == 0) {
+        self.vipLabel.text = lqStrings(@"VIP");
+        self.vipLabel.backgroundColor= CustomPinkColor;
+    }else if (item.tag == 1) {
+        self.vipLabel.text = lqStrings(@"限免");
+        self.vipLabel.backgroundColor= LightYellowColor;
+    }else if (item.tag == 2) {
+        self.vipLabel.text = lqStrings(@"收费");
+        self.vipLabel.backgroundColor=  CustomRedColor;
+    }
+
 
     self.timeLable.text = [item.create_time lq_getTimeFromTimestampWithFormatter:@"yyyy-MM-dd"];
     [self.seeTimesBtn setTitle:item.play forState:UIControlStateNormal];
     self.vedioTimesLable.text = item.total_time;
-    self.loveBtn.selected = item.tag == 1;
+//    self.loveBtn.selected = item.tag == 1;
     
     __weak __typeof(self) weakSelf = self;
     /**

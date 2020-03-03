@@ -67,7 +67,7 @@
 #pragma mark -  net
 -(void)requestData{
     __weak __typeof(self) weakSelf = self;
-
+    //AV 这里有3中状态，通过tag判断   0  VIP   1 限免    2 收费
     [AVApi requestAVExtendwithPageIndex:@"0" page_size:@"25" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
             weakSelf.pageIndex = hotItemArr.count;
             weakSelf.dataArr = [NSMutableArray arrayWithArray:hotItemArr];
