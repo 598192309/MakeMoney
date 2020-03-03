@@ -16,6 +16,9 @@
 @property (nonatomic,strong)UILabel *moneyTipLabel;
 @property (nonatomic,strong)UILabel *moneyLabel;
 
+@property (nonatomic,strong)UILabel *remainderTipLabel;//剩余总额
+@property (nonatomic,strong)UILabel *remainderLabel;
+
 @property (nonatomic,strong)UILabel *dailiTipLabel;
 @property (nonatomic,strong)UIView *dailiView;
 @property (nonatomic,strong)UILabel *dailiTipLabel1;
@@ -60,7 +63,9 @@
 #pragma mark - 刷新ui
 #pragma mark - act
 - (void)detailBtnClick:(UIButton *)sender{
-
+    if (self.tuiGuangCustomViewCheckBtnClickBlock) {
+        self.tuiGuangCustomViewCheckBtnClickBlock(sender,@{});
+    }
 }
 
 
@@ -88,22 +93,129 @@
         }];
         ViewRadius(_moneyView, 20);
         
-        _moneyTipLabel = [UILabel lableWithText:lqStrings(@"账户余额(元)") textColor:TitleBlackColor fontSize:AdaptedBoldFontSize(18) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
-        [_moneyView addSubview:_moneyTipLabel];
+        UIView *totalView = [UIView new];
+        [_moneyView addSubview:totalView];
+        [totalView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.bottom.mas_equalTo(weakSelf.moneyView);
+        }];
+        
+        UIView *remindarView = [UIView new];
+        [_moneyView addSubview:remindarView];
+        [remindarView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.top.bottom.mas_equalTo(weakSelf.moneyView);
+            make.left.mas_equalTo(totalView.mas_right);
+            make.width.mas_equalTo(totalView);
+        }];
+        
+        _moneyTipLabel = [UILabel lableWithText:lqStrings(@"总收益(元)") textColor:TitleBlackColor fontSize:AdaptedBoldFontSize(18) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        [totalView addSubview:_moneyTipLabel];
         [_moneyTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(Adaptor_Value(25));
-            make.left.mas_equalTo(Adaptor_Value(25));
+            make.bottom.mas_equalTo(totalView.mas_centerY).offset(-Adaptor_Value(5));
+            make.centerX.mas_equalTo(totalView);
         }];
         
-        _moneyLabel = [UILabel lableWithText:lqStrings(@"0") textColor:TitleBlackColor fontSize:AdaptedBoldFontSize(20) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
-        [_moneyView addSubview:_moneyLabel];
+        _moneyLabel = [UILabel lableWithText:lqStrings(@"0.0") textColor:TitleBlackColor fontSize:AdaptedBoldFontSize(20) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        [totalView addSubview:_moneyLabel];
         [_moneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(weakSelf.moneyTipLabel.mas_bottom).offset(Adaptor_Value(10));
-            make.left.mas_equalTo(weakSelf.moneyTipLabel);
+            make.top.mas_equalTo(totalView.mas_centerY).offset(Adaptor_Value(5));
+            make.centerX.mas_equalTo(totalView);
         }];
         
-      
+        _remainderTipLabel = [UILabel lableWithText:lqStrings(@"余额(元)") textColor:TitleBlackColor fontSize:AdaptedBoldFontSize(18) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        [remindarView addSubview:_remainderTipLabel];
+        [_remainderTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(remindarView.mas_centerY).offset(-Adaptor_Value(5));
+            make.centerX.mas_equalTo(remindarView);
+        }];
         
+        _remainderLabel = [UILabel lableWithText:lqStrings(@"0.0") textColor:TitleBlackColor fontSize:AdaptedBoldFontSize(20) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        [remindarView addSubview:_remainderLabel];
+        [_remainderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(remindarView.mas_centerY).offset(Adaptor_Value(5));
+            make.centerX.mas_equalTo(remindarView);
+        }];
+        
+        
+        _dailiTipLabel = [UILabel lableWithText:lqStrings(@"推广人数统计") textColor:TitleWhiteColor fontSize:AdaptedBoldFontSize(20) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [contentV addSubview:_dailiTipLabel];
+        [_dailiTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(weakSelf.moneyView.mas_bottom).offset(Adaptor_Value(20));
+            make.left.mas_equalTo(weakSelf.moneyView);
+        }];
+        
+        _dailiView = [UIView new];
+        _dailiView.backgroundColor = TitleWhiteColor;
+        [contentV addSubview:_dailiView];
+        [_dailiView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(Adaptor_Value(15));
+            make.right.mas_equalTo(contentV).offset(-Adaptor_Value(15));
+            make.height.mas_equalTo(Adaptor_Value(100));
+            make.top.mas_equalTo(weakSelf.dailiTipLabel.mas_bottom).offset(Adaptor_Value(10));
+        }];
+        ViewRadius(_dailiView, 20);
+        
+        UIView *oneView = [UIView new];
+        
+        
+
+      
+        _ruleLable = [UILabel lableWithText:lqStrings(@"推广规则") textColor:TitleWhiteColor fontSize:AdaptedBoldFontSize(20) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [contentV addSubview:_ruleLable];
+        [_ruleLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(weakSelf.dailiView.mas_bottom).offset(Adaptor_Value(20));
+            make.left.mas_equalTo(weakSelf.dailiView);
+        }];
+        
+        _ruleView = [UIView new];
+        _ruleView.backgroundColor = TitleWhiteColor;
+        [contentV addSubview:_ruleView];
+        [_ruleView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(Adaptor_Value(15));
+            make.right.mas_equalTo(contentV).offset(-Adaptor_Value(15));
+            make.height.mas_equalTo(Adaptor_Value(280));
+            make.top.mas_equalTo(weakSelf.ruleLable.mas_bottom).offset(Adaptor_Value(10));
+        }];
+        ViewRadius(_ruleView, 20);
+        _ruleTipLable = [UILabel lableWithText:lqStrings(@"新用户通过邀请链接下载安装APP后,即可绑定推荐关系,用户每一次消费,您都可以获得返利。好友奖励分成如下:") textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [_ruleView addSubview:_ruleTipLable];
+        [_ruleTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(Adaptor_Value(20));
+            make.left.mas_equalTo(Adaptor_Value(20));
+            make.right.mas_equalTo(weakSelf.ruleView).offset(-Adaptor_Value(20));
+        }];
+        
+        _ruleImageV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"invite_img"]];
+        _ruleImageV.contentMode = UIViewContentModeScaleAspectFill;
+        [_ruleView addSubview:_ruleImageV];
+        [_ruleImageV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(weakSelf.ruleTipLable.mas_bottom).offset(Adaptor_Value(10));
+            make.right.left.mas_equalTo(weakSelf.ruleTipLable);
+            make.bottom.mas_equalTo(weakSelf.ruleView).offset(-Adaptor_Value(20));
+        }];
+        
+        
+        _detailTipLable = [UILabel lableWithText:lqStrings(@"收益明细") textColor:TitleWhiteColor fontSize:AdaptedBoldFontSize(20) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [contentV addSubview:_detailTipLable];
+        [_detailTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(weakSelf.ruleView.mas_bottom).offset(Adaptor_Value(20));
+            make.left.mas_equalTo(weakSelf.ruleView);
+        }];
+        
+        _detailBtn = [[UIButton alloc] init];
+        [_detailBtn addTarget:self action:@selector(detailBtnClick:) forControlEvents:UIControlEventTouchDown];
+        [_detailBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _detailBtn.backgroundColor = TitleWhiteColor;
+        [_detailBtn setTitle:lqStrings(@"查看明细") forState:UIControlStateNormal];
+        _detailBtn.titleLabel.font = AdaptedBoldFontSize(18);
+        [contentV addSubview:_detailBtn];
+        [_detailBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(Adaptor_Value(15));
+            make.right.mas_equalTo(contentV).offset(-Adaptor_Value(15));
+            make.height.mas_equalTo(Adaptor_Value(50));
+            make.top.mas_equalTo(weakSelf.detailTipLable.mas_bottom).offset(Adaptor_Value(10));
+            make.bottom.mas_equalTo(contentV).offset(-Adaptor_Value(30));
+        }];
+        ViewRadius(_detailBtn, 10);
     }
     return _header;
 }

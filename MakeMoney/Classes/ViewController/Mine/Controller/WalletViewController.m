@@ -8,6 +8,8 @@
 
 #import "WalletViewController.h"
 #import "WalletCustomView.h"
+#import "MineApi.h"
+#import "MineItem.h"
 
 @interface WalletViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
@@ -80,15 +82,46 @@
     __weak __typeof(self) weakSelf = self;
     //点击提现
     self.walletCustomView.walletCustomViewCashBtnClickBlock = ^(UIButton * _Nonnull sender, NSDictionary * _Nonnull dict) {
-        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+//        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+        NSString *rate = [dict safeObjectForKey:@"rate"];
+        NSString *account = [dict safeObjectForKey:@"account"];
+        NSString *bankcard = [dict safeObjectForKey:@"bankcard"];
+        NSString *money = [dict safeObjectForKey:@"money"];
+        NSString *safe_code = [dict safeObjectForKey:@"safe_code"];
+        if (!(rate.length > 0 && account.length > 0 && bankcard.length > 0 && money.length > 0 && safe_code.length > 0 )) {
+            [LSVProgressHUD showInfoWithStatus:lqStrings(@"请将信息填写完整")];
+            return ;
+        }
+        
+        [weakSelf cashWithRate:rate account:account bankcard:bankcard money:money safe_code:safe_code sender:sender];
     };
 
 }
 #pragma mark -  net
+//获取余额
 -(void)requestData{
     __weak __typeof(self) weakSelf = self;
- 
+    [LSVProgressHUD show];
+    [MineApi requestBalanceSuccess:^(NSInteger status, NSString * _Nonnull msg) {
+        [weakSelf.walletCustomView refreshMoney:msg];
+        [LSVProgressHUD dismiss];
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+    }];
     
+}
+
+//提现
+- (void)cashWithRate:(NSString *)rate account:(NSString *)account bankcard:(NSString *)bankcard money:(NSString *)money safe_code:(NSString *)safe_code sender:(UIButton *)sender{
+    __weak __typeof(self) weakSelf = self;
+    [LSVProgressHUD show];
+    //type   1银行卡   2.支付宝    3.微信  暂时只支持银行卡
+    [MineApi cashWithType:@"1" rate:rate account:account bankcard:bankcard money:money safe_code:safe_code Success:^(NSInteger status, NSString * _Nonnull msg) {
+        [LSVProgressHUD showInfoWithStatus:msg];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+    }];
 }
 
 

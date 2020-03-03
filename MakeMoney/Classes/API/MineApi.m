@@ -103,7 +103,7 @@
     return [NET POST:@"/api/user/balance" parameters:nil criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
         NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
 
-        NSString *msg = [resultObject safeObjectForKey:@"msg"];
+        NSString *msg = [[resultObject safeObjectForKey:@"msg"] stringValue];
         if (successBlock) {
             successBlock(status,msg);
         }

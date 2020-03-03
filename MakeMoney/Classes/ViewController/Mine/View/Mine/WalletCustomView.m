@@ -74,10 +74,13 @@
 }
 
 #pragma mark - 刷新ui
+- (void)refreshMoney:(NSString *)money{
+    self.moneyLabel.text = money;
+}
 #pragma mark - act
 - (void)confirmBtnClick:(UIButton *)sender{
     if (self.walletCustomViewCashBtnClickBlock) {
-        self.walletCustomViewCashBtnClickBlock(sender,@{});
+        self.walletCustomViewCashBtnClickBlock(sender,@{@"rate":@"5%",@"account":SAFE_NIL_STRING(self.accontNameTf.text),@"bankcard":SAFE_NIL_STRING(self.bankcardTf.text),@"money":SAFE_NIL_STRING(self.cashAmountTf.text),@"safe_code":SAFE_NIL_STRING(self.securityTf.text)});
     }
 }
 

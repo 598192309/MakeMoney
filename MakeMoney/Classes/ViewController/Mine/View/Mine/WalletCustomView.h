@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface WalletCustomView : UIView
 /**点击提现 */
 @property(nonatomic,copy)void(^walletCustomViewCashBtnClickBlock)(UIButton * sender,NSDictionary *dict);
+
+- (void)refreshMoney:(NSString *)money;
 @end
 
 NS_ASSUME_NONNULL_END
