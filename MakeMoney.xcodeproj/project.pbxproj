@@ -156,6 +156,8 @@
 		1111169C240E084D00E9F781 /* RechargeCenterCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1111169B240E084D00E9F781 /* RechargeCenterCustomView.m */; };
 		1111169F240E3D9100E9F781 /* WalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1111169E240E3D9100E9F781 /* WalletViewController.m */; };
 		111116A2240E3DD200E9F781 /* WalletCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 111116A1240E3DD200E9F781 /* WalletCustomView.m */; };
+		111116A5240E4C2A00E9F781 /* TuiGuangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111116A4240E4C2A00E9F781 /* TuiGuangViewController.m */; };
+		111116A8240E4CE400E9F781 /* TuiGuangCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 111116A7240E4CE400E9F781 /* TuiGuangCustomView.m */; };
 		1118B7B2240C996E0098A1D4 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118B7B1240C996E0098A1D4 /* ListViewController.m */; };
 		1120F42524079F9D00550055 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1120F42224079F9D00550055 /* GTMBase64.m */; };
 		1135C9DA2408BA7800478696 /* CityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1135C9D92408BA7800478696 /* CityCell.m */; };
@@ -523,6 +525,10 @@
 		1111169E240E3D9100E9F781 /* WalletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletViewController.m; sourceTree = "<group>"; };
 		111116A0240E3DD200E9F781 /* WalletCustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletCustomView.h; sourceTree = "<group>"; };
 		111116A1240E3DD200E9F781 /* WalletCustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletCustomView.m; sourceTree = "<group>"; };
+		111116A3240E4C2A00E9F781 /* TuiGuangViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TuiGuangViewController.h; sourceTree = "<group>"; };
+		111116A4240E4C2A00E9F781 /* TuiGuangViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TuiGuangViewController.m; sourceTree = "<group>"; };
+		111116A6240E4CE400E9F781 /* TuiGuangCustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TuiGuangCustomView.h; sourceTree = "<group>"; };
+		111116A7240E4CE400E9F781 /* TuiGuangCustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TuiGuangCustomView.m; sourceTree = "<group>"; };
 		1118B7B0240C996E0098A1D4 /* ListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
 		1118B7B1240C996E0098A1D4 /* ListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
 		1120F41F24079F9D00550055 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
@@ -912,6 +918,8 @@
 				11111695240DFCEA00E9F781 /* RechargeCenterViewController.m */,
 				1111169D240E3D9100E9F781 /* WalletViewController.h */,
 				1111169E240E3D9100E9F781 /* WalletViewController.m */,
+				111116A3240E4C2A00E9F781 /* TuiGuangViewController.h */,
+				111116A4240E4C2A00E9F781 /* TuiGuangViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -992,6 +1000,8 @@
 				1111169B240E084D00E9F781 /* RechargeCenterCustomView.m */,
 				111116A0240E3DD200E9F781 /* WalletCustomView.h */,
 				111116A1240E3DD200E9F781 /* WalletCustomView.m */,
+				111116A6240E4CE400E9F781 /* TuiGuangCustomView.h */,
+				111116A7240E4CE400E9F781 /* TuiGuangCustomView.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1769,6 +1779,7 @@
 				11105E7224067BAB00521CB2 /* ZhuanTiApi.m in Sources */,
 				11105E4D24066BC900521CB2 /* UIViewController+LqExtension.m in Sources */,
 				11105E69240674E700521CB2 /* HomeCollectionTopHeaderView.m in Sources */,
+				111116A8240E4CE400E9F781 /* TuiGuangCustomView.m in Sources */,
 				09E72CEC24055F8E0004B25C /* UIImageView+HighlightedWebCache.m in Sources */,
 				09E72C5D24055F770004B25C /* ViewController+MASAdditions.m in Sources */,
 				8BD545A5240BB4CC00C90A31 /* UIScrollView+MJRefresh.m in Sources */,
@@ -1797,6 +1808,7 @@
 				8BD5456E240BA7BA00C90A31 /* HomeCategaryCell.m in Sources */,
 				8B9B8BF0240D4AED004B4704 /* ZFPlayerView.m in Sources */,
 				09E72AED240559F40004B25C /* AFURLSessionManager.m in Sources */,
+				111116A5240E4C2A00E9F781 /* TuiGuangViewController.m in Sources */,
 				8BD545B0240BB4CC00C90A31 /* MJRefreshAutoGifFooter.m in Sources */,
 				09E72D19240560210004B25C /* BaseNavigationController.m in Sources */,
 				09E72CF724055F8E0004B25C /* UIButton+WebCache.m in Sources */,

@@ -76,7 +76,9 @@
 #pragma mark - 刷新ui
 #pragma mark - act
 - (void)confirmBtnClick:(UIButton *)sender{
-    
+    if (self.walletCustomViewCashBtnClickBlock) {
+        self.walletCustomViewCashBtnClickBlock(sender,@{});
+    }
 }
 
 

@@ -166,5 +166,27 @@
     }];
 }
 
+/*******************提现
+ type   1银行卡   2.支付宝    3.微信  暂时只支持银行卡
+ rate   手续费
+ account
+ bankcard
+ money
+ safe_code    安全码
+ 
+ *********************/
++ (NetworkTask *)cashWithType:(NSString *)type rate:(NSString *)rate account:(NSString *)account bankcard:(NSString *)bankcard money:(NSString *)money safe_code:(NSString *)safe_code Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/withdraw/add" parameters:@{@"type":SAFE_NIL_STRING(type),@"rate":SAFE_NIL_STRING(rate),@"account":SAFE_NIL_STRING(account),@"bankcard":SAFE_NIL_STRING(bankcard),@"money":SAFE_NIL_STRING(money),@"safe_code":SAFE_NIL_STRING(safe_code)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+        NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
 
+        NSString *msg = [resultObject safeObjectForKey:@"msg"];
+        if (successBlock) {
+            successBlock(status,msg);
+        }
+    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+        if (errorBlock) {
+            errorBlock(error,resultObject);
+        }
+    }];
+}
 @end

@@ -1,24 +1,24 @@
 //
-//  WalletViewController.m
+//  TuiGuangViewController.m
 //  MakeMoney
 //
 //  Created by rabi on 2020/3/3.
 //  Copyright © 2020 lqq. All rights reserved.
-//  我的钱包
+//  推广赚钱
 
-#import "WalletViewController.h"
-#import "WalletCustomView.h"
+#import "TuiGuangViewController.h"
+#import "TuiGuangCustomView.h"
 
-@interface WalletViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface TuiGuangViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
 @property (nonatomic,strong)UIImageView *backImageV;
-@property (nonatomic,strong)WalletCustomView *walletCustomView;
+@property (nonatomic,strong)TuiGuangCustomView *tuiGuangCustomView;
 
 
 
 @end
 
-@implementation WalletViewController
+@implementation TuiGuangViewController
 #pragma mark - life
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,8 +55,8 @@
     
     //header
     UIView *tableHeaderView = [[UIView alloc] init];
-    [tableHeaderView addSubview:self.walletCustomView];
-    [self.walletCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [tableHeaderView addSubview:self.tuiGuangCustomView];
+    [self.tuiGuangCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(tableHeaderView);
     }];
     CGFloat H = [tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
@@ -64,7 +64,7 @@
     self.customTableView.tableHeaderView = tableHeaderView;
     self.customTableView.tableHeaderView.lq_height = H;
 
-    [self walletCustomViewAct];
+    [self tuiGuangCustomViewAct];
     
  
     
@@ -72,17 +72,16 @@
 - (void)setUpNav{
     [self addNavigationView];
     self.navigationView.backgroundColor = [UIColor clearColor];
-    self.navigationTextLabel.text = lqStrings(@"我的钱包");
-    [self.navigationRightBtn setTitle:lqStrings(@"提现明细") forState:UIControlStateNormal];
+    self.navigationTextLabel.text = lqStrings(@"推广赚钱");
 }
 #pragma mark - act
-- (void)walletCustomViewAct{
+- (void)tuiGuangCustomViewAct{
     __weak __typeof(self) weakSelf = self;
-    //点击提现
-    self.walletCustomView.walletCustomViewCashBtnClickBlock = ^(UIButton * _Nonnull sender, NSDictionary * _Nonnull dict) {
+    // 查看明细
+    self.tuiGuangCustomView.tuiGuangCustomViewCheckBtnClickBlock = ^(UIButton * _Nonnull sender, NSDictionary * _Nonnull dict) {
         [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
-    };
 
+    };
 }
 #pragma mark -  net
 -(void)requestData{
@@ -149,10 +148,10 @@
     }
     return _backImageV;
 }
-- (WalletCustomView *)walletCustomView{
-    if (!_walletCustomView) {
-        _walletCustomView = [WalletCustomView new];
+- (TuiGuangCustomView *)tuiGuangCustomView{
+    if (!_tuiGuangCustomView) {
+        _tuiGuangCustomView = [TuiGuangCustomView new];
     }
-    return _walletCustomView;
+    return _tuiGuangCustomView;
 }
 @end

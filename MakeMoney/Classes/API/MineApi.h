@@ -52,6 +52,17 @@ NS_ASSUME_NONNULL_BEGIN
 + (NetworkTask *)buyVipWithCard_pwd:(NSString *)card_pwd sex_id:(NSString *)sex_id invite_code:(NSString *)invite_code Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
 
 
+/*******************提现
+ type   1银行卡   2.支付宝    3.微信  暂时只支持银行卡
+ rate   手续费
+ account
+ bankcard
+ money
+ safe_code    安全码
+ 
+ *********************/
++ (NetworkTask *)cashWithType:(NSString *)type rate:(NSString *)rate account:(NSString *)account bankcard:(NSString *)bankcard money:(NSString *)money safe_code:(NSString *)safe_code Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
+
 
 @end
 
