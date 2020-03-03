@@ -50,6 +50,10 @@ NS_ASSUME_NONNULL_BEGIN
  
  *********************/
 + (NetworkTask *)buyVipWithCard_pwd:(NSString *)card_pwd sex_id:(NSString *)sex_id invite_code:(NSString *)invite_code Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
+
+/*******************分享*********************/
++ (NetworkTask *)shareSuccess:(void(^)(NSString *msg))successBlock error:(ErrorBlock)errorBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END

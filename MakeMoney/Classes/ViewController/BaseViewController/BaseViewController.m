@@ -218,7 +218,9 @@
     [self.navigationController popViewControllerAnimated:YES];
     
 }
-
+- (void)navigationRightBtnClick:(UIButton *)button{
+    
+}
 -(void)navigationRightSecBtnClick:(UIButton*)button{
 }
 -(void)navigationRightThirdBtnClick:(UIButton*)button{

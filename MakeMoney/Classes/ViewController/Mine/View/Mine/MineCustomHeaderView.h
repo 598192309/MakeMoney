@@ -12,6 +12,8 @@
 /**点击头像*/
 @property(nonatomic,copy)void(^mineCustomHeaderViewBlock)(NSDictionary *dict);
 
+/**点击*/
+@property(nonatomic,copy)void(^mineCustomHeaderViewBtnsBlock)(UIButton *sender,NSDictionary *dict);
 
 - (void)configUIWithItem:(NSObject *)item finishi:(void(^)(void))finishBlock;
 

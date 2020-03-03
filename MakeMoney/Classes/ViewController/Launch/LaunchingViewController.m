@@ -17,7 +17,7 @@
 @property(nonatomic,strong)UIImageView *imageView;
 @property(nonatomic,strong)UIButton *countingBtn;
 @property(nonatomic,strong)AdsItem *adsItem;
-
+@property (nonatomic,strong)EnlargeTouchSizeButton *jumpBtn;
 @end
 
 @implementation LaunchingViewController
@@ -62,7 +62,20 @@
         make.top.mas_equalTo(TopAdaptor_Value(40));
     }];
     ViewRadius(weakSelf.countingBtn, Adaptor_Value(25));
-    [weakSelf.countingBtn startWithTime:5 title:lqStrings(@"进入APP") titleColor:TitleWhiteColor countDownTitle:NSLocalizedString(@"s", nil) countDownTitleColor:TitleWhiteColor mainColor:[UIColor lq_colorWithHexString:@"#666666" alpha:0.5] countColor:[UIColor lq_colorWithHexString:@"#303030" alpha:0.3]];
+    [weakSelf.countingBtn startWithTime:5 title:lqStrings(@"") titleColor:TitleWhiteColor countDownTitle:NSLocalizedString(@"s", nil) countDownTitleColor:TitleWhiteColor mainColor:[UIColor lq_colorWithHexString:@"#666666" alpha:0.5] countColor:[UIColor lq_colorWithHexString:@"#303030" alpha:0.3]];
+    
+    
+    [weakSelf.view addSubview:weakSelf.jumpBtn];
+    [weakSelf.jumpBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(Adaptor_Value(80));
+        make.centerY.mas_equalTo(weakSelf.countingBtn);
+        make.height.mas_equalTo(Adaptor_Value(40));
+        make.right.mas_equalTo(weakSelf.view).offset(-Adaptor_Value(5));
+
+    }];
+    ViewRadius(weakSelf.jumpBtn, Adaptor_Value(20));
+    weakSelf.jumpBtn.hidden = YES;
+    
 }
 - (void)tap:(UITapGestureRecognizer *)gest{
     if ([self.adsItem.url hasPrefix:@"http"]) {
@@ -141,6 +154,10 @@
         AdsItem *adsItem = adsItemArr.firstObject;
         weakSelf.adsItem = adsItem;
         [weakSelf.imageView sd_setImageWithURL:[NSURL URLWithString:adsItem.img] placeholderImage:[UIImage imageNamed:@"splash_bg_chunjie"]];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            weakSelf.countingBtn.hidden = YES;
+            weakSelf.jumpBtn.hidden = NO;
+        });
 
     } error:^(NSError *error, id resultObject) {
         //广告请求回来 倒计时开始
@@ -162,9 +179,19 @@
         _countingBtn = [[UIButton alloc] init];
         _countingBtn.backgroundColor = [UIColor lq_colorWithHexString:@"#666666" alpha:0.5];
         _countingBtn.titleLabel.font = AdaptedFontSize(12);
-        [_countingBtn addTarget:self action:@selector(codeBtnClick:) forControlEvents:UIControlEventTouchDown];
+//        [_countingBtn addTarget:self action:@selector(codeBtnClick:) forControlEvents:UIControlEventTouchDown];
 }
     return _countingBtn;
 }
 
+- (EnlargeTouchSizeButton *)jumpBtn{
+    if (!_jumpBtn) {
+        _jumpBtn = [[EnlargeTouchSizeButton alloc] init];
+        _jumpBtn.backgroundColor = [UIColor lq_colorWithHexString:@"#666666" alpha:0.5];
+        _jumpBtn.titleLabel.font = AdaptedFontSize(12);
+        [_jumpBtn addTarget:self action:@selector(codeBtnClick:) forControlEvents:UIControlEventTouchDown];
+        [_jumpBtn setTitle:lqStrings(@"进入APP") forState:UIControlStateNormal];
+    }
+    return _jumpBtn;
+}
 @end

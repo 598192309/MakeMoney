@@ -12,6 +12,9 @@
 #import "CustomAlertView.h"
 #import "MineApi.h"
 #import "MineItem.h"
+#import "MyShareViewController.h"
+#import "RechargeCenterViewController.h"
+
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (strong, nonatomic) UITableView  *customTableView;
 @property (nonatomic,strong)MineCustomHeaderView *mineCustomHeaderView;
@@ -105,6 +108,17 @@
     //点击头像
     self.mineCustomHeaderView.mineCustomHeaderViewBlock = ^(NSDictionary *dict) {
         [weakSelf presentViewController: weakSelf.alertController animated: YES completion: nil];
+    };
+    
+    //点击按钮
+    self.mineCustomHeaderView.mineCustomHeaderViewBtnsBlock = ^(UIButton *sender, NSDictionary *dict) {
+        if ([[sender titleForState:UIControlStateNormal] isEqualToString:lqStrings(@"我的邀请码")]) {
+            MyShareViewController *vc = [[MyShareViewController alloc] init];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }else if ([[sender titleForState:UIControlStateNormal] isEqualToString:lqStrings(@"充值中心")]) {
+            RechargeCenterViewController *vc = [[RechargeCenterViewController alloc] init];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }
     };
 }
 

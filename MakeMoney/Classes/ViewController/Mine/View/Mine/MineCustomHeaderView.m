@@ -86,25 +86,36 @@
 }
 
 - (void)yaoqingBtnClick:(UIButton *)sender{
-    [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+//    [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+    if (self.mineCustomHeaderViewBtnsBlock) {
+        self.mineCustomHeaderViewBtnsBlock(sender,@{});
+    }
 }
 
 - (void)chongzhiBtnClick:(UIButton *)sender{
-    [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
-
+//    [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+    if (self.mineCustomHeaderViewBtnsBlock) {
+        self.mineCustomHeaderViewBtnsBlock(sender,@{});
+    }
 }
 
 - (void)qianbaoBtnClick:(UIButton *)sender{
-    [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
-
+//    [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+    if (self.mineCustomHeaderViewBtnsBlock) {
+        self.mineCustomHeaderViewBtnsBlock(sender,@{});
+    }
 }
 - (void)tuiguangBtnClick:(UIButton *)sender{
-    [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
-
+//    [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+    if (self.mineCustomHeaderViewBtnsBlock) {
+        self.mineCustomHeaderViewBtnsBlock(sender,@{});
+    }
 }
 - (void)vipBtnClick:(UIButton *)sender{
-    [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
-
+//    [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+    if (self.mineCustomHeaderViewBtnsBlock) {
+        self.mineCustomHeaderViewBtnsBlock(sender,@{});
+    }
 }
 
 #pragma mark - lazy
@@ -228,7 +239,6 @@
         [contentV addSubview:_yaoqingBtn];
         [_yaoqingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.bottom.mas_equalTo(contentV);
-//            make.width.mas_equalTo(LQScreemW / 5.0);
         }];
         [_yaoqingBtn setIconInTopWithSpacing:Adaptor_Value(25)];
 
@@ -285,7 +295,9 @@
             make.top.bottom.width.mas_equalTo(weakSelf.yaoqingBtn);
             make.left.mas_equalTo(weakSelf.tuiguangBtn.mas_right);
             make.right.mas_equalTo(contentV);
+            make.width.mas_equalTo(LQScreemW / 5.0);
         }];
+        [_vipBtn.superview layoutIfNeeded];
         [_vipBtn setIconInTopWithSpacing:Adaptor_Value(25)];
 
     }

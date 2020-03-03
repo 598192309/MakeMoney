@@ -149,6 +149,11 @@
 		11105E8A24067C4300521CB2 /* MineItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 11105E8924067C4300521CB2 /* MineItem.m */; };
 		11105E8D24067EDB00521CB2 /* InitApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 11105E8C24067EDB00521CB2 /* InitApi.m */; };
 		11105E9024067F1000521CB2 /* InitItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 11105E8F24067F1000521CB2 /* InitItem.m */; };
+		11111690240DF5C400E9F781 /* MyShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1111168F240DF5C400E9F781 /* MyShareViewController.m */; };
+		11111693240DF61600E9F781 /* MyShareCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11111692240DF61600E9F781 /* MyShareCustomView.m */; };
+		11111696240DFCEA00E9F781 /* RechargeCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11111695240DFCEA00E9F781 /* RechargeCenterViewController.m */; };
+		11111699240E00A400E9F781 /* RechargeCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11111698240E00A400E9F781 /* RechargeCenterCell.m */; };
+		1111169C240E084D00E9F781 /* RechargeCenterCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1111169B240E084D00E9F781 /* RechargeCenterCustomView.m */; };
 		1118B7B2240C996E0098A1D4 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118B7B1240C996E0098A1D4 /* ListViewController.m */; };
 		1120F42524079F9D00550055 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1120F42224079F9D00550055 /* GTMBase64.m */; };
 		1135C9DA2408BA7800478696 /* CityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1135C9D92408BA7800478696 /* CityCell.m */; };
@@ -502,6 +507,16 @@
 		11105E8C24067EDB00521CB2 /* InitApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InitApi.m; sourceTree = "<group>"; };
 		11105E8E24067F1000521CB2 /* InitItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InitItem.h; sourceTree = "<group>"; };
 		11105E8F24067F1000521CB2 /* InitItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InitItem.m; sourceTree = "<group>"; };
+		1111168E240DF5C400E9F781 /* MyShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyShareViewController.h; sourceTree = "<group>"; };
+		1111168F240DF5C400E9F781 /* MyShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyShareViewController.m; sourceTree = "<group>"; };
+		11111691240DF61600E9F781 /* MyShareCustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyShareCustomView.h; sourceTree = "<group>"; };
+		11111692240DF61600E9F781 /* MyShareCustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyShareCustomView.m; sourceTree = "<group>"; };
+		11111694240DFCEA00E9F781 /* RechargeCenterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RechargeCenterViewController.h; sourceTree = "<group>"; };
+		11111695240DFCEA00E9F781 /* RechargeCenterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RechargeCenterViewController.m; sourceTree = "<group>"; };
+		11111697240E00A400E9F781 /* RechargeCenterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RechargeCenterCell.h; sourceTree = "<group>"; };
+		11111698240E00A400E9F781 /* RechargeCenterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RechargeCenterCell.m; sourceTree = "<group>"; };
+		1111169A240E084D00E9F781 /* RechargeCenterCustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RechargeCenterCustomView.h; sourceTree = "<group>"; };
+		1111169B240E084D00E9F781 /* RechargeCenterCustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RechargeCenterCustomView.m; sourceTree = "<group>"; };
 		1118B7B0240C996E0098A1D4 /* ListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
 		1118B7B1240C996E0098A1D4 /* ListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
 		1120F41F24079F9D00550055 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
@@ -885,6 +900,10 @@
 			children = (
 				09239A8C2403FEE400A4F727 /* MineViewController.h */,
 				09239A8D2403FEE400A4F727 /* MineViewController.m */,
+				1111168E240DF5C400E9F781 /* MyShareViewController.h */,
+				1111168F240DF5C400E9F781 /* MyShareViewController.m */,
+				11111694240DFCEA00E9F781 /* RechargeCenterViewController.h */,
+				11111695240DFCEA00E9F781 /* RechargeCenterViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -957,6 +976,12 @@
 				096C7FBC240BC16800914E20 /* MineCell.m */,
 				096C7FBD240BC16800914E20 /* MineCustomHeaderView.h */,
 				096C7FBF240BC16800914E20 /* MineCustomHeaderView.m */,
+				11111691240DF61600E9F781 /* MyShareCustomView.h */,
+				11111692240DF61600E9F781 /* MyShareCustomView.m */,
+				11111697240E00A400E9F781 /* RechargeCenterCell.h */,
+				11111698240E00A400E9F781 /* RechargeCenterCell.m */,
+				1111169A240E084D00E9F781 /* RechargeCenterCustomView.h */,
+				1111169B240E084D00E9F781 /* RechargeCenterCustomView.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1703,6 +1728,7 @@
 				09E72AEC240559F40004B25C /* AFHTTPSessionManager.m in Sources */,
 				8B9B8BFD240D4AED004B4704 /* ZFPlayerControlView.m in Sources */,
 				09E72C6124055F770004B25C /* NSArray+MASAdditions.m in Sources */,
+				11111693240DF61600E9F781 /* MyShareCustomView.m in Sources */,
 				8B9B8BEA240D4AED004B4704 /* ZFPlayerController.m in Sources */,
 				8B9B8BF9240D4AED004B4704 /* ZFLandScapeControlView.m in Sources */,
 				09E72C6424055F770004B25C /* MASViewConstraint.m in Sources */,
@@ -1719,6 +1745,7 @@
 				09E72C7C24055F7E0004B25C /* MJPropertyType.m in Sources */,
 				11105E9024067F1000521CB2 /* InitItem.m in Sources */,
 				11105E4C24066BC900521CB2 /* LqToolKit.m in Sources */,
+				11111696240DFCEA00E9F781 /* RechargeCenterViewController.m in Sources */,
 				09E72C7D24055F7E0004B25C /* NSObject+MJKeyValue.m in Sources */,
 				09E72C3724055F6E0004B25C /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				8B9B8BFF240D4AED004B4704 /* ZFLoadingView.m in Sources */,
@@ -1833,6 +1860,8 @@
 				09E72C5C24055F770004B25C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				09239AC72403FEE400A4F727 /* BaseApi.m in Sources */,
 				096C7FC1240BC16800914E20 /* MineCustomHeaderView.m in Sources */,
+				1111169C240E084D00E9F781 /* RechargeCenterCustomView.m in Sources */,
+				11111690240DF5C400E9F781 /* MyShareViewController.m in Sources */,
 				09E72CED24055F8E0004B25C /* SDWebImageDownloader.m in Sources */,
 				09E72C4124055F6E0004B25C /* IQKeyboardReturnKeyHandler.m in Sources */,
 				8B9B8BF7240D4AED004B4704 /* UIView+ZFFrame.m in Sources */,
@@ -1858,6 +1887,7 @@
 				8B9B8C07240D5211004B4704 /* AVPlayerController.m in Sources */,
 				8B9B8BF4240D4AED004B4704 /* ZFIJKPlayerManager.m in Sources */,
 				092399D92403FE1400A4F727 /* main.m in Sources */,
+				11111699240E00A400E9F781 /* RechargeCenterCell.m in Sources */,
 				09E72C3624055F6E0004B25C /* IQBarButtonItem.m in Sources */,
 				11105E5224066BC900521CB2 /* UIView+LqExtension.m in Sources */,
 				8BD545B1240BB4CC00C90A31 /* MJRefreshAutoNormalFooter.m in Sources */,

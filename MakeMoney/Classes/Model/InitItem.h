@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *username;
 @property (nonatomic,assign)NSInteger new_user_free_hour;
 
+
+
 @end
 
 
@@ -49,6 +51,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *video_url;
 @property (nonatomic,assign)NSInteger vip_day;
 @property (nonatomic,strong)NSString *vip_video_url;
+
+@property (nonatomic,strong)NSString *potato_name;
+@property (nonatomic,strong)NSString *potato_url;
 
 @end
 NS_ASSUME_NONNULL_END
