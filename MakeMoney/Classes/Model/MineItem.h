@@ -84,5 +84,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *type;
 @end
 
+/********************提现明细*********************/
+@interface TixianDetailItem : NSObject
+
+@property (nonatomic,strong)NSString *account;
+@property (nonatomic,strong)NSString *arrive_money;
+@property (nonatomic,strong)NSString *bankcard;
+@property (nonatomic,strong)NSString *create_time;
+@property (nonatomic,strong)NSString *device_id;
+@property (nonatomic,strong)NSString *ID;
+@property (nonatomic,strong)NSString *rate;
+@property (nonatomic,strong)NSString *type;
+@property (nonatomic,strong)NSString *withdraw_money;
+
+@end
+
 
 NS_ASSUME_NONNULL_END

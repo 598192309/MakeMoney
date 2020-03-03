@@ -68,6 +68,11 @@ NS_ASSUME_NONNULL_BEGIN
  *********************/
 + (NetworkTask *)requestPayWaysSuccess:(void(^)(NSInteger status,NSString *msg,NSArray *payWayItemArr))successBlock error:(ErrorBlock)errorBlock;
 
+/*******************获取提现明细
+ 
+ *********************/
++ (NetworkTask *)requestCashDetailSuccess:(void(^)(NSInteger status,NSString *msg,NSArray *tixianDetailItemArr))successBlock error:(ErrorBlock)errorBlock;
+
 
 
 

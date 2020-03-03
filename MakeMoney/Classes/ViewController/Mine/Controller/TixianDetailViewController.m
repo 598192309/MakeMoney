@@ -66,8 +66,24 @@
 #pragma mark -  net
 -(void)requestData{
     __weak __typeof(self) weakSelf = self;
-    
-    [weakSelf.customTableView endHeaderRefreshing];
+    [MineApi requestCashDetailSuccess:^(NSInteger status, NSString * _Nonnull msg, NSArray * _Nonnull tixianDetailItemArr) {
+        weakSelf.pageIndex = tixianDetailItemArr.count ;
+        weakSelf.dataArr = [NSMutableArray arrayWithArray:tixianDetailItemArr];
+//        if (extendArr.count >= 25 ) {
+//            [weakSelf.customTableView addFooterWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
+//            [weakSelf.customTableView.mj_footer setHidden:NO];
+//
+//        }else{
+//            [weakSelf.customTableView endHeaderRefreshing];
+//            //消除尾部"没有更多数据"的状态
+//            [weakSelf.customTableView.mj_footer setHidden:YES];
+//        }
+        [weakSelf.customTableView endHeaderRefreshing];
+        [weakSelf.customTableView reloadData];
+    } error:^(NSError *error, id resultObject) {
+        [weakSelf.customTableView endHeaderRefreshing];
+        [weakSelf.customTableView reloadData];
+    }];
     
 }
 
@@ -77,15 +93,15 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-//    return self.dataArr.count;
-    return 10;
+    return self.dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TixianDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TixianDetailCell class]) forIndexPath:indexPath];
-    [cell configUIWithItem:nil];
+    TixianDetailItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
+    [cell configUIWithItem:item];
     return cell;
 
 

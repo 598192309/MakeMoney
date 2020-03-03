@@ -209,4 +209,24 @@
         }
     }];
 }
+
+/*******************获取提现明细
+ 
+ *********************/
++ (NetworkTask *)requestCashDetailSuccess:(void(^)(NSInteger status,NSString *msg,NSArray *tixianDetailItemArr))successBlock error:(ErrorBlock)errorBlock;{
+    return [NET POST:@"/api/withdraw/find" parameters:nil criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+        NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+
+        NSString *msg = [resultObject safeObjectForKey:@"msg"];
+        NSArray *tixianDetailItemArr = [TixianDetailItem mj_objectArrayWithKeyValuesArray:[resultObject safeObjectForKey:@"data"]];
+
+        if (successBlock) {
+            successBlock(status,msg,tixianDetailItemArr);
+        }
+    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+        if (errorBlock) {
+            errorBlock(error,resultObject);
+        }
+    }];
+}
 @end

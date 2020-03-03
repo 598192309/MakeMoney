@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class TixianDetailItem;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TixianDetailCell : UITableViewCell
-- (void)configUIWithItem:(NSObject *)item;
+- (void)configUIWithItem:(TixianDetailItem *)item;
 
 @end
 

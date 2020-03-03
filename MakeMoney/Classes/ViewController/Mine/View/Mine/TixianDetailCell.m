@@ -7,7 +7,7 @@
 //
 
 #import "TixianDetailCell.h"
-
+#import "MineItem.h"
 @interface TixianDetailCell()
 @property (nonatomic,strong) UIView * cellBackgroundView;
 @property (strong, nonatomic)  UILabel *typeLabel;
@@ -41,13 +41,23 @@
    
 }
 
-- (void)configUIWithItem:(NSObject *)item{
-    self.typeLabel.text = [NSString stringWithFormat:lqLocalized(@"提现类型：%@", nil),item];
-    self.feeLable.text = [NSString stringWithFormat:lqLocalized(@"手续费：%@", nil),item];
-    self.detailLable.text = [NSString stringWithFormat:@"%@       %@",item,item];
-    self.tixianLable.text = [NSString stringWithFormat:lqLocalized(@"提现：%@", nil),item];
-    self.daozhangLable.text = [NSString stringWithFormat:lqLocalized(@"到账：%@", nil),item];
-    self.timeLable.text = @"2012-12-12";
+- (void)configUIWithItem:(TixianDetailItem *)item{
+    //type   1银行卡   2.支付宝    3.微信  暂时只支持银行卡
+
+    NSString *type;
+    if ([item.type isEqualToString:@"1"]) {
+        type = lqStrings(@"银行卡");
+    }else if ([item.type isEqualToString:@"2"]) {
+        type = lqStrings(@"支付宝");
+    }else if ([item.type isEqualToString:@"3"]) {
+        type = lqStrings(@"微信");
+    }
+    self.typeLabel.text = [NSString stringWithFormat:lqLocalized(@"提现类型：%@", nil),type];
+    self.feeLable.text = [NSString stringWithFormat:lqLocalized(@"手续费：%@\%", nil),item.rate];
+    self.detailLable.text = [NSString stringWithFormat:@"%@   %@",item.account,item.bankcard];
+    self.tixianLable.text = [NSString stringWithFormat:lqLocalized(@"提现：%@", nil),item.withdraw_money];
+    self.daozhangLable.text = [NSString stringWithFormat:lqLocalized(@"到账：%@", nil),item.arrive_money];
+    self.timeLable.text = [item.create_time lq_getTimeFromTimestampWithFormatter:@"yyyy-MM-dd"];
     self.statusLable.text = @"已放款";
     
 }
