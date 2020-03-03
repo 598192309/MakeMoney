@@ -33,6 +33,21 @@
 
 
 @implementation ExtendDetailItem
++ (NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{
+             @"ID":@"id"
+             };
+}
 
+@end
+
+
+@implementation PayWayItem
+
++ (NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{
+             @"ID":@"id"
+             };
+}
 
 @end

@@ -61,8 +61,28 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *total_money;
 @property (nonatomic,strong)NSString *one_level;
 @property (nonatomic,strong)NSString *two_level;
+
+//收益
+@property (nonatomic,strong)NSString *create_time;
+@property (nonatomic,strong)NSString *ID;
+@property (nonatomic,strong)NSString *invite_code;
+@property (nonatomic,strong)NSString *invite_code2;
+@property (nonatomic,strong)NSString *money;
+@property (nonatomic,strong)NSString *reward;
+@property (nonatomic,strong)NSString *type;
+
+
 @end
 
+/********************支付方式 *********************/
+@interface PayWayItem : NSObject
+
+@property (nonatomic,strong)NSString *channel_id;
+@property (nonatomic,strong)NSString *create_time;
+@property (nonatomic,strong)NSString *ID;
+@property (nonatomic,strong)NSString *name;
+@property (nonatomic,strong)NSString *type;
+@end
 
 
 NS_ASSUME_NONNULL_END

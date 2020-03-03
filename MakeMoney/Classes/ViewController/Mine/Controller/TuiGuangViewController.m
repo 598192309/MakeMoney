@@ -10,6 +10,7 @@
 #import "TuiGuangCustomView.h"
 #import "MineApi.h"
 #import "MineItem.h"
+#import "IncomeDetailViewController.h"
 
 @interface TuiGuangViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
@@ -81,8 +82,9 @@
     __weak __typeof(self) weakSelf = self;
     // 查看明细
     self.tuiGuangCustomView.tuiGuangCustomViewCheckBtnClickBlock = ^(UIButton * _Nonnull sender, NSDictionary * _Nonnull dict) {
-        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
-
+//        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+        IncomeDetailViewController *vc = [[IncomeDetailViewController alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
     };
 }
 #pragma mark -  net

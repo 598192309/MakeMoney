@@ -193,6 +193,10 @@
 		8B9B8C03240D4AED004B4704 /* KSMediaPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8BE7240D4AED004B4704 /* KSMediaPlayerManager.m */; };
 		8B9B8C07240D5211004B4704 /* AVPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8C06240D5211004B4704 /* AVPlayerController.m */; };
 		8B9B8C0D240D6E42004B4704 /* DouYinControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8C0C240D6E42004B4704 /* DouYinControlView.m */; };
+		8B9B8C10240E993F004B4704 /* TixianDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8C0F240E993F004B4704 /* TixianDetailViewController.m */; };
+		8B9B8C13240E9960004B4704 /* TixianDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8C12240E9960004B4704 /* TixianDetailCell.m */; };
+		8B9B8C16240EA3AE004B4704 /* IncomeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8C15240EA3AE004B4704 /* IncomeDetailViewController.m */; };
+		8B9B8C19240EA3DC004B4704 /* IncomeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8C18240EA3DC004B4704 /* IncomeDetailCell.m */; };
 		8BD5456B240B9C0300C90A31 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5456A240B9C0300C90A31 /* Home.storyboard */; };
 		8BD5456E240BA7BA00C90A31 /* HomeCategaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5456D240BA7BA00C90A31 /* HomeCategaryCell.m */; };
 		8BD54571240BA80000C90A31 /* HomeSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD54570240BA80000C90A31 /* HomeSectionHeaderView.m */; };
@@ -601,6 +605,14 @@
 		8B9B8C06240D5211004B4704 /* AVPlayerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVPlayerController.m; sourceTree = "<group>"; };
 		8B9B8C0B240D6E42004B4704 /* DouYinControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DouYinControlView.h; sourceTree = "<group>"; };
 		8B9B8C0C240D6E42004B4704 /* DouYinControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DouYinControlView.m; sourceTree = "<group>"; };
+		8B9B8C0E240E993F004B4704 /* TixianDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TixianDetailViewController.h; sourceTree = "<group>"; };
+		8B9B8C0F240E993F004B4704 /* TixianDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TixianDetailViewController.m; sourceTree = "<group>"; };
+		8B9B8C11240E9960004B4704 /* TixianDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TixianDetailCell.h; sourceTree = "<group>"; };
+		8B9B8C12240E9960004B4704 /* TixianDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TixianDetailCell.m; sourceTree = "<group>"; };
+		8B9B8C14240EA3AE004B4704 /* IncomeDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IncomeDetailViewController.h; sourceTree = "<group>"; };
+		8B9B8C15240EA3AE004B4704 /* IncomeDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IncomeDetailViewController.m; sourceTree = "<group>"; };
+		8B9B8C17240EA3DC004B4704 /* IncomeDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IncomeDetailCell.h; sourceTree = "<group>"; };
+		8B9B8C18240EA3DC004B4704 /* IncomeDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IncomeDetailCell.m; sourceTree = "<group>"; };
 		8BD5456A240B9C0300C90A31 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		8BD5456C240BA7BA00C90A31 /* HomeCategaryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeCategaryCell.h; sourceTree = "<group>"; };
 		8BD5456D240BA7BA00C90A31 /* HomeCategaryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeCategaryCell.m; sourceTree = "<group>"; };
@@ -918,8 +930,12 @@
 				11111695240DFCEA00E9F781 /* RechargeCenterViewController.m */,
 				1111169D240E3D9100E9F781 /* WalletViewController.h */,
 				1111169E240E3D9100E9F781 /* WalletViewController.m */,
+				8B9B8C0E240E993F004B4704 /* TixianDetailViewController.h */,
+				8B9B8C0F240E993F004B4704 /* TixianDetailViewController.m */,
 				111116A3240E4C2A00E9F781 /* TuiGuangViewController.h */,
 				111116A4240E4C2A00E9F781 /* TuiGuangViewController.m */,
+				8B9B8C14240EA3AE004B4704 /* IncomeDetailViewController.h */,
+				8B9B8C15240EA3AE004B4704 /* IncomeDetailViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1002,6 +1018,10 @@
 				111116A1240E3DD200E9F781 /* WalletCustomView.m */,
 				111116A6240E4CE400E9F781 /* TuiGuangCustomView.h */,
 				111116A7240E4CE400E9F781 /* TuiGuangCustomView.m */,
+				8B9B8C11240E9960004B4704 /* TixianDetailCell.h */,
+				8B9B8C12240E9960004B4704 /* TixianDetailCell.m */,
+				8B9B8C17240EA3DC004B4704 /* IncomeDetailCell.h */,
+				8B9B8C18240EA3DC004B4704 /* IncomeDetailCell.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1789,6 +1809,7 @@
 				09E72C6024055F770004B25C /* MASLayoutConstraint.m in Sources */,
 				8BD545B8240BB4CC00C90A31 /* MJRefreshAutoFooter.m in Sources */,
 				11E860B7240D06D100719378 /* NoticeAlertView.m in Sources */,
+				8B9B8C19240EA3DC004B4704 /* IncomeDetailCell.m in Sources */,
 				11105E7E24067C1400521CB2 /* HomeItem.m in Sources */,
 				8BD545B7240BB4CC00C90A31 /* MJRefreshBackFooter.m in Sources */,
 				09E72C7F24055F7E0004B25C /* NSObject+MJCoding.m in Sources */,
@@ -1797,6 +1818,7 @@
 				8B9B8C03240D4AED004B4704 /* KSMediaPlayerManager.m in Sources */,
 				1120F42524079F9D00550055 /* GTMBase64.m in Sources */,
 				8B9B8BFC240D4AED004B4704 /* ZFSliderView.m in Sources */,
+				8B9B8C10240E993F004B4704 /* TixianDetailViewController.m in Sources */,
 				8B9B8BF1240D4AED004B4704 /* ZFKVOController.m in Sources */,
 				11105E4E24066BC900521CB2 /* UIScrollView+LqExtension.m in Sources */,
 				11105E5324066BC900521CB2 /* UITextField+LqExtension.m in Sources */,
@@ -1804,6 +1826,7 @@
 				8B9B8BEF240D4AED004B4704 /* ZFFloatView.m in Sources */,
 				1118B7B2240C996E0098A1D4 /* ListViewController.m in Sources */,
 				8B9B8C0D240D6E42004B4704 /* DouYinControlView.m in Sources */,
+				8B9B8C16240EA3AE004B4704 /* IncomeDetailViewController.m in Sources */,
 				09239ADA2403FFCE00A4F727 /* LorginApi.m in Sources */,
 				8BD5456E240BA7BA00C90A31 /* HomeCategaryCell.m in Sources */,
 				8B9B8BF0240D4AED004B4704 /* ZFPlayerView.m in Sources */,
@@ -1880,6 +1903,7 @@
 				11105E5824066BC900521CB2 /* UILabel+LqExtension.m in Sources */,
 				09E72D17240560210004B25C /* BaseWebViewController.m in Sources */,
 				11105E8724067C3600521CB2 /* CityItem.m in Sources */,
+				8B9B8C13240E9960004B4704 /* TixianDetailCell.m in Sources */,
 				09E72C5C24055F770004B25C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				09239AC72403FEE400A4F727 /* BaseApi.m in Sources */,
 				111116A2240E3DD200E9F781 /* WalletCustomView.m in Sources */,

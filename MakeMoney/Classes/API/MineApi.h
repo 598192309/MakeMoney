@@ -63,6 +63,13 @@ NS_ASSUME_NONNULL_BEGIN
  *********************/
 + (NetworkTask *)cashWithType:(NSString *)type rate:(NSString *)rate account:(NSString *)account bankcard:(NSString *)bankcard money:(NSString *)money safe_code:(NSString *)safe_code Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
 
+/*******************获取支付方式
+ 
+ *********************/
++ (NetworkTask *)requestPayWaysSuccess:(void(^)(NSInteger status,NSString *msg,NSArray *payWayItemArr))successBlock error:(ErrorBlock)errorBlock;
+
+
+
 
 @end
 

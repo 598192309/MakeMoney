@@ -10,6 +10,7 @@
 #import "WalletCustomView.h"
 #import "MineApi.h"
 #import "MineItem.h"
+#import "TixianDetailViewController.h"
 
 @interface WalletViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
@@ -21,6 +22,11 @@
 @end
 
 @implementation WalletViewController
+#pragma mark - 重写
+- (void)navigationRightBtnClick:(UIButton *)button{
+    TixianDetailViewController *vc = [[TixianDetailViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 #pragma mark - life
 - (void)viewDidLoad {
     [super viewDidLoad];

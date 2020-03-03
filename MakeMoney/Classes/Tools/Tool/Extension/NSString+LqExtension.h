@@ -100,10 +100,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 +(NSString *)lq_getyyyymmdd:(NSString *)formater;
 #pragma mark --- 将时间转换成时间戳
-
+/**将时间转换成时间戳*/
 - (NSString *)lq_getTimestampFromTimeWithFormatter:(NSString *)fmt;
 #pragma mark ---- 将时间戳转换成时间
-
+/**将时间戳转换成时间*/
 - (NSString *)lq_getTimeFromTimestampWithFormatter:(NSString *)fmt;
 @end
 
