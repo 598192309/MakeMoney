@@ -197,6 +197,8 @@
 		8B9B8C13240E9960004B4704 /* TixianDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8C12240E9960004B4704 /* TixianDetailCell.m */; };
 		8B9B8C16240EA3AE004B4704 /* IncomeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8C15240EA3AE004B4704 /* IncomeDetailViewController.m */; };
 		8B9B8C19240EA3DC004B4704 /* IncomeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8C18240EA3DC004B4704 /* IncomeDetailCell.m */; };
+		8B9B8C1C240EADA0004B4704 /* MyShareDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8C1B240EADA0004B4704 /* MyShareDetailViewController.m */; };
+		8B9B8C1F240EADDB004B4704 /* MyShareDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8C1E240EADDB004B4704 /* MyShareDetailCell.m */; };
 		8BD5456B240B9C0300C90A31 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5456A240B9C0300C90A31 /* Home.storyboard */; };
 		8BD5456E240BA7BA00C90A31 /* HomeCategaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5456D240BA7BA00C90A31 /* HomeCategaryCell.m */; };
 		8BD54571240BA80000C90A31 /* HomeSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD54570240BA80000C90A31 /* HomeSectionHeaderView.m */; };
@@ -613,6 +615,10 @@
 		8B9B8C15240EA3AE004B4704 /* IncomeDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IncomeDetailViewController.m; sourceTree = "<group>"; };
 		8B9B8C17240EA3DC004B4704 /* IncomeDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IncomeDetailCell.h; sourceTree = "<group>"; };
 		8B9B8C18240EA3DC004B4704 /* IncomeDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IncomeDetailCell.m; sourceTree = "<group>"; };
+		8B9B8C1A240EADA0004B4704 /* MyShareDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyShareDetailViewController.h; sourceTree = "<group>"; };
+		8B9B8C1B240EADA0004B4704 /* MyShareDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyShareDetailViewController.m; sourceTree = "<group>"; };
+		8B9B8C1D240EADDB004B4704 /* MyShareDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyShareDetailCell.h; sourceTree = "<group>"; };
+		8B9B8C1E240EADDB004B4704 /* MyShareDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyShareDetailCell.m; sourceTree = "<group>"; };
 		8BD5456A240B9C0300C90A31 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		8BD5456C240BA7BA00C90A31 /* HomeCategaryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeCategaryCell.h; sourceTree = "<group>"; };
 		8BD5456D240BA7BA00C90A31 /* HomeCategaryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeCategaryCell.m; sourceTree = "<group>"; };
@@ -926,6 +932,8 @@
 				09239A8D2403FEE400A4F727 /* MineViewController.m */,
 				1111168E240DF5C400E9F781 /* MyShareViewController.h */,
 				1111168F240DF5C400E9F781 /* MyShareViewController.m */,
+				8B9B8C1A240EADA0004B4704 /* MyShareDetailViewController.h */,
+				8B9B8C1B240EADA0004B4704 /* MyShareDetailViewController.m */,
 				11111694240DFCEA00E9F781 /* RechargeCenterViewController.h */,
 				11111695240DFCEA00E9F781 /* RechargeCenterViewController.m */,
 				1111169D240E3D9100E9F781 /* WalletViewController.h */,
@@ -1022,6 +1030,8 @@
 				8B9B8C12240E9960004B4704 /* TixianDetailCell.m */,
 				8B9B8C17240EA3DC004B4704 /* IncomeDetailCell.h */,
 				8B9B8C18240EA3DC004B4704 /* IncomeDetailCell.m */,
+				8B9B8C1D240EADDB004B4704 /* MyShareDetailCell.h */,
+				8B9B8C1E240EADDB004B4704 /* MyShareDetailCell.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1828,6 +1838,7 @@
 				8B9B8C0D240D6E42004B4704 /* DouYinControlView.m in Sources */,
 				8B9B8C16240EA3AE004B4704 /* IncomeDetailViewController.m in Sources */,
 				09239ADA2403FFCE00A4F727 /* LorginApi.m in Sources */,
+				8B9B8C1C240EADA0004B4704 /* MyShareDetailViewController.m in Sources */,
 				8BD5456E240BA7BA00C90A31 /* HomeCategaryCell.m in Sources */,
 				8B9B8BF0240D4AED004B4704 /* ZFPlayerView.m in Sources */,
 				09E72AED240559F40004B25C /* AFURLSessionManager.m in Sources */,
@@ -1857,6 +1868,7 @@
 				8BD545AF240BB4CC00C90A31 /* MJRefreshAutoStateFooter.m in Sources */,
 				09E72C8224055F7E0004B25C /* NSObject+MJClass.m in Sources */,
 				09239AD02403FEE400A4F727 /* LorginViewController.m in Sources */,
+				8B9B8C1F240EADDB004B4704 /* MyShareDetailCell.m in Sources */,
 				09E72D35240569920004B25C /* Error+KF.m in Sources */,
 				8B9B8BEC240D4AED004B4704 /* ZFPlayerLogManager.m in Sources */,
 				09E72C3524055F6E0004B25C /* IQTitleBarButtonItem.m in Sources */,

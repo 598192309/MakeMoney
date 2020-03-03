@@ -144,7 +144,7 @@
         }];
         
         
-        _dailiTipLabel = [UILabel lableWithText:lqStrings(@"推广人数统计") textColor:TitleWhiteColor fontSize:AdaptedBoldFontSize(20) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        _dailiTipLabel = [UILabel lableWithText:lqStrings(@"推广人数统计") textColor:TitleWhiteColor fontSize:AdaptedBoldFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
         [contentV addSubview:_dailiTipLabel];
         [_dailiTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(weakSelf.moneyView.mas_bottom).offset(Adaptor_Value(20));
@@ -234,9 +234,9 @@
         
 
       
-        _ruleLable = [UILabel lableWithText:lqStrings(@"推广规则") textColor:TitleWhiteColor fontSize:AdaptedBoldFontSize(20) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
-        [contentV addSubview:_ruleLable];
-        [_ruleLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        _ruleTipLable = [UILabel lableWithText:lqStrings(@"推广规则") textColor:TitleWhiteColor fontSize:AdaptedBoldFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [contentV addSubview:_ruleTipLable];
+        [_ruleTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(weakSelf.dailiView.mas_bottom).offset(Adaptor_Value(20));
             make.left.mas_equalTo(weakSelf.dailiView);
         }];
@@ -247,12 +247,13 @@
         [_ruleView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(Adaptor_Value(15));
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(15));
-            make.top.mas_equalTo(weakSelf.ruleLable.mas_bottom).offset(Adaptor_Value(10));
+            make.top.mas_equalTo(weakSelf.ruleTipLable.mas_bottom).offset(Adaptor_Value(10));
         }];
         ViewRadius(_ruleView, 20);
-        _ruleTipLable = [UILabel lableWithText:lqStrings(@"新用户通过邀请链接下载安装APP后,即可绑定推荐关系,用户每一次消费,您都可以获得返利。好友奖励分成如下:") textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
-        [_ruleView addSubview:_ruleTipLable];
-        [_ruleTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        _ruleLable = [UILabel lableWithText:lqStrings(@"新用户通过邀请链接下载安装APP后,即可绑定推荐关系,用户每一次消费,您都可以获得返利。好友奖励分成如下:") textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [_ruleView addSubview:_ruleLable];
+        [_ruleLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(Adaptor_Value(20));
             make.left.mas_equalTo(Adaptor_Value(20));
             make.right.mas_equalTo(weakSelf.ruleView).offset(-Adaptor_Value(20));
@@ -262,8 +263,8 @@
         _ruleImageV.contentMode = UIViewContentModeScaleAspectFill;
         [_ruleView addSubview:_ruleImageV];
         [_ruleImageV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(weakSelf.ruleTipLable.mas_bottom).offset(Adaptor_Value(20));
-            make.right.left.mas_equalTo(weakSelf.ruleTipLable);
+            make.top.mas_equalTo(weakSelf.ruleLable.mas_bottom).offset(Adaptor_Value(20));
+            make.right.left.mas_equalTo(weakSelf.ruleLable);
             make.height.mas_equalTo(Adaptor_Value(220));
             make.bottom.mas_equalTo(weakSelf.ruleView.mas_bottom).offset(-Adaptor_Value(20));
         }];

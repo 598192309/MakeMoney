@@ -74,6 +74,12 @@ NS_ASSUME_NONNULL_BEGIN
 + (NetworkTask *)requestCashDetailSuccess:(void(^)(NSInteger status,NSString *msg,NSArray *tixianDetailItemArr))successBlock error:(ErrorBlock)errorBlock;
 
 
+/*******************获取邀请记录
+ 
+ *********************/
++ (NetworkTask *)requestShareRecordsWithInviteCode:(NSString *)invite_code  Success:(void(^)(NSInteger status,NSString *msg,NSArray *extendDetailItemArr))successBlock error:(ErrorBlock)errorBlock;
+
+
 
 
 @end

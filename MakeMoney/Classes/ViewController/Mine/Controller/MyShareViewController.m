@@ -11,6 +11,7 @@
 #import <CoreImage/CoreImage.h>
 
 #import<AssetsLibrary/AssetsLibrary.h>
+#import "MyShareDetailViewController.h"
 
 
 @interface MyShareViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -34,7 +35,9 @@
 @implementation MyShareViewController
 #pragma mark - 重写
 - (void)navigationRightBtnClick:(UIButton *)button{
-    [LSVProgressHUD showInfoWithStatus:[button titleForState:UIControlStateNormal]];
+//    [LSVProgressHUD showInfoWithStatus:[button titleForState:UIControlStateNormal]];
+    MyShareDetailViewController *vc = [[MyShareDetailViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - 生命周期
 -(void)viewWillAppear:(BOOL)animated{

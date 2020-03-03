@@ -70,6 +70,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *money;
 @property (nonatomic,strong)NSString *reward;
 @property (nonatomic,strong)NSString *type;
+//邀请记录
+@property (nonatomic,strong)NSString *sex_id;
+@property (nonatomic,assign)NSInteger status;
 
 
 @end

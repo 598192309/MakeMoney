@@ -229,4 +229,24 @@
         }
     }];
 }
+
+/*******************获取邀请记录
+ 
+ *********************/
++ (NetworkTask *)requestShareRecordsWithInviteCode:(NSString *)invite_code  Success:(void(^)(NSInteger status,NSString *msg,NSArray *extendDetailItemArr))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/invite_record/find" parameters:@{@"invite_code":SAFE_NIL_STRING(invite_code)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+        NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+
+        NSString *msg = [resultObject safeObjectForKey:@"msg"];
+        NSArray *extendDetailItemArr = [ExtendDetailItem mj_objectArrayWithKeyValuesArray:[resultObject safeObjectForKey:@"data"]];
+
+        if (successBlock) {
+            successBlock(status,msg,extendDetailItemArr);
+        }
+    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+        if (errorBlock) {
+            errorBlock(error,resultObject);
+        }
+    }];
+}
 @end
