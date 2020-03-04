@@ -127,7 +127,7 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
     if ([self.item.vip_video_url hasPrefix:@"http"]) {
         videoUrl = self.item.vip_video_url;
     }else{
-        videoUrl = [NSString stringWithFormat:@"%@%@",RI.basicItem.vip_video_url,self.item.vip_video_url];
+        videoUrl = [NSString stringWithFormat:@"%@%@",RI.basicItem.vip_video_url,self.item.video_url];
     }
     NSLog(@"视频播放地址：%@",videoUrl);
     self.player.assetURL = [NSURL URLWithString:videoUrl];

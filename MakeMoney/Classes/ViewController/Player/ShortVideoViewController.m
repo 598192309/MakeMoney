@@ -78,11 +78,10 @@
     
     self.player.pauseWhenAppResignActive = NO;
     
-    @weakify(self)
+    __weak __typeof(self) weakSelf = self;
     self.player.playerDidToEnd = ^(id  _Nonnull asset) {
-        @strongify(self)
         [LSVProgressHUD showInfoWithStatus:lqStrings(@"VIP才可以观看完整版哟～")];
-        [self.player.currentPlayerManager replay];
+        [weakSelf.player.currentPlayerManager replay];
     };
     
     self.player.playerPlayTimeChanged = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, NSTimeInterval currentTime, NSTimeInterval duration) {
@@ -91,18 +90,18 @@
     };
     
     self.player.presentationSizeChanged = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, CGSize size) {
-        @strongify(self)
         if (size.width >= size.height) {
-            self.player.currentPlayerManager.scalingMode = ZFPlayerScalingModeAspectFit;
+            weakSelf.player.currentPlayerManager.scalingMode = ZFPlayerScalingModeAspectFit;
         } else {
-            self.player.currentPlayerManager.scalingMode = ZFPlayerScalingModeAspectFill;
+            weakSelf.player.currentPlayerManager.scalingMode = ZFPlayerScalingModeAspectFill;
         }
     };
     
     self.player.playerReadyToPlay = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, NSURL * _Nonnull assetURL) {
+
       //每次播放了 刷新一下用户信息 获取播放次数
-//        [self requestUserInfo];
-        [self updateTimesWithVideoID:self.item.ID];
+//        [weakSelf requestUserInfo];
+        [weakSelf updateTimesWithVideoID:weakSelf.item.ID];
     };
     //播放
     [self playTheIndex:0];
@@ -119,13 +118,14 @@
 }
 
 - (void)playTheIndex:(NSInteger)index {
-    @weakify(self)
+    __weak __typeof(self) weakSelf = self;
+
     /// 指定到某一行播放
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     [self.customTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
     [self.customTableView zf_filterShouldPlayCellWhileScrolled:^(NSIndexPath *indexPath) {
-        @strongify(self)
-        [self playTheVideoAtIndexPath:indexPath scrollToTop:NO];
+        
+        [weakSelf playTheVideoAtIndexPath:indexPath scrollToTop:NO];
     }];
 
 }
@@ -209,13 +209,15 @@
     ZFDouYinCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ZFDouYinCell class])];
     cell.dataItem = [self.dataSource safeObjectAtIndex:indexPath.row];
     //点击观看完整版
+    __weak __typeof(self) weakSelf = self;
+
     cell.douYinCellSeeBtnClickBlock = ^(UIButton *sender) {
         //判断是否是会员
         if (RI.infoInitItem.is_vip) {
             
         }else{
 //            [LSVProgressHUD showInfoWithStatus:@"购买会员"];
-            [self showMsg:lqStrings(@"VIP会员才能观看完整版喔～") firstBtnTitle:lqStrings(@"再想想") secBtnTitle:lqStrings(@"购买VIP") singleBtnTitle:@""];
+            [weakSelf showMsg:lqStrings(@"VIP会员才能观看完整版喔～") firstBtnTitle:lqStrings(@"再想想") secBtnTitle:lqStrings(@"购买VIP") singleBtnTitle:@""];
         }
     };
     //点击喜欢
