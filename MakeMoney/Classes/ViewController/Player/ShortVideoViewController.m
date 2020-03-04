@@ -101,7 +101,8 @@
     
     self.player.playerReadyToPlay = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, NSURL * _Nonnull assetURL) {
       //每次播放了 刷新一下用户信息 获取播放次数
-        [self requestUserInfo];
+//        [self requestUserInfo];
+        [self updateTimesWithVideoID:self.item.ID];
     };
     //播放
     [self playTheIndex:0];
@@ -160,6 +161,16 @@
 - (void)requestUserInfo{
     [MineApi requestUserInfoSuccess:^(NSInteger status, NSString * _Nonnull msg, InitItem *initItem) {
         RI.infoInitItem = initItem;
+    } error:^(NSError *error, id resultObject) {
+        
+    }];
+}
+
+//请求更新播放次数
+- (void)updateTimesWithVideoID:(NSString *)video_id{
+    __weak __typeof(self) weakSelf = self;
+    [MineApi requestShortVedioInfoWithVedioId:video_id is_vip:RI.infoInitItem.is_vip type:0 Success:^(InitItem * _Nonnull initItem, NSString * _Nonnull msg) {
+        [weakSelf requestUserInfo];
     } error:^(NSError *error, id resultObject) {
         
     }];
