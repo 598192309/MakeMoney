@@ -34,5 +34,6 @@
 #import "HomeApi.h"
 #import "HomeItem.h"
 
+#import "CommonAlertView.h"
 
 #endif /* PrefixHeader_pch */

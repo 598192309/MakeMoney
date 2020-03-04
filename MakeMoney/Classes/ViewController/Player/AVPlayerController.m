@@ -154,25 +154,10 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
     [self addNavigationView];
     self.navigationView.backgroundColor = [UIColor clearColor];
 }
-
-//- (void)viewWillLayoutSubviews {
-//    [super viewWillLayoutSubviews];
-//    CGFloat x = 0;
-//    CGFloat y = CGRectGetMaxY([UIApplication sharedApplication].statusBarFrame);
-//    CGFloat w = CGRectGetWidth(self.view.frame);
-//    CGFloat h = w*9/16;
-////    self.containerView.frame = CGRectMake(x, y, w, h);
-//    self.containerView.frame = CGRectMake(x, 0, w, h);
-//
-//
-//    w = 44;
-//    h = w;
-//    x = (CGRectGetWidth(self.containerView.frame)-w)/2;
-//    y = (CGRectGetHeight(self.containerView.frame)-h)/2;
-//    self.playBtn.frame = CGRectMake(x, y, w, h);
-//
-//}
-
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    LQLog(@"dealloc ---------%@",NSStringFromClass([self class]));
+}
 
 - (void)playClick:(UIButton *)sender {
     [self.player playTheIndex:0];

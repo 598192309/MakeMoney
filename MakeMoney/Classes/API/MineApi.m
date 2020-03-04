@@ -249,4 +249,24 @@
         }
     }];
 }
+
+/*******************用户信息
+ 
+ *********************/
++ (NetworkTask *)requestUserInfoSuccess:(void(^)(NSInteger status,NSString *msg,InitItem *initItem))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/user/info" parameters:nil criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+        NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+
+        NSString *msg = [resultObject safeObjectForKey:@"msg"];
+        InitItem *initItem = [InitItem mj_objectWithKeyValues:[resultObject safeObjectForKey:@"data"]];
+
+        if (successBlock) {
+            successBlock(status,msg,initItem);
+        }
+    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+        if (errorBlock) {
+            errorBlock(error,resultObject);
+        }
+    }];
+}
 @end

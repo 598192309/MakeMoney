@@ -80,6 +80,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (NetworkTask *)requestShareRecordsWithInviteCode:(NSString *)invite_code  Success:(void(^)(NSInteger status,NSString *msg,NSArray *extendDetailItemArr))successBlock error:(ErrorBlock)errorBlock;
 
 
+/*******************用户信息
+ 
+ *********************/
++ (NetworkTask *)requestUserInfoSuccess:(void(^)(NSInteger status,NSString *msg,InitItem *initItem))successBlock error:(ErrorBlock)errorBlock;
+
 
 
 @end

@@ -16,6 +16,8 @@
 #import "ZFDouYinCell.h"
 
 #import "HomeItem.h"
+#import "MineApi.h"
+#import "MineItem.h"
 @interface ShortVideoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
 @property (nonatomic, strong) ZFPlayerController *player;
@@ -25,6 +27,7 @@
 @property (nonatomic, strong) UIButton *backBtn;
 @property (nonatomic, strong) HotItem *item;
 
+@property (nonatomic,strong)CommonAlertView *commonAlertView;
 @end
 
 @implementation ShortVideoViewController
@@ -73,9 +76,12 @@
     /// 1.0是完全消失时候
     self.player.playerDisapperaPercent = 1.0;
     
+    self.player.pauseWhenAppResignActive = NO;
+    
     @weakify(self)
     self.player.playerDidToEnd = ^(id  _Nonnull asset) {
         @strongify(self)
+        [LSVProgressHUD showInfoWithStatus:lqStrings(@"VIP才可以观看完整版哟～")];
         [self.player.currentPlayerManager replay];
     };
     
@@ -92,6 +98,11 @@
             self.player.currentPlayerManager.scalingMode = ZFPlayerScalingModeAspectFill;
         }
     };
+    
+    self.player.playerReadyToPlay = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, NSURL * _Nonnull assetURL) {
+      //每次播放了 刷新一下用户信息 获取播放次数
+        [self requestUserInfo];
+    };
     //播放
     [self playTheIndex:0];
 }
@@ -101,6 +112,10 @@
     self.backBtn.frame = CGRectMake(15, CGRectGetMaxY([UIApplication sharedApplication].statusBarFrame), 36, 36);
 }
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    LQLog(@"dealloc ---------%@",NSStringFromClass([self class]));
+}
 
 - (void)playTheIndex:(NSInteger)index {
     @weakify(self)
@@ -129,6 +144,25 @@
 
 - (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
     return UIStatusBarAnimationSlide;
+}
+
+#pragma mark - act
+- (void)showMsg:(NSString *)msg firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singleBtnTitle:(NSString *)singleBtnTitle{
+    [self.commonAlertView refreshUIWithTitle:msg firstBtnTitle:firstBtnTitle secBtnTitle:secBtnTitle singleBtnTitle:singleBtnTitle];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.commonAlertView];
+    [self.commonAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
+    }];
+}
+
+#pragma mark - net
+//每次播放 刷新用户信息 获取播放次数
+- (void)requestUserInfo{
+    [MineApi requestUserInfoSuccess:^(NSInteger status, NSString * _Nonnull msg, InitItem *initItem) {
+        RI.infoInitItem = initItem;
+    } error:^(NSError *error, id resultObject) {
+        
+    }];
 }
 
 #pragma mark - UIScrollViewDelegate  列表播放必须实现
@@ -165,22 +199,22 @@
     cell.dataItem = [self.dataSource safeObjectAtIndex:indexPath.row];
     //点击观看完整版
     cell.douYinCellSeeBtnClickBlock = ^(UIButton *sender) {
-        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
         //判断是否是会员
         if (RI.infoInitItem.is_vip) {
             
         }else{
-            [LSVProgressHUD showInfoWithStatus:@"购买会员"];
+//            [LSVProgressHUD showInfoWithStatus:@"购买会员"];
+            [self showMsg:lqStrings(@"VIP会员才能观看完整版喔～") firstBtnTitle:lqStrings(@"再想想") secBtnTitle:lqStrings(@"购买VIP") singleBtnTitle:@""];
         }
     };
     //点击喜欢
     cell.douYinCellLikeBtnClickBlock = ^(UIButton *sender) {
-        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+//        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
 
     };
     //点击分享
     cell.douYinCellShareBtnClickBlock = ^(UIButton *sender) {
-        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+//        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
 
     };
     return cell;
@@ -290,5 +324,18 @@
     return _backBtn;
 }
 
-
+- (CommonAlertView *)commonAlertView{
+    if (!_commonAlertView) {
+        _commonAlertView = [CommonAlertView new];
+        __weak __typeof(self) weakSelf = self;
+        _commonAlertView.commonAlertViewBlock = ^(NSInteger index, NSString * _Nonnull str) {
+            [weakSelf.commonAlertView removeFromSuperview];
+            weakSelf.commonAlertView = nil;
+            if (index == 2) {//购买VIP
+                [LSVProgressHUD showInfoWithStatus:@"购买VIP"];
+            }
+        };
+    }
+    return _commonAlertView;
+}
 @end

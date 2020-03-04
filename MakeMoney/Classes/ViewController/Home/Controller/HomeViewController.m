@@ -32,6 +32,9 @@
 @property (nonatomic, strong) MJRefreshNormalHeader *refreshHeader;
 @property (strong, nonatomic) HomeInfoItem *dataSource;//容器视图
 @property (nonatomic,copy)NSArray<AdsItem *> *bannerList;
+
+@property (nonatomic,strong)CommonAlertView *commonAlertView;
+
 @end
 
 @implementation HomeViewController
@@ -65,7 +68,14 @@
 
 }
 
-
+#pragma mark - act
+- (void)showMsg:(NSString *)msg firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singleBtnTitle:(NSString *)singleBtnTitle{
+    [self.commonAlertView refreshUIWithTitle:msg titlefont:AdaptedFontSize(15) titleColor:TitleBlackColor firstBtnTitle:firstBtnTitle secBtnTitle:secBtnTitle singleBtnTitle:singleBtnTitle];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.commonAlertView];
+    [self.commonAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
+    }];
+}
 
 #pragma mark - net
 - (void)requestData{
@@ -240,6 +250,12 @@
         HotItem *item = [videoListItem.lists safeObjectAtIndex:indexPath.row];
 
         if (videoListItem.type == VideoType_ShortVideo) {//短视频
+            //判断是否还有观看次数
+            if (RI.infoInitItem.rest_free_times == 0) {
+                [self showMsg:lqStrings(@"今日观看次数已用完,明天再来吧,分享可获得无限观影哦") firstBtnTitle:lqStrings(@"分享") secBtnTitle:lqStrings(@"购买VIP") singleBtnTitle:@""];
+                return;
+            }
+
             ShortVideoViewController *vc = [ShortVideoViewController controllerWith:item];
             [self.navigationController pushViewController:vc animated:YES];
 
@@ -276,5 +292,20 @@
     }
     return _infiniteView;
 }
-
+- (CommonAlertView *)commonAlertView{
+    if (!_commonAlertView) {
+        _commonAlertView = [CommonAlertView new];
+        __weak __typeof(self) weakSelf = self;
+        _commonAlertView.commonAlertViewBlock = ^(NSInteger index, NSString * _Nonnull str) {
+            [weakSelf.commonAlertView removeFromSuperview];
+            weakSelf.commonAlertView = nil;
+            if (index == 1) {//分享
+                [LSVProgressHUD showInfoWithStatus:@"分享"];
+            }else if (index == 2) {//购买VIP
+                [LSVProgressHUD showInfoWithStatus:@"购买VIP"];
+            }
+        };
+    }
+    return _commonAlertView;
+}
 @end

@@ -112,6 +112,7 @@
 		110DFBF7240F5957002E1C8B /* AVCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 110DFBF6240F5957002E1C8B /* AVCenterView.m */; };
 		110DFBFA240F85C6002E1C8B /* ShortVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 110DFBF9240F85C6002E1C8B /* ShortVideoViewController.m */; };
 		110DFBFD240F8BAB002E1C8B /* ZFDouYinCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 110DFBFC240F8BAB002E1C8B /* ZFDouYinCell.m */; };
+		110DFC00240FAE1D002E1C8B /* CommonAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 110DFBFF240FAE1D002E1C8B /* CommonAlertView.m */; };
 		11105AD92406004700521CB2 /* ZhuanTiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11105AD82406004700521CB2 /* ZhuanTiViewController.m */; };
 		11105ADC2406005600521CB2 /* AVViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11105ADB2406005600521CB2 /* AVViewController.m */; };
 		11105ADF2406006800521CB2 /* CityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11105ADE2406006800521CB2 /* CityViewController.m */; };
@@ -448,6 +449,8 @@
 		110DFBF9240F85C6002E1C8B /* ShortVideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShortVideoViewController.m; sourceTree = "<group>"; };
 		110DFBFB240F8BAB002E1C8B /* ZFDouYinCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFDouYinCell.h; sourceTree = "<group>"; };
 		110DFBFC240F8BAB002E1C8B /* ZFDouYinCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFDouYinCell.m; sourceTree = "<group>"; };
+		110DFBFE240FAE1D002E1C8B /* CommonAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonAlertView.h; sourceTree = "<group>"; };
+		110DFBFF240FAE1D002E1C8B /* CommonAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonAlertView.m; sourceTree = "<group>"; };
 		11105AD72406004700521CB2 /* ZhuanTiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhuanTiViewController.h; sourceTree = "<group>"; };
 		11105AD82406004700521CB2 /* ZhuanTiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhuanTiViewController.m; sourceTree = "<group>"; };
 		11105ADA2406005600521CB2 /* AVViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVViewController.h; sourceTree = "<group>"; };
@@ -822,6 +825,8 @@
 				096C7FC3240BC3D800914E20 /* CustomAlertView.m */,
 				11E860B5240D06D100719378 /* NoticeAlertView.h */,
 				11E860B6240D06D100719378 /* NoticeAlertView.m */,
+				110DFBFE240FAE1D002E1C8B /* CommonAlertView.h */,
+				110DFBFF240FAE1D002E1C8B /* CommonAlertView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1844,6 +1849,7 @@
 				09E72C7D24055F7E0004B25C /* NSObject+MJKeyValue.m in Sources */,
 				09E72C3724055F6E0004B25C /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				8B9B8BFF240D4AED004B4704 /* ZFLoadingView.m in Sources */,
+				110DFC00240FAE1D002E1C8B /* CommonAlertView.m in Sources */,
 				09E72AF0240559F40004B25C /* AFSecurityPolicy.m in Sources */,
 				09E72D30240565710004B25C /* LSVProgressHUD.m in Sources */,
 				8B9B8BEE240D4AED004B4704 /* ZFPlayerNotification.m in Sources */,
