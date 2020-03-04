@@ -101,7 +101,14 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
     self.player.playerPlayTimeChanged = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, NSTimeInterval currentTime, NSTimeInterval duration) {
         @strongify(self)
         NSLog(@"播放时长currentTime:%f,总时长duration:%f",currentTime,duration);
-        
+        //判断是否是会员
+        if (!RI.infoInitItem.is_vip) {//不是会员 只能看5分钟
+            if (currentTime > 5 * 60) {
+                self.player.pauseByEvent = YES;
+            }else{
+                self.player.pauseByEvent = NO;
+            }
+        }
     };
     
     /// 播放完成
@@ -116,7 +123,12 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
         }
     };
     //拼接播放视频的Url
-    NSString *videoUrl = [NSString stringWithFormat:@"%@%@",RI.basicItem.vip_video_url,self.item.vip_video_url];
+    NSString *videoUrl;
+    if ([self.item.vip_video_url hasPrefix:@"http"]) {
+        videoUrl = self.item.vip_video_url;
+    }else{
+        videoUrl = [NSString stringWithFormat:@"%@%@",RI.basicItem.vip_video_url,self.item.vip_video_url];
+    }
     NSLog(@"视频播放地址：%@",videoUrl);
     self.player.assetURL = [NSURL URLWithString:videoUrl];
 //    [self.controlView showTitle:self.item.title coverURLString:kVideoCover fullScreenMode:ZFFullScreenModeAutomatic];

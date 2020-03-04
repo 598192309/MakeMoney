@@ -32,7 +32,14 @@
 + (instancetype)controllerWith:(HotItem *)item {
     ShortVideoViewController *vc = [[ShortVideoViewController alloc] init];
     vc.item = item;
-    vc.urls = [NSMutableArray arrayWithObject:[NSURL URLWithString:item.video_url]];
+    if ([item.video_url hasPrefix:@"http"]) {
+        vc.urls = [NSMutableArray arrayWithObject:[NSURL URLWithString:item.video_url]];
+
+    }else{//拼接
+        NSString *str = [NSString stringWithFormat:@"%@%@",RI.basicItem.video_url,item.video_url];
+        vc.urls = [NSMutableArray arrayWithObject:[NSURL URLWithString:str]];
+        
+    }
     vc.dataSource = [NSMutableArray arrayWithObject:item];
     return vc;
 }
@@ -70,6 +77,11 @@
     self.player.playerDidToEnd = ^(id  _Nonnull asset) {
         @strongify(self)
         [self.player.currentPlayerManager replay];
+    };
+    
+    self.player.playerPlayTimeChanged = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, NSTimeInterval currentTime, NSTimeInterval duration) {
+        NSLog(@"播放时长currentTime:%f,总时长duration:%f",currentTime,duration);
+
     };
     
     self.player.presentationSizeChanged = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, CGSize size) {
@@ -154,6 +166,12 @@
     //点击观看完整版
     cell.douYinCellSeeBtnClickBlock = ^(UIButton *sender) {
         [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+        //判断是否是会员
+        if (RI.infoInitItem.is_vip) {
+            
+        }else{
+            [LSVProgressHUD showInfoWithStatus:@"购买会员"];
+        }
     };
     //点击喜欢
     cell.douYinCellLikeBtnClickBlock = ^(UIButton *sender) {

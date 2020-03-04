@@ -11,7 +11,7 @@
 #import "AVItem.h"
 #import "AVApi.h"
 #import "HomeItem.h"
-
+#import "AVPlayerController.h"
 @interface AVViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
 @property (nonatomic,assign)NSInteger pageIndex;
@@ -185,7 +185,11 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [LSVProgressHUD showInfoWithStatus:@"点击"];
+//    [LSVProgressHUD showInfoWithStatus:@"点击"];
+    HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
+
+    AVPlayerController *vc = [AVPlayerController controllerWith:item];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
