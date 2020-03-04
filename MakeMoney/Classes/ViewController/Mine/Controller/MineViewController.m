@@ -132,7 +132,7 @@
         }else if ([[sender titleForState:UIControlStateNormal] isEqualToString:lqStrings(@"VIP兑换")]) {
             [[UIApplication sharedApplication].keyWindow addSubview:weakSelf.vipExchangeAlertView];
             
-            [self.vipExchangeAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
+            [weakSelf.vipExchangeAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
             }];
         }
@@ -278,7 +278,12 @@
     }else if (indexPath.section == 2){
         if (indexPath.row == 0) {
            
-        }else  if (indexPath.row == 1) {
+        }else  if (indexPath.row == 1) {//我的邀请人
+            [[UIApplication sharedApplication].keyWindow addSubview:self.vipExchangeAlertView];
+            [self.vipExchangeAlertView refreshContent:lqStrings(@"请填写邀请码")];
+            [self.vipExchangeAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
+            }];
            
         }else  if (indexPath.row == 2) {
             
@@ -451,7 +456,12 @@
         _vipExchangeAlertView.vipExchangeAlertViewkConfirmBtnClickBlock = ^(UIButton * _Nonnull sender, UITextField * _Nonnull tf) {
             [weakSelf.vipExchangeAlertView removeFromSuperview];
             weakSelf.vipExchangeAlertView = nil;
-            [weakSelf vipExchangeWithNumber:tf.text sender:sender];
+            if ([tf.placeholder isEqualToString:lqStrings(@"请填写邀请码")]) {
+                [LSVProgressHUD showInfoWithStatus:@"请填写邀请码"];
+            }else{
+                [weakSelf vipExchangeWithNumber:tf.text sender:sender];
+
+            }
         };
         
         _vipExchangeAlertView.vipExchangeAlertViewkCoverViewClickBlock = ^{

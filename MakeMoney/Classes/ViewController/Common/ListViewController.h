@@ -16,6 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *text;
 @property (nonatomic,strong)NSString *type;
 
+@property (nonatomic,strong)NSString *video_type;//区分人气热榜 请求的API不同  video_type     1001 最新视频    1002 最多播放     1003 最多点赞
+
+
+
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -95,6 +95,10 @@
 //}
 
 - (void)requestData{
+    if (self.video_type.length > 0) {//从人气榜过来的
+        [self requestHotData];
+        return;
+    }
     __weak __typeof(self) weakSelf = self;
     [HomeApi requestHotListMorewithTag:self.tag text:self.text type:self.type pageIndex:@"0" page_size:@"15" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
         weakSelf.pageIndex = hotItemArr.count ;
@@ -134,8 +138,46 @@
     }];
 }
 
+//从人气榜过来 请求的数据
+- (void)requestHotData{
+    __weak __typeof(self) weakSelf = self;
+    [HomeApi requestPopularityListwithVideoType:self.video_type pageIndex:@"0" page_size:@"15" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
+        weakSelf.pageIndex = hotItemArr.count ;
+        weakSelf.dataArr = [NSMutableArray arrayWithArray:hotItemArr];
+        if (hotItemArr.count >= 15 ) {
+            [weakSelf.customCollectionView addFooterWithRefreshingTarget:self refreshingAction:@selector(requestHotMoreData)];
+            [weakSelf.customCollectionView.mj_footer setHidden:NO];
 
+        }else{
+            [weakSelf.customCollectionView endHeaderRefreshing];
+            //消除尾部"没有更多数据"的状态
+            [weakSelf.customCollectionView.mj_footer setHidden:YES];
+        }
+        [weakSelf.customCollectionView endHeaderRefreshing];
+        [weakSelf.customCollectionView reloadData];
+    } error:^(NSError *error, id resultObject) {
+        [weakSelf.customCollectionView endHeaderRefreshing];
+        [weakSelf.customCollectionView reloadData];
+    }];
+}
 
+- (void)requestHotMoreData{
+    __weak __typeof(self) weakSelf = self;
+    [HomeApi requestPopularityListwithVideoType:self.video_type pageIndex:@"0" page_size:@"15" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
+        [weakSelf.dataArr addObjectsFromArray:hotItemArr];
+        [weakSelf.customCollectionView endFooterRefreshing];
+        [weakSelf.customCollectionView reloadData];
+        if (hotItemArr.count < 15) {
+            [weakSelf.customCollectionView endRefreshingWithNoMoreData];
+        }else{
+            weakSelf.pageIndex = weakSelf.dataArr.count ;
+
+        }
+    } error:^(NSError *error, id resultObject) {
+        [weakSelf.customCollectionView endHeaderRefreshing];
+        [weakSelf.customCollectionView reloadData];
+    }];
+}
 
  
 

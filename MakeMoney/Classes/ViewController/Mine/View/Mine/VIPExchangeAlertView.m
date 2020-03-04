@@ -50,6 +50,10 @@
     ViewRadius(self.alertView, Adaptor_Value(20));
 
 }
+
+-(void)refreshContent:(NSString *)content{
+    self.numberTF.placeholder = content;
+}
 #pragma mark - act
 - (void)confirmBtnClick:(UIButton *)sender {
     if (self.vipExchangeAlertViewkConfirmBtnClickBlock) {

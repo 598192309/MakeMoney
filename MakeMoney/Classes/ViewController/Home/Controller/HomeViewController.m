@@ -231,24 +231,31 @@
     if (indexPath.section == 0) {
         HotItem *item ;
         NSString *title;
+        NSString *video_type;
+
         if (indexPath.row == 0) {
             item = self.dataSource.most_new.firstObject;
             title = lqStrings(@"最新上传");
+            video_type = @"1001";
+
         }else if (indexPath.row == 1) {
             item = self.dataSource.most_play.firstObject;
             title = lqStrings(@"最多播放");
+            video_type = @"1002";
 
         }else if (indexPath.row == 2) {
             item = self.dataSource.most_love.firstObject;
             title = lqStrings(@"最多点赞");
+            video_type = @"1003";
 
         }
         ListViewController *vc = [[ListViewController alloc] init];
         HomeVideoList *videoItem = [self.dataSource.video safeObjectAtIndex:indexPath.section - 1];
-        vc.navTitle = videoItem.title;
+        vc.navTitle = title;
         vc.tag = IntTranslateStr(videoItem.tag);
         vc.type = IntTranslateStr(videoItem.type);
         vc.text = videoItem.text.length > 0 ? videoItem.text : @"51778";
+        vc.video_type = video_type;
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         HomeVideoList *videoListItem = [_dataSource.video safeObjectAtIndex:indexPath.section - 1];

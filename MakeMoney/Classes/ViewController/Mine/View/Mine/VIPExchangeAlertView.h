@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**点击cover view */
 @property(nonatomic,copy)void(^vipExchangeAlertViewkCoverViewClickBlock)(void);
+
+-(void)refreshContent:(NSString *)content;
 @end
 
 NS_ASSUME_NONNULL_END
