@@ -12,6 +12,13 @@
 #import "ZFUtilities.h"
 #import "UIImageView+ZFCache.h"
 #import "ZFAVPlayerManager.h"
+
+#import "AVApi.h"
+#import "AVItem.h"
+
+#import "AVTuijianView.h"
+#import "AVCenterView.h"
+
 static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/635942-14593722fe3f0695.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
 
 
@@ -26,7 +33,12 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
 
 
 @property (nonatomic, strong) HotItem *item;
+@property (nonatomic,strong)NSMutableArray *tuijianArr;
 
+//推荐部分
+@property (nonatomic,strong)AVTuijianView *avTuijianView;
+//中间 广告 title部分
+@property (nonatomic,strong)AVCenterView *avCenterView;
 @end
 
 @implementation AVPlayerController
@@ -40,13 +52,39 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self addNavigationView];
-
+    __weak __typeof(self) weakSelf = self;
     [self.view addSubview:self.containerView];
+    [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.mas_equalTo(weakSelf.view);
+        make.height.mas_equalTo(LQScreemW*9/16.0);
+    }];
     
     [self.containerView addSubview:self.playBtn];
+    [self.playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.height.mas_equalTo(Adaptor_Value(44));
+        make.center.mas_equalTo(self.containerView);
+    }];
+    
+    //中间部分
+    [self.view addSubview:self.avCenterView];
+    [self.avCenterView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(weakSelf.view);
+        make.top.mas_equalTo(weakSelf.containerView.mas_bottom);
+    }];
 
+    //推荐部分
+    [self.view addSubview:self.avTuijianView];
+    [self.avCenterView configUIWithItem:self.item finishi:^{
+        
+    }];
+    [self.avTuijianView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.mas_equalTo(weakSelf.view);
+        make.top.mas_equalTo(weakSelf.avCenterView.mas_bottom);
+    }];
 
+    [self setUpNav];
+
+    
     ZFAVPlayerManager *playerManager = [[ZFAVPlayerManager alloc] init];
     /// 播放器相关
     self.player = [ZFPlayerController playerWithPlayerManager:playerManager containerView:self.containerView];
@@ -81,8 +119,13 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
     NSString *videoUrl = [NSString stringWithFormat:@"%@%@",RI.basicItem.vip_video_url,self.item.vip_video_url];
     NSLog(@"视频播放地址：%@",videoUrl);
     self.player.assetURL = [NSURL URLWithString:videoUrl];
-    [self.controlView showTitle:self.item.title coverURLString:kVideoCover fullScreenMode:ZFFullScreenModeAutomatic];
+//    [self.controlView showTitle:self.item.title coverURLString:kVideoCover fullScreenMode:ZFFullScreenModeAutomatic];
+    [self.controlView showTitle:@"" coverURLString:kVideoCover fullScreenMode:ZFFullScreenModeAutomatic];
 
+
+    
+    [self requestTuijianList];
+    [self requestAds];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -95,23 +138,28 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
     self.player.viewControllerDisappear = YES;
 }
 
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
-    CGFloat x = 0;
-    CGFloat y = CGRectGetMaxY([UIApplication sharedApplication].statusBarFrame);
-    CGFloat w = CGRectGetWidth(self.view.frame);
-    CGFloat h = w*9/16;
-//    self.containerView.frame = CGRectMake(x, y, w, h);
-    self.containerView.frame = CGRectMake(x, 0, w, h);
-
-    
-    w = 44;
-    h = w;
-    x = (CGRectGetWidth(self.containerView.frame)-w)/2;
-    y = (CGRectGetHeight(self.containerView.frame)-h)/2;
-    self.playBtn.frame = CGRectMake(x, y, w, h);
-
+- (void)setUpNav{
+    [self addNavigationView];
+    self.navigationView.backgroundColor = [UIColor clearColor];
 }
+
+//- (void)viewWillLayoutSubviews {
+//    [super viewWillLayoutSubviews];
+//    CGFloat x = 0;
+//    CGFloat y = CGRectGetMaxY([UIApplication sharedApplication].statusBarFrame);
+//    CGFloat w = CGRectGetWidth(self.view.frame);
+//    CGFloat h = w*9/16;
+////    self.containerView.frame = CGRectMake(x, y, w, h);
+//    self.containerView.frame = CGRectMake(x, 0, w, h);
+//
+//
+//    w = 44;
+//    h = w;
+//    x = (CGRectGetWidth(self.containerView.frame)-w)/2;
+//    y = (CGRectGetHeight(self.containerView.frame)-h)/2;
+//    self.playBtn.frame = CGRectMake(x, y, w, h);
+//
+//}
 
 
 - (void)playClick:(UIButton *)sender {
@@ -143,6 +191,32 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait;
+}
+
+#pragma mark - net
+//获取推荐视频
+- (void)requestTuijianList{
+    __weak __typeof(self) weakSelf = self;
+    [AVApi requestAVExtendwithID:self.item.ID Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
+        weakSelf.tuijianArr = [NSMutableArray arrayWithArray:hotItemArr];
+        [weakSelf.avTuijianView configUIWithItemArr:hotItemArr finishi:^{
+            
+        }];
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+    }];
+}
+
+//获取广告
+- (void)requestAds{
+    __weak __typeof(self) weakSelf = self;
+    [HomeApi requestAdWithType:@"4" Success:^(NSArray * _Nonnull adsItemArr, NSString * _Nonnull msg) {
+        [weakSelf.avCenterView configAds:adsItemArr.firstObject finishi:^{
+            
+        }];
+    } error:^(NSError *error, id resultObject) {
+        
+    }];
 }
 #pragma mark - lazy
 - (ZFPlayerControlView *)controlView {
@@ -176,5 +250,17 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
 
 
 
+- (AVTuijianView *)avTuijianView{
+    if (!_avTuijianView) {
+        _avTuijianView = [AVTuijianView new];
+    }
+    return _avTuijianView;
+}
 
+- (AVCenterView *)avCenterView{
+    if (!_avCenterView) {
+        _avCenterView = [AVCenterView new];
+    }
+    return _avCenterView;
+}
 @end

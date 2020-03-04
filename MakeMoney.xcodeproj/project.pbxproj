@@ -107,6 +107,9 @@
 		09E72D3924056A5B0004B25C /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E72D3824056A5B0004B25C /* DeviceInfo.m */; };
 		09E72D3C24056ADC0004B25C /* RunInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E72D3B24056ADC0004B25C /* RunInfo.m */; };
 		110DFBED240F3F36002E1C8B /* VIPExchangeAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 110DFBEC240F3F36002E1C8B /* VIPExchangeAlertView.m */; };
+		110DFBF1240F4F6D002E1C8B /* AVTuijianView.m in Sources */ = {isa = PBXBuildFile; fileRef = 110DFBF0240F4F6D002E1C8B /* AVTuijianView.m */; };
+		110DFBF4240F5007002E1C8B /* AVTuijianCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 110DFBF3240F5007002E1C8B /* AVTuijianCell.m */; };
+		110DFBF7240F5957002E1C8B /* AVCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 110DFBF6240F5957002E1C8B /* AVCenterView.m */; };
 		11105AD92406004700521CB2 /* ZhuanTiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11105AD82406004700521CB2 /* ZhuanTiViewController.m */; };
 		11105ADC2406005600521CB2 /* AVViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11105ADB2406005600521CB2 /* AVViewController.m */; };
 		11105ADF2406006800521CB2 /* CityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11105ADE2406006800521CB2 /* CityViewController.m */; };
@@ -433,6 +436,12 @@
 		09E72D3B24056ADC0004B25C /* RunInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunInfo.m; sourceTree = "<group>"; };
 		110DFBEB240F3F36002E1C8B /* VIPExchangeAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VIPExchangeAlertView.h; sourceTree = "<group>"; };
 		110DFBEC240F3F36002E1C8B /* VIPExchangeAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VIPExchangeAlertView.m; sourceTree = "<group>"; };
+		110DFBEF240F4F6D002E1C8B /* AVTuijianView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVTuijianView.h; sourceTree = "<group>"; };
+		110DFBF0240F4F6D002E1C8B /* AVTuijianView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVTuijianView.m; sourceTree = "<group>"; };
+		110DFBF2240F5007002E1C8B /* AVTuijianCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVTuijianCell.h; sourceTree = "<group>"; };
+		110DFBF3240F5007002E1C8B /* AVTuijianCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVTuijianCell.m; sourceTree = "<group>"; };
+		110DFBF5240F5957002E1C8B /* AVCenterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVCenterView.h; sourceTree = "<group>"; };
+		110DFBF6240F5957002E1C8B /* AVCenterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVCenterView.m; sourceTree = "<group>"; };
 		11105AD72406004700521CB2 /* ZhuanTiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhuanTiViewController.h; sourceTree = "<group>"; };
 		11105AD82406004700521CB2 /* ZhuanTiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhuanTiViewController.m; sourceTree = "<group>"; };
 		11105ADA2406005600521CB2 /* AVViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVViewController.h; sourceTree = "<group>"; };
@@ -1310,6 +1319,19 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
+		110DFBEE240F4F54002E1C8B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				110DFBEF240F4F6D002E1C8B /* AVTuijianView.h */,
+				110DFBF0240F4F6D002E1C8B /* AVTuijianView.m */,
+				110DFBF2240F5007002E1C8B /* AVTuijianCell.h */,
+				110DFBF3240F5007002E1C8B /* AVTuijianCell.m */,
+				110DFBF5240F5957002E1C8B /* AVCenterView.h */,
+				110DFBF6240F5957002E1C8B /* AVCenterView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		11105ACF2406001900521CB2 /* ZhuanTi */ = {
 			isa = PBXGroup;
 			children = (
@@ -1587,6 +1609,7 @@
 		8B9B8C04240D5188004B4704 /* Player */ = {
 			isa = PBXGroup;
 			children = (
+				110DFBEE240F4F54002E1C8B /* View */,
 				8B9B8C05240D5211004B4704 /* AVPlayerController.h */,
 				8B9B8C06240D5211004B4704 /* AVPlayerController.m */,
 				8B9B8C0B240D6E42004B4704 /* DouYinControlView.h */,
@@ -1853,6 +1876,7 @@
 				8BD5456E240BA7BA00C90A31 /* HomeCategaryCell.m in Sources */,
 				8B9B8BF0240D4AED004B4704 /* ZFPlayerView.m in Sources */,
 				09E72AED240559F40004B25C /* AFURLSessionManager.m in Sources */,
+				110DFBF1240F4F6D002E1C8B /* AVTuijianView.m in Sources */,
 				111116A5240E4C2A00E9F781 /* TuiGuangViewController.m in Sources */,
 				8BD545B0240BB4CC00C90A31 /* MJRefreshAutoGifFooter.m in Sources */,
 				09E72D19240560210004B25C /* BaseNavigationController.m in Sources */,
@@ -1881,6 +1905,7 @@
 				09239AD02403FEE400A4F727 /* LorginViewController.m in Sources */,
 				8B9B8C1F240EADDB004B4704 /* MyShareDetailCell.m in Sources */,
 				09E72D35240569920004B25C /* Error+KF.m in Sources */,
+				110DFBF4240F5007002E1C8B /* AVTuijianCell.m in Sources */,
 				8B9B8BEC240D4AED004B4704 /* ZFPlayerLogManager.m in Sources */,
 				09E72C3524055F6E0004B25C /* IQTitleBarButtonItem.m in Sources */,
 				8B9B8C22240EC0F8004B4704 /* LPButton.m in Sources */,
@@ -1939,6 +1964,7 @@
 				8B9B8BF7240D4AED004B4704 /* UIView+ZFFrame.m in Sources */,
 				11105E8A24067C4300521CB2 /* MineItem.m in Sources */,
 				11105E4F24066BC900521CB2 /* NSString+LqExtension.m in Sources */,
+				110DFBF7240F5957002E1C8B /* AVCenterView.m in Sources */,
 				11105E5524066BC900521CB2 /* NSError+LqExtension.m in Sources */,
 				11105AF5240611C600521CB2 /* HomeCollectionHeaderView.m in Sources */,
 				09239ACD2403FEE400A4F727 /* MainTabBarController.m in Sources */,
