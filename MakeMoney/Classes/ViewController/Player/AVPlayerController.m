@@ -54,33 +54,40 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
     [super viewDidLoad];
     __weak __typeof(self) weakSelf = self;
     [self.view addSubview:self.containerView];
-    [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.mas_equalTo(weakSelf.view);
-        make.height.mas_equalTo(LQScreemW*9/16.0);
-    }];
-    
-    [self.containerView addSubview:self.playBtn];
-    [self.playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(Adaptor_Value(44));
-        make.center.mas_equalTo(self.containerView);
-    }];
-    
-    //中间部分
-    [self.view addSubview:self.avCenterView];
-    [self.avCenterView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(weakSelf.view);
-        make.top.mas_equalTo(weakSelf.containerView.mas_bottom);
-    }];
-
-    //推荐部分
-    [self.view addSubview:self.avTuijianView];
-    [self.avCenterView configUIWithItem:self.item finishi:^{
+    if (self.isShortVideo) {
+        [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.bottom.mas_equalTo(weakSelf.view);
+        }];
+    }else{
+        [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.mas_equalTo(weakSelf.view);
+            make.height.mas_equalTo(LQScreemW*9/16.0);
+        }];
         
-    }];
-    [self.avTuijianView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.mas_equalTo(weakSelf.view);
-        make.top.mas_equalTo(weakSelf.avCenterView.mas_bottom);
-    }];
+        [self.containerView addSubview:self.playBtn];
+        [self.playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.height.mas_equalTo(Adaptor_Value(44));
+            make.center.mas_equalTo(self.containerView);
+        }];
+        
+        //中间部分
+        [self.view addSubview:self.avCenterView];
+        [self.avCenterView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(weakSelf.view);
+            make.top.mas_equalTo(weakSelf.containerView.mas_bottom);
+        }];
+
+        //推荐部分
+        [self.view addSubview:self.avTuijianView];
+        [self.avCenterView configUIWithItem:self.item finishi:^{
+            
+        }];
+        [self.avTuijianView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.mas_equalTo(weakSelf.view);
+            make.top.mas_equalTo(weakSelf.avCenterView.mas_bottom);
+        }];
+    }
+
 
     [self setUpNav];
 
@@ -100,7 +107,7 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
     
     self.player.playerPlayTimeChanged = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, NSTimeInterval currentTime, NSTimeInterval duration) {
         @strongify(self)
-        NSLog(@"播放时长currentTime:%f,总时长duration:%f",currentTime,duration);
+//        NSLog(@"播放时长currentTime:%f,总时长duration:%f",currentTime,duration);
         //判断是否是会员
         if (!RI.infoInitItem.is_vip) {//不是会员 只能看5分钟
             if (currentTime > 5 * 60) {
@@ -127,12 +134,12 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
     if ([self.item.vip_video_url hasPrefix:@"http"]) {
         videoUrl = self.item.vip_video_url;
     }else{
-        videoUrl = [NSString stringWithFormat:@"%@%@",RI.basicItem.vip_video_url,self.item.video_url];
+        videoUrl = [NSString stringWithFormat:@"%@%@",RI.basicItem.vip_video_url,self.item.vip_video_url.length > 0 ? self.item.vip_video_url : self.item.video_url];
     }
     NSLog(@"视频播放地址：%@",videoUrl);
     self.player.assetURL = [NSURL URLWithString:videoUrl];
 //    [self.controlView showTitle:self.item.title coverURLString:kVideoCover fullScreenMode:ZFFullScreenModeAutomatic];
-    [self.controlView showTitle:@"" coverURLString:kVideoCover fullScreenMode:ZFFullScreenModeAutomatic];
+    [self.controlView showTitle:self.isShortVideo ? self.item.title : @"" coverURLString:kVideoCover fullScreenMode:ZFFullScreenModeAutomatic];
 
 
     

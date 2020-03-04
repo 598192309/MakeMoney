@@ -18,6 +18,9 @@
 #import "HomeItem.h"
 #import "MineApi.h"
 #import "MineItem.h"
+
+#import "AVPlayerController.h"
+
 @interface ShortVideoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
 @property (nonatomic, strong) ZFPlayerController *player;
@@ -213,7 +216,12 @@
 
     cell.douYinCellSeeBtnClickBlock = ^(UIButton *sender) {
         //判断是否是会员
-        if (RI.infoInitItem.is_vip) {
+        if (!RI.infoInitItem.is_vip) {
+            [self.player setPauseByEvent:YES];
+            HotItem *item = [weakSelf.dataSource safeObjectAtIndex:indexPath.row];
+            AVPlayerController *vc = [AVPlayerController controllerWith:item];
+            vc.isShortVideo = YES;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
             
         }else{
 //            [LSVProgressHUD showInfoWithStatus:@"购买会员"];

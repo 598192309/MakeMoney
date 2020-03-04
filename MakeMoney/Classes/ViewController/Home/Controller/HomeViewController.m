@@ -251,10 +251,10 @@
 
         if (videoListItem.type == VideoType_ShortVideo) {//短视频
             //判断是否还有观看次数
-            if (RI.infoInitItem.rest_free_times == 0) {
-                [self showMsg:lqStrings(@"今日观看次数已用完,明天再来吧,分享可获得无限观影哦") firstBtnTitle:lqStrings(@"分享") secBtnTitle:lqStrings(@"购买VIP") singleBtnTitle:@""];
-                return;
-            }
+//            if (RI.infoInitItem.rest_free_times == 0) {
+//                [self showMsg:lqStrings(@"今日观看次数已用完,明天再来吧,分享可获得无限观影哦") firstBtnTitle:lqStrings(@"分享") secBtnTitle:lqStrings(@"购买VIP") singleBtnTitle:@""];
+//                return;
+//            }
 
             ShortVideoViewController *vc = [ShortVideoViewController controllerWith:item];
             [self.navigationController pushViewController:vc animated:YES];

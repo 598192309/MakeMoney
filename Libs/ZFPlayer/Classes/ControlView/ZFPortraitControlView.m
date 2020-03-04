@@ -145,8 +145,8 @@
 
 /// 根据当前播放状态取反
 - (void)playOrPause {
-    self.playOrPauseBtn.selected = !self.playOrPauseBtn.isSelected;
-    self.playOrPauseBtn.isSelected? [self.player.currentPlayerManager play]: [self.player.currentPlayerManager pause];
+    self.playOrPauseBtn.selected = !self.playOrPauseBtn.selected;
+    self.playOrPauseBtn.selected? [self.player.currentPlayerManager play]: [self.player.currentPlayerManager pause];
 }
 
 - (void)playBtnSelectedState:(BOOL)selected {
@@ -173,7 +173,9 @@
     self.topToolView.frame = CGRectMake(min_x, min_y, min_w, min_h);
     
     min_x = 15;
-    min_y = 5;
+//    min_y = 5;
+    min_y = NavMaxY + Adaptor_Value(10);
+
     min_w = min_view_w - min_x - 15;
     min_h = 30;
     self.titleLabel.frame = CGRectMake(min_x, min_y, min_w, min_h);
