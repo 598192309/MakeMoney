@@ -157,7 +157,9 @@
         _sliderView.minimumTrackTintColor = [UIColor whiteColor];
         _sliderView.bufferTrackTintColor  = [UIColor clearColor];
         _sliderView.sliderHeight = 1;
-        _sliderView.isHideSliderBlock = NO;
+        _sliderView.isHideSliderBlock = NO;// 隐藏滑块，滑杆不可点击
+        
+        _sliderView.hidden = YES;
     }
     return _sliderView;
 }

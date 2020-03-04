@@ -110,6 +110,8 @@
 		110DFBF1240F4F6D002E1C8B /* AVTuijianView.m in Sources */ = {isa = PBXBuildFile; fileRef = 110DFBF0240F4F6D002E1C8B /* AVTuijianView.m */; };
 		110DFBF4240F5007002E1C8B /* AVTuijianCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 110DFBF3240F5007002E1C8B /* AVTuijianCell.m */; };
 		110DFBF7240F5957002E1C8B /* AVCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 110DFBF6240F5957002E1C8B /* AVCenterView.m */; };
+		110DFBFA240F85C6002E1C8B /* ShortVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 110DFBF9240F85C6002E1C8B /* ShortVideoViewController.m */; };
+		110DFBFD240F8BAB002E1C8B /* ZFDouYinCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 110DFBFC240F8BAB002E1C8B /* ZFDouYinCell.m */; };
 		11105AD92406004700521CB2 /* ZhuanTiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11105AD82406004700521CB2 /* ZhuanTiViewController.m */; };
 		11105ADC2406005600521CB2 /* AVViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11105ADB2406005600521CB2 /* AVViewController.m */; };
 		11105ADF2406006800521CB2 /* CityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11105ADE2406006800521CB2 /* CityViewController.m */; };
@@ -442,6 +444,10 @@
 		110DFBF3240F5007002E1C8B /* AVTuijianCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVTuijianCell.m; sourceTree = "<group>"; };
 		110DFBF5240F5957002E1C8B /* AVCenterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVCenterView.h; sourceTree = "<group>"; };
 		110DFBF6240F5957002E1C8B /* AVCenterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVCenterView.m; sourceTree = "<group>"; };
+		110DFBF8240F85C6002E1C8B /* ShortVideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShortVideoViewController.h; sourceTree = "<group>"; };
+		110DFBF9240F85C6002E1C8B /* ShortVideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShortVideoViewController.m; sourceTree = "<group>"; };
+		110DFBFB240F8BAB002E1C8B /* ZFDouYinCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFDouYinCell.h; sourceTree = "<group>"; };
+		110DFBFC240F8BAB002E1C8B /* ZFDouYinCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFDouYinCell.m; sourceTree = "<group>"; };
 		11105AD72406004700521CB2 /* ZhuanTiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhuanTiViewController.h; sourceTree = "<group>"; };
 		11105AD82406004700521CB2 /* ZhuanTiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhuanTiViewController.m; sourceTree = "<group>"; };
 		11105ADA2406005600521CB2 /* AVViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVViewController.h; sourceTree = "<group>"; };
@@ -1328,6 +1334,10 @@
 				110DFBF3240F5007002E1C8B /* AVTuijianCell.m */,
 				110DFBF5240F5957002E1C8B /* AVCenterView.h */,
 				110DFBF6240F5957002E1C8B /* AVCenterView.m */,
+				8B9B8C0B240D6E42004B4704 /* DouYinControlView.h */,
+				8B9B8C0C240D6E42004B4704 /* DouYinControlView.m */,
+				110DFBFB240F8BAB002E1C8B /* ZFDouYinCell.h */,
+				110DFBFC240F8BAB002E1C8B /* ZFDouYinCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1612,8 +1622,8 @@
 				110DFBEE240F4F54002E1C8B /* View */,
 				8B9B8C05240D5211004B4704 /* AVPlayerController.h */,
 				8B9B8C06240D5211004B4704 /* AVPlayerController.m */,
-				8B9B8C0B240D6E42004B4704 /* DouYinControlView.h */,
-				8B9B8C0C240D6E42004B4704 /* DouYinControlView.m */,
+				110DFBF8240F85C6002E1C8B /* ShortVideoViewController.h */,
+				110DFBF9240F85C6002E1C8B /* ShortVideoViewController.m */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -1883,12 +1893,14 @@
 				09E72CF724055F8E0004B25C /* UIButton+WebCache.m in Sources */,
 				8BD545B3240BB4CC00C90A31 /* MJRefreshStateHeader.m in Sources */,
 				11105E5D24066BC900521CB2 /* EnlargeTouchSizeButton.m in Sources */,
+				110DFBFD240F8BAB002E1C8B /* ZFDouYinCell.m in Sources */,
 				11105E7824067BC700521CB2 /* CityApi.m in Sources */,
 				09E72C5F24055F770004B25C /* MASConstraintMaker.m in Sources */,
 				09E72D0524055F960004B25C /* SVIndefiniteAnimatedView.m in Sources */,
 				09E72C3C24055F6E0004B25C /* IQUIWindow+Hierarchy.m in Sources */,
 				09E72C8324055F7E0004B25C /* NSString+MJExtension.m in Sources */,
 				8BD545A6240BB4CC00C90A31 /* MJRefreshConst.m in Sources */,
+				110DFBFA240F85C6002E1C8B /* ShortVideoViewController.m in Sources */,
 				8BD545B9240BB4CC00C90A31 /* MJRefreshComponent.m in Sources */,
 				8BD545AC240BB4CC00C90A31 /* MJRefreshBackGifFooter.m in Sources */,
 				09239ABF2403FEE400A4F727 /* LogModel.m in Sources */,

@@ -23,6 +23,7 @@
 #import "HomeApi.h"
 #import "ListViewController.h"
 #import "AllCategoryViewController.h"
+#import "ShortVideoViewController.h"
 
 @interface HomeViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,SDCycleScrollViewDelegate>
 
@@ -235,10 +236,19 @@
         vc.navTitle = title;
         [self.navigationController pushViewController:vc animated:YES];
     } else {
-        HomeVideoList *videoList = _dataSource.video[indexPath.section - 1];
-        HotItem *item = videoList.lists[indexPath.row];
-        AVPlayerController *vc = [AVPlayerController controllerWith:item];
-        [self.navigationController pushViewController:vc animated:YES];
+        HomeVideoList *videoListItem = [_dataSource.video safeObjectAtIndex:indexPath.section - 1];
+        HotItem *item = [videoListItem.lists safeObjectAtIndex:indexPath.row];
+
+        if (videoListItem.type == VideoType_ShortVideo) {//短视频
+            ShortVideoViewController *vc = [ShortVideoViewController controllerWith:item];
+            [self.navigationController pushViewController:vc animated:YES];
+
+
+        }else{//av
+            AVPlayerController *vc = [AVPlayerController controllerWith:item];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+
     }
     
 }
