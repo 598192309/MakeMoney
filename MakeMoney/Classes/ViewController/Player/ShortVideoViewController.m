@@ -217,7 +217,8 @@
     cell.douYinCellSeeBtnClickBlock = ^(UIButton *sender) {
         //判断是否是会员
         if (!RI.infoInitItem.is_vip) {
-            [self.player setPauseByEvent:YES];
+            [weakSelf.player setPauseByEvent:YES];
+            [weakSelf.controlView setPlayBtnHidden:NO];
             HotItem *item = [weakSelf.dataSource safeObjectAtIndex:indexPath.row];
             AVPlayerController *vc = [AVPlayerController controllerWith:item];
             vc.isShortVideo = YES;

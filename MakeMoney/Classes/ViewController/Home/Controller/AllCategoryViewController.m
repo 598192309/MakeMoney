@@ -10,6 +10,8 @@
 #import "ZHuanTiCell.h"
 #import "HomeApi.h"
 #import "HomeItem.h"
+#import "ListViewController.h"
+#import "ZhuanTiItem.h"
 @interface AllCategoryViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
 @property (nonatomic,assign)NSInteger pageIndex;
@@ -119,7 +121,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    [LSVProgressHUD showInfoWithStatus:@"跳转短视频播放器"];
+    ListViewController *vc = [[ListViewController alloc] init];
+    ZhuanTiHomeItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
+    vc.navTitle = item.title;
+    vc.tag = IntTranslateStr(item.tag);
+    vc.type = IntTranslateStr(item.type);
+    vc.text = item.text.length > 0 ? item.text : @"51778";
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 

@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)resetControlView;
 
 - (void)showCoverViewWithUrl:(NSString *)coverUrl withImageMode:(UIViewContentMode)contentMode;
+
+- (void)setPlayBtnHidden:(BOOL)hidden;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -8,7 +8,8 @@
 
 #import "ListViewController.h"
 #import "HomeVideoCell.h"
-
+#import "ShortVideoViewController.h"
+#import "AVPlayerController.h"
 
 @interface ListViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property (strong, nonatomic) UICollectionView *customCollectionView;
@@ -175,7 +176,23 @@
 #pragma mark - UICollectionViewDelegate
 //方块被选中会调用
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"点击选择了第%ld组，第%ld个方块",indexPath.section,indexPath.row);
+    HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
+
+    if (self.type.integerValue == VideoType_ShortVideo) {//短视频
+        //判断是否还有观看次数
+//            if (RI.infoInitItem.rest_free_times == 0) {
+//                [self showMsg:lqStrings(@"今日观看次数已用完,明天再来吧,分享可获得无限观影哦") firstBtnTitle:lqStrings(@"分享") secBtnTitle:lqStrings(@"购买VIP") singleBtnTitle:@""];
+//                return;
+//            }
+
+        ShortVideoViewController *vc = [ShortVideoViewController controllerWith:item];
+        [self.navigationController pushViewController:vc animated:YES];
+
+
+    }else{//av
+        AVPlayerController *vc = [AVPlayerController controllerWith:item];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
 }
 //方块取消选中会调用

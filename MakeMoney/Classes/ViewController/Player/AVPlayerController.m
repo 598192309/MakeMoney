@@ -109,7 +109,7 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
         @strongify(self)
         NSLog(@"播放时长currentTime:%f,总时长duration:%f",currentTime,duration);
         //判断是否是会员
-        if (!RI.infoInitItem.is_vip) {//不是会员 只能看5分钟
+        if (!RI.infoInitItem.is_vip && !weakSelf.isShortVideo) {//不是会员 只能看5分钟
             if (currentTime > 5 * 60) {
                 [self.player.currentPlayerManager pause];
                 [self.controlView resetControlView];

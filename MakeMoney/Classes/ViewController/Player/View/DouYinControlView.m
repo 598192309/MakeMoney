@@ -103,6 +103,10 @@
         self.playBtn.hidden = YES;
     }
 }
+- (void)setPlayBtnHidden:(BOOL)hidden{
+    self.playBtn.hidden = hidden;
+
+}
 
 - (void)setPlayer:(ZFPlayerController *)player {
     _player = player;
