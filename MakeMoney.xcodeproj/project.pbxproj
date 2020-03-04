@@ -106,6 +106,7 @@
 		09E72D36240569920004B25C /* Network.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E72D34240569920004B25C /* Network.m */; };
 		09E72D3924056A5B0004B25C /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E72D3824056A5B0004B25C /* DeviceInfo.m */; };
 		09E72D3C24056ADC0004B25C /* RunInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E72D3B24056ADC0004B25C /* RunInfo.m */; };
+		110DFBED240F3F36002E1C8B /* VIPExchangeAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 110DFBEC240F3F36002E1C8B /* VIPExchangeAlertView.m */; };
 		11105AD92406004700521CB2 /* ZhuanTiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11105AD82406004700521CB2 /* ZhuanTiViewController.m */; };
 		11105ADC2406005600521CB2 /* AVViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11105ADB2406005600521CB2 /* AVViewController.m */; };
 		11105ADF2406006800521CB2 /* CityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11105ADE2406006800521CB2 /* CityViewController.m */; };
@@ -430,6 +431,8 @@
 		09E72D3824056A5B0004B25C /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo.m; sourceTree = "<group>"; };
 		09E72D3A24056ADC0004B25C /* RunInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunInfo.h; sourceTree = "<group>"; };
 		09E72D3B24056ADC0004B25C /* RunInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunInfo.m; sourceTree = "<group>"; };
+		110DFBEB240F3F36002E1C8B /* VIPExchangeAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VIPExchangeAlertView.h; sourceTree = "<group>"; };
+		110DFBEC240F3F36002E1C8B /* VIPExchangeAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VIPExchangeAlertView.m; sourceTree = "<group>"; };
 		11105AD72406004700521CB2 /* ZhuanTiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZhuanTiViewController.h; sourceTree = "<group>"; };
 		11105AD82406004700521CB2 /* ZhuanTiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhuanTiViewController.m; sourceTree = "<group>"; };
 		11105ADA2406005600521CB2 /* AVViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVViewController.h; sourceTree = "<group>"; };
@@ -1037,6 +1040,8 @@
 				8B9B8C18240EA3DC004B4704 /* IncomeDetailCell.m */,
 				8B9B8C1D240EADDB004B4704 /* MyShareDetailCell.h */,
 				8B9B8C1E240EADDB004B4704 /* MyShareDetailCell.m */,
+				110DFBEB240F3F36002E1C8B /* VIPExchangeAlertView.h */,
+				110DFBEC240F3F36002E1C8B /* VIPExchangeAlertView.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1767,6 +1772,7 @@
 				09E72C8524055F7E0004B25C /* MJFoundation.m in Sources */,
 				1111169F240E3D9100E9F781 /* WalletViewController.m in Sources */,
 				09E72C3D24055F6E0004B25C /* IQUITextFieldView+Additions.m in Sources */,
+				110DFBED240F3F36002E1C8B /* VIPExchangeAlertView.m in Sources */,
 				09E72C3A24055F6E0004B25C /* IQKeyboardManager.m in Sources */,
 				09E72D0424055F960004B25C /* SVProgressHUD.m in Sources */,
 				11105E6F24067B9C00521CB2 /* HomeApi.m in Sources */,
@@ -2108,7 +2114,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9L23HH5C26;
+				DEVELOPMENT_TEAM = ATBJJ8434Q;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2126,7 +2132,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/MakeMoney/Classes/Tools/Frameworks/shujumohePB",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.juphoon.JRDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lqlq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2137,7 +2143,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9L23HH5C26;
+				DEVELOPMENT_TEAM = ATBJJ8434Q;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2155,7 +2161,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/MakeMoney/Classes/Tools/Frameworks/shujumohePB",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.juphoon.JRDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lqlq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

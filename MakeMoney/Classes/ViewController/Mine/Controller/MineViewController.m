@@ -16,6 +16,7 @@
 #import "RechargeCenterViewController.h"
 #import "WalletViewController.h"
 #import "TuiGuangViewController.h"
+#import "VIPExchangeAlertView.h"
 
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (strong, nonatomic) UITableView  *customTableView;
@@ -23,6 +24,8 @@
 @property (nonatomic,strong)UIImageView *backImageV;
 @property(nonatomic,strong)UIAlertController * alertController;
 @property (nonatomic,strong)CustomAlertView *infoAlert;
+@property(nonatomic,strong)VIPExchangeAlertView * vipExchangeAlertView;
+
 @end
 
 @implementation MineViewController
@@ -126,6 +129,12 @@
         }else if ([[sender titleForState:UIControlStateNormal] isEqualToString:lqStrings(@"推广赚钱")]) {
             TuiGuangViewController *vc = [[TuiGuangViewController alloc] init];
             [weakSelf.navigationController pushViewController:vc animated:YES];
+        }else if ([[sender titleForState:UIControlStateNormal] isEqualToString:lqStrings(@"VIP兑换")]) {
+            [[UIApplication sharedApplication].keyWindow addSubview:weakSelf.vipExchangeAlertView];
+            
+            [self.vipExchangeAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
+            }];
         }
     };
 }
@@ -136,6 +145,23 @@
     __weak __typeof(self) weakSelf = self;
     
     [weakSelf.customTableView endHeaderRefreshing];
+}
+
+//vip兑换
+- (void)vipExchangeWithNumber:(NSString *)number sender:(UIButton *)sender{
+    [LSVProgressHUD show];
+    __weak __typeof(self) weakSelf = self;
+    sender.userInteractionEnabled = NO;
+    [MineApi buyVipWithCard_pwd:number sex_id:RI.infoInitItem.sex_id invite_code:RI.infoInitItem.invite_code Success:^(NSInteger status, NSString * _Nonnull msg) {
+        [LSVProgressHUD showInfoWithStatus:msg];
+        sender.userInteractionEnabled = YES;
+        //刷新数据 是否是VIP了
+
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+        sender.userInteractionEnabled = YES;
+
+    }];
 }
 
 #pragma mark -  UITableViewDataSource
@@ -415,5 +441,24 @@
     
     return _infoAlert;
     
+}
+
+- (VIPExchangeAlertView *)vipExchangeAlertView{
+    if (!_vipExchangeAlertView) {
+        _vipExchangeAlertView = [VIPExchangeAlertView new];
+        __weak __typeof(self) weakSelf = self;
+        //vip兑换
+        _vipExchangeAlertView.vipExchangeAlertViewkConfirmBtnClickBlock = ^(UIButton * _Nonnull sender, UITextField * _Nonnull tf) {
+            [weakSelf.vipExchangeAlertView removeFromSuperview];
+            weakSelf.vipExchangeAlertView = nil;
+            [weakSelf vipExchangeWithNumber:tf.text sender:sender];
+        };
+        
+        _vipExchangeAlertView.vipExchangeAlertViewkCoverViewClickBlock = ^{
+            [weakSelf.vipExchangeAlertView removeFromSuperview];
+            weakSelf.vipExchangeAlertView = nil;
+        };
+    }
+    return _vipExchangeAlertView;
 }
 @end

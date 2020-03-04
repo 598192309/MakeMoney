@@ -101,7 +101,9 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
     CGFloat y = CGRectGetMaxY([UIApplication sharedApplication].statusBarFrame);
     CGFloat w = CGRectGetWidth(self.view.frame);
     CGFloat h = w*9/16;
-    self.containerView.frame = CGRectMake(x, y, w, h);
+//    self.containerView.frame = CGRectMake(x, y, w, h);
+    self.containerView.frame = CGRectMake(x, 0, w, h);
+
     
     w = 44;
     h = w;
@@ -142,7 +144,7 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait;
 }
-
+#pragma mark - lazy
 - (ZFPlayerControlView *)controlView {
     if (!_controlView) {
         _controlView = [ZFPlayerControlView new];
