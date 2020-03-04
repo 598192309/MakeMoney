@@ -120,7 +120,7 @@
 }
 //设置每个组有多少个方块
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    if (section == 0) {
+    if (section == 0 && _dataSource != nil) {
         return 3;
     }
     HomeVideoList *videoList = _dataSource.video[section - 1];
@@ -192,6 +192,7 @@
 //设置各个方块的大小尺寸
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
+
         return CGSizeMake((LQScreemW - 15*2 - 25) / 3, Adaptor_Value(80));
 
     }

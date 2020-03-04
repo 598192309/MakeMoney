@@ -107,14 +107,21 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
     
     self.player.playerPlayTimeChanged = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, NSTimeInterval currentTime, NSTimeInterval duration) {
         @strongify(self)
-//        NSLog(@"播放时长currentTime:%f,总时长duration:%f",currentTime,duration);
+        NSLog(@"播放时长currentTime:%f,总时长duration:%f",currentTime,duration);
         //判断是否是会员
         if (!RI.infoInitItem.is_vip) {//不是会员 只能看5分钟
             if (currentTime > 5 * 60) {
-                self.player.pauseByEvent = YES;
-            }else{
-                self.player.pauseByEvent = NO;
+                [self.player.currentPlayerManager pause];
+                [self.controlView resetControlView];
+                [self.player seekToTime:0 completionHandler:^(BOOL finished) {
+
+                    [self.player.currentPlayerManager pause];
+
+                }];
             }
+//            else{
+//                self.player.pauseByEvent = NO;
+//            }
         }
     };
     
