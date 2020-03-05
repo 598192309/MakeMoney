@@ -11,6 +11,8 @@
 #import "RechargeCenterCustomView.h"
 #import "MineApi.h"
 #import "MineItem.h"
+#import "PopPayWayViewController.h"
+
 @interface RechargeCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
 @property (nonatomic,assign)NSInteger pageIndex;
@@ -112,7 +114,29 @@
 
     
 }
+//获取支付方式
+- (void)requestPayWays:(UIButton *)sender{
+    [LSVProgressHUD show];
+    sender.userInteractionEnabled = NO;
+    __weak __typeof(self) weakSelf = self;
+    [MineApi requestPayWaysSuccess:^(NSInteger status, NSString * _Nonnull msg, NSArray * _Nonnull payWayItemArr) {
+        sender.userInteractionEnabled = YES;
+        [LSVProgressHUD dismiss];
+        PopPayWayViewController *vc = [[PopPayWayViewController alloc] init];
+        vc.dataArr = payWayItemArr;
+        [weakSelf yc_bottomPresentController:vc presentedHeight:Adaptor_Value(50) * (payWayItemArr.count + 1) completeHandle:^(BOOL presented) {
+            if (presented) {
+                NSLog(@"弹出了");
+            }else{
+                NSLog(@"消失了");
+            }
+        }];
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+        sender.userInteractionEnabled = YES;
 
+    }];
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -128,9 +152,11 @@
     RechargeCenterCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([RechargeCenterCell class]) forIndexPath:indexPath];
     PayCenterInfotem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
     [cell refreshUIWithItem:item];
-    
+    __weak __typeof(self) weakSelf = self;
     cell.rechargeCenterBuyBtnClickBlock = ^(UIButton * _Nonnull sender) {
-        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+//        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+        //支付方式弹框
+        [weakSelf requestPayWays:sender];
     };
     return cell;
 

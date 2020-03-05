@@ -9,7 +9,7 @@
 #import "BaseApi.h"
 
 NS_ASSUME_NONNULL_BEGIN
-@class UpdateItem,InitItem,ExtendDetailItem;
+@class UpdateItem,InitItem,ExtendDetailItem,PayDetailItem;
 @interface MineApi : BaseApi
 /**版本升级 */
 + (NetworkTask *)updateSuccess:(void(^)(UpdateItem *updateItem,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
@@ -86,6 +86,16 @@ NS_ASSUME_NONNULL_BEGIN
 + (NetworkTask *)requestUserInfoSuccess:(void(^)(NSInteger status,NSString *msg,InitItem *initItem))successBlock error:(ErrorBlock)errorBlock;
 
 
+/*******************请求支付
+ channel_id      渠道号
+ goods_id        商品id     支付列表返回
+ sex_id          用户ID
+ pay_type       支付类型
+ 
+ type 1     跳转到webview加载 data
+ Type  3或4    跳转到新的扫码支付界面
+ *********************/
++ (NetworkTask *)goPayWithInviteChannelId:(NSString *)channel_id goods_id:(NSString *)goods_id sex_id:(NSString *)sex_id pay_type:(NSString *)pay_type  Success:(void(^)(NSInteger status,NSString *msg,PayDetailItem *payDetailItem))successBlock error:(ErrorBlock)errorBlock;
 
 @end
 

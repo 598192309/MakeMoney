@@ -269,4 +269,30 @@
         }
     }];
 }
+
+/*******************请求支付
+ channel_id      渠道号
+ goods_id        商品id     支付列表返回
+ sex_id          用户ID
+ pay_type       支付类型
+ 
+ type 1     跳转到webview加载 data
+ Type  3或4    跳转到新的扫码支付界面
+ *********************/
++ (NetworkTask *)goPayWithInviteChannelId:(NSString *)channel_id goods_id:(NSString *)goods_id sex_id:(NSString *)sex_id pay_type:(NSString *)pay_type  Success:(void(^)(NSInteger status,NSString *msg,PayDetailItem *payDetailItem))successBlock error:(ErrorBlock)errorBlock{
+    
+    return [NET POST:@"/api/jz_getpay" parameters:@{@"channel_id":SAFE_NIL_STRING(channel_id),@"goods_id":SAFE_NIL_STRING(goods_id),@"sex_id":SAFE_NIL_STRING(sex_id),@"pay_type":SAFE_NIL_STRING(pay_type)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+        NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+        NSString *msg = [resultObject safeObjectForKey:@"msg"];
+        PayDetailItem *payDetailItem = [PayDetailItem mj_objectWithKeyValues:[resultObject safeObjectForKey:@"data"]];
+
+        if (successBlock) {
+            successBlock(status,msg,payDetailItem);
+        }
+    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+        if (errorBlock) {
+            errorBlock(error,resultObject);
+        }
+    }];
+}
 @end

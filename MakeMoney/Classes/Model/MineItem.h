@@ -103,4 +103,23 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
+/********************请求支付返回的数据********************/
+@interface PayDetailItem : NSObject
+
+@property (nonatomic,strong)NSString *channel_id;
+@property (nonatomic,strong)NSString *create_at;
+@property (nonatomic,strong)NSString *data;
+@property (nonatomic,strong)NSString *goods_id;
+@property (nonatomic,strong)NSString *goods_name;
+@property (nonatomic,strong)NSString *goods_price;
+@property (nonatomic,strong)NSString *number;
+@property (nonatomic,strong)NSString *price;
+@property (nonatomic,strong)NSString *quantity;
+@property (nonatomic,strong)NSString *secret;
+@property (nonatomic,strong)NSString *timestamp;
+@property (nonatomic,strong)NSString *total_price;
+@property (nonatomic,strong)NSString *trade_no;
+
+@end
+
 NS_ASSUME_NONNULL_END

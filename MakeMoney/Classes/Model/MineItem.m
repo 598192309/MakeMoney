@@ -61,3 +61,8 @@
 }
 
 @end
+
+@implementation PayDetailItem
+
+
+@end

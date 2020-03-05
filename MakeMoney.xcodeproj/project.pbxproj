@@ -168,6 +168,11 @@
 		1118B7B2240C996E0098A1D4 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118B7B1240C996E0098A1D4 /* ListViewController.m */; };
 		1120F42524079F9D00550055 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1120F42224079F9D00550055 /* GTMBase64.m */; };
 		1135C9DA2408BA7800478696 /* CityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1135C9D92408BA7800478696 /* CityCell.m */; };
+		1139807D2410A08400663E26 /* YCPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113980762410A08400663E26 /* YCPresentationController.m */; };
+		1139807E2410A08400663E26 /* YCPopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1139807B2410A08400663E26 /* YCPopoverAnimator.m */; };
+		1139807F2410A08400663E26 /* UIViewController+YCPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 1139807C2410A08400663E26 /* UIViewController+YCPopover.m */; };
+		113980822410A0BB00663E26 /* PopPayWayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113980812410A0BB00663E26 /* PopPayWayViewController.m */; };
+		113980852410A79500663E26 /* PopPayWayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 113980842410A79500663E26 /* PopPayWayCell.m */; };
 		11E860B4240CF27D00719378 /* AllCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B3240CF27D00719378 /* AllCategoryViewController.m */; };
 		11E860B7240D06D100719378 /* NoticeAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B6240D06D100719378 /* NoticeAlertView.m */; };
 		11E860BA240D142700719378 /* SYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B8240D142600719378 /* SYPageControl.m */; };
@@ -564,6 +569,17 @@
 		1120F42224079F9D00550055 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		1135C9D82408BA7800478696 /* CityCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityCell.h; sourceTree = "<group>"; };
 		1135C9D92408BA7800478696 /* CityCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityCell.m; sourceTree = "<group>"; };
+		113980762410A08400663E26 /* YCPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCPresentationController.m; sourceTree = "<group>"; };
+		113980772410A08400663E26 /* YCPopoverAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCPopoverAnimator.h; sourceTree = "<group>"; };
+		113980782410A08400663E26 /* UIViewController+YCPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+YCPopover.h"; sourceTree = "<group>"; };
+		113980792410A08400663E26 /* YCPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCPresentationController.h; sourceTree = "<group>"; };
+		1139807A2410A08400663E26 /* YCPopoverMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCPopoverMacro.h; sourceTree = "<group>"; };
+		1139807B2410A08400663E26 /* YCPopoverAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCPopoverAnimator.m; sourceTree = "<group>"; };
+		1139807C2410A08400663E26 /* UIViewController+YCPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+YCPopover.m"; sourceTree = "<group>"; };
+		113980802410A0BB00663E26 /* PopPayWayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopPayWayViewController.h; sourceTree = "<group>"; };
+		113980812410A0BB00663E26 /* PopPayWayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopPayWayViewController.m; sourceTree = "<group>"; };
+		113980832410A79500663E26 /* PopPayWayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopPayWayCell.h; sourceTree = "<group>"; };
+		113980842410A79500663E26 /* PopPayWayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopPayWayCell.m; sourceTree = "<group>"; };
 		11E860B2240CF27D00719378 /* AllCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllCategoryViewController.h; sourceTree = "<group>"; };
 		11E860B3240CF27D00719378 /* AllCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllCategoryViewController.m; sourceTree = "<group>"; };
 		11E860B5240D06D100719378 /* NoticeAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoticeAlertView.h; sourceTree = "<group>"; };
@@ -970,6 +986,8 @@
 				111116A4240E4C2A00E9F781 /* TuiGuangViewController.m */,
 				8B9B8C14240EA3AE004B4704 /* IncomeDetailViewController.h */,
 				8B9B8C15240EA3AE004B4704 /* IncomeDetailViewController.m */,
+				113980802410A0BB00663E26 /* PopPayWayViewController.h */,
+				113980812410A0BB00663E26 /* PopPayWayViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1062,6 +1080,8 @@
 				8B9B8C1E240EADDB004B4704 /* MyShareDetailCell.m */,
 				110DFBEB240F3F36002E1C8B /* VIPExchangeAlertView.h */,
 				110DFBEC240F3F36002E1C8B /* VIPExchangeAlertView.m */,
+				113980832410A79500663E26 /* PopPayWayCell.h */,
+				113980842410A79500663E26 /* PopPayWayCell.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1314,6 +1334,7 @@
 			children = (
 				11105E632406720400521CB2 /* CustomVIew */,
 				11105E1724066BC800521CB2 /* Tool */,
+				113980752410A08400663E26 /* YCPopover */,
 				09E72D2C2405641C0004B25C /* UIScrollView+LQRefresh.h */,
 				09E72D2B2405641C0004B25C /* UIScrollView+LQRefresh.m */,
 				09E72D2E240565700004B25C /* LSVProgressHUD.h */,
@@ -1509,6 +1530,20 @@
 				1118B7B1240C996E0098A1D4 /* ListViewController.m */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		113980752410A08400663E26 /* YCPopover */ = {
+			isa = PBXGroup;
+			children = (
+				113980762410A08400663E26 /* YCPresentationController.m */,
+				113980772410A08400663E26 /* YCPopoverAnimator.h */,
+				113980782410A08400663E26 /* UIViewController+YCPopover.h */,
+				113980792410A08400663E26 /* YCPresentationController.h */,
+				1139807A2410A08400663E26 /* YCPopoverMacro.h */,
+				1139807B2410A08400663E26 /* YCPopoverAnimator.m */,
+				1139807C2410A08400663E26 /* UIViewController+YCPopover.m */,
+			);
+			path = YCPopover;
 			sourceTree = "<group>";
 		};
 		8B9B8BAB240D4AED004B4704 /* ZFPlayer */ = {
@@ -1899,6 +1934,7 @@
 				09E72CF724055F8E0004B25C /* UIButton+WebCache.m in Sources */,
 				8BD545B3240BB4CC00C90A31 /* MJRefreshStateHeader.m in Sources */,
 				11105E5D24066BC900521CB2 /* EnlargeTouchSizeButton.m in Sources */,
+				113980852410A79500663E26 /* PopPayWayCell.m in Sources */,
 				110DFBFD240F8BAB002E1C8B /* ZFDouYinCell.m in Sources */,
 				11105E7824067BC700521CB2 /* CityApi.m in Sources */,
 				09E72C5F24055F770004B25C /* MASConstraintMaker.m in Sources */,
@@ -1920,6 +1956,7 @@
 				09239AD22403FEE400A4F727 /* LaunchingViewController.m in Sources */,
 				8BD545AF240BB4CC00C90A31 /* MJRefreshAutoStateFooter.m in Sources */,
 				09E72C8224055F7E0004B25C /* NSObject+MJClass.m in Sources */,
+				1139807D2410A08400663E26 /* YCPresentationController.m in Sources */,
 				09239AD02403FEE400A4F727 /* LorginViewController.m in Sources */,
 				8B9B8C1F240EADDB004B4704 /* MyShareDetailCell.m in Sources */,
 				09E72D35240569920004B25C /* Error+KF.m in Sources */,
@@ -1959,6 +1996,7 @@
 				11105E5624066BC900521CB2 /* UIImage+LqExtension.m in Sources */,
 				092399C82403FE0F00A4F727 /* AppDelegate.m in Sources */,
 				11105E5B24066BC900521CB2 /* LqNoPasteTextField.m in Sources */,
+				113980822410A0BB00663E26 /* PopPayWayViewController.m in Sources */,
 				11105E5E24066BC900521CB2 /* SystemAlertViewController.m in Sources */,
 				09E72C8024055F7E0004B25C /* MJExtensionConst.m in Sources */,
 				11105E5924066BC900521CB2 /* UIButton+LqExtension.m in Sources */,
@@ -1972,8 +2010,10 @@
 				11105E8724067C3600521CB2 /* CityItem.m in Sources */,
 				8B9B8C13240E9960004B4704 /* TixianDetailCell.m in Sources */,
 				09E72C5C24055F770004B25C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				1139807F2410A08400663E26 /* UIViewController+YCPopover.m in Sources */,
 				09239AC72403FEE400A4F727 /* BaseApi.m in Sources */,
 				111116A2240E3DD200E9F781 /* WalletCustomView.m in Sources */,
+				1139807E2410A08400663E26 /* YCPopoverAnimator.m in Sources */,
 				096C7FC1240BC16800914E20 /* MineCustomHeaderView.m in Sources */,
 				1111169C240E084D00E9F781 /* RechargeCenterCustomView.m in Sources */,
 				11111690240DF5C400E9F781 /* MyShareViewController.m in Sources */,
