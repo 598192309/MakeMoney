@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)refreshUIWithTitle:(NSString *)title firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singleBtnTitle:(NSString *)singleBtnTitle;
 
 - (void)refreshUIWithTitle:(NSString *)title titlefont:(UIFont *)titlefont titleColor:(UIColor *)titleColor firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singleBtnTitle:(NSString *)singleBtnTitle;
+
+- (void)refreshUIWithTitle:(NSString *)title titlefont:(UIFont *)titlefont titleColor:(UIColor *)titleColor subtitle:(NSString *)subTitle subTitleFont:(UIFont *)subTitleFont subtitleColor:(UIColor *)subtitleColor firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singleBtnTitle:(NSString *)singleBtnTitle;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -75,7 +75,7 @@
            make.edges.mas_equalTo(contentV);
        }];
         [_payBtn setIconInLeftWithSpacing:Adaptor_Value(5)];
-        
+        _payBtn.userInteractionEnabled = NO;
     }
     return _cellBackgroundView;
 }

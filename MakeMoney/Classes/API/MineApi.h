@@ -97,6 +97,9 @@ NS_ASSUME_NONNULL_BEGIN
  *********************/
 + (NetworkTask *)goPayWithInviteChannelId:(NSString *)channel_id goods_id:(NSString *)goods_id sex_id:(NSString *)sex_id pay_type:(NSString *)pay_type  Success:(void(^)(NSInteger status,NSString *msg,PayDetailItem *payDetailItem))successBlock error:(ErrorBlock)errorBlock;
 
+
+
+
 @end
 
 NS_ASSUME_NONNULL_END

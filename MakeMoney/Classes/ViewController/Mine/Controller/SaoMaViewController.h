@@ -1,5 +1,5 @@
 //
-//  PopPayWayViewController.h
+//  SaoMaViewController.h
 //  MakeMoney
 //
 //  Created by rabi on 2020/3/5.
@@ -10,9 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PopPayWayViewController : BaseViewController
-@property (nonatomic,strong)NSArray *dataArr;
-//@property (nonatomic,strong)NSString *goodsId;
+@interface SaoMaViewController : BaseViewController
+@property (nonatomic,strong)NSString *navTitle;
 @end
 
 NS_ASSUME_NONNULL_END

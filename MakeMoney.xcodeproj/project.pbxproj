@@ -173,6 +173,10 @@
 		1139807F2410A08400663E26 /* UIViewController+YCPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 1139807C2410A08400663E26 /* UIViewController+YCPopover.m */; };
 		113980822410A0BB00663E26 /* PopPayWayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113980812410A0BB00663E26 /* PopPayWayViewController.m */; };
 		113980852410A79500663E26 /* PopPayWayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 113980842410A79500663E26 /* PopPayWayCell.m */; };
+		113980882410DB3C00663E26 /* SaoMaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113980872410DB3C00663E26 /* SaoMaViewController.m */; };
+		1139808B2410DC6F00663E26 /* SaoMaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1139808A2410DC6F00663E26 /* SaoMaView.m */; };
+		1139808E2411026B00663E26 /* RechargeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1139808D2411026B00663E26 /* RechargeDetailViewController.m */; };
+		11398091241102B000663E26 /* RechargeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11398090241102B000663E26 /* RechargeDetailCell.m */; };
 		11E860B4240CF27D00719378 /* AllCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B3240CF27D00719378 /* AllCategoryViewController.m */; };
 		11E860B7240D06D100719378 /* NoticeAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B6240D06D100719378 /* NoticeAlertView.m */; };
 		11E860BA240D142700719378 /* SYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B8240D142600719378 /* SYPageControl.m */; };
@@ -580,6 +584,14 @@
 		113980812410A0BB00663E26 /* PopPayWayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopPayWayViewController.m; sourceTree = "<group>"; };
 		113980832410A79500663E26 /* PopPayWayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopPayWayCell.h; sourceTree = "<group>"; };
 		113980842410A79500663E26 /* PopPayWayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopPayWayCell.m; sourceTree = "<group>"; };
+		113980862410DB3C00663E26 /* SaoMaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaoMaViewController.h; sourceTree = "<group>"; };
+		113980872410DB3C00663E26 /* SaoMaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaoMaViewController.m; sourceTree = "<group>"; };
+		113980892410DC6F00663E26 /* SaoMaView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaoMaView.h; sourceTree = "<group>"; };
+		1139808A2410DC6F00663E26 /* SaoMaView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaoMaView.m; sourceTree = "<group>"; };
+		1139808C2411026B00663E26 /* RechargeDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RechargeDetailViewController.h; sourceTree = "<group>"; };
+		1139808D2411026B00663E26 /* RechargeDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RechargeDetailViewController.m; sourceTree = "<group>"; };
+		1139808F241102B000663E26 /* RechargeDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RechargeDetailCell.h; sourceTree = "<group>"; };
+		11398090241102B000663E26 /* RechargeDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RechargeDetailCell.m; sourceTree = "<group>"; };
 		11E860B2240CF27D00719378 /* AllCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllCategoryViewController.h; sourceTree = "<group>"; };
 		11E860B3240CF27D00719378 /* AllCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllCategoryViewController.m; sourceTree = "<group>"; };
 		11E860B5240D06D100719378 /* NoticeAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoticeAlertView.h; sourceTree = "<group>"; };
@@ -978,6 +990,8 @@
 				8B9B8C1B240EADA0004B4704 /* MyShareDetailViewController.m */,
 				11111694240DFCEA00E9F781 /* RechargeCenterViewController.h */,
 				11111695240DFCEA00E9F781 /* RechargeCenterViewController.m */,
+				1139808C2411026B00663E26 /* RechargeDetailViewController.h */,
+				1139808D2411026B00663E26 /* RechargeDetailViewController.m */,
 				1111169D240E3D9100E9F781 /* WalletViewController.h */,
 				1111169E240E3D9100E9F781 /* WalletViewController.m */,
 				8B9B8C0E240E993F004B4704 /* TixianDetailViewController.h */,
@@ -988,6 +1002,8 @@
 				8B9B8C15240EA3AE004B4704 /* IncomeDetailViewController.m */,
 				113980802410A0BB00663E26 /* PopPayWayViewController.h */,
 				113980812410A0BB00663E26 /* PopPayWayViewController.m */,
+				113980862410DB3C00663E26 /* SaoMaViewController.h */,
+				113980872410DB3C00663E26 /* SaoMaViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1082,6 +1098,10 @@
 				110DFBEC240F3F36002E1C8B /* VIPExchangeAlertView.m */,
 				113980832410A79500663E26 /* PopPayWayCell.h */,
 				113980842410A79500663E26 /* PopPayWayCell.m */,
+				113980892410DC6F00663E26 /* SaoMaView.h */,
+				1139808A2410DC6F00663E26 /* SaoMaView.m */,
+				1139808F241102B000663E26 /* RechargeDetailCell.h */,
+				11398090241102B000663E26 /* RechargeDetailCell.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1934,6 +1954,7 @@
 				09E72CF724055F8E0004B25C /* UIButton+WebCache.m in Sources */,
 				8BD545B3240BB4CC00C90A31 /* MJRefreshStateHeader.m in Sources */,
 				11105E5D24066BC900521CB2 /* EnlargeTouchSizeButton.m in Sources */,
+				1139808B2410DC6F00663E26 /* SaoMaView.m in Sources */,
 				113980852410A79500663E26 /* PopPayWayCell.m in Sources */,
 				110DFBFD240F8BAB002E1C8B /* ZFDouYinCell.m in Sources */,
 				11105E7824067BC700521CB2 /* CityApi.m in Sources */,
@@ -2006,6 +2027,7 @@
 				8BD545BD240BE71700C90A31 /* HomeVideoCell.m in Sources */,
 				11105E5C24066BC900521CB2 /* LqWGS84TOGCJ02.m in Sources */,
 				11105E5824066BC900521CB2 /* UILabel+LqExtension.m in Sources */,
+				113980882410DB3C00663E26 /* SaoMaViewController.m in Sources */,
 				09E72D17240560210004B25C /* BaseWebViewController.m in Sources */,
 				11105E8724067C3600521CB2 /* CityItem.m in Sources */,
 				8B9B8C13240E9960004B4704 /* TixianDetailCell.m in Sources */,
@@ -2015,6 +2037,7 @@
 				111116A2240E3DD200E9F781 /* WalletCustomView.m in Sources */,
 				1139807E2410A08400663E26 /* YCPopoverAnimator.m in Sources */,
 				096C7FC1240BC16800914E20 /* MineCustomHeaderView.m in Sources */,
+				1139808E2411026B00663E26 /* RechargeDetailViewController.m in Sources */,
 				1111169C240E084D00E9F781 /* RechargeCenterCustomView.m in Sources */,
 				11111690240DF5C400E9F781 /* MyShareViewController.m in Sources */,
 				09E72CED24055F8E0004B25C /* SDWebImageDownloader.m in Sources */,
@@ -2042,6 +2065,7 @@
 				11105E8D24067EDB00521CB2 /* InitApi.m in Sources */,
 				8B9B8C07240D5211004B4704 /* AVPlayerController.m in Sources */,
 				8B9B8BF4240D4AED004B4704 /* ZFIJKPlayerManager.m in Sources */,
+				11398091241102B000663E26 /* RechargeDetailCell.m in Sources */,
 				092399D92403FE1400A4F727 /* main.m in Sources */,
 				11111699240E00A400E9F781 /* RechargeCenterCell.m in Sources */,
 				09E72C3624055F6E0004B25C /* IQBarButtonItem.m in Sources */,

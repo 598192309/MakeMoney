@@ -262,7 +262,7 @@ alpha:(a)]
 
 
 
-#define KNotification_ReLorigin @"KNotification_ReLorigin"//多人登录 在其他设备登录 需要重新登录
+#define KNotification_PayClick @"KNotification_PayClick"//支付方式点击
 //
 #define KNotification_ReLoriginSuccess @"KNotification_ReLoriginSuccess"//多人登录 在其他设备登录 需要重新登录  重新登录成功
 //

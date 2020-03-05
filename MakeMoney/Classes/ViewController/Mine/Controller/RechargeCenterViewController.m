@@ -12,6 +12,10 @@
 #import "MineApi.h"
 #import "MineItem.h"
 #import "PopPayWayViewController.h"
+#import "BaseWebViewController.h"
+#import "SaoMaViewController.h"
+#import "RechargeDetailViewController.h"
+
 
 @interface RechargeCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
@@ -25,10 +29,16 @@
 @property (nonatomic,strong)UILabel *bottomTipLable1;
 @property (nonatomic,strong)UILabel *bottomTipLable2;
 @property (nonatomic,strong)UILabel *bottomTipLable3;
+@property (nonatomic,strong)CommonAlertView *commonAlertView;
 
 @end
 
 @implementation RechargeCenterViewController
+#pragma mark - 重写
+- (void)navigationRightBtnClick:(UIButton *)button{
+    RechargeDetailViewController *vc = [[RechargeDetailViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 #pragma mark - life
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,9 +53,11 @@
        self.automaticallyAdjustsScrollViewInsets = NO;
     }
     [self requestData];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notify:) name:KNotification_PayClick object:nil];
 }
 - (void)dealloc{
     LQLog(@"dealloc -------%@",NSStringFromClass([self class]));
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 #pragma mark - ui
 - (void)configUI{
@@ -95,6 +107,21 @@
     self.navigationTextLabel.text = lqStrings(@"充值中心");
     [self.navigationRightBtn setTitle:lqStrings(@"充值记录") forState:UIControlStateNormal];
 }
+
+- (void)showMsg:(NSString *)msg msgFont:(UIFont *)msgFont msgColor:(UIColor *)msgColor subTitle:(NSString *)subTitle subFont:(UIFont *)subFont subColor:(UIColor *)subColor firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singleBtnTitle:(NSString *)singleBtnTitle{
+    [self.commonAlertView refreshUIWithTitle:msg titlefont:msgFont titleColor:msgColor subtitle:subTitle subTitleFont:subFont subtitleColor:subColor firstBtnTitle:firstBtnTitle secBtnTitle:secBtnTitle singleBtnTitle:singleBtnTitle];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.commonAlertView];
+    [self.commonAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
+    }];
+}
+#pragma mark - notify
+//点击了支付方式
+- (void)notify:(NSNotification *)noti{
+    NSDictionary *dict = noti.userInfo;
+    PayWayItem *item = [dict safeObjectForKey:@"info"];
+    [self goPayWithInviteChannelId:item.channel_id goods_id:item.goods_id sex_id:RI.infoInitItem.sex_id pay_type:item.type payName:item.name];
+}
 #pragma mark - act
 - (void)rechargeCenterCustomViewAct{
     __weak __typeof(self) weakSelf = self;
@@ -138,6 +165,33 @@
     }];
 }
 
+//支付 pay_type 1     跳转到webview加载 data pay_type： 3或4    跳转到新的扫码支付界面
+
+- (void)goPayWithInviteChannelId:(NSString *)channel_id goods_id:(NSString *)goods_id sex_id:(NSString *)sex_id pay_type:(NSString *)pay_type payName:(NSString *)payName{
+    
+    [self showMsg:lqStrings(@"准备支付，情稍后...") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"支付成功后，请返回当前界面，或手动输入订单号查询支付状态") subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@""];
+    [LSVProgressHUD show];
+    __weak __typeof(self) weakSelf = self;
+    [MineApi goPayWithInviteChannelId:channel_id goods_id:goods_id sex_id:sex_id pay_type:pay_type Success:^(NSInteger status, NSString * _Nonnull msg, PayDetailItem* _Nonnull payDetailItem) {
+        [weakSelf.commonAlertView removeFromSuperview];
+        weakSelf.commonAlertView = nil;
+        
+        if ([pay_type isEqualToString:@"1"]) {//跳转到webview加载
+            BaseWebViewController *vc = [[BaseWebViewController alloc] init];
+            vc.htmlStr = payDetailItem.data;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }else{//3或4    跳转到新的扫码支付界面
+            SaoMaViewController *vc = [[SaoMaViewController alloc] init];
+
+            vc.navTitle =[NSString stringWithFormat:lqLocalized(@"%@支付", nil),payName];
+            
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+
+        }
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+    }];
+}
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView
@@ -288,5 +342,16 @@
         _bottomTipLable3.attributedText = attr3;
     }
     return _bottomView;
+}
+
+- (CommonAlertView *)commonAlertView{
+    if (!_commonAlertView) {
+        _commonAlertView = [CommonAlertView new];
+        __weak __typeof(self) weakSelf = self;
+        _commonAlertView.commonAlertViewBlock = ^(NSInteger index, NSString * _Nonnull str) {
+
+        };
+    }
+    return _commonAlertView;
 }
 @end

@@ -85,6 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *ID;
 @property (nonatomic,strong)NSString *name;
 @property (nonatomic,strong)NSString *type;
+@property (nonatomic,strong)NSString *goods_id;
 @end
 
 /********************提现明细*********************/

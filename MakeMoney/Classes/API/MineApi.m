@@ -27,7 +27,7 @@
 
 /********************充值记录 *********************/
 + (NetworkTask *)requestPayRecordsSuccess:(void(^)(NSArray *payRecordItemArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
-    return [NET POST:@"/api/version" parameters:nil criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+    return [NET POST:@"/api/pay_detail/finde" parameters:nil criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
         NSArray *payRecordItemArr = [PayRecordItem mj_objectArrayWithKeyValuesArray:[resultObject safeObjectForKey:@"data"]];
         NSString *msg = [resultObject safeObjectForKey:@"msg"];
         if (successBlock) {

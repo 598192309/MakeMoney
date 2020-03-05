@@ -91,6 +91,26 @@
     [self.singleBtn setTitle:singleBtnTitle forState:UIControlStateNormal];
     self.singleBtn.hidden = singleBtnTitle.length == 0;
 }
+
+- (void)refreshUIWithTitle:(NSString *)title titlefont:(UIFont *)titlefont titleColor:(UIColor *)titleColor subtitle:(NSString *)subTitle subTitleFont:(UIFont *)subTitleFont subtitleColor:(UIColor *)subtitleColor firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singleBtnTitle:(NSString *)singleBtnTitle{
+    self.titlelabel.text = title;
+    self.titlelabel.font = titlefont;
+    self.titlelabel.textColor = titleColor;
+    self.subLable.text = title;
+    self.subLable.font = titlefont;
+    self.subLable.textColor = titleColor;
+    [self.firstBtn setTitle:firstBtnTitle forState:UIControlStateNormal];
+    [self.secBtn setTitle:secBtnTitle forState:UIControlStateNormal];
+    [self.singleBtn setTitle:singleBtnTitle forState:UIControlStateNormal];
+    self.singleBtn.hidden = singleBtnTitle.length == 0;
+    
+    if (firstBtnTitle.length == 0 && secBtnTitle.length == 0 && singleBtnTitle.length == 0) {
+        [_firstBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+
+        }];
+    }
+}
 #pragma mark - lazy
 - (UIView *)alertView{
     if (!_alertView) {

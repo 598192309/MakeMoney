@@ -247,8 +247,10 @@
      "params": "page_index=0&page_size=15&tag=22&text=51778&type=0"
     }
      */
-    
-
+//    
+//    if (sign.length == 0) {
+//        return sign;
+//    }
     NSString *DESStr = [RSAEncryptor encodeDesWithString:sign];
 //    NSString *DESStr = [DES3Util encryptUseDES:sign];
     
@@ -348,7 +350,7 @@
                     RI.is_logined = NO;
                     
                     //发送通知 该账户在其他设备登录
-                    [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_ReLorigin object:nil userInfo:@{@"msg":errorMsgString}];
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_ReLorigin object:nil userInfo:@{@"msg":errorMsgString}];
 
                 }
                 failure(task,[NSError errorWithMsg:errorMsgString domain:@"Request Error" code:[SAFE_VALUE_FOR_KEY(responseObject, @"status") intValue]],responseObject);
@@ -385,7 +387,7 @@
                 RI.is_logined = NO;
                 
                 //发送通知 该账户在其他设备登录
-                [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_ReLorigin object:nil userInfo:@{@"msg":errorMsgString}];
+//                [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_ReLorigin object:nil userInfo:@{@"msg":errorMsgString}];
 
             }
             failure(task,[NSError errorWithMsg:errorMsgString domain:@"Request Error" code:[SAFE_VALUE_FOR_KEY(responseObject, @"status") intValue]],responseObject);

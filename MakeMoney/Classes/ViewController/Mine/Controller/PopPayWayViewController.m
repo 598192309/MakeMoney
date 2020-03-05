@@ -10,6 +10,8 @@
 #import "PopPayWayCell.h"
 #import "MineItem.h"
 #import "MineApi.h"
+
+
 @interface PopPayWayViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
 
@@ -49,15 +51,7 @@
 #pragma mark - act
 
 #pragma mark -  net
-//支付
-- (void)goPayWithInviteChannelId:(NSString *)channel_id goods_id:(NSString *)goods_id sex_id:(NSString *)sex_id pay_type:(NSString *)pay_type {
-    [LSVProgressHUD show];
-    [MineApi goPayWithInviteChannelId:channel_id goods_id:goods_id sex_id:sex_id pay_type:pay_type Success:^(NSInteger status, NSString * _Nonnull msg, PayDetailItem * _Nonnull payDetailItem) {
-        
-    } error:^(NSError *error, id resultObject) {
-        
-    }];
-}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView
@@ -108,6 +102,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //支付
+    PayWayItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
+//    [self goPayWithInviteChannelId:item.channel_id goods_id:item.ID sex_id:RI.infoInitItem.sex_id pay_type:item.type payName:item.name];
+    [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_PayClick object:@{@"info":item}];
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 #pragma mark - lazy
