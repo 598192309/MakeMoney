@@ -18,6 +18,14 @@
 @property(nonatomic,strong)UIButton *countingBtn;
 @property(nonatomic,strong)AdsItem *adsItem;
 @property (nonatomic,strong)EnlargeTouchSizeButton *jumpBtn;
+
+@property (nonatomic,strong)UIView *warningView;//第一次安装且第一次启动。显示出来警告页
+@property (nonatomic,strong)UIImageView *warningImageV;
+@property (nonatomic,strong)UILabel *warningTitleLable;
+@property (nonatomic,strong)UILabel *warningContenLable;
+@property (nonatomic,strong)EnlargeTouchSizeButton *chooseBtn;
+@property (nonatomic,strong)EnlargeTouchSizeButton *agreeBtn;
+
 @end
 
 @implementation LaunchingViewController
@@ -41,7 +49,17 @@
     }
     [self initAPP];
     
-    
+
+
+    // 之前的最新的版本号 lastVersion
+    if (![self isNewVersion]) {
+    }else{ // 有最新的版本号 显示警告页
+         __weak __typeof(self) weakSelf = self;
+        [self.view addSubview:self.warningView];
+        [self.warningView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(weakSelf.view);
+        }];
+    }
 
 }
 
@@ -50,6 +68,28 @@
     
 }
 #pragma mark - act
+- (BOOL)isNewVersion{
+    // 判断下用户有没有最新的版本
+     NSDictionary *dict =  [NSBundle mainBundle].infoDictionary;
+
+     // 获取最新的版本号
+     NSString *curVersion = dict[@"CFBundleShortVersionString"];
+
+     // 获取上一次的版本号
+     NSString *lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:VersionKey];
+
+     // 之前的最新的版本号 lastVersion
+     if ([curVersion isEqualToString:lastVersion]) {
+         [[NSUserDefaults standardUserDefaults] setObject:curVersion forKey:VersionKey];
+         return NO;
+     }else{ // 有最新的版本号 显示警告页
+
+         // 保存最新的版本号
+         // 保存到偏好设置
+         [[NSUserDefaults standardUserDefaults] setObject:curVersion forKey:VersionKey];
+         return YES;
+     }
+}
 #pragma  mark - 自定义
 
 - (void)addCountBtn{
@@ -102,6 +142,20 @@
     }
 
 }
+
+- (void)chooseBtnClick:(UIButton *)sender{
+    sender.selected = !sender.selected;
+}
+- (void)agreeBtnClick:(UIButton *)sender{
+    if (self.chooseBtn.selected) {
+            //进入APP
+        MainTabBarController *main = [[MainTabBarController alloc] init];
+        [AppDelegate shareAppDelegate].rootTabbar = main;
+        APPDelegate.window.rootViewController = main ;
+    }else{
+        [LSVProgressHUD showInfoWithStatus:lqStrings(@"请确认已阅读")];
+    }
+}
 #pragma mark - net
 -(void)initAPP{
     __weak __typeof(self) weakSelf = self;
@@ -142,9 +196,15 @@
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         NSLog(@"OVER:%@", [NSThread currentThread]);
         [LSVProgressHUD dismiss];
-       //请求广告
-        [weakSelf requestAds];
-        });
+        // 之前的最新的版本号 lastVersion
+        if (!_warningView) {
+            //请求广告
+             [weakSelf requestAds];
+        }else{ // 有最新的版本号 显示警告页
+            
+        }
+
+    });
 }
 - (void)requestAds{
     __weak __typeof(self) weakSelf = self;
@@ -193,5 +253,76 @@
         [_jumpBtn setTitle:lqStrings(@"进入APP") forState:UIControlStateNormal];
     }
     return _jumpBtn;
+}
+
+- (UIView *)warningView{
+    if (!_warningView) {
+        _warningView = [UIView new];
+        _warningView.backgroundColor = ThemeBlackColor;
+        __weak __typeof(self) weakSelf = self;
+        UIView *contentV = [UIView new];
+        [_warningView addSubview:contentV];
+        [contentV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(weakSelf.warningView);
+        }];
+        
+        _warningImageV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"warning"]];
+        [contentV addSubview:_warningImageV];
+        [_warningImageV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(contentV);
+            make.width.height.mas_equalTo(Adaptor_Value(80));
+            make.top.mas_equalTo(TopAdaptor_Value(140));
+        }];
+        
+        _warningTitleLable = [UILabel lableWithText:lqLocalized(@"警告",nil) textColor:[UIColor whiteColor] fontSize:AdaptedBoldFontSize(30) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        [contentV addSubview:_warningTitleLable];
+        [_warningTitleLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(contentV);
+            make.top.mas_equalTo(weakSelf.warningImageV.mas_bottom).offset(Adaptor_Value(10));
+        }];
+        
+        _warningContenLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [contentV addSubview:_warningContenLable];
+        [_warningContenLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(Adaptor_Value(10));
+            make.top.mas_equalTo(weakSelf.warningTitleLable.mas_bottom).offset(Adaptor_Value(30));
+            make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
+
+        }];
+        NSString *str = lqStrings(@"你在访问本应用时,请严格遵守当地法律法规,严禁未满18周岁和中国大陆地区用户使用,严禁讲应用内容派发.传阅.出售.出租.交给或出借给Ta人,严禁向未满18岁人员出示.推荐或播放应用内容。");
+        _warningContenLable.attributedText = [str lq_getAttributedStringWithLineSpace:Adaptor_Value(10) kern:0];
+        
+        _chooseBtn = [[EnlargeTouchSizeButton alloc] init];
+        _chooseBtn.titleLabel.font = AdaptedFontSize(12);
+        [_chooseBtn addTarget:self action:@selector(chooseBtnClick:) forControlEvents:UIControlEventTouchDown];
+        [_chooseBtn setTitle:lqStrings(@"我已阅读") forState:UIControlStateNormal];
+        [_chooseBtn setImage:[UIImage imageNamed:@"icon_xieyi_uncheck"] forState:UIControlStateNormal];
+        [_chooseBtn setImage:[UIImage imageNamed:@"icon_xieyi_checked"] forState:UIControlStateSelected];
+        [contentV addSubview:_chooseBtn];
+        [_chooseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(contentV);
+            make.top.mas_equalTo(weakSelf.warningContenLable.mas_bottom).offset(Adaptor_Value(50));
+            make.height.mas_equalTo(Adaptor_Value(40));
+            make.width.mas_equalTo(Adaptor_Value(120));
+        }];
+        
+        _agreeBtn = [[EnlargeTouchSizeButton alloc] init];
+        _agreeBtn.titleLabel.font = AdaptedFontSize(16);
+        [_agreeBtn setTitleColor:TitleBlackColor forState:UIControlStateNormal];
+        [_agreeBtn addTarget:self action:@selector(agreeBtnClick:) forControlEvents:UIControlEventTouchDown];
+        [_agreeBtn setTitle:lqStrings(@"同意") forState:UIControlStateNormal];
+        [contentV addSubview:_agreeBtn];
+        [_agreeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(contentV);
+            make.top.mas_equalTo(weakSelf.chooseBtn.mas_bottom).offset(Adaptor_Value(20));
+            make.height.mas_equalTo(Adaptor_Value(40));
+            make.width.mas_equalTo(Adaptor_Value(150));
+        }];
+        [_agreeBtn setBackgroundColor:TitleWhiteColor];
+        ViewRadius(_agreeBtn, Adaptor_Value(20));
+
+    }
+    
+    return _warningView;
 }
 @end
