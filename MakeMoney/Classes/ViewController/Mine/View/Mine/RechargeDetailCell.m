@@ -43,9 +43,11 @@
 - (void)configUIWithItem:(PayRecordItem *)item{
     self.item = item;
     self.orderLabel.text = [NSString stringWithFormat:lqLocalized(@"订单编号:%@", nil),item.order_no];
-    
-    self.vipLable.text = item.type == 1 ? lqStrings(@"同城VIP     已支付") : lqStrings(@"视频VIP     已支付");
-    self.timeLable.text = [item.create_time lq_getTimeFromTimestampWithFormatter:@"yyyy-MM-dd"];
+    //type 1 视频  2 同城
+    NSString *str1 = item.type == 2 ? lqStrings(@"同城VIP"):lqStrings(@"视频VIP");
+    NSString *status = item.status == 1 ? lqStrings(@"已支付"):lqStrings(@"未支付");
+    self.vipLable.text = [NSString stringWithFormat:@"%@     %@",str1,status];
+    self.timeLable.text = [item.create_time lq_getTimeFromTimestampWithFormatter:@"yyyy-MM-dd HH:mm:ss"];
     self.moneyLable.text = [NSString stringWithFormat:@"%@%@",item.price,item.unit];
     
 }
@@ -111,7 +113,7 @@
         [contentV addSubview:_moneyLable];
         [_moneyLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
-            make.top.mas_equalTo(weakSelf.orderBtn.mas_bottom).offset(Adaptor_Value(20));
+            make.top.mas_equalTo(weakSelf.orderBtn.mas_bottom).offset(Adaptor_Value(10));
         }];
 
 

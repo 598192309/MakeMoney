@@ -44,6 +44,10 @@
     self.titleLabel.text = item.price;
     self.detailLable.text = item.text;
     
+    //type 1 视频  2 同城
+    self.tipLabel.text = item.type == 2 ? lqStrings(@"同城VIP"):lqStrings(@"视频VIP");
+
+    
 }
 #pragma mark - act
 - (void)buyBtnClick:(UIButton *)sender{
@@ -73,7 +77,7 @@
         }];
         
         
-        _tipLabel = [UILabel lableWithText:lqLocalized(@"视频VIP",nil) textColor:LightYellowColor fontSize:AdaptedFontSize(18) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        _tipLabel = [UILabel lableWithText:lqLocalized(@"",nil) textColor:LightYellowColor fontSize:AdaptedFontSize(18) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_tipLabel];
         [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(weakSelf.titleLabel.mas_right).offset(Adaptor_Value(10));

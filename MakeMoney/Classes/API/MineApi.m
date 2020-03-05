@@ -26,8 +26,8 @@
 }
 
 /********************充值记录 *********************/
-+ (NetworkTask *)requestPayRecordsSuccess:(void(^)(NSArray *payRecordItemArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
-    return [NET POST:@"/api/pay_detail/find" parameters:nil criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
++ (NetworkTask *)requestPayRecordswithPageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(NSArray *payRecordItemArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/pay_detail/find" parameters:@{@"page_index":SAFE_NIL_STRING(page_index),@"page_size":SAFE_NIL_STRING(page_size)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
         NSArray *payRecordItemArr = [PayRecordItem mj_objectArrayWithKeyValuesArray:[resultObject safeObjectForKey:@"data"]];
         NSString *msg = [resultObject safeObjectForKey:@"msg"];
         if (successBlock) {
@@ -145,7 +145,7 @@
     }];
 }
 
-/*******************卡密兑换
+/*******************卡密兑换 手动
  card_pwd
  sex_id
  invite_code
@@ -153,6 +153,27 @@
  *********************/
 + (NetworkTask *)buyVipWithCard_pwd:(NSString *)card_pwd sex_id:(NSString *)sex_id invite_code:(NSString *)invite_code Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
     return [NET POST:@"/api/check_card_pwd" parameters:@{@"card_pwd":SAFE_NIL_STRING(card_pwd),@"sex_id":SAFE_NIL_STRING(sex_id),@"invite_code":SAFE_NIL_STRING(invite_code)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+        NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+
+        NSString *msg = [resultObject safeObjectForKey:@"msg"];
+        if (successBlock) {
+            successBlock(status,msg);
+        }
+    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+        if (errorBlock) {
+            errorBlock(error,resultObject);
+        }
+    }];
+}
+
+/*******************卡密兑换2  自动兑换 跟在订单查询后 请求
+ card_pwd
+ sex_id
+ invite_code
+ 
+ *********************/
++ (NetworkTask *)autobuyVipWithCard_pwd:(NSString *)card_pwd sex_id:(NSString *)sex_id invite_code:(NSString *)invite_code Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/check_card_pwd2" parameters:@{@"card_pwd":SAFE_NIL_STRING(card_pwd),@"sex_id":SAFE_NIL_STRING(sex_id),@"invite_code":SAFE_NIL_STRING(invite_code)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
         NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
 
         NSString *msg = [resultObject safeObjectForKey:@"msg"];
@@ -213,8 +234,8 @@
 /*******************获取提现明细
  
  *********************/
-+ (NetworkTask *)requestCashDetailSuccess:(void(^)(NSInteger status,NSString *msg,NSArray *tixianDetailItemArr))successBlock error:(ErrorBlock)errorBlock;{
-    return [NET POST:@"/api/withdraw/find" parameters:nil criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
++ (NetworkTask *)requestCashDetailwithPageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(NSInteger status,NSString *msg,NSArray *tixianDetailItemArr))successBlock error:(ErrorBlock)errorBlock;{
+    return [NET POST:@"/api/withdraw/find" parameters:@{@"page_index":SAFE_NIL_STRING(page_index),@"page_size":SAFE_NIL_STRING(page_size)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
         NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
 
         NSString *msg = [resultObject safeObjectForKey:@"msg"];
@@ -285,7 +306,7 @@
         NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
         NSString *msg = [resultObject safeObjectForKey:@"msg"];
         PayDetailItem *payDetailItem = [PayDetailItem mj_objectWithKeyValues:[resultObject safeObjectForKey:@"data"]];
-
+        RI.tradeNo = payDetailItem.trade_no;
         if (successBlock) {
             successBlock(status,msg,payDetailItem);
         }
@@ -294,5 +315,25 @@
             errorBlock(error,resultObject);
         }
     }];
+}
+
+
+/*******************订单查询 查询支付结果 返回卡密
+ 
+ *********************/
++ (NetworkTask *)requestPayResultWithTradeNo:(NSString *)trade_no Success:(void(^)(NSInteger status,NSString *msg,NSString *secret))successBlock error:(ErrorBlock)errorBlock{
+        return [NET POST:@"/api/jz_verpay" parameters:@{@"trade_no":SAFE_NIL_STRING(trade_no)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+            NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+            NSString *msg = [resultObject safeObjectForKey:@"msg"];
+            NSString *secret = [[resultObject safeObjectForKey:@"data"] safeObjectForKey:@"secret"];
+
+            if (successBlock) {
+                successBlock(status,msg,secret);
+            }
+        } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+            if (errorBlock) {
+                errorBlock(error,resultObject);
+            }
+        }];        
 }
 @end

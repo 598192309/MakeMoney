@@ -258,7 +258,10 @@ alpha:(a)]
 #define KNotification_BankAuthed    @"KNotification_BankAuthed"
 
 
+#define kTradeNo         @"kTradeNo"
 
+#define kBasicItemJasonStr         @"kBasicItemJasonStr"
+#define kInfoInitItemJasonStr        @"kInfoInitItemJasonStr"
 
 
 

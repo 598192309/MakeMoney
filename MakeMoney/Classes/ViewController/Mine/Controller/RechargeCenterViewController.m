@@ -15,6 +15,7 @@
 #import "BaseWebViewController.h"
 #import "SaoMaViewController.h"
 #import "RechargeDetailViewController.h"
+#import "WebViewViewController.h"
 
 
 @interface RechargeCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -126,7 +127,8 @@
 - (void)rechargeCenterCustomViewAct{
     __weak __typeof(self) weakSelf = self;
     self.rechargeCenterCustomView.rechargeCenterViewCheckBtnClickBlock = ^(UIButton * _Nonnull sender, UITextField * _Nonnull tf) {
-        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+//        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+        [weakSelf requestOrder:tf.text];
     };
 }
 #pragma mark -  net
@@ -177,8 +179,12 @@
         weakSelf.commonAlertView = nil;
         
         if ([pay_type isEqualToString:@"1"]) {//跳转到webview加载
-            BaseWebViewController *vc = [[BaseWebViewController alloc] init];
-            vc.htmlStr = [payDetailItem.data stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+//            BaseWebViewController *vc = [[BaseWebViewController alloc] init];
+            WebViewViewController *vc = [[WebViewViewController alloc] init];
+            NSString *html = payDetailItem.data;
+            //去掉转义符
+//            NSString *encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)html, (CFStringRef)@"!NULL,'()*+,-./:;=?@_~%#[]", NULL, kCFStringEncodingUTF8));
+            vc.htmlStr = html;
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }else{//3或4    跳转到新的扫码支付界面
             SaoMaViewController *vc = [[SaoMaViewController alloc] init];
@@ -195,6 +201,23 @@
         weakSelf.commonAlertView = nil;
     }];
 }
+- (void)requestOrder:(NSString *)orderNum{
+    if (orderNum.length == 0) {
+        return;
+    }
+    [MineApi requestPayResultWithTradeNo:orderNum Success:^(NSInteger status, NSString * _Nonnull msg, NSString * _Nonnull secret) {
+        InitItem *item = [InitItem mj_objectWithKeyValues:[RI.infoInitItemJasonStr mj_JSONObject]] ;
+        //兑换卡密
+        [MineApi autobuyVipWithCard_pwd:secret sex_id:item.sex_id invite_code:item.invite_code Success:^(NSInteger status, NSString * _Nonnull msg) {
+            RI.tradeNo = @"";
+        } error:^(NSError *error, id resultObject) {
+            
+        }];
+    } error:^(NSError *error, id resultObject) {
+        
+    }];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView

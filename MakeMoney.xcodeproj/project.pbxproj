@@ -180,6 +180,7 @@
 		11E860B4240CF27D00719378 /* AllCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B3240CF27D00719378 /* AllCategoryViewController.m */; };
 		11E860B7240D06D100719378 /* NoticeAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B6240D06D100719378 /* NoticeAlertView.m */; };
 		11E860BA240D142700719378 /* SYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B8240D142600719378 /* SYPageControl.m */; };
+		8B58D0462411416400FE426E /* WebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B58D0452411416400FE426E /* WebViewViewController.m */; };
 		8B9B8BE9240D4AED004B4704 /* ZFPlayerGestureControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8BAF240D4AED004B4704 /* ZFPlayerGestureControl.m */; };
 		8B9B8BEA240D4AED004B4704 /* ZFPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8BB0240D4AED004B4704 /* ZFPlayerController.m */; };
 		8B9B8BEB240D4AED004B4704 /* ZFOrientationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8BB3240D4AED004B4704 /* ZFOrientationObserver.m */; };
@@ -598,6 +599,8 @@
 		11E860B6240D06D100719378 /* NoticeAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoticeAlertView.m; sourceTree = "<group>"; };
 		11E860B8240D142600719378 /* SYPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYPageControl.m; sourceTree = "<group>"; };
 		11E860B9240D142700719378 /* SYPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYPageControl.h; sourceTree = "<group>"; };
+		8B58D0442411416400FE426E /* WebViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewViewController.h; sourceTree = "<group>"; };
+		8B58D0452411416400FE426E /* WebViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewViewController.m; sourceTree = "<group>"; };
 		8B9B8BAE240D4AED004B4704 /* ZFPlayerNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPlayerNotification.h; sourceTree = "<group>"; };
 		8B9B8BAF240D4AED004B4704 /* ZFPlayerGestureControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPlayerGestureControl.m; sourceTree = "<group>"; };
 		8B9B8BB0240D4AED004B4704 /* ZFPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPlayerController.m; sourceTree = "<group>"; };
@@ -966,6 +969,8 @@
 				09E72D10240560200004B25C /* SYProgressWebView.m */,
 				09E72D14240560210004B25C /* UIViewController+popBlock.h */,
 				09E72D13240560200004B25C /* UIViewController+popBlock.m */,
+				8B58D0442411416400FE426E /* WebViewViewController.h */,
+				8B58D0452411416400FE426E /* WebViewViewController.m */,
 			);
 			path = BaseViewController;
 			sourceTree = "<group>";
@@ -2020,6 +2025,7 @@
 				113980822410A0BB00663E26 /* PopPayWayViewController.m in Sources */,
 				11105E5E24066BC900521CB2 /* SystemAlertViewController.m in Sources */,
 				09E72C8024055F7E0004B25C /* MJExtensionConst.m in Sources */,
+				8B58D0462411416400FE426E /* WebViewViewController.m in Sources */,
 				11105E5924066BC900521CB2 /* UIButton+LqExtension.m in Sources */,
 				09E72D1B240560210004B25C /* BaseViewController.m in Sources */,
 				8B9B8C02240D4AED004B4704 /* UIImageView+ZFCache.m in Sources */,

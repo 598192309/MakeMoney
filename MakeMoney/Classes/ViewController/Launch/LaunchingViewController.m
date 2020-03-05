@@ -114,7 +114,8 @@
 
     }];
     ViewRadius(weakSelf.jumpBtn, Adaptor_Value(20));
-    weakSelf.jumpBtn.hidden = YES;
+#warning ceshi
+//    weakSelf.jumpBtn.hidden = YES;
     
 }
 - (void)tap:(UITapGestureRecognizer *)gest{
@@ -167,6 +168,7 @@
         dispatch_group_leave(group);
         
         RI.basicItem = basicItem;
+        RI.basicItemJasonStr = [basicItem mj_JSONString];
 
     } error:^(NSError *error, id resultObject) {
 //        [LSVProgressHUD showError:error];
@@ -181,6 +183,8 @@
     [InitApi initWithSyste:@"ios" Success:^(InitItem * _Nonnull initItem, NSString * _Nonnull msg) {
         dispatch_group_leave(group);
         RI.infoInitItem = initItem;
+        RI.infoInitItemJasonStr = [initItem mj_JSONString];
+
     } error:^(NSError *error, id resultObject) {
 //        [LSVProgressHUD showError:error];
 //        dispatch_group_leave(group);

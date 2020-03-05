@@ -66,18 +66,18 @@
 #pragma mark -  net
 -(void)requestData{
     __weak __typeof(self) weakSelf = self;
-    [MineApi requestCashDetailSuccess:^(NSInteger status, NSString * _Nonnull msg, NSArray * _Nonnull tixianDetailItemArr) {
+    [MineApi requestCashDetailwithPageIndex:@"0" page_size:@"25" Success:^(NSInteger status, NSString * _Nonnull msg, NSArray * _Nonnull tixianDetailItemArr) {
         weakSelf.pageIndex = tixianDetailItemArr.count ;
         weakSelf.dataArr = [NSMutableArray arrayWithArray:tixianDetailItemArr];
-//        if (extendArr.count >= 25 ) {
-//            [weakSelf.customTableView addFooterWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
-//            [weakSelf.customTableView.mj_footer setHidden:NO];
-//
-//        }else{
-//            [weakSelf.customTableView endHeaderRefreshing];
-//            //消除尾部"没有更多数据"的状态
-//            [weakSelf.customTableView.mj_footer setHidden:YES];
-//        }
+        if (tixianDetailItemArr.count >= 25 ) {
+            [weakSelf.customTableView addFooterWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
+            [weakSelf.customTableView.mj_footer setHidden:NO];
+
+        }else{
+            [weakSelf.customTableView endHeaderRefreshing];
+            //消除尾部"没有更多数据"的状态
+            [weakSelf.customTableView.mj_footer setHidden:YES];
+        }
         [weakSelf.customTableView endHeaderRefreshing];
         [weakSelf.customTableView reloadData];
     } error:^(NSError *error, id resultObject) {
@@ -86,7 +86,23 @@
     }];
     
 }
-
+- (void)requestMoreData{
+    __weak __typeof(self) weakSelf = self;
+    [MineApi requestCashDetailwithPageIndex:IntTranslateStr(self.pageIndex) page_size:@"25" Success:^(NSInteger status, NSString * _Nonnull msg, NSArray * _Nonnull tixianDetailItemArr) {
+        [weakSelf.dataArr addObjectsFromArray:tixianDetailItemArr];
+        [weakSelf.customTableView endFooterRefreshing];
+        [weakSelf.customTableView reloadData];
+        if (tixianDetailItemArr.count < 25) {
+            [weakSelf.customTableView endRefreshingWithNoMoreData];
+        }else{
+            weakSelf.pageIndex = weakSelf.dataArr.count ;
+            
+        }
+    } error:^(NSError *error, id resultObject) {
+        [weakSelf.customTableView endHeaderRefreshing];
+        [weakSelf.customTableView reloadData];
+    }];
+}
 
 #pragma mark - UITableViewDataSource
 

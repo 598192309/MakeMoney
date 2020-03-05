@@ -27,9 +27,12 @@ extern NSString* const STAPPErrorDomain;
 //@property (strong,nonatomic  )NSString * version;// 版本号
 
 @property (nonatomic,strong)BasicItem *basicItem;
+@property (nonatomic,strong)NSString *basicItemJasonStr;//不能保存item 转json保存
 
 @property (nonatomic,strong)InitItem *infoInitItem;
+@property (nonatomic,strong)NSString *infoInitItemJasonStr;//不能保存item 转json保存
 
+@property (nonatomic,strong)NSString *tradeNo;//支付订单
 
 + (RunInfo *)sharedInstance;
 //检测是否需要自动登录

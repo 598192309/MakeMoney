@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /********************充值记录 *********************/
-+ (NetworkTask *)requestPayRecordsSuccess:(void(^)(NSArray *payRecordItemArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
++ (NetworkTask *)requestPayRecordswithPageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(NSArray *payRecordItemArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
 
 
 /********************充值中心 *********************/
@@ -52,6 +52,15 @@ NS_ASSUME_NONNULL_BEGIN
 + (NetworkTask *)buyVipWithCard_pwd:(NSString *)card_pwd sex_id:(NSString *)sex_id invite_code:(NSString *)invite_code Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
 
 
+/*******************卡密兑换2  自动兑换 跟在订单查询后 请求
+ card_pwd
+ sex_id
+ invite_code
+ 
+ *********************/
++ (NetworkTask *)autobuyVipWithCard_pwd:(NSString *)card_pwd sex_id:(NSString *)sex_id invite_code:(NSString *)invite_code Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
+
+
 /*******************提现
  type   1银行卡   2.支付宝    3.微信  暂时只支持银行卡
  rate   手续费
@@ -71,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*******************获取提现明细
  
  *********************/
-+ (NetworkTask *)requestCashDetailSuccess:(void(^)(NSInteger status,NSString *msg,NSArray *tixianDetailItemArr))successBlock error:(ErrorBlock)errorBlock;
++ (NetworkTask *)requestCashDetailwithPageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(NSInteger status,NSString *msg,NSArray *tixianDetailItemArr))successBlock error:(ErrorBlock)errorBlock;
 
 
 /*******************获取邀请记录
@@ -98,6 +107,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (NetworkTask *)goPayWithInviteChannelId:(NSString *)channel_id goods_id:(NSString *)goods_id sex_id:(NSString *)sex_id pay_type:(NSString *)pay_type  Success:(void(^)(NSInteger status,NSString *msg,PayDetailItem *payDetailItem))successBlock error:(ErrorBlock)errorBlock;
 
 
+/*******************订单查询 查询支付结果 返回卡密
+ 
+ *********************/
++ (NetworkTask *)requestPayResultWithTradeNo:(NSString *)trade_no Success:(void(^)(NSInteger status,NSString *msg,NSString *secret))successBlock error:(ErrorBlock)errorBlock;
 
 
 @end

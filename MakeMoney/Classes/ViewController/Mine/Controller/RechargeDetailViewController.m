@@ -34,7 +34,6 @@
        self.automaticallyAdjustsScrollViewInsets = NO;
     }
     
-    [self requestData];
 }
 - (void)dealloc{
     LQLog(@"dealloc -------%@",NSStringFromClass([self class]));
@@ -68,14 +67,44 @@
 #pragma mark -  net
 -(void)requestData{
     __weak __typeof(self) weakSelf = self;
-    [LSVProgressHUD show];
-    [MineApi requestPayRecordsSuccess:^(NSArray * _Nonnull payRecordItemArr, NSString * _Nonnull msg) {
+    [MineApi requestPayRecordswithPageIndex:@"0" page_size:@"25" Success:^(NSArray * _Nonnull payRecordItemArr, NSString * _Nonnull msg) {
         weakSelf.pageIndex = payRecordItemArr.count ;
         weakSelf.dataArr = [NSMutableArray arrayWithArray:payRecordItemArr];
+        if (payRecordItemArr.count >= 25 ) {
+            [weakSelf.customTableView addFooterWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
+            [weakSelf.customTableView.mj_footer setHidden:NO];
+
+        }else{
+            [weakSelf.customTableView endHeaderRefreshing];
+            //消除尾部"没有更多数据"的状态
+            [weakSelf.customTableView.mj_footer setHidden:YES];
+        }
         [weakSelf.customTableView reloadData];
-        [LSVProgressHUD dismiss];
+        [weakSelf.customTableView endFooterRefreshing];
+
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
+        [weakSelf.customTableView endFooterRefreshing];
+
+    }];
+}
+
+-(void)requestMoreData{
+    __weak __typeof(self) weakSelf = self;
+    [MineApi requestPayRecordswithPageIndex:IntTranslateStr(self.pageIndex) page_size:@"25" Success:^(NSArray * _Nonnull payRecordItemArr, NSString * _Nonnull msg) {
+        [weakSelf.dataArr addObjectsFromArray:payRecordItemArr];
+        [weakSelf.customTableView endFooterRefreshing];
+        [weakSelf.customTableView reloadData];
+        if (payRecordItemArr.count < 25) {
+            [weakSelf.customTableView endRefreshingWithNoMoreData];
+        }else{
+            weakSelf.pageIndex = weakSelf.dataArr.count ;
+            
+        }
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+        [weakSelf.customTableView endFooterRefreshing];
+
         
     }];
 }
@@ -137,6 +166,9 @@
         _customTableView.rowHeight=UITableViewAutomaticDimension;
         
         [_customTableView registerClass:[RechargeDetailCell class] forCellReuseIdentifier:NSStringFromClass([RechargeDetailCell class])];
+        //下拉刷新
+        [_customTableView addHeaderWithRefreshingTarget:self refreshingAction:@selector(requestData)];
+        [_customTableView beginHeaderRefreshing];
     }
     return _customTableView;
 }

@@ -190,5 +190,4 @@
     self.navigationTextLabel.text = title;
 }
 
-
 @end

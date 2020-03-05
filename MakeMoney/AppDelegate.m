@@ -14,6 +14,8 @@
 #import <UMCommon/UMCommon.h>
 
 #import "LaunchingViewController.h"
+#import "MineApi.h"
+#import "MineItem.h"
 static BOOL isProduction = YES;
 
 static NSString  *YouMengKey = @"5e551f1c0cafb2fd5a00017b";
@@ -91,7 +93,10 @@ static NSString  *YouMengKey = @"5e551f1c0cafb2fd5a00017b";
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    }
+    //请求 看看有没有订单
+    [self requestOrder];
+    
+}
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -131,7 +136,23 @@ static NSString  *YouMengKey = @"5e551f1c0cafb2fd5a00017b";
 
 
 
-#pragma  mark - lazy
+#pragma  mark - net
+- (void)requestOrder{
+    if (RI.tradeNo.length == 0) {
+        return;
+    }
+    [MineApi requestPayResultWithTradeNo:RI.tradeNo Success:^(NSInteger status, NSString * _Nonnull msg, NSString * _Nonnull secret) {
+        InitItem *item = [InitItem mj_objectWithKeyValues:[RI.infoInitItemJasonStr mj_JSONObject]] ;
+        //兑换卡密
+        [MineApi autobuyVipWithCard_pwd:secret sex_id:item.sex_id invite_code:item.invite_code Success:^(NSInteger status, NSString * _Nonnull msg) {
+            RI.tradeNo = @"";
+        } error:^(NSError *error, id resultObject) {
+            
+        }];
+    } error:^(NSError *error, id resultObject) {
+        
+    }];
+}
 
 
 @end

@@ -42,6 +42,11 @@
         
         _is_logined = [[NSUserDefaults standardUserDefaults ] objectForKey:kUserSignIn] ? [[[NSUserDefaults standardUserDefaults ] objectForKey:kUserSignIn] boolValue] : false;
         
+        _tradeNo = [[NSUserDefaults standardUserDefaults ] objectForKey:kTradeNo] ? [[NSUserDefaults standardUserDefaults ] objectForKey:kTradeNo] : @"";
+
+        _basicItemJasonStr = [[NSUserDefaults standardUserDefaults ] objectForKey:kBasicItemJasonStr] ? [[NSUserDefaults standardUserDefaults ] objectForKey:kBasicItemJasonStr] : @"";
+        _infoInitItemJasonStr = [[NSUserDefaults standardUserDefaults ] objectForKey:kInfoInitItemJasonStr] ? [[NSUserDefaults standardUserDefaults ] objectForKey:kInfoInitItemJasonStr] : @"";
+
 
     }
     return self;
@@ -53,9 +58,26 @@
 -(void)setIs_logined:(BOOL)is_logined{
     _is_logined = is_logined;
     [[NSUserDefaults standardUserDefaults] setBool:is_logined forKey:kUserSignIn];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
 }
 
+- (void)setTradeNo:(NSString *)tradeNo{
+    _tradeNo = tradeNo;
+    [[NSUserDefaults standardUserDefaults] setObject:tradeNo forKey:kTradeNo];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 
+}
 
+- (void)setBasicItemJasonStr:(NSString *)basicItemJasonStr{
+    _basicItemJasonStr = basicItemJasonStr;
+    [[NSUserDefaults standardUserDefaults] setObject:basicItemJasonStr forKey:kBasicItemJasonStr];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 
+- (void)setInfoInitItemJasonStr:(NSString *)infoInitItemJasonStr{
+    _infoInitItemJasonStr = infoInitItemJasonStr;
+    [[NSUserDefaults standardUserDefaults] setObject:infoInitItemJasonStr forKey:kInfoInitItemJasonStr];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 @end
