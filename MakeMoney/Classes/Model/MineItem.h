@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *text;
 @property (nonatomic,assign)NSInteger type;
 @property (nonatomic,strong)NSString *unit;
-
+@property (nonatomic,strong)NSString *goods_id;
 @end
 
 /********************推广明细 *********************/
@@ -85,7 +85,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *ID;
 @property (nonatomic,strong)NSString *name;
 @property (nonatomic,strong)NSString *type;
-@property (nonatomic,strong)NSString *goods_id;
 @end
 
 /********************提现明细*********************/

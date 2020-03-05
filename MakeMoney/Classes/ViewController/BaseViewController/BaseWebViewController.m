@@ -87,6 +87,7 @@
     self.webView.isBackRoot = NO;
     self.webView.showActivityView = YES;
     self.webView.showActionButton = YES;
+    self.webView.html = self.htmlStr;
     [self.webView reloadUI];
     [self.webView loadRequest:^(SYProgressWebView *webView, NSString *title, NSURL *url) {
         NSLog(@"准备加载。title = %@, url = %@", title, url);

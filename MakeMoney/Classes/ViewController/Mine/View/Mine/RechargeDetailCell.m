@@ -7,7 +7,7 @@
 //
 
 #import "RechargeDetailCell.h"
-
+#import "MineItem.h"
 @interface RechargeDetailCell()
 @property (nonatomic,strong) UIView * cellBackgroundView;
 @property (strong, nonatomic)  UILabel *orderLabel;
@@ -16,6 +16,7 @@
 @property (strong, nonatomic)  UILabel *moneyLable;
 @property (strong, nonatomic)  UILabel *timeLable;
 
+@property (nonatomic,strong)PayRecordItem *item;
 @end
 @implementation RechargeDetailCell
 
@@ -39,12 +40,21 @@
    
 }
 
-- (void)configUIWithItem:(NSObject *)item{
-  
+- (void)configUIWithItem:(PayRecordItem *)item{
+    self.item = item;
+    self.orderLabel.text = [NSString stringWithFormat:lqLocalized(@"订单编号:%@", nil),item.order_no];
+    
+    self.vipLable.text = item.type == 1 ? lqStrings(@"同城VIP     已支付") : lqStrings(@"视频VIP     已支付");
+    self.timeLable.text = [item.create_time lq_getTimeFromTimestampWithFormatter:@"yyyy-MM-dd"];
+    self.moneyLable.text = [NSString stringWithFormat:@"%@%@",item.price,item.unit];
     
 }
 #pragma mark - act
-
+- (void)orderBtnClick:(UIButton *)sender{
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = self.item.order_no;
+    [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"复制成功", nil)];
+}
 #pragma mark - lazy
 - (UIView *)cellBackgroundView{
     if (!_cellBackgroundView) {

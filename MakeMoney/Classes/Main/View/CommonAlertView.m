@@ -96,9 +96,9 @@
     self.titlelabel.text = title;
     self.titlelabel.font = titlefont;
     self.titlelabel.textColor = titleColor;
-    self.subLable.text = title;
-    self.subLable.font = titlefont;
-    self.subLable.textColor = titleColor;
+    self.subLable.text = subTitle;
+    self.subLable.font = subTitleFont;
+    self.subLable.textColor = subtitleColor;
     [self.firstBtn setTitle:firstBtnTitle forState:UIControlStateNormal];
     [self.secBtn setTitle:secBtnTitle forState:UIControlStateNormal];
     [self.singleBtn setTitle:singleBtnTitle forState:UIControlStateNormal];

@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class PayRecordItem;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RechargeDetailCell : UITableViewCell
-
+- (void)configUIWithItem:(PayRecordItem *)item;
 @end
 
 NS_ASSUME_NONNULL_END

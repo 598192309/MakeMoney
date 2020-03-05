@@ -30,7 +30,7 @@
 @property (nonatomic,strong)UILabel *bottomTipLable2;
 @property (nonatomic,strong)UILabel *bottomTipLable3;
 @property (nonatomic,strong)CommonAlertView *commonAlertView;
-
+@property (nonatomic,strong)NSString *goodID;
 @end
 
 @implementation RechargeCenterViewController
@@ -120,7 +120,7 @@
 - (void)notify:(NSNotification *)noti{
     NSDictionary *dict = noti.userInfo;
     PayWayItem *item = [dict safeObjectForKey:@"info"];
-    [self goPayWithInviteChannelId:item.channel_id goods_id:item.goods_id sex_id:RI.infoInitItem.sex_id pay_type:item.type payName:item.name];
+    [self goPayWithInviteChannelId:item.channel_id goods_id:self.goodID sex_id:RI.infoInitItem.sex_id pay_type:item.type payName:item.name];
 }
 #pragma mark - act
 - (void)rechargeCenterCustomViewAct{
@@ -178,7 +178,7 @@
         
         if ([pay_type isEqualToString:@"1"]) {//跳转到webview加载
             BaseWebViewController *vc = [[BaseWebViewController alloc] init];
-            vc.htmlStr = payDetailItem.data;
+            vc.htmlStr = [payDetailItem.data stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }else{//3或4    跳转到新的扫码支付界面
             SaoMaViewController *vc = [[SaoMaViewController alloc] init];
@@ -188,8 +188,11 @@
             [weakSelf.navigationController pushViewController:vc animated:YES];
 
         }
+        [LSVProgressHUD dismiss];
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
+        [weakSelf.commonAlertView removeFromSuperview];
+        weakSelf.commonAlertView = nil;
     }];
 }
 #pragma mark - UITableViewDataSource
@@ -206,6 +209,7 @@
     RechargeCenterCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([RechargeCenterCell class]) forIndexPath:indexPath];
     PayCenterInfotem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
     [cell refreshUIWithItem:item];
+    self.goodID = item.goods_id;
     __weak __typeof(self) weakSelf = self;
     cell.rechargeCenterBuyBtnClickBlock = ^(UIButton * _Nonnull sender) {
 //        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];

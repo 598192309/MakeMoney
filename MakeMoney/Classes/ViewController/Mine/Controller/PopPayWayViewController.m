@@ -104,8 +104,9 @@
     //支付
     PayWayItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
 //    [self goPayWithInviteChannelId:item.channel_id goods_id:item.ID sex_id:RI.infoInitItem.sex_id pay_type:item.type payName:item.name];
-    [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_PayClick object:@{@"info":item}];
     [self dismissViewControllerAnimated:YES completion:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_PayClick object:nil userInfo:@{@"info":item}];
+
 
 }
 

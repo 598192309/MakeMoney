@@ -93,8 +93,8 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RechargeDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([RechargeDetailCell class]) forIndexPath:indexPath];
-//    ExtendDetailItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
-//    [cell configUIWithItem:item];
+    PayRecordItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
+    [cell configUIWithItem:item];
     return cell;
 
 
