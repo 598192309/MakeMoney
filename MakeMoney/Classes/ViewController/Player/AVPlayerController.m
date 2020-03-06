@@ -19,6 +19,9 @@
 #import "AVTuijianView.h"
 #import "AVCenterView.h"
 
+#import "MineApi.h"
+#import "MineItem.h"
+
 static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/635942-14593722fe3f0695.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
 
 
@@ -110,7 +113,7 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
         NSLog(@"播放时长currentTime:%f,总时长duration:%f",currentTime,duration);
         //判断是否是会员     //AV 这里有3中状态，通过tag判断   0  VIP   1 限免    2 收费
 
-        if (!RI.infoInitItem.is_vip && !weakSelf.isShortVideo && !(weakSelf.item.tag == 1)) {//不是会员 只能看5分钟 不是限免
+        if (!RI.infoInitItem.is_vip && !weakSelf.isShortVideo && !(weakSelf.item.tag == 1) && !RI.infoInitItem.is_new_user) {//不是会员 只能看5分钟 不是限免 不是新用户限时免费
             if (currentTime > 5 * 60) {
                 [self.player.currentPlayerManager pause];
                 [self.controlView resetControlView];
@@ -137,6 +140,15 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
             [self.player stop];
         }
     };
+    
+    self.player.playerReadyToPlay = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, NSURL * _Nonnull assetURL) {
+        if (!weakSelf.isShortVideo) {//短视频不用更新 因为ShortVideoViewController更新了的
+            //每次播放了 刷新一下用户信息 获取播放次数
+            [weakSelf updatePlayTimes];
+        }
+
+    };
+    
     //拼接播放视频的Url
     NSString *videoUrl;
     if ([self.item.vip_video_url hasPrefix:@"http"]) {
@@ -226,6 +238,16 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
         [weakSelf.avCenterView configAds:adsItemArr.firstObject finishi:^{
             
         }];
+    } error:^(NSError *error, id resultObject) {
+        
+    }];
+}
+
+//更新播放次数
+- (void)updatePlayTimes{
+    __weak __typeof(self) weakSelf = self;
+    [MineApi requestAVInfoWithVedioId:self.item.ID Success:^(InitItem * _Nonnull initItem, NSString * _Nonnull msg) {
+        RI.infoInitItem.is_new_user = initItem.is_new_user;
     } error:^(NSError *error, id resultObject) {
         
     }];
