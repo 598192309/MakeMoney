@@ -167,6 +167,8 @@
 		111116A8240E4CE400E9F781 /* TuiGuangCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 111116A7240E4CE400E9F781 /* TuiGuangCustomView.m */; };
 		1118B7B2240C996E0098A1D4 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118B7B1240C996E0098A1D4 /* ListViewController.m */; };
 		111FD6F1241231DC00E7B419 /* xieyi.html in Resources */ = {isa = PBXBuildFile; fileRef = 111FD6F0241231DC00E7B419 /* xieyi.html */; };
+		111FD6F424124B1800E7B419 /* AblumApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 111FD6F324124B1800E7B419 /* AblumApi.m */; };
+		111FD6F724124B6000E7B419 /* AblumItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 111FD6F624124B6000E7B419 /* AblumItem.m */; };
 		1120F42524079F9D00550055 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1120F42224079F9D00550055 /* GTMBase64.m */; };
 		112F56AE2411DD2100CE4715 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F56AD2411DD2100CE4715 /* ShareView.m */; };
 		112F56B12411EF4600CE4715 /* LScreenShot.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F56AF2411EF4600CE4715 /* LScreenShot.m */; };
@@ -578,6 +580,10 @@
 		1118B7B0240C996E0098A1D4 /* ListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
 		1118B7B1240C996E0098A1D4 /* ListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
 		111FD6F0241231DC00E7B419 /* xieyi.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = xieyi.html; sourceTree = "<group>"; };
+		111FD6F224124B1800E7B419 /* AblumApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AblumApi.h; sourceTree = "<group>"; };
+		111FD6F324124B1800E7B419 /* AblumApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AblumApi.m; sourceTree = "<group>"; };
+		111FD6F524124B6000E7B419 /* AblumItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AblumItem.h; sourceTree = "<group>"; };
+		111FD6F624124B6000E7B419 /* AblumItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AblumItem.m; sourceTree = "<group>"; };
 		1120F41F24079F9D00550055 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		1120F42124079F9D00550055 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		1120F42224079F9D00550055 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
@@ -836,6 +842,8 @@
 				11105E8624067C3600521CB2 /* CityItem.m */,
 				11105E8824067C4300521CB2 /* MineItem.h */,
 				11105E8924067C4300521CB2 /* MineItem.m */,
+				111FD6F524124B6000E7B419 /* AblumItem.h */,
+				111FD6F624124B6000E7B419 /* AblumItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -859,6 +867,8 @@
 				11105E7724067BC700521CB2 /* CityApi.m */,
 				11105E7924067BE500521CB2 /* MineApi.h */,
 				11105E7A24067BE500521CB2 /* MineApi.m */,
+				111FD6F224124B1800E7B419 /* AblumApi.h */,
+				111FD6F324124B1800E7B419 /* AblumApi.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -2039,6 +2049,7 @@
 				11105E6224066BC900521CB2 /* SafeControl.m in Sources */,
 				09E72C3824055F6E0004B25C /* IQPreviousNextView.m in Sources */,
 				8BD545C1240C101E00C90A31 /* HomeSectionFooterView.m in Sources */,
+				111FD6F424124B1800E7B419 /* AblumApi.m in Sources */,
 				8B9B8BF5240D4AED004B4704 /* ZFAVPlayerManager.m in Sources */,
 				8B9B8BED240D4AED004B4704 /* UIScrollView+ZFPlayer.m in Sources */,
 				11105AEF24060EFA00521CB2 /* HomeTopCell.m in Sources */,
@@ -2063,6 +2074,7 @@
 				09E72CEA24055F8E0004B25C /* SDWebImageManager.m in Sources */,
 				09830AFA2408207F00FBF2C7 /* AVCell.m in Sources */,
 				09E72CF024055F8E0004B25C /* SDWebImageCompat.m in Sources */,
+				111FD6F724124B6000E7B419 /* AblumItem.m in Sources */,
 				11105E5624066BC900521CB2 /* UIImage+LqExtension.m in Sources */,
 				092399C82403FE0F00A4F727 /* AppDelegate.m in Sources */,
 				11105E5B24066BC900521CB2 /* LqNoPasteTextField.m in Sources */,

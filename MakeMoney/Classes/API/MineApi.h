@@ -154,6 +154,29 @@ NS_ASSUME_NONNULL_BEGIN
  
  *********************/
 + (NetworkTask *)requestSetInfoWithCode:(NSString *)invite_code Success:(void(^)(NSInteger status,NSString *msg,NSString *mobile,NSString *invite_code))successBlock error:(ErrorBlock)errorBlock;
+
+/*******************AV  收藏列表
+ page_index
+ page_size
+
+ *********************/
++ (NetworkTask *)requestAVLoveListWithPageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(NSInteger status,NSString *msg,NSArray *hotItemArr))successBlock error:(ErrorBlock)errorBlock;
+
+
+/*******************视频  收藏列表
+ page_index
+ page_size
+
+ *********************/
++ (NetworkTask *)requestVideoLoveListWithPageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(NSInteger status,NSString *msg,NSArray *hotItemArr))successBlock error:(ErrorBlock)errorBlock;
+
+/*******************写真  收藏列表
+ page_index
+ page_size
+
+ 成功返回： (非VIP，imgs返回10条，VIP返回全集，自己拿集合分页加载)
+ *********************/
++ (NetworkTask *)requestAblumLoveListWithPageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(NSInteger status,NSString *msg,NSArray *ablumItemArr))successBlock error:(ErrorBlock)errorBlock;
 @end
 
 NS_ASSUME_NONNULL_END

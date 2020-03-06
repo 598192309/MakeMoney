@@ -9,6 +9,7 @@
 #import "MineApi.h"
 #import "MineItem.h"
 #import "InitItem.h"
+#import "AblumItem.h"
 @implementation MineApi
 /**版本升级 */
 + (NetworkTask *)updateSuccess:(void(^)(UpdateItem *updateItem,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
@@ -471,4 +472,71 @@
          }
      }];
 }
+
+/*******************AV  收藏列表
+ page_index
+ page_size
+
+ *********************/
++ (NetworkTask *)requestAVLoveListWithPageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(NSInteger status,NSString *msg,NSArray *hotItemArr))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/video/av_love" parameters:@{@"page_index":SAFE_NIL_STRING(page_index),@"page_size":SAFE_NIL_STRING(page_size)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+        NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+        NSString *msg = [resultObject safeObjectForKey:@"msg"];
+
+        NSArray *hotItemArr = [HotItem mj_objectArrayWithKeyValuesArray:[resultObject safeObjectForKey:@"data"]];
+        if (successBlock) {
+            successBlock(status,msg,hotItemArr);
+        }
+    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+        if (errorBlock) {
+            errorBlock(error,resultObject);
+        }
+    }];
+    
+}
+
+/*******************视频  收藏列表
+ page_index
+ page_size
+
+ *********************/
++ (NetworkTask *)requestVideoLoveListWithPageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(NSInteger status,NSString *msg,NSArray *hotItemArr))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/video/love" parameters:@{@"page_index":SAFE_NIL_STRING(page_index),@"page_size":SAFE_NIL_STRING(page_size)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+        NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+        NSString *msg = [resultObject safeObjectForKey:@"msg"];
+
+        NSArray *hotItemArr = [HotItem mj_objectArrayWithKeyValuesArray:[resultObject safeObjectForKey:@"data"]];
+        if (successBlock) {
+            successBlock(status,msg,hotItemArr);
+        }
+    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+        if (errorBlock) {
+            errorBlock(error,resultObject);
+        }
+    }];
+}
+
+
+/*******************写真  收藏列表
+ page_index
+ page_size
+
+ 成功返回： (非VIP，imgs返回10条，VIP返回全集，自己拿集合分页加载)
+ *********************/
++ (NetworkTask *)requestAblumLoveListWithPageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(NSInteger status,NSString *msg,NSArray *ablumItemArr))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/album/love" parameters:@{@"page_index":SAFE_NIL_STRING(page_index),@"page_size":SAFE_NIL_STRING(page_size)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+        NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+        NSString *msg = [resultObject safeObjectForKey:@"msg"];
+
+        NSArray *ablumItemArr = [AblumItem mj_objectArrayWithKeyValuesArray:[resultObject safeObjectForKey:@"data"]];
+        if (successBlock) {
+            successBlock(status,msg,ablumItemArr);
+        }
+    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+        if (errorBlock) {
+            errorBlock(error,resultObject);
+        }
+    }];
+}
+
 @end
