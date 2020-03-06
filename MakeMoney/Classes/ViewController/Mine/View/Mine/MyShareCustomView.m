@@ -54,20 +54,20 @@
 
 #pragma mark - act
 - (void)changeBtnClick:(EnlargeTouchSizeButton *)sender{
-    [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+//    [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
     if (self.myshareCustomHeaderViewChangeBtnClickBlock) {
         self.myshareCustomHeaderViewChangeBtnClickBlock(sender,@{});
     }
 }
 - (void)saveBtnClick:(EnlargeTouchSizeButton *)sender{
-    [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+//    [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
     if (self.myshareCustomHeaderViewSaveBtnClickBlock) {
         self.myshareCustomHeaderViewSaveBtnClickBlock(sender,self.erweimaImageV);
     }
 }
 
 - (void)copyBtnClick:(EnlargeTouchSizeButton *)sender{
-    [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+//    [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
     if (self.myshareCustomHeaderViewCopyBtnClickBlock) {
         self.myshareCustomHeaderViewCopyBtnClickBlock(sender,@{});
     }

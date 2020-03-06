@@ -167,6 +167,7 @@
 		111116A8240E4CE400E9F781 /* TuiGuangCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 111116A7240E4CE400E9F781 /* TuiGuangCustomView.m */; };
 		1118B7B2240C996E0098A1D4 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118B7B1240C996E0098A1D4 /* ListViewController.m */; };
 		1120F42524079F9D00550055 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1120F42224079F9D00550055 /* GTMBase64.m */; };
+		112F56AE2411DD2100CE4715 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F56AD2411DD2100CE4715 /* ShareView.m */; };
 		1135C9DA2408BA7800478696 /* CityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1135C9D92408BA7800478696 /* CityCell.m */; };
 		1139807D2410A08400663E26 /* YCPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113980762410A08400663E26 /* YCPresentationController.m */; };
 		1139807E2410A08400663E26 /* YCPopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1139807B2410A08400663E26 /* YCPopoverAnimator.m */; };
@@ -572,6 +573,8 @@
 		1120F41F24079F9D00550055 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		1120F42124079F9D00550055 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		1120F42224079F9D00550055 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
+		112F56AC2411DD2100CE4715 /* ShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
+		112F56AD2411DD2100CE4715 /* ShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
 		1135C9D82408BA7800478696 /* CityCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityCell.h; sourceTree = "<group>"; };
 		1135C9D92408BA7800478696 /* CityCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityCell.m; sourceTree = "<group>"; };
 		113980762410A08400663E26 /* YCPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCPresentationController.m; sourceTree = "<group>"; };
@@ -943,6 +946,8 @@
 				8BD545BA240BE71700C90A31 /* HomeVideoCell.h */,
 				8BD545BB240BE71700C90A31 /* HomeVideoCell.m */,
 				8BD545BC240BE71700C90A31 /* HomeVideoCell.xib */,
+				112F56AC2411DD2100CE4715 /* ShareView.h */,
+				112F56AD2411DD2100CE4715 /* ShareView.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1931,6 +1936,7 @@
 				11E860B7240D06D100719378 /* NoticeAlertView.m in Sources */,
 				8B9B8C19240EA3DC004B4704 /* IncomeDetailCell.m in Sources */,
 				11105E7E24067C1400521CB2 /* HomeItem.m in Sources */,
+				112F56AE2411DD2100CE4715 /* ShareView.m in Sources */,
 				8BD545B7240BB4CC00C90A31 /* MJRefreshBackFooter.m in Sources */,
 				09E72C7F24055F7E0004B25C /* NSObject+MJCoding.m in Sources */,
 				8B9B8BFE240D4AED004B4704 /* ZFSmallFloatControlView.m in Sources */,

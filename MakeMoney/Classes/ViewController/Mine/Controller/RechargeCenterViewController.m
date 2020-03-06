@@ -205,16 +205,19 @@
     if (orderNum.length == 0) {
         return;
     }
+    [LSVProgressHUD show];
     [MineApi requestPayResultWithTradeNo:orderNum Success:^(NSInteger status, NSString * _Nonnull msg, NSString * _Nonnull secret) {
         InitItem *item = [InitItem mj_objectWithKeyValues:[RI.infoInitItemJasonStr mj_JSONObject]] ;
         //兑换卡密
         [MineApi autobuyVipWithCard_pwd:secret sex_id:item.sex_id invite_code:item.invite_code Success:^(NSInteger status, NSString * _Nonnull msg) {
             RI.tradeNo = @"";
+            [LSVProgressHUD showInfoWithStatus:msg];
         } error:^(NSError *error, id resultObject) {
-            
+            [LSVProgressHUD showError:error];
         }];
     } error:^(NSError *error, id resultObject) {
-        
+        [LSVProgressHUD showError:error];
+
     }];
 }
 

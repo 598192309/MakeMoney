@@ -20,6 +20,8 @@
 #import "MineItem.h"
 
 #import "AVPlayerController.h"
+#import "ShareView.h"
+#import<AssetsLibrary/AssetsLibrary.h>
 
 @interface ShortVideoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
@@ -31,6 +33,8 @@
 @property (nonatomic, strong) HotItem *item;
 
 @property (nonatomic,strong)CommonAlertView *commonAlertView;
+
+@property (nonatomic,strong)ShareView *shareView;
 @end
 
 @implementation ShortVideoViewController
@@ -210,7 +214,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ZFDouYinCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ZFDouYinCell class])];
-    cell.dataItem = [self.dataSource safeObjectAtIndex:indexPath.row];
+    HotItem *item = [self.dataSource safeObjectAtIndex:indexPath.row];
+
+    cell.dataItem = item;
     //点击观看完整版
     __weak __typeof(self) weakSelf = self;
 
@@ -219,7 +225,6 @@
         if (!RI.infoInitItem.is_vip) {
             [weakSelf.player setPauseByEvent:YES];
             [weakSelf.controlView setPlayBtnHidden:NO];
-            HotItem *item = [weakSelf.dataSource safeObjectAtIndex:indexPath.row];
             AVPlayerController *vc = [AVPlayerController controllerWith:item];
             vc.isShortVideo = YES;
             [weakSelf.navigationController pushViewController:vc animated:YES];
@@ -237,7 +242,11 @@
     //点击分享
     cell.douYinCellShareBtnClickBlock = ^(UIButton *sender) {
 //        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
-
+        [[UIApplication sharedApplication].keyWindow addSubview:weakSelf.shareView];
+        [weakSelf.shareView refreshUIWithItme:item];
+        [weakSelf.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
+        }];
     };
     return cell;
 }
@@ -273,7 +282,34 @@
     [self.controlView showCoverViewWithUrl:self.item.img_url withImageMode:UIViewContentModeScaleAspectFill];
 
 }
+#pragma mark - 保存图片
+- (void)saveImageToDiskWithImage:(UIImage *)image
+{
+    __weak __typeof(self) weakSelf = self;
+    UIImageWriteToSavedPhotosAlbum(image, weakSelf, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
 
+    
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    
+    
+    ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
+    
+    if(author == ALAuthorizationStatusDenied ){
+        //无权限
+        [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"图片保存失败,请前往设置开启相册权限", nil)];
+        return;
+    }
+    
+    if (error) {
+        [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"保存失败，请查看你的相册权限是否开启", nil)];
+    }else{
+        [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"图片已经保存至相册", nil)];
+ 
+    }
+}
 #pragma mark - getter
 
 - (UITableView *)customTableView {
@@ -359,5 +395,29 @@
         };
     }
     return _commonAlertView;
+}
+
+- (ShareView *)shareView{
+    if (!_shareView) {
+        _shareView = [ShareView new];
+        __weak __typeof(self) weakSelf = self;
+        _shareView.tapClickBlock = ^{
+            [weakSelf.shareView removeFromSuperview];
+            weakSelf.shareView = nil;
+        };
+        
+        _shareView.saveBtnClickBlock = ^(UIButton * _Nonnull sender, UIImageView * _Nonnull erweimaImageV) {
+            [weakSelf saveImageToDiskWithImage:erweimaImageV.image];
+
+        };
+        
+        _shareView.copyBtnClickBlock = ^(UIButton * _Nonnull sender, UIImageView * _Nonnull erweimaImageV) {
+            NSString *erweimaStr = [NSString stringWithFormat:@"%@/share.html?appkey=%@&code=%@",RI.basicItem.share_url,ErweimaShareKey,RI.infoInitItem.invite_code];
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            pasteboard.string = erweimaStr;
+            [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"复制成功", nil)];
+        };
+    }
+    return _shareView;
 }
 @end
