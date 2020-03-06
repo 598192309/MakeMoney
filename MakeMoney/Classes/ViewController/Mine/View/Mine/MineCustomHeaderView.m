@@ -8,6 +8,7 @@
 
 #import "MineCustomHeaderView.h"
 #import "LPButton.h"
+#import "MineItem.h"
 
 @interface MineCustomHeaderView()
 //头部view
@@ -60,8 +61,8 @@
 
 
 #pragma mark - 刷新ui
-- (void)configUIWithItem:(NSObject *)item finishi:(void(^)(void))finishBlock{
-    NSString *str = [NSString stringWithFormat:lqLocalized(@"每日观看次数 %ld/%ld", nil),RI.infoInitItem.rest_free_times,RI.infoInitItem.max_free_times];
+- (void)configUIWithItem:(InitItem *)item finishi:(void(^)(void))finishBlock{
+    NSString *str = [NSString stringWithFormat:lqLocalized(@"每日观看次数 %ld/%ld", nil),item.rest_free_times,item.max_free_times];
     //字体局部变色
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:str];
     if (str.length > 0) {
@@ -73,6 +74,8 @@
         }
     }
     self.timesLable.attributedText = attr;
+    
+    self.vipLable.text = item.is_qm_vip ? item.qm_vip_end_time:lqStrings(@"未开通");
     
     finishBlock();
 }

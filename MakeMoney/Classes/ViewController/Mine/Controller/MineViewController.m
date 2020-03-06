@@ -17,6 +17,8 @@
 #import "WalletViewController.h"
 #import "TuiGuangViewController.h"
 #import "VIPExchangeAlertView.h"
+#import "BindMobileFirstStepViewController.h"
+#import "SecurityCodeViewController.h"
 
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (strong, nonatomic) UITableView  *customTableView;
@@ -26,6 +28,7 @@
 @property (nonatomic,strong)CustomAlertView *infoAlert;
 @property(nonatomic,strong)VIPExchangeAlertView * vipExchangeAlertView;
 
+@property (nonatomic,strong)InitItem *dataItem;
 @end
 
 @implementation MineViewController
@@ -140,15 +143,28 @@
 }
 
 #pragma mark - net
-//更新播放次数
+//更新用户信息
 - (void)requestData{
     __weak __typeof(self) weakSelf = self;
-    
-    [weakSelf.customTableView endHeaderRefreshing];
+    [MineApi requestUserInfoSuccess:^(NSInteger status, NSString * _Nonnull msg, InitItem * _Nonnull initItem) {
+        weakSelf.dataItem = initItem;
+        [weakSelf.customTableView endHeaderRefreshing];
+        [weakSelf.mineCustomHeaderView configUIWithItem:initItem finishi:^{
+            
+        }];
+        [weakSelf.customTableView reloadData];
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+        [weakSelf.customTableView endHeaderRefreshing];
+    }];
 }
 
 //vip兑换
 - (void)vipExchangeWithNumber:(NSString *)number sender:(UIButton *)sender{
+    if (number.length == 0) {
+        [LSVProgressHUD showInfoWithStatus:lqStrings(@"请填写兑换码")];
+        return;
+    }
     [LSVProgressHUD show];
     __weak __typeof(self) weakSelf = self;
     sender.userInteractionEnabled = NO;
@@ -163,7 +179,25 @@
 
     }];
 }
+//绑定邀请码
+- (void)bandingYaoqingmaWithNum:(NSString *)number sender:(UIButton *)sender{
+    if (number.length == 0) {
+        [LSVProgressHUD showInfoWithStatus:lqStrings(@"请填写邀请码")];
+        return;
+    }
+    [LSVProgressHUD show];
+    __weak __typeof(self) weakSelf = self;
+    sender.userInteractionEnabled = NO;
+    [MineApi requestPayResultWithsexID:RI.infoInitItem.sex_id invite_code:number invite_code2:RI.infoInitItem.invite_code Success:^(NSInteger status, NSString * _Nonnull msg) {
+        sender.userInteractionEnabled = YES;
+        [LSVProgressHUD showInfoWithStatus:msg];
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+        sender.userInteractionEnabled = YES;
 
+    }];
+    
+}
 #pragma mark -  UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 5;
@@ -218,7 +252,7 @@
     }else if (indexPath.section == 2){
         if (indexPath.row == 0) {
             title = lqStrings(@"绑定手机号");
-            subTitle = RI.infoInitItem.mobile.length > 0 ? lqStrings(@"已绑定") : lqStrings(@"未绑定");
+            subTitle = RI.infoInitItem.mobile.length > 0 ? RI.infoInitItem.mobile : lqStrings(@"未绑定");
         }else  if (indexPath.row == 1) {
             title = lqStrings(@"我的邀请人");
             subTitle = lqStrings(@"未绑定");
@@ -276,8 +310,11 @@
     }else if (indexPath.section == 1){
         
     }else if (indexPath.section == 2){
-        if (indexPath.row == 0) {
-           
+        if (indexPath.row == 0) {//绑定手机号
+            if (RI.infoInitItem.mobile.length == 0) {
+                BindMobileFirstStepViewController *vc = [[BindMobileFirstStepViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
         }else  if (indexPath.row == 1) {//我的邀请人
             [[UIApplication sharedApplication].keyWindow addSubview:self.vipExchangeAlertView];
             [self.vipExchangeAlertView refreshContent:lqStrings(@"请填写邀请码")];
@@ -285,7 +322,9 @@
                 make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
             }];
            
-        }else  if (indexPath.row == 2) {
+        }else  if (indexPath.row == 2) {//安全码设置
+            SecurityCodeViewController *vc = [[SecurityCodeViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
             
         }
 
@@ -457,7 +496,9 @@
             [weakSelf.vipExchangeAlertView removeFromSuperview];
             weakSelf.vipExchangeAlertView = nil;
             if ([tf.placeholder isEqualToString:lqStrings(@"请填写邀请码")]) {
-                [LSVProgressHUD showInfoWithStatus:@"请填写邀请码"];
+//                [LSVProgressHUD showInfoWithStatus:@"请填写邀请码"];
+                //
+                [weakSelf bandingYaoqingmaWithNum:tf.text sender:sender];
             }else{
                 [weakSelf vipExchangeWithNumber:tf.text sender:sender];
 

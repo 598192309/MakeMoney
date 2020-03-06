@@ -108,8 +108,9 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
     self.player.playerPlayTimeChanged = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, NSTimeInterval currentTime, NSTimeInterval duration) {
         @strongify(self)
         NSLog(@"播放时长currentTime:%f,总时长duration:%f",currentTime,duration);
-        //判断是否是会员
-        if (!RI.infoInitItem.is_vip && !weakSelf.isShortVideo) {//不是会员 只能看5分钟
+        //判断是否是会员     //AV 这里有3中状态，通过tag判断   0  VIP   1 限免    2 收费
+
+        if (!RI.infoInitItem.is_vip && !weakSelf.isShortVideo && !(weakSelf.item.tag == 1)) {//不是会员 只能看5分钟 不是限免
             if (currentTime > 5 * 60) {
                 [self.player.currentPlayerManager pause];
                 [self.controlView resetControlView];

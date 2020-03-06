@@ -169,6 +169,11 @@
 		1120F42524079F9D00550055 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1120F42224079F9D00550055 /* GTMBase64.m */; };
 		112F56AE2411DD2100CE4715 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F56AD2411DD2100CE4715 /* ShareView.m */; };
 		112F56B12411EF4600CE4715 /* LScreenShot.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F56AF2411EF4600CE4715 /* LScreenShot.m */; };
+		112F56B42411FACB00CE4715 /* BindMobileFirstStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F56B32411FACB00CE4715 /* BindMobileFirstStepViewController.m */; };
+		112F56B72411FB0400CE4715 /* BindMobileFirstStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F56B62411FB0400CE4715 /* BindMobileFirstStepView.m */; };
+		112F56BA2412019100CE4715 /* BindMobileSecStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F56B92412019100CE4715 /* BindMobileSecStepViewController.m */; };
+		112F56BD241201B000CE4715 /* BindMobileSecStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F56BC241201B000CE4715 /* BindMobileSecStepView.m */; };
+		112F56C02412237D00CE4715 /* SecurityCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F56BF2412237D00CE4715 /* SecurityCodeViewController.m */; };
 		1135C9DA2408BA7800478696 /* CityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1135C9D92408BA7800478696 /* CityCell.m */; };
 		1139807D2410A08400663E26 /* YCPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113980762410A08400663E26 /* YCPresentationController.m */; };
 		1139807E2410A08400663E26 /* YCPopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1139807B2410A08400663E26 /* YCPopoverAnimator.m */; };
@@ -578,6 +583,16 @@
 		112F56AD2411DD2100CE4715 /* ShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
 		112F56AF2411EF4600CE4715 /* LScreenShot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LScreenShot.m; sourceTree = "<group>"; };
 		112F56B02411EF4600CE4715 /* LScreenShot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LScreenShot.h; sourceTree = "<group>"; };
+		112F56B22411FACB00CE4715 /* BindMobileFirstStepViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BindMobileFirstStepViewController.h; sourceTree = "<group>"; };
+		112F56B32411FACB00CE4715 /* BindMobileFirstStepViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BindMobileFirstStepViewController.m; sourceTree = "<group>"; };
+		112F56B52411FB0400CE4715 /* BindMobileFirstStepView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BindMobileFirstStepView.h; sourceTree = "<group>"; };
+		112F56B62411FB0400CE4715 /* BindMobileFirstStepView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BindMobileFirstStepView.m; sourceTree = "<group>"; };
+		112F56B82412019100CE4715 /* BindMobileSecStepViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BindMobileSecStepViewController.h; sourceTree = "<group>"; };
+		112F56B92412019100CE4715 /* BindMobileSecStepViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BindMobileSecStepViewController.m; sourceTree = "<group>"; };
+		112F56BB241201B000CE4715 /* BindMobileSecStepView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BindMobileSecStepView.h; sourceTree = "<group>"; };
+		112F56BC241201B000CE4715 /* BindMobileSecStepView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BindMobileSecStepView.m; sourceTree = "<group>"; };
+		112F56BE2412237D00CE4715 /* SecurityCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecurityCodeViewController.h; sourceTree = "<group>"; };
+		112F56BF2412237D00CE4715 /* SecurityCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecurityCodeViewController.m; sourceTree = "<group>"; };
 		1135C9D82408BA7800478696 /* CityCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityCell.h; sourceTree = "<group>"; };
 		1135C9D92408BA7800478696 /* CityCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityCell.m; sourceTree = "<group>"; };
 		113980762410A08400663E26 /* YCPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCPresentationController.m; sourceTree = "<group>"; };
@@ -1017,6 +1032,12 @@
 				113980812410A0BB00663E26 /* PopPayWayViewController.m */,
 				113980862410DB3C00663E26 /* SaoMaViewController.h */,
 				113980872410DB3C00663E26 /* SaoMaViewController.m */,
+				112F56B22411FACB00CE4715 /* BindMobileFirstStepViewController.h */,
+				112F56B32411FACB00CE4715 /* BindMobileFirstStepViewController.m */,
+				112F56B82412019100CE4715 /* BindMobileSecStepViewController.h */,
+				112F56B92412019100CE4715 /* BindMobileSecStepViewController.m */,
+				112F56BE2412237D00CE4715 /* SecurityCodeViewController.h */,
+				112F56BF2412237D00CE4715 /* SecurityCodeViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1115,6 +1136,10 @@
 				1139808A2410DC6F00663E26 /* SaoMaView.m */,
 				1139808F241102B000663E26 /* RechargeDetailCell.h */,
 				11398090241102B000663E26 /* RechargeDetailCell.m */,
+				112F56B52411FB0400CE4715 /* BindMobileFirstStepView.h */,
+				112F56B62411FB0400CE4715 /* BindMobileFirstStepView.m */,
+				112F56BB241201B000CE4715 /* BindMobileSecStepView.h */,
+				112F56BC241201B000CE4715 /* BindMobileSecStepView.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1930,6 +1955,7 @@
 				11105E4D24066BC900521CB2 /* UIViewController+LqExtension.m in Sources */,
 				11105E69240674E700521CB2 /* HomeCollectionTopHeaderView.m in Sources */,
 				111116A8240E4CE400E9F781 /* TuiGuangCustomView.m in Sources */,
+				112F56BD241201B000CE4715 /* BindMobileSecStepView.m in Sources */,
 				09E72CEC24055F8E0004B25C /* UIImageView+HighlightedWebCache.m in Sources */,
 				09E72C5D24055F770004B25C /* ViewController+MASAdditions.m in Sources */,
 				8BD545A5240BB4CC00C90A31 /* UIScrollView+MJRefresh.m in Sources */,
@@ -1971,6 +1997,7 @@
 				8BD545B3240BB4CC00C90A31 /* MJRefreshStateHeader.m in Sources */,
 				11105E5D24066BC900521CB2 /* EnlargeTouchSizeButton.m in Sources */,
 				1139808B2410DC6F00663E26 /* SaoMaView.m in Sources */,
+				112F56B72411FB0400CE4715 /* BindMobileFirstStepView.m in Sources */,
 				113980852410A79500663E26 /* PopPayWayCell.m in Sources */,
 				110DFBFD240F8BAB002E1C8B /* ZFDouYinCell.m in Sources */,
 				11105E7824067BC700521CB2 /* CityApi.m in Sources */,
@@ -1979,6 +2006,8 @@
 				09E72C3C24055F6E0004B25C /* IQUIWindow+Hierarchy.m in Sources */,
 				09E72C8324055F7E0004B25C /* NSString+MJExtension.m in Sources */,
 				8BD545A6240BB4CC00C90A31 /* MJRefreshConst.m in Sources */,
+				112F56B42411FACB00CE4715 /* BindMobileFirstStepViewController.m in Sources */,
+				112F56C02412237D00CE4715 /* SecurityCodeViewController.m in Sources */,
 				110DFBFA240F85C6002E1C8B /* ShortVideoViewController.m in Sources */,
 				8BD545B9240BB4CC00C90A31 /* MJRefreshComponent.m in Sources */,
 				8BD545AC240BB4CC00C90A31 /* MJRefreshBackGifFooter.m in Sources */,
@@ -2096,6 +2125,7 @@
 				8B9B8BF2240D4AED004B4704 /* ZFReachabilityManager.m in Sources */,
 				8BD545B6240BB4CC00C90A31 /* MJRefreshHeader.m in Sources */,
 				09E72C4024055F6E0004B25C /* IQUIViewController+Additions.m in Sources */,
+				112F56BA2412019100CE4715 /* BindMobileSecStepViewController.m in Sources */,
 				093E58BF2406A87A004E5F72 /* SAMKeychainQuery.m in Sources */,
 				09E72C3F24055F6E0004B25C /* IQUIView+Hierarchy.m in Sources */,
 				09E72D0324055F960004B25C /* SVProgressAnimatedView.m in Sources */,

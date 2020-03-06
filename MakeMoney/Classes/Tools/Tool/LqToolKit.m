@@ -7,6 +7,7 @@
 //
 
 #import "LqToolKit.h"
+#import "AVPlayerController.h"
 @implementation LqToolKit
 
 /**
@@ -248,7 +249,14 @@
             break;
         case AdTag_AVDetailVC:
         {
-            [LSVProgressHUD showInfoWithStatus:@"跳转到AV详情页面"];
+//            [LSVProgressHUD showInfoWithStatus:@"跳转到AV详情页面"];
+            AVPlayerController *vc = [AVPlayerController controllerWith:item];
+            //上上一个界面
+            MainTabBarController *main = (MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            BaseNavigationController *nav = [main.childViewControllers safeObjectAtIndex:main.selectedIndex];
+            UIViewController *currentvc = [nav.childViewControllers lastObject];
+            
+            [currentvc.navigationController pushViewController:vc animated:YES];
         }
             break;
         case AdTag_QMDetailVC:

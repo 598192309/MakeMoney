@@ -280,6 +280,9 @@
 
         NSString *msg = [resultObject safeObjectForKey:@"msg"];
         InitItem *initItem = [InitItem mj_objectWithKeyValues:[resultObject safeObjectForKey:@"data"]];
+        
+        RI.infoInitItem = initItem;
+        RI.infoInitItemJasonStr = [initItem mj_JSONString];
 
         if (successBlock) {
             successBlock(status,msg,initItem);
@@ -335,5 +338,117 @@
                 errorBlock(error,resultObject);
             }
         }];        
+}
+
+
+/*******************添加邀请码
+ sex_id
+ invite_code      被邀请人的
+ invite_code2     自己的
+ *********************/
++ (NetworkTask *)requestPayResultWithsexID:(NSString *)sex_id invite_code:(NSString *)invite_code invite_code2:(NSString *)invite_code2 Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/invite_record/add" parameters:@{@"sex_id":SAFE_NIL_STRING(sex_id),@"invite_code":SAFE_NIL_STRING(invite_code),@"invite_code2":SAFE_NIL_STRING(invite_code2)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+         NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+         NSString *msg = [resultObject safeObjectForKey:@"msg"];
+
+         if (successBlock) {
+             successBlock(status,msg);
+         }
+     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+         if (errorBlock) {
+             errorBlock(error,resultObject);
+         }
+     }];
+}
+
+/*******************检查安全码
+ 
+ *********************/
++ (NetworkTask *)checkSecurityWithsafeCode:(NSString *)safe_code  Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/check_safe_code" parameters:@{@"safe_code":SAFE_NIL_STRING(safe_code)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+         NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+         NSString *msg = [resultObject safeObjectForKey:@"msg"];
+
+         if (successBlock) {
+             successBlock(status,msg);
+         }
+     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+         if (errorBlock) {
+             errorBlock(error,resultObject);
+         }
+     }];
+}
+
+/*******************添加安全码
+ 
+ *********************/
++ (NetworkTask *)addSecurityWithsafeCode:(NSString *)safe_code  Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/safe_code/update" parameters:@{@"safe_code":SAFE_NIL_STRING(safe_code)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+         NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+         NSString *msg = [resultObject safeObjectForKey:@"msg"];
+
+         if (successBlock) {
+             successBlock(status,msg);
+         }
+     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+         if (errorBlock) {
+             errorBlock(error,resultObject);
+         }
+     }];
+}
+
+/*******************重置安全码
+ 
+ *********************/
++ (NetworkTask *)resetSecuritySuccess:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/reset_safe_code" parameters:nil criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+         NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+         NSString *msg = [resultObject safeObjectForKey:@"msg"];
+
+         if (successBlock) {
+             successBlock(status,msg);
+         }
+     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+         if (errorBlock) {
+             errorBlock(error,resultObject);
+         }
+     }];
+}
+
+
+/*******************获取验证码
+ 
+ *********************/
++ (NetworkTask *)requestCodeWithMobile:(NSString *)mobile  Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/get_code" parameters:@{@"mobile":SAFE_NIL_STRING(mobile)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+         NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+         NSString *msg = [resultObject safeObjectForKey:@"msg"];
+
+         if (successBlock) {
+             successBlock(status,msg);
+         }
+     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+         if (errorBlock) {
+             errorBlock(error,resultObject);
+         }
+     }];
+}
+
+/*******************检查验证码
+ 
+ *********************/
++ (NetworkTask *)checkCodeWithMobile:(NSString *)mobile code:(NSString *)code Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/check_code" parameters:@{@"mobile":SAFE_NIL_STRING(mobile),@"code":SAFE_NIL_STRING(code)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+         NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+         NSString *msg = [resultObject safeObjectForKey:@"msg"];
+
+         if (successBlock) {
+             successBlock(status,msg);
+         }
+     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+         if (errorBlock) {
+             errorBlock(error,resultObject);
+         }
+     }];
 }
 @end

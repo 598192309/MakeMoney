@@ -24,7 +24,8 @@
 #import "ListViewController.h"
 #import "AllCategoryViewController.h"
 #import "ShortVideoViewController.h"
-
+#import "MineApi.h"
+#import "MineItem.h"
 @interface HomeViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,SDCycleScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -34,7 +35,7 @@
 @property (nonatomic,copy)NSArray<AdsItem *> *bannerList;
 
 @property (nonatomic,strong)CommonAlertView *commonAlertView;
-
+@property (nonatomic,strong)UpdateItem * updateItem;
 @end
 
 @implementation HomeViewController
@@ -48,7 +49,7 @@
     [super viewDidLoad];
     [self configUI];
     [self requestData];
-    
+    [self updateVesion];
     
 }
 - (void)dealloc{
@@ -112,7 +113,16 @@
         
     }];
 }
-
+//检查是否有版本更新
+- (void)updateVesion{
+    __weak __typeof(self) weakSelf = self;
+    [MineApi updateSuccess:^(UpdateItem * _Nonnull updateItem, NSString * _Nonnull msg) {
+        weakSelf.updateItem = updateItem;
+        [weakSelf showMsg:updateItem.content firstBtnTitle:lqStrings(@"暂时不升级") secBtnTitle:lqStrings(@"去升级") singleBtnTitle:nil];
+    } error:^(NSError *error, id resultObject) {
+        
+    }];
+}
 #pragma mark - UICollectionViewDataSource
 //设置容器中有多少个组
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -312,9 +322,20 @@
             [weakSelf.commonAlertView removeFromSuperview];
             weakSelf.commonAlertView = nil;
             if (index == 1) {//分享
-                [LSVProgressHUD showInfoWithStatus:@"分享"];
+                if ([str isEqualToString:lqStrings(@"暂时不升级")]) {
+                    
+                }else{
+                    [LSVProgressHUD showInfoWithStatus:@"分享"];
+
+                }
             }else if (index == 2) {//购买VIP
-                [LSVProgressHUD showInfoWithStatus:@"购买VIP"];
+                if ([str isEqualToString:lqStrings(@"去升级")]) {
+                    NSURL *url = [NSURL URLWithString:weakSelf.updateItem.download_url];
+                    [[UIApplication sharedApplication] openURL:url];
+                }else{
+                    [LSVProgressHUD showInfoWithStatus:@"购买VIP"];
+                    
+                }
             }
         };
     }

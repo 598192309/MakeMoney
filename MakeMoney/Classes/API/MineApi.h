@@ -112,7 +112,43 @@ NS_ASSUME_NONNULL_BEGIN
  *********************/
 + (NetworkTask *)requestPayResultWithTradeNo:(NSString *)trade_no Success:(void(^)(NSInteger status,NSString *msg,NSString *secret))successBlock error:(ErrorBlock)errorBlock;
 
+/*******************添加邀请码
+ sex_id
+ invite_code      被邀请人的
+ invite_code2     自己的
+ *********************/
++ (NetworkTask *)requestPayResultWithsexID:(NSString *)sex_id invite_code:(NSString *)invite_code invite_code2:(NSString *)invite_code2 Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
 
+
+/*******************检查安全码
+ 
+ *********************/
++ (NetworkTask *)checkSecurityWithsafeCode:(NSString *)safe_code  Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
+
+/*******************检查安全码
+ 
+ *********************/
++ (NetworkTask *)checkSecurityWithsafeCode:(NSString *)safe_code  Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
+
+/*******************添加安全码
+ 
+ *********************/
++ (NetworkTask *)addSecurityWithsafeCode:(NSString *)safe_code  Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
+
+/*******************重置安全码
+ 
+ *********************/
++ (NetworkTask *)resetSecuritySuccess:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
+
+/*******************获取验证码
+ 
+ *********************/
++ (NetworkTask *)requestCodeWithMobile:(NSString *)mobile  Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
+
+/*******************检查验证码
+ 
+ *********************/
++ (NetworkTask *)checkCodeWithMobile:(NSString *)mobile code:(NSString *)code Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
 @end
 
 NS_ASSUME_NONNULL_END

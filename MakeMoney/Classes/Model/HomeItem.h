@@ -44,27 +44,6 @@ typedef NS_ENUM(NSInteger,AdTag) {
 @end
 
 
-/**广告 */
-@interface AdsItem : NSObject
-@property (nonatomic,strong)NSString *av_url;
-@property (nonatomic,strong)NSString *create_time;
-@property (nonatomic,strong)NSString *desc;
-@property (nonatomic,strong)NSString *end_time;
-@property (nonatomic,strong)NSString *ID;
-@property (nonatomic,strong)NSString *img;
-@property (nonatomic,assign)NSInteger qm_id;
-@property (nonatomic,assign)NSInteger status;
-@property (nonatomic,assign)AdTag tag;
-@property (nonatomic,assign)NSInteger time;
-@property (nonatomic,strong)NSString *title;
-@property (nonatomic,assign)NSInteger type;
-@property (nonatomic,strong)NSString *url;
-
-//自己写
-@property (nonatomic, assign) CGSize imageSize;
-@end
-
-
 /**热门视频 */
 @interface HotItem : NSObject
 @property (nonatomic,strong)NSString *fan_hao;
@@ -91,6 +70,27 @@ typedef NS_ENUM(NSInteger,AdTag) {
 @property (nonatomic,strong)NSString *text;
 
 @end
+/**广告 */
+@interface AdsItem : HotItem
+@property (nonatomic,strong)NSString *av_url;
+@property (nonatomic,strong)NSString *create_time;
+@property (nonatomic,strong)NSString *desc;
+@property (nonatomic,strong)NSString *end_time;
+@property (nonatomic,strong)NSString *ID;
+@property (nonatomic,strong)NSString *img;
+@property (nonatomic,assign)NSInteger qm_id;
+@property (nonatomic,assign)NSInteger status;
+@property (nonatomic,assign)AdTag tag;
+@property (nonatomic,assign)NSInteger time;
+@property (nonatomic,strong)NSString *title;
+@property (nonatomic,assign)NSInteger type;
+@property (nonatomic,strong)NSString *url;
+
+//自己写
+@property (nonatomic, assign) CGSize imageSize;
+@end
+
+
 
 //视频类型
 typedef NS_ENUM(NSInteger, VideoType) {
