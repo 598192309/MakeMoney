@@ -169,6 +169,13 @@
 		111FD6F1241231DC00E7B419 /* xieyi.html in Resources */ = {isa = PBXBuildFile; fileRef = 111FD6F0241231DC00E7B419 /* xieyi.html */; };
 		111FD6F424124B1800E7B419 /* AblumApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 111FD6F324124B1800E7B419 /* AblumApi.m */; };
 		111FD6F724124B6000E7B419 /* AblumItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 111FD6F624124B6000E7B419 /* AblumItem.m */; };
+		111FD6FA24124E5B00E7B419 /* MyLoveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111FD6F924124E5B00E7B419 /* MyLoveViewController.m */; };
+		111FD6FD24124E7B00E7B419 /* MyAVLoveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111FD6FC24124E7B00E7B419 /* MyAVLoveViewController.m */; };
+		111FD70024124E8700E7B419 /* MyVedioLoveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111FD6FF24124E8700E7B419 /* MyVedioLoveViewController.m */; };
+		111FD70324124E9400E7B419 /* MyAblumLoveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111FD70224124E9400E7B419 /* MyAblumLoveViewController.m */; };
+		111FD70624124F3F00E7B419 /* GroupCoinSegmentrol.m in Sources */ = {isa = PBXBuildFile; fileRef = 111FD70524124F3F00E7B419 /* GroupCoinSegmentrol.m */; };
+		111FD7092412515400E7B419 /* MyLoveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 111FD7082412515400E7B419 /* MyLoveCell.m */; };
+		111FD70C241258B100E7B419 /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 111FD70B241258B100E7B419 /* NoDataView.m */; };
 		1120F42524079F9D00550055 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1120F42224079F9D00550055 /* GTMBase64.m */; };
 		112F56AE2411DD2100CE4715 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F56AD2411DD2100CE4715 /* ShareView.m */; };
 		112F56B12411EF4600CE4715 /* LScreenShot.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F56AF2411EF4600CE4715 /* LScreenShot.m */; };
@@ -584,6 +591,20 @@
 		111FD6F324124B1800E7B419 /* AblumApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AblumApi.m; sourceTree = "<group>"; };
 		111FD6F524124B6000E7B419 /* AblumItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AblumItem.h; sourceTree = "<group>"; };
 		111FD6F624124B6000E7B419 /* AblumItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AblumItem.m; sourceTree = "<group>"; };
+		111FD6F824124E5B00E7B419 /* MyLoveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyLoveViewController.h; sourceTree = "<group>"; };
+		111FD6F924124E5B00E7B419 /* MyLoveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyLoveViewController.m; sourceTree = "<group>"; };
+		111FD6FB24124E7B00E7B419 /* MyAVLoveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyAVLoveViewController.h; sourceTree = "<group>"; };
+		111FD6FC24124E7B00E7B419 /* MyAVLoveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyAVLoveViewController.m; sourceTree = "<group>"; };
+		111FD6FE24124E8700E7B419 /* MyVedioLoveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyVedioLoveViewController.h; sourceTree = "<group>"; };
+		111FD6FF24124E8700E7B419 /* MyVedioLoveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyVedioLoveViewController.m; sourceTree = "<group>"; };
+		111FD70124124E9400E7B419 /* MyAblumLoveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyAblumLoveViewController.h; sourceTree = "<group>"; };
+		111FD70224124E9400E7B419 /* MyAblumLoveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyAblumLoveViewController.m; sourceTree = "<group>"; };
+		111FD70424124F3F00E7B419 /* GroupCoinSegmentrol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupCoinSegmentrol.h; sourceTree = "<group>"; };
+		111FD70524124F3F00E7B419 /* GroupCoinSegmentrol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupCoinSegmentrol.m; sourceTree = "<group>"; };
+		111FD7072412515400E7B419 /* MyLoveCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyLoveCell.h; sourceTree = "<group>"; };
+		111FD7082412515400E7B419 /* MyLoveCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyLoveCell.m; sourceTree = "<group>"; };
+		111FD70A241258B100E7B419 /* NoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoDataView.h; sourceTree = "<group>"; };
+		111FD70B241258B100E7B419 /* NoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoDataView.m; sourceTree = "<group>"; };
 		1120F41F24079F9D00550055 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		1120F42124079F9D00550055 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		1120F42224079F9D00550055 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
@@ -886,6 +907,8 @@
 		09239A6D2403FEE400A4F727 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				111FD70A241258B100E7B419 /* NoDataView.h */,
+				111FD70B241258B100E7B419 /* NoDataView.m */,
 				096C7FC2240BC3D800914E20 /* CustomAlertView.h */,
 				096C7FC3240BC3D800914E20 /* CustomAlertView.m */,
 				11E860B5240D06D100719378 /* NoticeAlertView.h */,
@@ -1051,6 +1074,14 @@
 				112F56B92412019100CE4715 /* BindMobileSecStepViewController.m */,
 				112F56BE2412237D00CE4715 /* SecurityCodeViewController.h */,
 				112F56BF2412237D00CE4715 /* SecurityCodeViewController.m */,
+				111FD6F824124E5B00E7B419 /* MyLoveViewController.h */,
+				111FD6F924124E5B00E7B419 /* MyLoveViewController.m */,
+				111FD6FB24124E7B00E7B419 /* MyAVLoveViewController.h */,
+				111FD6FC24124E7B00E7B419 /* MyAVLoveViewController.m */,
+				111FD6FE24124E8700E7B419 /* MyVedioLoveViewController.h */,
+				111FD6FF24124E8700E7B419 /* MyVedioLoveViewController.m */,
+				111FD70124124E9400E7B419 /* MyAblumLoveViewController.h */,
+				111FD70224124E9400E7B419 /* MyAblumLoveViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1153,6 +1184,10 @@
 				112F56B62411FB0400CE4715 /* BindMobileFirstStepView.m */,
 				112F56BB241201B000CE4715 /* BindMobileSecStepView.h */,
 				112F56BC241201B000CE4715 /* BindMobileSecStepView.m */,
+				111FD70424124F3F00E7B419 /* GroupCoinSegmentrol.h */,
+				111FD70524124F3F00E7B419 /* GroupCoinSegmentrol.m */,
+				111FD7072412515400E7B419 /* MyLoveCell.h */,
+				111FD7082412515400E7B419 /* MyLoveCell.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1921,6 +1956,7 @@
 				09E72C3D24055F6E0004B25C /* IQUITextFieldView+Additions.m in Sources */,
 				110DFBED240F3F36002E1C8B /* VIPExchangeAlertView.m in Sources */,
 				09E72C3A24055F6E0004B25C /* IQKeyboardManager.m in Sources */,
+				111FD6FD24124E7B00E7B419 /* MyAVLoveViewController.m in Sources */,
 				09E72D0424055F960004B25C /* SVProgressHUD.m in Sources */,
 				11105E6F24067B9C00521CB2 /* HomeApi.m in Sources */,
 				11105E5024066BC900521CB2 /* UIImageView+LqExtension.m in Sources */,
@@ -1989,8 +2025,10 @@
 				8B9B8C03240D4AED004B4704 /* KSMediaPlayerManager.m in Sources */,
 				1120F42524079F9D00550055 /* GTMBase64.m in Sources */,
 				8B9B8BFC240D4AED004B4704 /* ZFSliderView.m in Sources */,
+				111FD6FA24124E5B00E7B419 /* MyLoveViewController.m in Sources */,
 				8B9B8C10240E993F004B4704 /* TixianDetailViewController.m in Sources */,
 				8B9B8BF1240D4AED004B4704 /* ZFKVOController.m in Sources */,
+				111FD70624124F3F00E7B419 /* GroupCoinSegmentrol.m in Sources */,
 				11105E4E24066BC900521CB2 /* UIScrollView+LqExtension.m in Sources */,
 				11105E5324066BC900521CB2 /* UITextField+LqExtension.m in Sources */,
 				096C7FC4240BC3D800914E20 /* CustomAlertView.m in Sources */,
@@ -2007,6 +2045,7 @@
 				111116A5240E4C2A00E9F781 /* TuiGuangViewController.m in Sources */,
 				8BD545B0240BB4CC00C90A31 /* MJRefreshAutoGifFooter.m in Sources */,
 				09E72D19240560210004B25C /* BaseNavigationController.m in Sources */,
+				111FD70024124E8700E7B419 /* MyVedioLoveViewController.m in Sources */,
 				09E72CF724055F8E0004B25C /* UIButton+WebCache.m in Sources */,
 				8BD545B3240BB4CC00C90A31 /* MJRefreshStateHeader.m in Sources */,
 				11105E5D24066BC900521CB2 /* EnlargeTouchSizeButton.m in Sources */,
@@ -2025,6 +2064,7 @@
 				110DFBFA240F85C6002E1C8B /* ShortVideoViewController.m in Sources */,
 				8BD545B9240BB4CC00C90A31 /* MJRefreshComponent.m in Sources */,
 				8BD545AC240BB4CC00C90A31 /* MJRefreshBackGifFooter.m in Sources */,
+				111FD70324124E9400E7B419 /* MyAblumLoveViewController.m in Sources */,
 				09239ABF2403FEE400A4F727 /* LogModel.m in Sources */,
 				8B9B8BF3240D4AED004B4704 /* UIViewController+ZFPlayerRotation.m in Sources */,
 				09E72C7E24055F7E0004B25C /* MJProperty.m in Sources */,
@@ -2034,10 +2074,12 @@
 				11105AD92406004700521CB2 /* ZhuanTiViewController.m in Sources */,
 				1135C9DA2408BA7800478696 /* CityCell.m in Sources */,
 				09239AD22403FEE400A4F727 /* LaunchingViewController.m in Sources */,
+				111FD7092412515400E7B419 /* MyLoveCell.m in Sources */,
 				8BD545AF240BB4CC00C90A31 /* MJRefreshAutoStateFooter.m in Sources */,
 				09E72C8224055F7E0004B25C /* NSObject+MJClass.m in Sources */,
 				1139807D2410A08400663E26 /* YCPresentationController.m in Sources */,
 				09239AD02403FEE400A4F727 /* LorginViewController.m in Sources */,
+				111FD70C241258B100E7B419 /* NoDataView.m in Sources */,
 				8B9B8C1F240EADDB004B4704 /* MyShareDetailCell.m in Sources */,
 				09E72D35240569920004B25C /* Error+KF.m in Sources */,
 				110DFBF4240F5007002E1C8B /* AVTuijianCell.m in Sources */,

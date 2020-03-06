@@ -20,6 +20,8 @@
 #import "BindMobileFirstStepViewController.h"
 #import "SecurityCodeViewController.h"
 #import "BaseWebViewController.h"
+#import "MyLoveViewController.h"
+
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (strong, nonatomic) UITableView  *customTableView;
 @property (nonatomic,strong)MineCustomHeaderView *mineCustomHeaderView;
@@ -319,7 +321,10 @@
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = RI.basicItem.email;
         [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"复制成功", nil)];
-    }else if (indexPath.section == 1){
+    }else if (indexPath.section == 1){//我的收藏
+        MyLoveViewController *vc = [[MyLoveViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+
         
     }else if (indexPath.section == 2){
         if (indexPath.row == 0) {//绑定手机号
