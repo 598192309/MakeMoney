@@ -36,6 +36,9 @@
 
 @property (nonatomic,strong)CommonAlertView *commonAlertView;
 @property (nonatomic,strong)UpdateItem * updateItem;
+
+@property (nonatomic,strong)CommonAlertView *freeAlertView;
+
 @end
 
 @implementation HomeViewController
@@ -50,6 +53,18 @@
     [self configUI];
     [self requestData];
     [self updateVesion];
+    
+    //如果是新用户 弹框限时免费
+    if (RI.infoInitItem.is_new_user) {
+        NSString *str;
+        if (RI.infoInitItem.new_user_free_day > 0) {
+            str = [NSString stringWithFormat:@"%ld天",(long)RI.infoInitItem.new_user_free_day];
+        }else{
+            str = [NSString stringWithFormat:@"%ld小时",(long)RI.infoInitItem.new_user_free_hour];
+
+        }
+        [self showFreeMsg:lqStrings(@"临时体验卡") submsg:[NSString stringWithFormat:lqLocalized(@"新用户可以免费体验%@哦～", nil),str] firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:lqStrings(@"好的")];
+    }
     
 }
 - (void)dealloc{
@@ -77,7 +92,14 @@
         make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
     }];
 }
-
+//新用户 限时免费 免的和其他提示冲突了
+- (void)showFreeMsg:(NSString *)msg submsg:(NSString *)submsg firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singleBtnTitle:(NSString *)singleBtnTitle{
+    [self.freeAlertView refreshUIWithTitle:msg titlefont:AdaptedFontSize(15) titleColor:TitleBlackColor subtitle:submsg subTitleFont:AdaptedFontSize(12) subtitleColor:TitleBlackColor firstBtnTitle:firstBtnTitle secBtnTitle:secBtnTitle singleBtnTitle:singleBtnTitle];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.freeAlertView];
+    [self.freeAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
+    }];
+}
 #pragma mark - net
 - (void)requestData{
     
@@ -118,7 +140,13 @@
     __weak __typeof(self) weakSelf = self;
     [MineApi updateSuccess:^(UpdateItem * _Nonnull updateItem, NSString * _Nonnull msg) {
         weakSelf.updateItem = updateItem;
-        [weakSelf showMsg:updateItem.content firstBtnTitle:lqStrings(@"暂时不升级") secBtnTitle:lqStrings(@"去升级") singleBtnTitle:nil];
+        if (updateItem.status == 2) {//强制
+            [weakSelf showMsg:updateItem.content firstBtnTitle:lqStrings(@"") secBtnTitle:@"" singleBtnTitle:lqStrings(@"去升级")];
+
+        }else{
+            [weakSelf showMsg:updateItem.content firstBtnTitle:lqStrings(@"暂时不升级") secBtnTitle:lqStrings(@"去升级") singleBtnTitle:nil];
+
+        }
     } error:^(NSError *error, id resultObject) {
         
     }];
@@ -228,9 +256,10 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
     if (section % 2 == 0) {
         AdsItem *item = [_dataSource.ads safeObjectAtIndex:section / 2];
-        CGSize size = [UIImage getImageSizeWithURL:item.img];
-        CGFloat h = (LQScreemW - 20) / size.width * size.height;
-        return  CGSizeMake(LQScreemW,h);
+//        CGSize size = [UIImage getImageSizeWithURL:item.img];//这个方法造成好卡
+//        CGFloat h = (LQScreemW - 20) / size.width * size.height;
+#warning todo  找个新方法
+        return  CGSizeMake(LQScreemW,Adaptor_Value(50));
     }
     return CGSizeZero;
 }
@@ -273,10 +302,10 @@
 
         if (videoListItem.type == VideoType_ShortVideo) {//短视频
             //判断是否还有观看次数
-//            if (RI.infoInitItem.rest_free_times == 0) {
-//                [self showMsg:lqStrings(@"今日观看次数已用完,明天再来吧,分享可获得无限观影哦") firstBtnTitle:lqStrings(@"分享") secBtnTitle:lqStrings(@"购买VIP") singleBtnTitle:@""];
-//                return;
-//            }
+            if (RI.infoInitItem.rest_free_times == 0) {
+                [self showMsg:lqStrings(@"今日观看次数已用完,明天再来吧,分享可获得无限观影哦") firstBtnTitle:lqStrings(@"分享") secBtnTitle:lqStrings(@"购买VIP") singleBtnTitle:@""];
+                return;
+            }
 
             ShortVideoViewController *vc = [ShortVideoViewController controllerWith:item];
             [self.navigationController pushViewController:vc animated:YES];
@@ -319,16 +348,19 @@
         _commonAlertView = [CommonAlertView new];
         __weak __typeof(self) weakSelf = self;
         _commonAlertView.commonAlertViewBlock = ^(NSInteger index, NSString * _Nonnull str) {
-            [weakSelf.commonAlertView removeFromSuperview];
-            weakSelf.commonAlertView = nil;
+
             if (index == 1) {//分享
+                [weakSelf.commonAlertView removeFromSuperview];
+                weakSelf.commonAlertView = nil;
                 if ([str isEqualToString:lqStrings(@"暂时不升级")]) {
                     
                 }else{
                     [LSVProgressHUD showInfoWithStatus:@"分享"];
-
+                    
                 }
             }else if (index == 2) {//购买VIP
+                [weakSelf.commonAlertView removeFromSuperview];
+                weakSelf.commonAlertView = nil;
                 if ([str isEqualToString:lqStrings(@"去升级")]) {
                     NSURL *url = [NSURL URLWithString:weakSelf.updateItem.download_url];
                     [[UIApplication sharedApplication] openURL:url];
@@ -336,9 +368,35 @@
                     [LSVProgressHUD showInfoWithStatus:@"购买VIP"];
                     
                 }
+            }else if (index == 3){
+                if ([str isEqualToString:lqStrings(@"去升级")]) {
+                    NSURL *url = [NSURL URLWithString:weakSelf.updateItem.download_url];
+                    [[UIApplication sharedApplication] openURL:url];
+                }else if ([str isEqualToString:lqStrings(@"好的")]){
+                    [weakSelf.commonAlertView removeFromSuperview];
+                    weakSelf.commonAlertView = nil;
+                }
+            }else if (index == 4){
+                if ([weakSelf.commonAlertView.titleStr containsString:lqStrings(@"今日观看次数已用完")]) {
+                    [weakSelf.commonAlertView removeFromSuperview];
+                    weakSelf.commonAlertView = nil;
+                }//强制升级 不给消失
+
             }
         };
     }
     return _commonAlertView;
+}
+
+- (CommonAlertView *)freeAlertView{
+    if (!_freeAlertView) {
+        _freeAlertView = [CommonAlertView new];
+        __weak __typeof(self) weakSelf = self;
+        _freeAlertView.commonAlertViewBlock = ^(NSInteger index, NSString * _Nonnull str) {
+            [weakSelf.freeAlertView removeFromSuperview];
+            weakSelf.freeAlertView = nil;
+        };
+    }
+    return _freeAlertView;
 }
 @end

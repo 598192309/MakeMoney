@@ -451,4 +451,24 @@
          }
      }];
 }
+
+/******************获取设置信息  返回已绑定的手机号和邀请码
+ 
+ *********************/
++ (NetworkTask *)requestSetInfoWithCode:(NSString *)invite_code Success:(void(^)(NSInteger status,NSString *msg,NSString *mobile,NSString *invite_code))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/setting" parameters:@{@"invite_code":SAFE_NIL_STRING(invite_code)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+         NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+         NSString *msg = [resultObject safeObjectForKey:@"msg"];
+        NSString *mobile = [[resultObject safeObjectForKey:@"data"] safeObjectForKey:@"mobile"];
+        NSString *invite_code = [[resultObject safeObjectForKey:@"data"] safeObjectForKey:@"invite_code"];
+
+         if (successBlock) {
+             successBlock(status,msg,mobile,invite_code);
+         }
+     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+         if (errorBlock) {
+             errorBlock(error,resultObject);
+         }
+     }];
+}
 @end

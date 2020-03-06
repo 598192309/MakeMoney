@@ -12,13 +12,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface InitItem : NSObject
 @property (nonatomic,assign)NSInteger is_safe_code;
-@property (nonatomic,strong)NSString *vip_end_time;
-@property (nonatomic,assign)NSInteger is_vip;
-@property (nonatomic,assign)NSInteger is_qm_vip;
+@property (nonatomic,assign)NSInteger is_vip;//视频
+@property (nonatomic,assign)NSInteger is_qm_vip;//同城
+@property (nonatomic,assign)NSInteger is_album_vip;//写真
+
 @property (nonatomic,strong)NSString *mobile;
 @property (nonatomic,strong)NSString *avatar;
-@property (nonatomic,strong)NSString *qm_vip_end_time;
 @property (nonatomic,strong)NSString *sex_id;
+@property (nonatomic,strong)NSString *vip_end_time;
+@property (nonatomic,strong)NSString *qm_vip_end_time;
+@property (nonatomic,strong)NSString *ablum_vip_end_time;
+
 
 @property (nonatomic,assign)NSInteger new_user_free_day;
 @property (nonatomic,strong)NSString *user_id;
@@ -31,8 +35,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign)NSInteger max_free_times;
 @property (nonatomic,strong)NSString *username;
 @property (nonatomic,assign)NSInteger new_user_free_hour;
-
-
 
 @end
 

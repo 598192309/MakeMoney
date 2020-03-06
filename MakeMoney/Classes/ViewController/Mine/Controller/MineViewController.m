@@ -29,6 +29,8 @@
 @property(nonatomic,strong)VIPExchangeAlertView * vipExchangeAlertView;
 
 @property (nonatomic,strong)InitItem *dataItem;
+
+@property (nonatomic,strong)NSString *yaoqingren;//邀请人
 @end
 
 @implementation MineViewController
@@ -157,8 +159,18 @@
         [LSVProgressHUD showError:error];
         [weakSelf.customTableView endHeaderRefreshing];
     }];
+    
+    [self requestSetInfo];
 }
-
+//获取配置信息 比如绑定的手机号 邀请人
+-(void)requestSetInfo{
+    __weak __typeof(self) weakSelf = self;
+    [MineApi requestSetInfoWithCode:RI.infoInitItem.invite_code Success:^(NSInteger status, NSString * _Nonnull msg, NSString * _Nonnull mobile, NSString * _Nonnull invite_code) {
+        [weakSelf.customTableView reloadData];
+    } error:^(NSError *error, id resultObject) {
+        
+    }];
+}
 //vip兑换
 - (void)vipExchangeWithNumber:(NSString *)number sender:(UIButton *)sender{
     if (number.length == 0) {
@@ -255,7 +267,7 @@
             subTitle = RI.infoInitItem.mobile.length > 0 ? RI.infoInitItem.mobile : lqStrings(@"未绑定");
         }else  if (indexPath.row == 1) {
             title = lqStrings(@"我的邀请人");
-            subTitle = lqStrings(@"未绑定");
+            subTitle = self.yaoqingren.length == 0 ? lqStrings(@"未绑定") :self.yaoqingren;
         }else  if (indexPath.row == 2) {
             title = lqStrings(@"安全码设置");
             subTitle = lqStrings(@"");

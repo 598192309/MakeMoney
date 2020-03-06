@@ -44,7 +44,11 @@
     }
 }
 
-#pragma  mark - 拖拽
+#pragma mark - getter
+- (NSString *)titleStr{
+    return self.titlelabel.text;
+}
+
 #pragma  mark - 类方法
 -(instancetype)init{
     if (self = [super init]) {
@@ -140,7 +144,7 @@
         [contentV addSubview:_subLable];
         [_subLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(weakSelf.titlelabel);
-            make.top.mas_equalTo(weakSelf.titlelabel.mas_bottom).offset(Adaptor_Value(5));
+            make.top.mas_equalTo(weakSelf.titlelabel.mas_bottom).offset(Adaptor_Value(10));
             
         }];
     
@@ -152,7 +156,8 @@
             make.left.mas_equalTo(contentV);
             make.right.mas_equalTo(contentV.mas_centerX).offset(- Adaptor_Value(20));
             make.height.mas_equalTo(Adaptor_Value(44));
-            make.top.mas_equalTo(weakSelf.subLable.mas_bottom).offset(Adaptor_Value(10));
+            make.top.mas_lessThanOrEqualTo(weakSelf.subLable.mas_bottom).offset(Adaptor_Value(15));
+            make.top.mas_greaterThanOrEqualTo(weakSelf.titlelabel.mas_bottom).offset(Adaptor_Value(20));
             make.bottom.mas_equalTo(contentV).offset(-Adaptor_Value(20));
         }];
         [_firstBtn setTitleColor:TitleGrayColor forState:UIControlStateNormal];
@@ -201,18 +206,4 @@
     return _customCoverView;
 }
 
-- (NSString *)titleStr{
-//    return self.titlelabel.text.length > 0 ? self.titlelabel.text : self.subLable.text;
-    NSString * str ;
-    if (self.titlelabel.text.length > 0) {
-        str = self.titlelabel.text;
-    }else if (self.subLable.text.length > 0){
-        str = self.subLable.text;
-    }else if (self.titlelabel.attributedText.string.length > 0 ){
-        str = self.titlelabel.attributedText.string;
-    }else if (self.subLable.attributedText.string.length > 0 ){
-        str = self.subLable.attributedText.string;
-    }
-    return str;
-}
 @end

@@ -149,6 +149,11 @@ NS_ASSUME_NONNULL_BEGIN
  
  *********************/
 + (NetworkTask *)checkCodeWithMobile:(NSString *)mobile code:(NSString *)code Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
+
+/******************获取设置信息  返回已绑定的手机号和邀请码
+ 
+ *********************/
++ (NetworkTask *)requestSetInfoWithCode:(NSString *)invite_code Success:(void(^)(NSInteger status,NSString *msg,NSString *mobile,NSString *invite_code))successBlock error:(ErrorBlock)errorBlock;
 @end
 
 NS_ASSUME_NONNULL_END
