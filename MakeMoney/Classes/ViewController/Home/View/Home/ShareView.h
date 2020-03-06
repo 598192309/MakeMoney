@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)refreshUIWithItme:(HotItem *)item;
 
 /**点击保存*/
-@property(nonatomic,copy)void(^saveBtnClickBlock)(UIButton * sender,UIImageView *erweimaImageV);
+@property(nonatomic,copy)void(^saveBtnClickBlock)(UIButton * sender,UIImage *image);
 
 /**点击copy*/
 @property(nonatomic,copy)void(^copyBtnClickBlock)(UIButton * sender,UIImageView *erweimaImageV);

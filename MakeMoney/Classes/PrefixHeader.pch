@@ -36,5 +36,5 @@
 
 #import "CommonAlertView.h"
 #import "UIViewController+YCPopover.h"
-
+#import "LScreenShot.h"
 #endif /* PrefixHeader_pch */

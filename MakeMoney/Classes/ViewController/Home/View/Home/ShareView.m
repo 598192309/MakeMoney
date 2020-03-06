@@ -8,6 +8,9 @@
 
 #import "ShareView.h"
 #import "MineItem.h"
+#import <AVFoundation/AVAsset.h>
+#import <AVFoundation/AVAssetImageGenerator.h>
+
 @interface ShareView()
 @property (strong, nonatomic)  UIView *header;
 @property (nonatomic,strong)UIImageView *tipiconImageV;
@@ -62,17 +65,28 @@
 -(void)refreshUIWithItme:(HotItem *)item{
     self.titlelabel.text = item.title;
     [self.yaoqingmaBtn setTitle:[NSString stringWithFormat:lqLocalized(@"邀请码 %@", nil),RI.infoInitItem.invite_code] forState:UIControlStateNormal];
-    [self.contentImageV sd_setImageWithURL:[NSURL URLWithString:item.video_url]];
     NSString *erweimaStr = [NSString stringWithFormat:@"%@/share.html?appkey=%@&code=%@",RI.basicItem.share_url,ErweimaShareKey,RI.infoInitItem.invite_code];
 
     self.urlLable.text = [NSString stringWithFormat:lqLocalized(@"如果扫码不能打开，请手动在流浪起输入地址：%@", nil),erweimaStr];
     
+    NSString *typeStr = @"v_imgs";
+    NSString *titleStr = @"vId";
+
+    __weak __typeof(self) weakSelf = self;
+    [HomeApi downImageWithType:typeStr paramTitle:titleStr ID:item.ID key:item.video_url Success:^(UIImage * _Nonnull img,NSString *ID) {
+        weakSelf.contentImageV.image = img;
+
+    } error:^(NSError *error, id resultObject) {
+        
+    }];
 }
 
 #pragma mark - act
 - (void)saveBtnClick:(UIButton *)sender {
     if (self.saveBtnClickBlock) {
-        self.saveBtnClickBlock(sender,self.erweimaImageV);
+        //截图
+        UIImage *image = [LScreenShot screenShotWithView:self.header size:CGSizeMake(self.header.lq_width, self.header.lq_height)];
+        self.saveBtnClickBlock(sender,image);
     }
 }
 - (void)urlCopyBtnClick:(UIButton *)sender {

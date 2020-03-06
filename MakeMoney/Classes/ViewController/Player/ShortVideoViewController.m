@@ -406,8 +406,8 @@
             weakSelf.shareView = nil;
         };
         
-        _shareView.saveBtnClickBlock = ^(UIButton * _Nonnull sender, UIImageView * _Nonnull erweimaImageV) {
-            [weakSelf saveImageToDiskWithImage:erweimaImageV.image];
+        _shareView.saveBtnClickBlock = ^(UIButton * _Nonnull sender, UIImage * _Nonnull image) {
+            [weakSelf saveImageToDiskWithImage:image];
 
         };
         

@@ -168,6 +168,7 @@
 		1118B7B2240C996E0098A1D4 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118B7B1240C996E0098A1D4 /* ListViewController.m */; };
 		1120F42524079F9D00550055 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1120F42224079F9D00550055 /* GTMBase64.m */; };
 		112F56AE2411DD2100CE4715 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F56AD2411DD2100CE4715 /* ShareView.m */; };
+		112F56B12411EF4600CE4715 /* LScreenShot.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F56AF2411EF4600CE4715 /* LScreenShot.m */; };
 		1135C9DA2408BA7800478696 /* CityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1135C9D92408BA7800478696 /* CityCell.m */; };
 		1139807D2410A08400663E26 /* YCPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113980762410A08400663E26 /* YCPresentationController.m */; };
 		1139807E2410A08400663E26 /* YCPopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1139807B2410A08400663E26 /* YCPopoverAnimator.m */; };
@@ -575,6 +576,8 @@
 		1120F42224079F9D00550055 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		112F56AC2411DD2100CE4715 /* ShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
 		112F56AD2411DD2100CE4715 /* ShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
+		112F56AF2411EF4600CE4715 /* LScreenShot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LScreenShot.m; sourceTree = "<group>"; };
+		112F56B02411EF4600CE4715 /* LScreenShot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LScreenShot.h; sourceTree = "<group>"; };
 		1135C9D82408BA7800478696 /* CityCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityCell.h; sourceTree = "<group>"; };
 		1135C9D92408BA7800478696 /* CityCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityCell.m; sourceTree = "<group>"; };
 		113980762410A08400663E26 /* YCPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCPresentationController.m; sourceTree = "<group>"; };
@@ -1482,6 +1485,8 @@
 				1120F42224079F9D00550055 /* GTMBase64.m */,
 				11105E4024066BC800521CB2 /* LqToolKit.h */,
 				11105E1A24066BC800521CB2 /* LqToolKit.m */,
+				112F56B02411EF4600CE4715 /* LScreenShot.h */,
+				112F56AF2411EF4600CE4715 /* LScreenShot.m */,
 				11105E1B24066BC800521CB2 /* Extension */,
 				11105E3624066BC800521CB2 /* Widget */,
 				11105E4924066BC900521CB2 /* LqWGS84TOGCJ02.h */,
@@ -2094,6 +2099,7 @@
 				093E58BF2406A87A004E5F72 /* SAMKeychainQuery.m in Sources */,
 				09E72C3F24055F6E0004B25C /* IQUIView+Hierarchy.m in Sources */,
 				09E72D0324055F960004B25C /* SVProgressAnimatedView.m in Sources */,
+				112F56B12411EF4600CE4715 /* LScreenShot.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
