@@ -166,6 +166,7 @@
 		111116A5240E4C2A00E9F781 /* TuiGuangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111116A4240E4C2A00E9F781 /* TuiGuangViewController.m */; };
 		111116A8240E4CE400E9F781 /* TuiGuangCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 111116A7240E4CE400E9F781 /* TuiGuangCustomView.m */; };
 		1118B7B2240C996E0098A1D4 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1118B7B1240C996E0098A1D4 /* ListViewController.m */; };
+		111FD6F1241231DC00E7B419 /* xieyi.html in Resources */ = {isa = PBXBuildFile; fileRef = 111FD6F0241231DC00E7B419 /* xieyi.html */; };
 		1120F42524079F9D00550055 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1120F42224079F9D00550055 /* GTMBase64.m */; };
 		112F56AE2411DD2100CE4715 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F56AD2411DD2100CE4715 /* ShareView.m */; };
 		112F56B12411EF4600CE4715 /* LScreenShot.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F56AF2411EF4600CE4715 /* LScreenShot.m */; };
@@ -576,6 +577,7 @@
 		111116A7240E4CE400E9F781 /* TuiGuangCustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TuiGuangCustomView.m; sourceTree = "<group>"; };
 		1118B7B0240C996E0098A1D4 /* ListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
 		1118B7B1240C996E0098A1D4 /* ListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
+		111FD6F0241231DC00E7B419 /* xieyi.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = xieyi.html; sourceTree = "<group>"; };
 		1120F41F24079F9D00550055 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		1120F42124079F9D00550055 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		1120F42224079F9D00550055 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
@@ -792,6 +794,7 @@
 				092399C72403FE0F00A4F727 /* AppDelegate.m */,
 				092399CC2403FE0F00A4F727 /* ViewController.h */,
 				092399CD2403FE0F00A4F727 /* ViewController.m */,
+				111FD6F0241231DC00E7B419 /* xieyi.html */,
 				092399CF2403FE0F00A4F727 /* Main.storyboard */,
 				092399D22403FE1400A4F727 /* Assets.xcassets */,
 				092399D42403FE1400A4F727 /* LaunchScreen.storyboard */,
@@ -1888,6 +1891,7 @@
 				8BD5456B240B9C0300C90A31 /* Home.storyboard in Resources */,
 				8B9B8BFB240D4AED004B4704 /* ZFPlayer.bundle in Resources */,
 				092399D32403FE1400A4F727 /* Assets.xcassets in Resources */,
+				111FD6F1241231DC00E7B419 /* xieyi.html in Resources */,
 				09830AF7240819A700FBF2C7 /* UserData.plist in Resources */,
 				092399D12403FE0F00A4F727 /* Main.storyboard in Resources */,
 				8BD545BE240BE71700C90A31 /* HomeVideoCell.xib in Resources */,

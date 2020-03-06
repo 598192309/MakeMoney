@@ -19,7 +19,7 @@
 #import "VIPExchangeAlertView.h"
 #import "BindMobileFirstStepViewController.h"
 #import "SecurityCodeViewController.h"
-
+#import "BaseWebViewController.h"
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (strong, nonatomic) UITableView  *customTableView;
 @property (nonatomic,strong)MineCustomHeaderView *mineCustomHeaderView;
@@ -336,7 +336,13 @@
             
         }else  if (indexPath.row == 1) {
             
-        }else  if (indexPath.row == 2) {
+        }else  if (indexPath.row == 2) {//使用者协定
+            BaseWebViewController *vc = [[BaseWebViewController alloc] init];
+            NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];
+            NSString *basePath = [NSString stringWithFormat:@"%@/xieyi.html",mainBundlePath];
+            NSString *htmlstr = [NSString stringWithContentsOfFile:basePath encoding:NSUTF8StringEncoding error:nil];
+            vc.htmlStr = htmlstr;
+            [self.navigationController pushViewController:vc animated:YES];
             
         }else  if (indexPath.row == 3) {
             

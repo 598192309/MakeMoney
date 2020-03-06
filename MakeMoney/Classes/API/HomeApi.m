@@ -171,16 +171,25 @@
         successBlock([UIImage imageWithContentsOfFile:imagePath],ID);
         return nil;
     }
-    if (ID.length == 0) {
-           LQLog(@"这个item ID为空 ");
-       }
+
     return [NET POST:apistr parameters:@{paramTitle:SAFE_NIL_STRING(ID)} criticalValue:@{@"NoEncode":@YES} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
-        NSString *img = resultObject;
-        UIImage *downImage = [UIImage base64stringToImage:img];
-        BOOL success = [UIImagePNGRepresentation(downImage) writeToFile:imagePath atomically:YES];
-        if (successBlock) {
-            successBlock(downImage,ID);
-        }
+//        NSString *img = resultObject;
+//        UIImage *downImage = [UIImage base64stringToImage:img];
+//        BOOL success = [UIImagePNGRepresentation(downImage) writeToFile:imagePath atomically:YES];
+//        if (successBlock) {
+//            successBlock(downImage,ID);
+//        }
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSString *img = resultObject;
+            UIImage *downImage = [UIImage base64stringToImage:img];
+            BOOL success = [UIImagePNGRepresentation(downImage) writeToFile:imagePath atomically:YES];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (successBlock) {
+                    successBlock(downImage,ID);
+                }
+            });
+        });
     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
         if (errorBlock) {
             errorBlock(error,resultObject);

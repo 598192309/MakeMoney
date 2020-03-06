@@ -21,7 +21,7 @@
 #pragma mark - 重写
 -(void)navigationRightBtnClick:(UIButton*)button{
     //重置
-    self.codeTV.text = nil;
+    [LSVProgressHUD showInfoWithStatus:[button titleForState:UIControlStateNormal]];
 }
 #pragma mark - 生命周期
 - (void)viewDidLoad {
