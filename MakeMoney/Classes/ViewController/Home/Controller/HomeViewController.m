@@ -263,7 +263,7 @@
         if (item.imageSize.height > 0) {
             return CGSizeMake(LQScreemW, LQScreemW * item.imageSize.height / item.imageSize.width);
         }
-        return  CGSizeMake(LQScreemW,Adaptor_Value(50));
+        return  CGSizeMake(LQScreemW,100);
     }
     return CGSizeZero;
 }
