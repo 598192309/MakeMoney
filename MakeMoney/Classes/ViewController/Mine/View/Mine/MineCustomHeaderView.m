@@ -15,14 +15,18 @@
 @property (nonatomic,strong)UIView *header;
 @property (nonatomic,strong)UILabel *nameLabel;
 @property (nonatomic,strong)UILabel *iDLable;
-@property (nonatomic,strong)UILabel *vipTipLable;
+@property (nonatomic,strong)UILabel *ablumVipTipLable;
+@property (nonatomic,strong)UILabel *ablumVipLable;
+@property (nonatomic,strong)UILabel *cityVipTipLable;
+@property (nonatomic,strong)UILabel *cityVipLable;
+@property (nonatomic,strong)UILabel *shipinVipTipLable;
+@property (nonatomic,strong)UILabel *shipinVipLable;
+@property (nonatomic,strong)UILabel *timesLable;
 
-@property (nonatomic,strong)UILabel *vipLable;
 @property (nonatomic,strong)UIImageView *iconImageV;
 @property (nonatomic,strong)UIImageView *vipImageV;
 
 
-@property (nonatomic,strong)UILabel *timesLable;
 
 
 @property (nonatomic,strong)UIView *bottomView;
@@ -74,8 +78,22 @@
         }
     }
     self.timesLable.attributedText = attr;
+    self.cityVipLable.text = item.is_qm_vip ? item.qm_vip_end_time:lqStrings(@"未开通");
+    self.ablumVipLable.text = item.is_album_vip ? item.ablum_vip_end_time:lqStrings(@"未开通");
+    self.shipinVipLable.text = item.is_vip ? item.vip_end_time:lqStrings(@"未开通");
     
-    self.vipLable.text = item.is_qm_vip ? item.qm_vip_end_time:lqStrings(@"未开通");
+    self.shipinVipLable.hidden = !item.is_vip;
+    self.shipinVipTipLable.hidden = !item.is_vip;
+    self.timesLable.hidden = item.is_vip;
+    
+    if (item.is_new_user) {
+        self.ablumVipLable.text = lqStrings(@"临时体验卡");
+        self.shipinVipLable.text = lqStrings(@"临时体验卡");
+        self.shipinVipLable.hidden = NO;
+        self.shipinVipTipLable.hidden = NO;
+        self.timesLable.hidden = YES;
+
+    }
     
     finishBlock();
 }
@@ -180,39 +198,82 @@
         }];
 
         
-        _iDLable = [UILabel lableWithText:[NSString stringWithFormat:lqLocalized(@"ID:%@", nil),RI.infoInitItem.sex_id] textColor:TitleWhiteColor fontSize:AdaptedFontSize(14) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        _iDLable = [UILabel lableWithText:[NSString stringWithFormat:lqLocalized(@"ID:%@", nil),RI.infoInitItem.sex_id] textColor:TitleWhiteColor fontSize:AdaptedFontSize(10) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
         [contentV addSubview:_iDLable];
         [_iDLable mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(weakSelf.nameLabel.mas_bottom).offset(Adaptor_Value(5));
-            make.left.mas_equalTo(weakSelf.nameLabel);
+            make.centerY.mas_equalTo(weakSelf.nameLabel);
+            make.left.mas_equalTo(weakSelf.nameLabel.mas_right).offset(Adaptor_Value(20));
         }];
                         
-        _vipTipLable = [UILabel lableWithText:lqStrings(@"同城VIP:") textColor:TitleWhiteColor fontSize:AdaptedFontSize(14) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
-        [contentV addSubview:_vipTipLable];
-        [_vipTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        _ablumVipTipLable = [UILabel lableWithText:lqStrings(@"写真VIP:") textColor:TitleWhiteColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        [contentV addSubview:_ablumVipTipLable];
+        [_ablumVipTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.left.mas_equalTo(weakSelf.nameLabel);
-            make.top.mas_equalTo(weakSelf.iDLable.mas_bottom).offset(Adaptor_Value(5));
+            make.top.mas_equalTo(weakSelf.iDLable.mas_bottom).offset(Adaptor_Value(10));
     
             
         }];
         
-        _vipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? lqStrings(@"已开通"):lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(14) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
-        [contentV addSubview:_vipLable];
-        [_vipLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        _ablumVipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? RI.infoInitItem.ablum_vip_end_time:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        [contentV addSubview:_ablumVipLable];
+        [_ablumVipLable mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.mas_equalTo(weakSelf.vipTipLable.mas_right).offset(Adaptor_Value(5));
-            make.top.mas_equalTo(weakSelf.iDLable.mas_bottom).offset(Adaptor_Value(5));
+            make.left.mas_equalTo(weakSelf.ablumVipTipLable.mas_right).offset(Adaptor_Value(5));
+            make.centerY.mas_equalTo(weakSelf.ablumVipTipLable);
             
         }];
         
-        _timesLable = [UILabel lableWithText:@"每日观看次数" textColor:TitleWhiteColor fontSize:AdaptedFontSize(14) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        _cityVipTipLable = [UILabel lableWithText:lqStrings(@"同城VIP:") textColor:TitleWhiteColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        [contentV addSubview:_cityVipTipLable];
+        [_cityVipTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.mas_equalTo(weakSelf.nameLabel);
+            make.top.mas_equalTo(weakSelf.ablumVipTipLable.mas_bottom).offset(Adaptor_Value(10));
+    
+            
+        }];
+        
+        _cityVipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? RI.infoInitItem.qm_vip_end_time:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        [contentV addSubview:_cityVipLable];
+        [_cityVipLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.mas_equalTo(weakSelf.cityVipTipLable.mas_right).offset(Adaptor_Value(5));
+            make.centerY.mas_equalTo(weakSelf.cityVipTipLable);
+            
+        }];
+        
+        _timesLable = [UILabel lableWithText:@"每日观看次数" textColor:TitleWhiteColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_timesLable];
         [_timesLable mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.left.mas_equalTo(weakSelf.nameLabel);
-            make.top.mas_equalTo(weakSelf.vipLable.mas_bottom).offset(Adaptor_Value(5));
+            make.top.mas_equalTo(weakSelf.cityVipLable.mas_bottom).offset(Adaptor_Value(10));
         }];
+        _timesLable.hidden = RI.infoInitItem.is_vip;
+
+        
+        _shipinVipTipLable = [UILabel lableWithText:lqStrings(@"视频VIP:") textColor:TitleWhiteColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        [contentV addSubview:_shipinVipTipLable];
+        [_shipinVipTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.mas_equalTo(weakSelf.nameLabel);
+            make.centerY.mas_equalTo(weakSelf.timesLable);
+    
+            
+        }];
+        _shipinVipTipLable.hidden = !RI.infoInitItem.is_vip;
+        
+        _shipinVipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? RI.infoInitItem.vip_end_time:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        [contentV addSubview:_shipinVipLable];
+        [_shipinVipLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.mas_equalTo(weakSelf.shipinVipTipLable.mas_right).offset(Adaptor_Value(5));
+            make.centerY.mas_equalTo(weakSelf.shipinVipTipLable);
+            
+        }];
+        _shipinVipLable.hidden = !RI.infoInitItem.is_vip;
+
   
 
 

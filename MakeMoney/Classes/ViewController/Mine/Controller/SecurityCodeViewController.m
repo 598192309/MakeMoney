@@ -51,7 +51,11 @@
 }
 #pragma mark - act
 - (void)confirmBtnClick:(UIButton *)sender{
-    
+    if (self.codeTV.text.length == 0) {
+        [LSVProgressHUD showInfoWithStatus:lqStrings(@"请输入安全码")];
+        return;
+    }
+    [self addCode:self.codeTV.text sender:sender];
 }
 #pragma mark uitextView delegate
 - (void)textViewDidChange:(UITextView *)textView
@@ -80,7 +84,7 @@
     __weak __typeof(self) weakSelf = self;
     sender.userInteractionEnabled = NO;
     [MineApi checkSecurityWithsafeCode:code Success:^(NSInteger status, NSString * _Nonnull msg) {
-        [weakSelf addCode:code sender:sender];
+        [LSVProgressHUD showInfoWithStatus:msg];
     } error:^(NSError *error, id resultObject) {
         sender.userInteractionEnabled = YES;
         [LSVProgressHUD showError:error];
@@ -148,7 +152,7 @@
             make.left.mas_equalTo(Adaptor_Value(15));
             make.right.mas_equalTo(tfBackView);
         }];
-        _codeTV.textColor = [UIColor whiteColor];
+        _codeTV.textColor = ThemeBlackColor;
         _codeTV.delegate = self;
         _codeTV.font = AdaptedFontSize(15);
         _codeTV.backgroundColor = [UIColor clearColor];
