@@ -38,6 +38,9 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
 @property (nonatomic, strong) HotItem *item;
 @property (nonatomic,strong)NSMutableArray *tuijianArr;
 
+@property (nonatomic,strong)NSArray *adsArr;
+
+
 //推荐部分
 @property (nonatomic,strong)AVTuijianView *avTuijianView;
 ////中间 广告 title部分
@@ -85,9 +88,9 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
 
         //推荐部分
         [self.view addSubview:self.avTuijianView];
-        [self.avTuijianView configCenterViewUIWithItem:self.item finishi:^{
-            
-        }];
+//        [self.avTuijianView configCenterViewUIWithItem:self.item finishi:^{
+//
+//        }];
         [self.avTuijianView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.mas_equalTo(weakSelf.view);
             make.top.mas_equalTo(weakSelf.containerView.mas_bottom);
@@ -153,6 +156,10 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
 
     };
     
+    [self startPlay];
+}
+
+- (void)startPlay {
     //拼接播放视频的Url
     NSString *videoUrl;
     if ([self.item.vip_video_url hasPrefix:@"http"]) {
@@ -165,7 +172,9 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
 //    [self.controlView showTitle:self.item.title coverURLString:kVideoCover fullScreenMode:ZFFullScreenModeAutomatic];
     [self.controlView showTitle:self.isShortVideo ? self.item.title : @"" coverURLString:kVideoCover fullScreenMode:ZFFullScreenModeAutomatic];
 
-
+    [self.avTuijianView configCenterViewUIWithItem:self.item finishi:^{
+        
+    }];
     
     [self requestTuijianList];
     [self requestAds];
@@ -199,7 +208,10 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
     __weak __typeof(self) weakSelf = self;
     //点击cell
     weakSelf.avTuijianView.cellClickBlock = ^(NSIndexPath * _Nonnull indexPath) {
-        
+        //切换数据
+        HotItem *hotitem = [weakSelf.tuijianArr safeObjectAtIndex:indexPath.row];
+        weakSelf.item = hotitem;
+        [weakSelf startPlay];
     };
 }
 
@@ -244,12 +256,21 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
 //获取广告
 - (void)requestAds{
     __weak __typeof(self) weakSelf = self;
+    if (self.adsArr.count > 0) {
+        int count = self.adsArr.count;
+        int index = arc4random()% (count -1);
+        [weakSelf.avTuijianView configAds:[weakSelf.adsArr safeObjectAtIndex:index] finishi:^{
+        }];
+        return;
+    }
     [HomeApi requestAdWithType:@"4" Success:^(NSArray * _Nonnull adsItemArr, NSString * _Nonnull msg) {
 //        [weakSelf.avCenterView configAds:adsItemArr.firstObject finishi:^{
 //
 //        }];
-        [weakSelf.avTuijianView configAds:adsItemArr.firstObject finishi:^{
-            
+        weakSelf.adsArr = adsItemArr;
+        int count = adsItemArr.count;
+        int index = arc4random()% (count -1);
+        [weakSelf.avTuijianView configAds:[adsItemArr safeObjectAtIndex:index] finishi:^{
         }];
     } error:^(NSError *error, id resultObject) {
         
