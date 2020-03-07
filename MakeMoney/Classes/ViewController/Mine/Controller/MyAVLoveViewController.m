@@ -28,6 +28,7 @@
     [super viewDidLoad];
     
     [self configUI];
+    [self requestData];
 
 }
 
@@ -60,6 +61,7 @@
         self.noDataView = nil;
     }
 }
+
 #pragma mark - net
 - (void)requestData{
     __weak __typeof(self) weakSelf = self;

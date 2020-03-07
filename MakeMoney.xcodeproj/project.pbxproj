@@ -29,6 +29,8 @@
 		096C7FC7240C0F6D00914E20 /* AdsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C7FC6240C0F6D00914E20 /* AdsHeaderView.m */; };
 		09830AF7240819A700FBF2C7 /* UserData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 09830AF6240819A700FBF2C7 /* UserData.plist */; };
 		09830AFA2408207F00FBF2C7 /* AVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09830AF92408207F00FBF2C7 /* AVCell.m */; };
+		09C51AE724135AC400705DFC /* LqSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C51AE524135AC300705DFC /* LqSegmentControl.m */; };
+		09C51AEB24135B5800705DFC /* LqScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C51AE924135B5800705DFC /* LqScrollView.m */; };
 		09E72AEB240559F40004B25C /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E72AE2240559F40004B25C /* AFURLResponseSerialization.m */; };
 		09E72AEC240559F40004B25C /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E72AE3240559F40004B25C /* AFHTTPSessionManager.m */; };
 		09E72AED240559F40004B25C /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E72AE5240559F40004B25C /* AFURLSessionManager.m */; };
@@ -310,6 +312,10 @@
 		09830AF6240819A700FBF2C7 /* UserData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = UserData.plist; sourceTree = "<group>"; };
 		09830AF82408207F00FBF2C7 /* AVCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVCell.h; sourceTree = "<group>"; };
 		09830AF92408207F00FBF2C7 /* AVCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVCell.m; sourceTree = "<group>"; };
+		09C51AE524135AC300705DFC /* LqSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LqSegmentControl.m; sourceTree = "<group>"; };
+		09C51AE624135AC300705DFC /* LqSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LqSegmentControl.h; sourceTree = "<group>"; };
+		09C51AE924135B5800705DFC /* LqScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LqScrollView.m; sourceTree = "<group>"; };
+		09C51AEA24135B5800705DFC /* LqScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LqScrollView.h; sourceTree = "<group>"; };
 		09E72ADE240559F40004B25C /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
 		09E72ADF240559F40004B25C /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		09E72AE0240559F40004B25C /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
@@ -1199,6 +1205,24 @@
 			path = Mine;
 			sourceTree = "<group>";
 		};
+		09C51AE424135AC300705DFC /* LQSegmentControl */ = {
+			isa = PBXGroup;
+			children = (
+				09C51AE624135AC300705DFC /* LqSegmentControl.h */,
+				09C51AE524135AC300705DFC /* LqSegmentControl.m */,
+			);
+			path = LQSegmentControl;
+			sourceTree = "<group>";
+		};
+		09C51AE824135B5700705DFC /* LQScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				09C51AEA24135B5800705DFC /* LqScrollView.h */,
+				09C51AE924135B5800705DFC /* LqScrollView.m */,
+			);
+			path = LQScrollView;
+			sourceTree = "<group>";
+		};
 		09E72ADC240559E20004B25C /* Libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1445,6 +1469,8 @@
 		09E72D2A240563F70004B25C /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				09C51AE824135B5700705DFC /* LQScrollView */,
+				09C51AE424135AC300705DFC /* LQSegmentControl */,
 				11105E632406720400521CB2 /* CustomVIew */,
 				11105E1724066BC800521CB2 /* Tool */,
 				113980752410A08400663E26 /* YCPopover */,
@@ -2103,6 +2129,7 @@
 				09239AD22403FEE400A4F727 /* LaunchingViewController.m in Sources */,
 				111FD7092412515400E7B419 /* MyLoveCell.m in Sources */,
 				8BD545AF240BB4CC00C90A31 /* MJRefreshAutoStateFooter.m in Sources */,
+				09C51AE724135AC400705DFC /* LqSegmentControl.m in Sources */,
 				09E72C8224055F7E0004B25C /* NSObject+MJClass.m in Sources */,
 				1139807D2410A08400663E26 /* YCPresentationController.m in Sources */,
 				09239AD02403FEE400A4F727 /* LorginViewController.m in Sources */,
@@ -2117,6 +2144,7 @@
 				09E72D2D2405641C0004B25C /* UIScrollView+LQRefresh.m in Sources */,
 				11105E6224066BC900521CB2 /* SafeControl.m in Sources */,
 				09E72C3824055F6E0004B25C /* IQPreviousNextView.m in Sources */,
+				09C51AEB24135B5800705DFC /* LqScrollView.m in Sources */,
 				8BD545C1240C101E00C90A31 /* HomeSectionFooterView.m in Sources */,
 				111FD6F424124B1800E7B419 /* AblumApi.m in Sources */,
 				8B9B8BF5240D4AED004B4704 /* ZFAVPlayerManager.m in Sources */,

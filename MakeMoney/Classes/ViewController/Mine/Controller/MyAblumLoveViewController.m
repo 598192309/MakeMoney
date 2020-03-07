@@ -27,6 +27,7 @@
     [super viewDidLoad];
     
     [self configUI];
+    [self requestData];
 
 }
 
@@ -41,6 +42,7 @@
     }];
 
 }
+
 #pragma mark - nodataView
 - (void)addNodataView{
     if (_noDataView) {
