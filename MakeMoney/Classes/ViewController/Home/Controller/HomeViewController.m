@@ -261,8 +261,8 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
     if (section % 2 == 0) {
         AdsItem *item = [_dataSource.ads safeObjectAtIndex:section / 2];
-        if (item.imageSize.height > 0) {
-            return CGSizeMake(LQScreemW, LQScreemW * item.imageSize.height / item.imageSize.width);
+        if (item.width > 0 && item.height > 0) {
+            return CGSizeMake(LQScreemW, LQScreemW * item.height / item.width);
         }
         return  CGSizeMake(LQScreemW,100);
     }
