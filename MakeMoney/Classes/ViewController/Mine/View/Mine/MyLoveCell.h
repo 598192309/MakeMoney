@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-@class HotItem;
+@class HotItem,AblumItem;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MyLoveCell : UICollectionViewCell
 - (void)refreshWithItem:(HotItem *)item;
+
+//针对写真
+- (void)refreshAblumWithItem:(AblumItem *)item;
+
 @end
 
 NS_ASSUME_NONNULL_END

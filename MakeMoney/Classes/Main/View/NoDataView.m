@@ -56,7 +56,7 @@
             make.centerY.mas_equalTo(contentV.mas_centerY).offset(-Adaptor_Value(50));
         }];
 
-        _tipLable = [UILabel lableWithText:lqStrings(@"暂无内容") textColor:TitleGrayColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        _tipLable = [UILabel lableWithText:lqStrings(@"小目标，一个亿真的不多") textColor:TitleGrayColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
         [contentV addSubview:_tipLable];
         [_tipLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(contentV);

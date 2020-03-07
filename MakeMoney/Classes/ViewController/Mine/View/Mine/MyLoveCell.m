@@ -8,6 +8,7 @@
 
 #import "MyLoveCell.h"
 #import "MineItem.h"
+#import "AblumItem.h"
 @interface MyLoveCell()
 @property (nonatomic,strong) UIView * cellBackgroundView;
 @property (strong, nonatomic)  UILabel *titleLabel;
@@ -76,6 +77,15 @@
      }];
     
 }
+//针对写真
+- (void)refreshAblumWithItem:(AblumItem *)item{
+    self.titleLable.text = item.album_name;
+    self.timeLable.text = [item.create_time lq_getTimeFromTimestampWithFormatter:@"yyyy-MM-dd"];
+    [self.seeTimesBtn setTitle:item.see forState:UIControlStateNormal];
+    self.vedioTimesLable.text = [NSString stringWithFormat:@"%ld张",(long)item.img_count];
+}
+
+
 #pragma mark - act
 
 #pragma mark - lazy

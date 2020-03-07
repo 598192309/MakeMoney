@@ -198,6 +198,8 @@
 		11E860B7240D06D100719378 /* NoticeAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B6240D06D100719378 /* NoticeAlertView.m */; };
 		11E860BA240D142700719378 /* SYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B8240D142600719378 /* SYPageControl.m */; };
 		8B58D0462411416400FE426E /* WebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B58D0452411416400FE426E /* WebViewViewController.m */; };
+		8B58D04B2413555400FE426E /* AblumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B58D04A2413555400FE426E /* AblumViewController.m */; };
+		8B58D04E241355C500FE426E /* AblumCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B58D04D241355C500FE426E /* AblumCollectionCell.m */; };
 		8B9B8BE9240D4AED004B4704 /* ZFPlayerGestureControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8BAF240D4AED004B4704 /* ZFPlayerGestureControl.m */; };
 		8B9B8BEA240D4AED004B4704 /* ZFPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8BB0240D4AED004B4704 /* ZFPlayerController.m */; };
 		8B9B8BEB240D4AED004B4704 /* ZFOrientationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8BB3240D4AED004B4704 /* ZFOrientationObserver.m */; };
@@ -651,6 +653,10 @@
 		11E860B9240D142700719378 /* SYPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYPageControl.h; sourceTree = "<group>"; };
 		8B58D0442411416400FE426E /* WebViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewViewController.h; sourceTree = "<group>"; };
 		8B58D0452411416400FE426E /* WebViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewViewController.m; sourceTree = "<group>"; };
+		8B58D0492413555400FE426E /* AblumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AblumViewController.h; sourceTree = "<group>"; };
+		8B58D04A2413555400FE426E /* AblumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AblumViewController.m; sourceTree = "<group>"; };
+		8B58D04C241355C500FE426E /* AblumCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AblumCollectionCell.h; sourceTree = "<group>"; };
+		8B58D04D241355C500FE426E /* AblumCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AblumCollectionCell.m; sourceTree = "<group>"; };
 		8B9B8BAE240D4AED004B4704 /* ZFPlayerNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPlayerNotification.h; sourceTree = "<group>"; };
 		8B9B8BAF240D4AED004B4704 /* ZFPlayerGestureControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPlayerGestureControl.m; sourceTree = "<group>"; };
 		8B9B8BB0240D4AED004B4704 /* ZFPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPlayerController.m; sourceTree = "<group>"; };
@@ -931,6 +937,7 @@
 				11105ACF2406001900521CB2 /* ZhuanTi */,
 				11105AD32406001900521CB2 /* AV */,
 				09239A902403FEE400A4F727 /* City */,
+				8B58D0472413552D00FE426E /* Ablum */,
 				09239A8A2403FEE400A4F727 /* Mine */,
 			);
 			path = ViewController;
@@ -1654,6 +1661,25 @@
 			path = YCPopover;
 			sourceTree = "<group>";
 		};
+		8B58D0472413552D00FE426E /* Ablum */ = {
+			isa = PBXGroup;
+			children = (
+				8B58D0492413555400FE426E /* AblumViewController.h */,
+				8B58D04A2413555400FE426E /* AblumViewController.m */,
+				8B58D0482413554000FE426E /* View */,
+			);
+			path = Ablum;
+			sourceTree = "<group>";
+		};
+		8B58D0482413554000FE426E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8B58D04C241355C500FE426E /* AblumCollectionCell.h */,
+				8B58D04D241355C500FE426E /* AblumCollectionCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		8B9B8BAB240D4AED004B4704 /* ZFPlayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -2009,6 +2035,7 @@
 				09E72CEC24055F8E0004B25C /* UIImageView+HighlightedWebCache.m in Sources */,
 				09E72C5D24055F770004B25C /* ViewController+MASAdditions.m in Sources */,
 				8BD545A5240BB4CC00C90A31 /* UIScrollView+MJRefresh.m in Sources */,
+				8B58D04B2413555400FE426E /* AblumViewController.m in Sources */,
 				09E72D18240560210004B25C /* SYProgressWebView.m in Sources */,
 				8BD545A7240BB4CC00C90A31 /* MJRefreshConfig.m in Sources */,
 				09E72C8424055F7E0004B25C /* MJPropertyKey.m in Sources */,
@@ -2131,6 +2158,7 @@
 				8BD545BD240BE71700C90A31 /* HomeVideoCell.m in Sources */,
 				11105E5C24066BC900521CB2 /* LqWGS84TOGCJ02.m in Sources */,
 				11105E5824066BC900521CB2 /* UILabel+LqExtension.m in Sources */,
+				8B58D04E241355C500FE426E /* AblumCollectionCell.m in Sources */,
 				113980882410DB3C00663E26 /* SaoMaViewController.m in Sources */,
 				09E72D17240560210004B25C /* BaseWebViewController.m in Sources */,
 				11105E8724067C3600521CB2 /* CityItem.m in Sources */,
