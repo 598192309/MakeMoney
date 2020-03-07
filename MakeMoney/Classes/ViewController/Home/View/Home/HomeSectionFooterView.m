@@ -25,7 +25,16 @@
 
 - (void)refreshViewWith:(AdsItem *)item{
     _adItem = item;
-    [_adImageView sd_setImageWithURL:[NSURL URLWithString:item.img]];
+    __weak __typeof(self) weakSelf = self;
+    [_adImageView sd_setImageWithURL:[NSURL URLWithString:item.img] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (weakSelf.adItem.imageSize.height > 0) return ;
+        if (image) {
+            weakSelf.adItem.imageSize = image.size;
+            if (weakSelf.imageLoadSuccess) {
+                weakSelf.imageLoadSuccess();
+            }
+        }
+    }];
 }
 
 - (void)clickedAdImage{
