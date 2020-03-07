@@ -27,6 +27,7 @@
     _desLabel.text = des;
     self.imageV.image = nil;
     __weak __typeof(self) weakSelf = self;
+
     if (!item) {
         return;
     }

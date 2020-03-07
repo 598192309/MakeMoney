@@ -77,5 +77,21 @@
         }
     }];
 }
+/********************AV的收藏 与取消 *********************/
++ (NetworkTask *)loveAVWithVedioId:(NSString *)video_id Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/av_love" parameters:@{@"video_id":SAFE_NIL_STRING(video_id)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+        NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+
+        NSString *msg = [resultObject safeObjectForKey:@"msg"];
+        if (successBlock) {
+            successBlock(status,msg);
+        }
+    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+        if (errorBlock) {
+            errorBlock(error,resultObject);
+        }
+    }];
+}
+
 
 @end
