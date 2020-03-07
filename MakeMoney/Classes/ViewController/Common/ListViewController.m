@@ -197,6 +197,9 @@
     HomeVideoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([HomeVideoCell class]) forIndexPath:indexPath];
     HotItem *hotItem = [self.dataArr safeObjectAtIndex:indexPath.row];
     [cell refreshCellWithItem:hotItem videoType:self.type.integerValue];
+    if (self.video_type.length > 0) {//从人气榜过来的
+        [cell setLoveBtnAppear:YES];
+    }
     return cell;
     
 }
