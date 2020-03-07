@@ -42,9 +42,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if (self.notFirstAppear) {
-        [self.mineCustomHeaderView configUIWithItem:nil finishi:^{
-            
-        }];
+        [self requestData];
     }
 
 }
@@ -58,7 +56,7 @@
            // Fallback on earlier versions
            self.automaticallyAdjustsScrollViewInsets = NO;
        }
-    [self.mineCustomHeaderView configUIWithItem:nil finishi:^{
+    [self.mineCustomHeaderView configUIWithItem:RI.infoInitItem finishi:^{
         
     }];
 }

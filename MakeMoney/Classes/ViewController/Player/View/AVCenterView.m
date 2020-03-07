@@ -43,10 +43,6 @@
 #pragma mark - 刷新ui
 - (void)configUIWithItem:(HotItem *)item finishi:(void(^)(void))finishBlock{
 
-//    //根据url 获取图片尺寸
-//    CGSize size = [UIImage getImageSizeWithURL:self.adsItem.img];
-//
-//    CGFloat h = LQScreemW / size.width * size.height;
     self.timeLable.text = [item.create_time lq_getTimeFromTimestampWithFormatter:@"yyyy-MM-dd"];
     self.seeCountsLable.text = [NSString stringWithFormat:lqLocalized(@"%@次播放", nil),item.play];
     self.titleLable.text = item.title;
@@ -56,11 +52,21 @@
 - (void)configAds:(AdsItem *)item finishi:(void(^)(void))finishBlock{
     self.adsItem = item;
     //根据url 获取图片尺寸
-    CGSize size = [UIImage getImageSizeWithURL:item.img];
-    CGFloat h = LQScreemW / size.width * size.height;
-    [self.adsImageV sd_setImageWithURL:[NSURL URLWithString:item.img]];
-    [self.adsImageV mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(h);
+//    CGSize size = [UIImage getImageSizeWithURL:item.img];
+    
+//    CGFloat h = LQScreemW / size.width * size.height;
+//    [self.adsImageV sd_setImageWithURL:[NSURL URLWithString:item.img]];
+//    [self.adsImageV mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.height.mas_equalTo(h);
+//    }];
+    __weak __typeof(self) weakSelf = self;
+    [self.adsImageV sd_setImageWithURL:[NSURL URLWithString:item.img] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (image) {
+            CGFloat h = LQScreemW /image.size.width * image.size.height;
+            [weakSelf.adsImageV mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(h);
+            }];
+        }
     }];
     finishBlock();
 }

@@ -17,6 +17,7 @@
 @property (nonatomic,assign)NSInteger pageIndex;
 @property (nonatomic,strong)NSMutableArray *dataArr;
 @property (nonatomic,strong)AdsItem *adsItem;
+
 @end
 
 @implementation AVViewController
@@ -176,7 +177,15 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIImageView *imageV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, LQScreemW, Adaptor_Value(80))];
-    [imageV sd_setImageWithURL:[NSURL URLWithString:self.adsItem.img]];
+//    [imageV sd_setImageWithURL:[NSURL URLWithString:self.adsItem.img]];
+    __weak __typeof(self) weakSelf = self;
+    [imageV sd_setImageWithURL:[NSURL URLWithString:self.adsItem.img] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (weakSelf.adsItem.imageSize.height > 0) return ;
+        if (image) {
+            weakSelf.adsItem.imageSize = image.size;
+            [weakSelf.customTableView reloadData];
+        }
+    }];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(adsTap:)];
     imageV.userInteractionEnabled = YES;
     [imageV addGestureRecognizer:tap];
@@ -184,15 +193,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (self.adsItem.img.length > 0) {
-//        return Adaptor_Value(80);
-        //根据url 获取图片尺寸
-        CGSize size = [UIImage getImageSizeWithURL:self.adsItem.img];
-        
-        CGFloat h = LQScreemW / size.width * size.height;
-        return h;
+    if (self.adsItem.imageSize.height > 0) {
+        return LQScreemW * self.adsItem.imageSize.height / self.adsItem.imageSize.width;
     }
-    return 0.01;
+    return  0.01;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{

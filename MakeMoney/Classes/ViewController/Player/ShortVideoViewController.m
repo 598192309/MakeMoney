@@ -191,11 +191,11 @@
     sender.userInteractionEnabled = NO;
     [AVApi loveVedioWithVedioId:ID Success:^(NSInteger status, NSString * _Nonnull msg) {
         sender.userInteractionEnabled = YES;
-        [LSVProgressHUD showInfoWithStatus:msg];
+        [LSVProgressHUD showInfoWithStatus:msg.length > 0 ? msg : lqStrings(@"收藏成功")];
         sender.selected = !sender.selected;
     } error:^(NSError *error, id resultObject) {
         sender.userInteractionEnabled = YES;
-
+        [LSVProgressHUD showError:error];
     }];
 }
 
@@ -211,6 +211,7 @@
 
     } error:^(NSError *error, id resultObject) {
         sender.userInteractionEnabled = YES;
+        [LSVProgressHUD showError:error];
 
     }];
 }
