@@ -90,6 +90,15 @@
     type = @"vt_imgs";
     paramTitle = @"vtId";
     key = @"category";
+    /**
+     
+    对应参数如下
+    /api/v_imgs         vId=                   短视频
+    /api/a_imgs         aId=                   av
+    /api/qm_imgs      qmId=                同城
+    /api/vt_imgs        vtId=                  全部分类
+    /api/s_imgs         sId=                   专题
+     */
     [HomeApi downImageWithType:type paramTitle:paramTitle ID:item.ID key:key Success:^(UIImage * _Nonnull img,NSString *ID) {
         if ([weakSelf.hotItem.ID isEqualToString:ID]) {
             weakSelf.imageV.image = img;
