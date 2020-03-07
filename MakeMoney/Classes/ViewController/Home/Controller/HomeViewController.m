@@ -221,6 +221,10 @@
             AdsItem *item = [_dataSource.ads safeObjectAtIndex:indexPath.section / 2];
             HomeSectionFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:NSStringFromClass([HomeSectionFooterView class]) forIndexPath:indexPath];
             [footerView refreshViewWith:item];
+            __weak __typeof(self) weakSelf = self;
+            footerView.imageLoadSuccess = ^{
+                [weakSelf.collectionView reloadData];
+            };
             return footerView;
         }
     }
@@ -256,9 +260,9 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
     if (section % 2 == 0) {
         AdsItem *item = [_dataSource.ads safeObjectAtIndex:section / 2];
-//        CGSize size = [UIImage getImageSizeWithURL:item.img];//这个方法造成好卡
-//        CGFloat h = (LQScreemW - 20) / size.width * size.height;
-#warning todo  找个新方法
+        if (item.imageSize.height > 0) {
+            return CGSizeMake(LQScreemW, LQScreemW * item.imageSize.height / item.imageSize.width);
+        }
         return  CGSizeMake(LQScreemW,Adaptor_Value(50));
     }
     return CGSizeZero;
