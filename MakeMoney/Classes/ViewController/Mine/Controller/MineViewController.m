@@ -291,7 +291,7 @@
     else if (indexPath.section == 3){
         if (indexPath.row == 0) {
             title = lqStrings(@"清理缓存");
-            subTitle = [NSString stringWithFormat:@"%.2fMB",[LqSandBox folderSizeAtPath:[LqSandBox docDownloadImagePath]]];
+            subTitle = [NSString stringWithFormat:@"%.2fMB",[LqSandBox folderSizeAtPath:[LqSandBox docDownloadImagePath]] / 5];
         }
 //        else  if (indexPath.row == 1) {
 //            title = lqStrings(@"问题反馈");
@@ -374,6 +374,9 @@
     if (indexPath.section == 3){
         if (indexPath.row == 0) {//清理缓存
             [self remindShow: @"" msgColor:[UIColor whiteColor] msgFont:AdaptedFontSize(15) subMsg:lqStrings(@"是否要清理缓存") submsgColor:ThemeBlackColor submsgFont:AdaptedFontSize(16) firstBtnTitle:nil secBtnTitle:nil singeBtnTitle:lqStrings(@"是")];
+            [[SDImageCache sharedImageCache] clearDisk];
+
+            [[SDImageCache sharedImageCache] clearMemory];//可有可无
             
         }
 //        else  if (indexPath.row == 1) {
