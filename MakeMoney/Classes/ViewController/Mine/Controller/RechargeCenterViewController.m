@@ -405,6 +405,6 @@
             weakSelf.tipAlertView = nil;
         };
     }
-    return _commonAlertView;
+    return _tipAlertView;
 }
 @end
