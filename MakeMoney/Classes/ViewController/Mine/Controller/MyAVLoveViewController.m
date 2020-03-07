@@ -28,6 +28,7 @@
     [super viewDidLoad];
     
     [self configUI];
+    [self requestData];
 
 }
 
@@ -60,6 +61,7 @@
         self.noDataView = nil;
     }
 }
+
 #pragma mark - net
 - (void)requestData{
     __weak __typeof(self) weakSelf = self;
@@ -130,7 +132,7 @@
 //设置各个方块的大小尺寸
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat row = 2.0;
-    CGFloat w = (LQScreemW - 2 * Adaptor_Value(10) ) / row;
+    CGFloat w = (LQScreemW - 2 * 10 ) / row;
 //    CGFloat h = [self caculateCellHeight:indexPath];
     CGFloat h = Adaptor_Value(190);
     return CGSizeMake(w , h);
@@ -158,7 +160,7 @@
 //}
 //设置每一组的上下左右间距
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(0, Adaptor_Value(10), 0, Adaptor_Value(10));
+    return UIEdgeInsetsMake(0, 10, 0, 10);
 
 }
 
@@ -183,7 +185,7 @@
         //设置顶部视图和底部视图的大小，当滚动方向为垂直时，设置宽度无效，当滚动方向为水平时，设置高度无效
 //        layout.headerReferenceSize = CGSizeMake(LQScreemW, Adaptor_Value(20));
         
-        layout.minimumLineSpacing = Adaptor_Value(5);
+        layout.minimumLineSpacing = 0;
         layout.minimumInteritemSpacing = 0;
         //创建容器视图
         _collectionView=[[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
