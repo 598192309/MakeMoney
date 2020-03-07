@@ -26,6 +26,8 @@
 #import "ShortVideoViewController.h"
 #import "MineApi.h"
 #import "MineItem.h"
+#import "MyShareViewController.h"
+#import "RechargeCenterViewController.h"
 @interface HomeViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,SDCycleScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -368,7 +370,10 @@
                 if ([str isEqualToString:lqStrings(@"暂时不升级")]) {
                     
                 }else{
-                    [LSVProgressHUD showInfoWithStatus:@"分享"];
+//                    [LSVProgressHUD showInfoWithStatus:@"分享"];
+                    MyShareViewController *vc = [[MyShareViewController alloc] init];
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                    
                     
                 }
             }else if (index == 2) {//购买VIP
@@ -378,8 +383,9 @@
                     NSURL *url = [NSURL URLWithString:weakSelf.updateItem.ios_download_url];
                     [[UIApplication sharedApplication] openURL:url];
                 }else{
-                    [LSVProgressHUD showInfoWithStatus:@"购买VIP"];
-                    
+//                    [LSVProgressHUD showInfoWithStatus:@"购买VIP"];
+                    RechargeCenterViewController *vc = [[RechargeCenterViewController alloc] init];
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
                 }
             }else if (index == 3){
                 if ([str isEqualToString:lqStrings(@"去升级")]) {

@@ -1620,6 +1620,7 @@
 		11105E1B24066BC800521CB2 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				11105E2C24066BC800521CB2 /* UIViewController+LqExtension.h */,
 				11105E1C24066BC800521CB2 /* UIViewController+LqExtension.m */,
 				11105E1D24066BC800521CB2 /* UIScrollView+LqExtension.m */,
 				11105E2A24066BC800521CB2 /* NSString+LqExtension.h */,
@@ -1638,7 +1639,6 @@
 				11105E2824066BC800521CB2 /* NSFileManager+LqExtension.m */,
 				11105E2924066BC800521CB2 /* NSError+LqExtension.m */,
 				11105E2B24066BC800521CB2 /* UIScrollView+LqExtension.h */,
-				11105E2C24066BC800521CB2 /* UIViewController+LqExtension.h */,
 				11105E2E24066BC800521CB2 /* UIColor+LqExtension.m */,
 				11105E2F24066BC800521CB2 /* UIView+LqExtension.h */,
 				11105E3024066BC800521CB2 /* UIStoryboard+LqExtension.h */,

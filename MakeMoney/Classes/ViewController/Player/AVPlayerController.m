@@ -22,6 +22,8 @@
 #import "MineApi.h"
 #import "MineItem.h"
 
+#import "RechargeCenterViewController.h"
+
 static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/635942-14593722fe3f0695.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
 
 
@@ -45,6 +47,9 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
 @property (nonatomic,strong)AVTuijianView *avTuijianView;
 ////中间 广告 title部分
 //@property (nonatomic,strong)AVCenterView *avCenterView;
+@property (nonatomic,strong)CommonAlertView *commonAlertView;
+
+
 @end
 
 @implementation AVPlayerController
@@ -127,8 +132,8 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
                 [self.player seekToTime:0 completionHandler:^(BOOL finished) {
 
                     [self.player.currentPlayerManager pause];
-
                 }];
+                [self showMsg:lqStrings(@"非会员只允许观看5分钟") firstBtnTitle:lqStrings(@"取消") secBtnTitle:lqStrings(@"去充值VIP") singleBtnTitle:@""];
             }
 //            else{
 //                self.player.pauseByEvent = NO;
@@ -215,30 +220,13 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
     };
 }
 
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    if (self.player.isFullScreen) {
-        return UIStatusBarStyleLightContent;
-    }
-    return UIStatusBarStyleDefault;
+- (void)showMsg:(NSString *)msg firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singleBtnTitle:(NSString *)singleBtnTitle{
+    [self.commonAlertView refreshUIWithTitle:msg titlefont:AdaptedFontSize(15) titleColor:TitleBlackColor firstBtnTitle:firstBtnTitle secBtnTitle:secBtnTitle singleBtnTitle:singleBtnTitle];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.commonAlertView];
+    [self.commonAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
+    }];
 }
-
-- (BOOL)prefersStatusBarHidden {
-    return self.player.isStatusBarHidden;
-}
-
-- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
-    return UIStatusBarAnimationSlide;
-}
-
-- (BOOL)shouldAutorotate {
-    return self.player.shouldAutorotate;
-}
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskPortrait;
-}
-
 #pragma mark - net
 //获取推荐视频
 - (void)requestTuijianList{
@@ -331,4 +319,50 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
 //    }
 //    return _avCenterView;
 //}
+
+- (CommonAlertView *)commonAlertView{
+    if (!_commonAlertView) {
+        _commonAlertView = [CommonAlertView new];
+        __weak __typeof(self) weakSelf = self;
+        _commonAlertView.commonAlertViewBlock = ^(NSInteger index, NSString * _Nonnull str) {
+
+            if (index == 1) {//取消
+                [weakSelf.commonAlertView removeFromSuperview];
+                weakSelf.commonAlertView = nil;
+                
+            }else if (index == 2) {//购买VIP
+                [weakSelf.commonAlertView removeFromSuperview];
+                weakSelf.commonAlertView = nil;
+                RechargeCenterViewController *vc = [[RechargeCenterViewController alloc] init];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+                [weakSelf popSelfDelayTime:1.0];
+            }
+        };
+    }
+    return _commonAlertView;
+}
+
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    if (self.player.isFullScreen) {
+        return UIStatusBarStyleLightContent;
+    }
+    return UIStatusBarStyleDefault;
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return self.player.isStatusBarHidden;
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
+    return UIStatusBarAnimationSlide;
+}
+
+- (BOOL)shouldAutorotate {
+    return self.player.shouldAutorotate;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
 @end

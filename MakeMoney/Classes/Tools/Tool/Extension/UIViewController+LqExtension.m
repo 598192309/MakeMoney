@@ -106,4 +106,27 @@ static char popBlockKey;
     
     return popBlock;
 }
+
+
+- (void)popSelfDelayTime:(CGFloat)delayTime
+{
+    __weak __typeof (self)weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSMutableArray *marr = [[NSMutableArray alloc]initWithArray:weakSelf.navigationController.viewControllers];
+        [marr removeObject:weakSelf];
+        weakSelf.navigationController.viewControllers = marr;
+    });
+}
+
+- (void)popControllers:(NSArray *)controllers delayTime:(CGFloat)delayTime
+{
+    __weak __typeof (self)weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSMutableArray *marr = [[NSMutableArray alloc]initWithArray:weakSelf.navigationController.viewControllers];
+        for (UIViewController *vc in controllers) {
+            [marr removeObject:vc];
+        }
+        weakSelf.navigationController.viewControllers = marr;
+    });
+}
 @end
