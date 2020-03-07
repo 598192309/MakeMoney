@@ -87,9 +87,8 @@
     self.timesLable.hidden = item.is_vip;
     
     if (item.is_new_user ) {
-        if (!item.is_album_vip) {
-            self.ablumVipLable.text = lqStrings(@"临时体验卡");
-        }
+        self.ablumVipLable.text = lqStrings(@"临时体验卡");
+
         if (!item.is_vip) {
             self.shipinVipLable.text = lqStrings(@"临时体验卡");
             self.shipinVipLable.hidden = NO;

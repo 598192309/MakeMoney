@@ -43,8 +43,15 @@
 - (void)configUIWithItem:(PayRecordItem *)item{
     self.item = item;
     self.orderLabel.text = [NSString stringWithFormat:lqLocalized(@"订单编号:%@", nil),item.order_no];
-    //type 1 视频  2 同城
-    NSString *str1 = item.type == 2 ? lqStrings(@"同城VIP"):lqStrings(@"视频VIP");
+    //type 1 视频  2 同城 3写真
+    NSString *str1;
+    if (item.type == 1) {
+        str1 = lqStrings(@"同城VIP");
+    }else if (item.type == 2) {
+        str1 = lqStrings(@"视频VIP");
+    }else if (item.type == 3) {
+        str1 = lqStrings(@"写真VIP");
+    }
     NSString *status = item.status == 1 ? lqStrings(@"已支付"):lqStrings(@"未支付");
     self.vipLable.text = [NSString stringWithFormat:@"%@     %@",str1,status];
     self.timeLable.text = [item.create_time lq_getTimeFromTimestampWithFormatter:@"yyyy-MM-dd HH:mm:ss"];

@@ -11,7 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SaoMaView : UIView
-
+@property (nonatomic,strong)NSString *urlStr;
+/**点击保存*/
+@property(nonatomic,copy)void(^saveBtnClickBlock)(UIButton * sender,UIImageView * erweimaImageV);
+/**点击copy*/
+@property(nonatomic,copy)void(^copyBtnClickBlock)(UIButton * sender);
 @end
 
 NS_ASSUME_NONNULL_END

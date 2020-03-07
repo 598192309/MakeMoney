@@ -22,7 +22,14 @@
 
 @end
 @implementation SaoMaView
-#pragma mark - 生命周期
+#pragma mark - SETTER
+- (void)setUrlStr:(NSString *)urlStr{
+    _urlStr = urlStr;
+    //生成对应的二维码
+      NSString *erweimaStr = self.urlStr;
+      UIImage *image = [UIImage generateQRCodeWithString:erweimaStr Size:Adaptor_Value(200)];
+      self.erweimaImageV.image = image;
+}
 #pragma mark - 生命周期
 -(instancetype)init{
     if (self = [super init]) {
@@ -39,10 +46,7 @@
         make.edges.mas_equalTo(weakSelf);
     }];
     
-    //生成对应的二维码
-    NSString *erweimaStr = [NSString stringWithFormat:@"%@/share.html?appkey=%@&code=%@",RI.basicItem.share_url,ErweimaShareKey,RI.infoInitItem.invite_code];
-    UIImage *image = [UIImage generateIconQRCodeWithString:erweimaStr Size:Adaptor_Value(200) icon:[UIImage imageNamed:@"ic_erweima"]];
-    self.erweimaImageV.image = image;
+  
 
 }
 
@@ -56,12 +60,16 @@
 
 #pragma mark - act
 - (void)saveBtnClick:(EnlargeTouchSizeButton *)sender{
-  
+    if (self.saveBtnClickBlock) {
+        self.saveBtnClickBlock(sender, self.erweimaImageV);
+    }
 }
 
 
 - (void)copyBtnClick:(EnlargeTouchSizeButton *)sender{
-
+    if (self.copyBtnClickBlock) {
+        self.copyBtnClickBlock(sender);
+    }
 }
 
 #pragma mark - lazy
@@ -69,7 +77,7 @@
     if (!_header) {
         _header = [UIView new];
         UIView *contentV = [UIView new];
-        contentV.backgroundColor = [UIColor clearColor];
+        contentV.backgroundColor = [UIColor whiteColor];
         [_header addSubview:contentV];
         __weak __typeof(self) weakSelf = self;
         
@@ -80,10 +88,8 @@
         _tipLabel = [UILabel lableWithText:lqStrings(@"请完成支付后再离开当前界面") textColor:ThemeBlackColor fontSize:AdaptedBoldFontSize(20) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_tipLabel];
         [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            
             make.centerX.mas_equalTo(contentV);
             make.top.mas_equalTo(Adaptor_Value(40));
-            
         }];
         
         _subTipLable = [UILabel lableWithText:lqStrings(@"保存二维码，并打开微信扫一扫功能扫码支付") textColor:ThemeBlackColor fontSize:AdaptedBoldFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
@@ -121,7 +127,7 @@
         [contentV addSubview:_tipCopyLable];
         [_tipCopyLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(contentV);
-            make.top.mas_equalTo(weakSelf.tipLabel.mas_bottom).offset(Adaptor_Value(30));
+            make.top.mas_equalTo(weakSelf.saveBtn.mas_bottom).offset(Adaptor_Value(30));
         }];
         
         _urlLable = [UILabel lableWithText:lqStrings(@"") textColor:ThemeBlackColor fontSize:AdaptedFontSize(14) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
@@ -142,6 +148,7 @@
             make.centerX.mas_equalTo(contentV);
             make.height.mas_equalTo(Adaptor_Value(40));
             make.width.mas_equalTo(Adaptor_Value(120));
+            make.bottom.mas_equalTo(contentV).offset(-Adaptor_Value(20));
         }];
 
     
