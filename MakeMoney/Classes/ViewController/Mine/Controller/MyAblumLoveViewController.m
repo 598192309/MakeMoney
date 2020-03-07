@@ -7,7 +7,7 @@
 //  我的写真收藏
 
 #import "MyAblumLoveViewController.h"
-#import "MyLoveCell.h"
+#import "AblumCollectionCell.h"
 #import "MineApi.h"
 #import "MineItem.h"
 #import "NoDataView.h"
@@ -121,7 +121,7 @@
 //设置方块的视图
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     //获取cell视图，内部通过去缓存池中取，如果缓存池中没有，就自动创建一个新的cell
-    MyLoveCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([MyLoveCell class]) forIndexPath:indexPath];
+    AblumCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([AblumCollectionCell class]) forIndexPath:indexPath];
     AblumItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
     [cell refreshAblumWithItem:item];
     return cell;
@@ -133,7 +133,7 @@
     CGFloat row = 2.0;
     CGFloat w = (LQScreemW - 2 * 10 ) / row;
 //    CGFloat h = [self caculateCellHeight:indexPath];
-    CGFloat h = Adaptor_Value(190);
+    CGFloat h = Adaptor_Value(270);
     return CGSizeMake(w , h);
 
 }
@@ -192,7 +192,7 @@
         _collectionView.dataSource=self;//设置数据源
         _collectionView.backgroundColor = ThemeBlackColor;
         
-        [_collectionView registerClass:[MyLoveCell class] forCellWithReuseIdentifier:NSStringFromClass([MyLoveCell class])];
+        [_collectionView registerClass:[AblumCollectionCell class] forCellWithReuseIdentifier:NSStringFromClass([AblumCollectionCell class])];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;

@@ -61,8 +61,9 @@ const char* jailbreak_tool_pathes[] = {
 // 获取设备id  卸载  不变的
 +(NSString*)getNerverChangeUUID{
     NSString *uuid = [SAMKeychain passwordForService:@"com.51778Vedio" account:@"uuid"];;
-    NSString *md5UUId = [uuid stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *md5UUId = uuid;
     if (!uuid) {
+        [LSVProgressHUD showWithStatus:lqStrings(@"uuid变了")];
         uuid = [[NSUUID UUID] UUIDString];
         //拼接随机参数 再MD5 此行别去可删
         int salt = 100000 + arc4random() %(999999 -100000 + 1);

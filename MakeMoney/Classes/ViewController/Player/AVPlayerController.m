@@ -40,8 +40,8 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
 
 //推荐部分
 @property (nonatomic,strong)AVTuijianView *avTuijianView;
-//中间 广告 title部分
-@property (nonatomic,strong)AVCenterView *avCenterView;
+////中间 广告 title部分
+//@property (nonatomic,strong)AVCenterView *avCenterView;
 @end
 
 @implementation AVPlayerController
@@ -73,22 +73,26 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
             make.center.mas_equalTo(self.containerView);
         }];
         
-        //中间部分
-        [self.view addSubview:self.avCenterView];
-        [self.avCenterView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(weakSelf.view);
-            make.top.mas_equalTo(weakSelf.containerView.mas_bottom);
-        }];
+//        //中间部分
+//        [self.view addSubview:self.avCenterView];
+//        [self.avCenterView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.right.mas_equalTo(weakSelf.view);
+//            make.top.mas_equalTo(weakSelf.containerView.mas_bottom);
+//        }];
+//        [self.avCenterView configUIWithItem:self.item finishi:^{
+//
+//        }];
 
         //推荐部分
         [self.view addSubview:self.avTuijianView];
-        [self.avCenterView configUIWithItem:self.item finishi:^{
+        [self.avTuijianView configCenterViewUIWithItem:self.item finishi:^{
             
         }];
         [self.avTuijianView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.mas_equalTo(weakSelf.view);
-            make.top.mas_equalTo(weakSelf.avCenterView.mas_bottom);
+            make.top.mas_equalTo(weakSelf.containerView.mas_bottom);
         }];
+        [self tuijianViewAct];
     }
 
 
@@ -190,8 +194,14 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
     [self.player playTheIndex:0];
     [self.controlView showTitle:self.item.title coverURLString:kVideoCover fullScreenMode:ZFFullScreenModeAutomatic];
 }
-
-
+#pragma mark ----act
+- (void)tuijianViewAct{
+    __weak __typeof(self) weakSelf = self;
+    //点击cell
+    weakSelf.avTuijianView.cellClickBlock = ^(NSIndexPath * _Nonnull indexPath) {
+        
+    };
+}
 
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -235,7 +245,10 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
 - (void)requestAds{
     __weak __typeof(self) weakSelf = self;
     [HomeApi requestAdWithType:@"4" Success:^(NSArray * _Nonnull adsItemArr, NSString * _Nonnull msg) {
-        [weakSelf.avCenterView configAds:adsItemArr.firstObject finishi:^{
+//        [weakSelf.avCenterView configAds:adsItemArr.firstObject finishi:^{
+//
+//        }];
+        [weakSelf.avTuijianView configAds:adsItemArr.firstObject finishi:^{
             
         }];
     } error:^(NSError *error, id resultObject) {
@@ -291,10 +304,10 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
     return _avTuijianView;
 }
 
-- (AVCenterView *)avCenterView{
-    if (!_avCenterView) {
-        _avCenterView = [AVCenterView new];
-    }
-    return _avCenterView;
-}
+//- (AVCenterView *)avCenterView{
+//    if (!_avCenterView) {
+//        _avCenterView = [AVCenterView new];
+//    }
+//    return _avCenterView;
+//}
 @end

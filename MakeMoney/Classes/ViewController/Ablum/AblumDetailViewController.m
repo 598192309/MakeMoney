@@ -76,7 +76,7 @@
 - (void)love{
     [LSVProgressHUD show];
     __weak __typeof(self) weakSelf = self;
-    [AblumApi loveAblumWithAblumId:self.ablumData.ID Success:^(NSInteger status, NSString * _Nonnull msg) {
+    [AblumApi loveAblumWithAblumId:self.ablumData.album_id Success:^(NSInteger status, NSString * _Nonnull msg) {
         [LSVProgressHUD showInfoWithStatus:msg];
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];

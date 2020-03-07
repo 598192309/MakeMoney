@@ -8,10 +8,15 @@
 
 #import "AVTuijianView.h"
 #import "AVTuijianCell.h"
+#import "AVCenterView.h"
+#import "HomeItem.h"
 
 @interface AVTuijianView ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
 @property (nonatomic,strong)NSArray *hotItemdataArr;
+//中间 广告 title部分
+@property (nonatomic,strong)AVCenterView *avCenterView;
+@property (nonatomic,strong)UIView *tableHeaderV;
 @end
 @implementation AVTuijianView
 #pragma mark - 生命周期
@@ -30,7 +35,16 @@
     [self.customTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(weakSelf);
     }];
-
+    UIView *tableHeaderView = [[UIView alloc] init];
+    _tableHeaderV = tableHeaderView;
+    [tableHeaderView addSubview:self.avCenterView];
+    [self.avCenterView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(tableHeaderView);
+    }];
+    CGFloat H = [tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    tableHeaderView.lq_height = H;
+    self.customTableView.tableHeaderView = tableHeaderView;
+    self.customTableView.tableHeaderView.lq_height = H;
 }
 
 
@@ -40,6 +54,26 @@
     [self.customTableView reloadData];
     
     finishBlock();
+}
+- (void)configCenterViewUIWithItem:(HotItem *)item finishi:(void(^)(void))finishBlock{
+    __weak __typeof(self) weakSelf = self;
+    [self.avCenterView configUIWithItem:item finishi:^{
+        CGFloat H = [weakSelf.avCenterView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        weakSelf.tableHeaderV.lq_height = H;
+        weakSelf.customTableView.tableHeaderView = weakSelf.tableHeaderV;
+        weakSelf.customTableView.tableHeaderView.lq_height = H;
+    }];
+    
+}
+
+- (void)configAds:(AdsItem *)item finishi:(void(^)(void))finishBlock{
+    __weak __typeof(self) weakSelf = self;
+    [weakSelf.avCenterView configAds:item finishi:^{
+        CGFloat H = [weakSelf.avCenterView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        weakSelf.tableHeaderV.lq_height = H;
+        weakSelf.customTableView.tableHeaderView = weakSelf.tableHeaderV;
+        weakSelf.customTableView.tableHeaderView.lq_height = H;
+    }];
 }
 
 #pragma mark - act
@@ -82,6 +116,11 @@
     return 0.01;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.cellClickBlock) {
+        self.cellClickBlock(indexPath);
+    }
+}
 
 #pragma mark - lazy
 - (UITableView *)customTableView{
@@ -102,5 +141,12 @@
 
     }
     return _customTableView;
+}
+
+- (AVCenterView *)avCenterView{
+    if (!_avCenterView) {
+        _avCenterView = [AVCenterView new];
+    }
+    return _avCenterView;
 }
 @end

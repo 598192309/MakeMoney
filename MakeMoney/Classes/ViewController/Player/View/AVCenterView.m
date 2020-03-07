@@ -66,9 +66,10 @@
             [weakSelf.adsImageV mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.height.mas_equalTo(h);
             }];
+            finishBlock();
+
         }
     }];
-    finishBlock();
 }
 
 #pragma mark - act
@@ -94,7 +95,7 @@
         [_adsImageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(Adaptor_Value(10));
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
-           make.top.mas_equalTo(TopAdaptor_Value(10));
+           make.top.mas_equalTo(Adaptor_Value(10));
             make.height.mas_equalTo(0);
         }];
         ViewRadius(_adsImageV, 5);

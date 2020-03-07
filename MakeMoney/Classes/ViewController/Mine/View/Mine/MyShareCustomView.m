@@ -102,7 +102,7 @@
         [_erweimaImageV mas_makeConstraints:^(MASConstraintMaker *make) {
            make.centerX.mas_equalTo(weakSelf.erweimaView);
            make.height.width.mas_equalTo(Adaptor_Value(200));
-           make.top.mas_equalTo(TopAdaptor_Value(20));
+           make.top.mas_equalTo(Adaptor_Value(20));
         }];
         _erweimaImageV.backgroundColor = TitleGrayColor;
         

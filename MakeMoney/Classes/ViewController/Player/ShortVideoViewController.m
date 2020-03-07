@@ -206,7 +206,7 @@
 
     [AVApi cancleLoveVedioWithVedioId:ID Success:^(NSInteger status, NSString * _Nonnull msg) {
         sender.userInteractionEnabled = YES;
-        [LSVProgressHUD showInfoWithStatus:msg];
+        [LSVProgressHUD showInfoWithStatus:msg.length > 0 ? msg : lqStrings(@"取消收藏")];
         sender.selected = !sender.selected;
 
     } error:^(NSError *error, id resultObject) {
