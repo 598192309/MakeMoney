@@ -163,7 +163,7 @@
 
 - (void)requestHotMoreData{
     __weak __typeof(self) weakSelf = self;
-    [HomeApi requestPopularityListwithVideoType:self.video_type pageIndex:@"0" page_size:@"15" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
+    [HomeApi requestPopularityListwithVideoType:self.video_type pageIndex:IntTranslateStr(self.pageIndex) page_size:@"15" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
         [weakSelf.dataArr addObjectsFromArray:hotItemArr];
         [weakSelf.customCollectionView endFooterRefreshing];
         [weakSelf.customCollectionView reloadData];
