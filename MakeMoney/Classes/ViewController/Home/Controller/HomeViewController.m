@@ -222,10 +222,10 @@
             HomeSectionFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:NSStringFromClass([HomeSectionFooterView class]) forIndexPath:indexPath];
             [footerView refreshViewWith:item];
             __weak __typeof(self) weakSelf = self;
-            footerView.imageLoadSuccess = ^{
-//                [weakSelf.collectionView reloadData];
-                [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
-            };
+//            footerView.imageLoadSuccess = ^{
+////                [weakSelf.collectionView reloadData];
+//                [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
+//            };
             return footerView;
         }
     }
