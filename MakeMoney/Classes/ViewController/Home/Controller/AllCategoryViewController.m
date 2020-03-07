@@ -12,6 +12,7 @@
 #import "HomeItem.h"
 #import "ListViewController.h"
 #import "ZhuanTiItem.h"
+
 @interface AllCategoryViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
 @property (nonatomic,assign)NSInteger pageIndex;
@@ -108,7 +109,7 @@
 {
     ZHuanTiCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ZHuanTiCell class]) forIndexPath:indexPath];
     HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
-    [cell refreshWithItem: item  downImageType:@"分类"];
+    [cell refreshCategoryWithItem:item  downImageType:@"分类"];
     return cell;
 
 

@@ -11,6 +11,7 @@
 @interface HomeVideoCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageV;
 @property (weak, nonatomic) IBOutlet UILabel *desLabel;
+@property (weak, nonatomic) IBOutlet UIButton *loveBtn;
 @property (nonatomic, strong) HotItem *item;
 @end
 
@@ -20,6 +21,8 @@
     [super awakeFromNib];
  
     ViewRadius(_imageV, 4);
+    _loveBtn.hidden = YES;
+    [_loveBtn setIconInLeftWithSpacing:2.5];
 }
 - (void)refreshCellWithItem:(HotItem *)item videoType:(VideoType)type{
     _item = item;
@@ -56,5 +59,9 @@
      */
     
 }
-
+//针对最新上传 最多播放 最多点赞 全部分类里进来 要显示
+- (void)setLoveBtnAppear:(BOOL)appear{
+    self.loveBtn.hidden = !appear;
+    [self.loveBtn setTitle:self.item.love forState:UIControlStateNormal];
+}
 @end

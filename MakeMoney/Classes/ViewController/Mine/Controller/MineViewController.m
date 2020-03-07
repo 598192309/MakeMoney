@@ -219,7 +219,7 @@
     switch (section) {
         case 0:
             {
-                return 1;
+                return 2;
             }
             break;
 
@@ -256,8 +256,14 @@
     NSString *title;
     NSString *subTitle;
     if (indexPath.section == 0) {
-        title = [NSString stringWithFormat:lqLocalized(@"官方邮箱:%@", nil),RI.basicItem.email];
-        subTitle = lqStrings(@"复制");
+        if (indexPath.row == 0) {
+            title = [NSString stringWithFormat:lqLocalized(@"官方邮箱:%@", nil),RI.basicItem.email];
+            subTitle = lqStrings(@"复制");
+        }else{
+            title = lqStrings(@"福利分享群");
+            subTitle = @"";
+        }
+        
     }else if (indexPath.section == 1){
         title = lqStrings(@"我的收藏");
         subTitle = nil;
@@ -316,9 +322,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-        pasteboard.string = RI.basicItem.email;
-        [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"复制成功", nil)];
+        if (indexPath.row == 0) {
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            pasteboard.string = RI.basicItem.email;
+            [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"复制成功", nil)];
+        }else{//福利分享群
+            NSURL *url = [NSURL URLWithString:RI.basicItem.potato_url];
+            if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                [[UIApplication sharedApplication] openURL:url];
+            }
+        }
+        
     }else if (indexPath.section == 1){//我的收藏
         MyLoveViewController *vc = [[MyLoveViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
