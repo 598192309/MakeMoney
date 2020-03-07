@@ -915,8 +915,8 @@
 		09239A6B2403FEE400A4F727 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				09239A6C2403FEE400A4F727 /* MainTabBarController.m */,
 				09239A712403FEE400A4F727 /* MainTabBarController.h */,
+				09239A6C2403FEE400A4F727 /* MainTabBarController.m */,
 				09239A6D2403FEE400A4F727 /* View */,
 			);
 			path = Main;
