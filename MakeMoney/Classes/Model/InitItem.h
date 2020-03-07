@@ -56,6 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong)NSString *potato_name;
 @property (nonatomic,strong)NSString *potato_url;
+@property (nonatomic,strong)NSString *album_url;
 
 @end
 NS_ASSUME_NONNULL_END
