@@ -31,6 +31,8 @@
 @property (nonatomic,strong)UILabel *bottomTipLable2;
 @property (nonatomic,strong)UILabel *bottomTipLable3;
 @property (nonatomic,strong)CommonAlertView *commonAlertView;
+@property (nonatomic,strong)CommonAlertView *tipAlertView;
+
 @property (nonatomic,strong)NSString *goodID;
 @end
 
@@ -55,6 +57,7 @@
     }
     [self requestData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notify:) name:KNotification_PayClick object:nil];
+    [self showTipMsg:lqStrings(@"温馨提示") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"请注意选择VIP类型哦~") subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"好的"];
 }
 - (void)dealloc{
     LQLog(@"dealloc -------%@",NSStringFromClass([self class]));
@@ -113,6 +116,14 @@
     [self.commonAlertView refreshUIWithTitle:msg titlefont:msgFont titleColor:msgColor subtitle:subTitle subTitleFont:subFont subtitleColor:subColor firstBtnTitle:firstBtnTitle secBtnTitle:secBtnTitle singleBtnTitle:singleBtnTitle];
     [[UIApplication sharedApplication].keyWindow addSubview:self.commonAlertView];
     [self.commonAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
+    }];
+}
+
+- (void)showTipMsg:(NSString *)msg msgFont:(UIFont *)msgFont msgColor:(UIColor *)msgColor subTitle:(NSString *)subTitle subFont:(UIFont *)subFont subColor:(UIColor *)subColor firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singleBtnTitle:(NSString *)singleBtnTitle{
+    [self.tipAlertView refreshUIWithTitle:msg titlefont:msgFont titleColor:msgColor subtitle:subTitle subTitleFont:subFont subtitleColor:subColor firstBtnTitle:firstBtnTitle secBtnTitle:secBtnTitle singleBtnTitle:singleBtnTitle];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.tipAlertView];
+    [self.tipAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
     }];
 }
@@ -235,10 +246,10 @@
     RechargeCenterCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([RechargeCenterCell class]) forIndexPath:indexPath];
     PayCenterInfotem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
     [cell refreshUIWithItem:item];
-    self.goodID = item.goods_id;
     __weak __typeof(self) weakSelf = self;
     cell.rechargeCenterBuyBtnClickBlock = ^(UIButton * _Nonnull sender) {
 //        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+        weakSelf.goodID = item.goods_id;
         //支付方式弹框
         [weakSelf requestPayWays:sender];
     };
@@ -380,6 +391,18 @@
         __weak __typeof(self) weakSelf = self;
         _commonAlertView.commonAlertViewBlock = ^(NSInteger index, NSString * _Nonnull str) {
 
+        };
+    }
+    return _commonAlertView;
+}
+
+- (CommonAlertView *)tipAlertView{
+    if (!_tipAlertView) {
+        _tipAlertView = [CommonAlertView new];
+        __weak __typeof(self) weakSelf = self;
+        _tipAlertView.commonAlertViewBlock = ^(NSInteger index, NSString * _Nonnull str) {
+            [weakSelf.tipAlertView removeFromSuperview];
+            weakSelf.tipAlertView = nil;
         };
     }
     return _commonAlertView;

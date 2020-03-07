@@ -78,20 +78,25 @@
         }
     }
     self.timesLable.attributedText = attr;
-    self.cityVipLable.text = item.is_qm_vip ? item.qm_vip_end_time:lqStrings(@"未开通");
-    self.ablumVipLable.text = item.is_album_vip ? item.ablum_vip_end_time:lqStrings(@"未开通");
-    self.shipinVipLable.text = item.is_vip ? item.vip_end_time:lqStrings(@"未开通");
+    self.cityVipLable.text = item.is_qm_vip ? [self changeStr:item.qm_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
+    self.ablumVipLable.text = item.is_album_vip ? [self changeStr:item.ablum_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
+    self.shipinVipLable.text = item.is_vip ? [self changeStr:item.vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
     
     self.shipinVipLable.hidden = !item.is_vip;
     self.shipinVipTipLable.hidden = !item.is_vip;
     self.timesLable.hidden = item.is_vip;
     
-    if (item.is_new_user) {
-        self.ablumVipLable.text = lqStrings(@"临时体验卡");
-        self.shipinVipLable.text = lqStrings(@"临时体验卡");
-        self.shipinVipLable.hidden = NO;
-        self.shipinVipTipLable.hidden = NO;
-        self.timesLable.hidden = YES;
+    if (item.is_new_user ) {
+        if (!item.is_album_vip) {
+            self.ablumVipLable.text = lqStrings(@"临时体验卡");
+        }
+        if (!item.is_vip) {
+            self.shipinVipLable.text = lqStrings(@"临时体验卡");
+            self.shipinVipLable.hidden = NO;
+            self.shipinVipTipLable.hidden = NO;
+            self.timesLable.hidden = YES;
+
+        }
 
     }
     
@@ -140,7 +145,10 @@
         self.mineCustomHeaderViewBtnsBlock(sender,@{});
     }
 }
-
+//转时间戳 变时间类型
+- (NSString *)changeStr:(NSString *)str format:(NSString *)fmt{
+    return  [str lq_getTimeFromTimestampWithFormatter:fmt];
+}
 #pragma mark - lazy
 -(UIView *)header{
     if (!_header) {
@@ -215,7 +223,7 @@
             
         }];
         
-        _ablumVipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? RI.infoInitItem.ablum_vip_end_time:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        _ablumVipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? [weakSelf changeStr:RI.infoInitItem.ablum_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_ablumVipLable];
         [_ablumVipLable mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -234,7 +242,7 @@
             
         }];
         
-        _cityVipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? RI.infoInitItem.qm_vip_end_time:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        _cityVipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? [weakSelf changeStr:RI.infoInitItem.qm_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_cityVipLable];
         [_cityVipLable mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -264,7 +272,7 @@
         }];
         _shipinVipTipLable.hidden = !RI.infoInitItem.is_vip;
         
-        _shipinVipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? RI.infoInitItem.vip_end_time:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        _shipinVipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? [weakSelf changeStr:RI.infoInitItem.vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_shipinVipLable];
         [_shipinVipLable mas_makeConstraints:^(MASConstraintMaker *make) {
             

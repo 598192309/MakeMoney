@@ -45,7 +45,7 @@
     self.detailLable.text = item.text;
     
     //type 1 视频  2 同城
-    self.tipLabel.text = item.type == 2 ? lqStrings(@"同城VIP"):lqStrings(@"视频VIP");
+    self.tipLabel.text = item.name;
 
     
 }
