@@ -1,8 +1,8 @@
 //
-//  AblumDetailCell.h
+//  AblumDetailNewCell.h
 //  MakeMoney
 //
-//  Created by JS on 2020/3/7.
+//  Created by 黎芹 on 2020/3/7.
 //  Copyright © 2020 lqq. All rights reserved.
 //
 
@@ -10,8 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AblumDetailCell : UITableViewCell
+@interface AblumDetailNewCell : UITableViewCell
 - (void)refreshUIWithImageStr:(NSString*)imageStr;
+
 @end
 
 NS_ASSUME_NONNULL_END

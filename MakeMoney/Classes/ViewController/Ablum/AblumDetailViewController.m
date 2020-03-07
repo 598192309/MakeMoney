@@ -7,9 +7,9 @@
 //  
 
 #import "AblumDetailViewController.h"
-#import "AblumDetailCell.h"
 #import "AblumItem.h"
 #import "AblumApi.h"
+#import "AblumDetailNewCell.h"
 @interface AblumDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView  *customTableView;
 
@@ -94,7 +94,9 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    AblumDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AblumDetailCell class]) forIndexPath:indexPath];
+//    AblumDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AblumDetailCell class]) forIndexPath:indexPath];
+    AblumDetailNewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AblumDetailNewCell class]) forIndexPath:indexPath];
+
     [cell refreshUIWithImageStr:[self.ablumData.imgs safeObjectAtIndex:indexPath.row]];
     return cell;
 
@@ -127,7 +129,7 @@
         _customTableView.showsHorizontalScrollIndicator = NO;
         _customTableView.backgroundColor = [UIColor clearColor];
         _customTableView.separatorColor = [UIColor clearColor];
-        [_customTableView registerClass:[AblumDetailCell class] forCellReuseIdentifier:NSStringFromClass([AblumDetailCell class])];
+        [_customTableView registerNib:[UINib nibWithNibName:NSStringFromClass([AblumDetailNewCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([AblumDetailNewCell class])];
 
         
     }
