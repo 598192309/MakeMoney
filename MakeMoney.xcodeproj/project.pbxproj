@@ -202,6 +202,8 @@
 		8B58D0462411416400FE426E /* WebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B58D0452411416400FE426E /* WebViewViewController.m */; };
 		8B58D04B2413555400FE426E /* AblumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B58D04A2413555400FE426E /* AblumViewController.m */; };
 		8B58D04E241355C500FE426E /* AblumCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B58D04D241355C500FE426E /* AblumCollectionCell.m */; };
+		8B58D05124135E6400FE426E /* AblumDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B58D05024135E6400FE426E /* AblumDetailViewController.m */; };
+		8B58D05424135E9B00FE426E /* AblumDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B58D05324135E9B00FE426E /* AblumDetailCell.m */; };
 		8B9B8BE9240D4AED004B4704 /* ZFPlayerGestureControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8BAF240D4AED004B4704 /* ZFPlayerGestureControl.m */; };
 		8B9B8BEA240D4AED004B4704 /* ZFPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8BB0240D4AED004B4704 /* ZFPlayerController.m */; };
 		8B9B8BEB240D4AED004B4704 /* ZFOrientationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B8BB3240D4AED004B4704 /* ZFOrientationObserver.m */; };
@@ -663,6 +665,10 @@
 		8B58D04A2413555400FE426E /* AblumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AblumViewController.m; sourceTree = "<group>"; };
 		8B58D04C241355C500FE426E /* AblumCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AblumCollectionCell.h; sourceTree = "<group>"; };
 		8B58D04D241355C500FE426E /* AblumCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AblumCollectionCell.m; sourceTree = "<group>"; };
+		8B58D04F24135E6400FE426E /* AblumDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AblumDetailViewController.h; sourceTree = "<group>"; };
+		8B58D05024135E6400FE426E /* AblumDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AblumDetailViewController.m; sourceTree = "<group>"; };
+		8B58D05224135E9B00FE426E /* AblumDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AblumDetailCell.h; sourceTree = "<group>"; };
+		8B58D05324135E9B00FE426E /* AblumDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AblumDetailCell.m; sourceTree = "<group>"; };
 		8B9B8BAE240D4AED004B4704 /* ZFPlayerNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPlayerNotification.h; sourceTree = "<group>"; };
 		8B9B8BAF240D4AED004B4704 /* ZFPlayerGestureControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPlayerGestureControl.m; sourceTree = "<group>"; };
 		8B9B8BB0240D4AED004B4704 /* ZFPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPlayerController.m; sourceTree = "<group>"; };
@@ -1692,6 +1698,8 @@
 			children = (
 				8B58D0492413555400FE426E /* AblumViewController.h */,
 				8B58D04A2413555400FE426E /* AblumViewController.m */,
+				8B58D04F24135E6400FE426E /* AblumDetailViewController.h */,
+				8B58D05024135E6400FE426E /* AblumDetailViewController.m */,
 				8B58D0482413554000FE426E /* View */,
 			);
 			path = Ablum;
@@ -1702,6 +1710,8 @@
 			children = (
 				8B58D04C241355C500FE426E /* AblumCollectionCell.h */,
 				8B58D04D241355C500FE426E /* AblumCollectionCell.m */,
+				8B58D05224135E9B00FE426E /* AblumDetailCell.h */,
+				8B58D05324135E9B00FE426E /* AblumDetailCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2174,6 +2184,7 @@
 				111FD6F724124B6000E7B419 /* AblumItem.m in Sources */,
 				11105E5624066BC900521CB2 /* UIImage+LqExtension.m in Sources */,
 				092399C82403FE0F00A4F727 /* AppDelegate.m in Sources */,
+				8B58D05124135E6400FE426E /* AblumDetailViewController.m in Sources */,
 				11105E5B24066BC900521CB2 /* LqNoPasteTextField.m in Sources */,
 				113980822410A0BB00663E26 /* PopPayWayViewController.m in Sources */,
 				11105E5E24066BC900521CB2 /* SystemAlertViewController.m in Sources */,
@@ -2209,6 +2220,7 @@
 				11105E5524066BC900521CB2 /* NSError+LqExtension.m in Sources */,
 				11105AF5240611C600521CB2 /* HomeCollectionHeaderView.m in Sources */,
 				09239ACD2403FEE400A4F727 /* MainTabBarController.m in Sources */,
+				8B58D05424135E9B00FE426E /* AblumDetailCell.m in Sources */,
 				11105E8124067C2100521CB2 /* ZhuanTiItem.m in Sources */,
 				8B9B8C01240D4AED004B4704 /* ZFPortraitControlView.m in Sources */,
 				8B9B8BF6240D4AED004B4704 /* ZFUtilities.m in Sources */,

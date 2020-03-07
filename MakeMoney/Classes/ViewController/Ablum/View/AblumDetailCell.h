@@ -1,5 +1,5 @@
 //
-//  AblumCollectionCell.h
+//  AblumDetailCell.h
 //  MakeMoney
 //
 //  Created by JS on 2020/3/7.
@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-@class AblumItem;
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AblumCollectionCell : UICollectionViewCell
-- (void)refreshAblumWithItem:(AblumItem *)item;
+@interface AblumDetailCell : UITableViewCell
+- (void)refreshUIWithImageStr:(NSString*)imageStr;
 @end
 
 NS_ASSUME_NONNULL_END
