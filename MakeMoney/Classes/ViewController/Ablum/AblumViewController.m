@@ -76,7 +76,7 @@
             
         }
     } error:^(NSError *error, id resultObject) {
-      [weakSelf.collectionView endHeaderRefreshing];
+      [weakSelf.collectionView endFooterRefreshing];
       [weakSelf.collectionView reloadData];
     }];
 }

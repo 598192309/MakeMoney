@@ -89,7 +89,7 @@
         }
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
-        [weakSelf.customTableView endHeaderRefreshing];
+        [weakSelf.customTableView endFooterRefreshing];
     }];
 }
 
@@ -107,7 +107,7 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ZHuanTiCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ZHuanTiCell class]) forIndexPath:indexPath];
-    ZhuanTiHomeItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
+    HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
     [cell refreshWithItem: item  downImageType:@"分类"];
     return cell;
 
@@ -122,10 +122,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     ListViewController *vc = [[ListViewController alloc] init];
-    ZhuanTiHomeItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
+    HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
     vc.navTitle = item.title;
     vc.tag = IntTranslateStr(item.tag);
-    vc.type = IntTranslateStr(item.type);
+    vc.type = self.type;
     vc.text = item.text.length > 0 ? item.text : @"51778";
     [self.navigationController pushViewController:vc animated:YES];
     

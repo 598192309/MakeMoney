@@ -62,7 +62,7 @@
 }
 - (void)setUpNav{
     [self addNavigationView];
-    self.navigationView.backgroundColor = [UIColor clearColor];
+    self.navigationTextLabel.text = self.navTitle;
 }
 #pragma mark - act
 - (void)saoMaViewAct{

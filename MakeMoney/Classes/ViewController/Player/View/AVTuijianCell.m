@@ -11,6 +11,8 @@
 @interface AVTuijianCell()
 @property (nonatomic,strong) UIView * cellBackgroundView;
 @property (strong, nonatomic)  UIImageView *imageV;
+@property (strong, nonatomic)  UILabel *videoTimeLable;
+
 @property (strong, nonatomic)  UILabel *titleLable;
 @property (strong, nonatomic)  UILabel *tagLable;
 @property (strong, nonatomic)  UILabel *seeCountsLable;
@@ -47,7 +49,7 @@
 
 - (void)refreshWithItem:(HotItem*)item{
     self.item = item;
-    
+    self.videoTimeLable.text = item.total_time;
     self.titleLable.text = item.title;
 
     self.timeLable.text = [item.create_time lq_getTimeFromTimestampWithFormatter:@"yyyy-MM-dd"];
@@ -127,6 +129,13 @@
             make.height.mas_equalTo(Adaptor_Value(100));
         }];
         ViewRadius(_imageV, 5);
+        
+        _videoTimeLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleWhiteColor fontSize:AdaptedFontSize(14) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [contentV addSubview:_videoTimeLable];
+        [_videoTimeLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(weakSelf.imageV).offset(-Adaptor_Value(10));
+            make.bottom.mas_equalTo(weakSelf.imageV.mas_bottom).offset(-Adaptor_Value(10));
+        }];
         
         _titleLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:3];
         [contentV addSubview:_titleLable];

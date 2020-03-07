@@ -140,13 +140,20 @@
     __weak __typeof(self) weakSelf = self;
     [MineApi updateSuccess:^(UpdateItem * _Nonnull updateItem, NSString * _Nonnull msg) {
         weakSelf.updateItem = updateItem;
-        if (updateItem.status == 2) {//强制
-            [weakSelf showMsg:updateItem.content firstBtnTitle:lqStrings(@"") secBtnTitle:@"" singleBtnTitle:lqStrings(@"去升级")];
+        //获取当前vesion
+        NSDictionary *dict =  [NSBundle mainBundle].infoDictionary;
+        NSString *curVersion = dict[@"CFBundleShortVersionString"];
+        if ([curVersion compare:updateItem.ios_version_name] == NSOrderedAscending) {
+            if (updateItem.status == 2) {//强制
+                [weakSelf showMsg:updateItem.ios_content firstBtnTitle:lqStrings(@"") secBtnTitle:@"" singleBtnTitle:lqStrings(@"去升级")];
 
-        }else{
-            [weakSelf showMsg:updateItem.content firstBtnTitle:lqStrings(@"暂时不升级") secBtnTitle:lqStrings(@"去升级") singleBtnTitle:nil];
+            }else{
+                [weakSelf showMsg:updateItem.ios_content firstBtnTitle:lqStrings(@"暂时不升级") secBtnTitle:lqStrings(@"去升级") singleBtnTitle:nil];
 
+            }
         }
+        
+
     } error:^(NSError *error, id resultObject) {
         
     }];
@@ -203,6 +210,7 @@
         headerView.headerViewTipBtnClickBlock = ^(UIButton * _Nonnull sender) {
             if (indexPath.section == 0) {
                 AllCategoryViewController *vc = [[AllCategoryViewController alloc] init];
+                vc.type = @"0";//短视频
                 [weakSelf.navigationController pushViewController:vc animated:YES];
             }else{
                 ListViewController *vc = [[ListViewController alloc] init];
@@ -367,7 +375,7 @@
                 [weakSelf.commonAlertView removeFromSuperview];
                 weakSelf.commonAlertView = nil;
                 if ([str isEqualToString:lqStrings(@"去升级")]) {
-                    NSURL *url = [NSURL URLWithString:weakSelf.updateItem.download_url];
+                    NSURL *url = [NSURL URLWithString:weakSelf.updateItem.ios_download_url];
                     [[UIApplication sharedApplication] openURL:url];
                 }else{
                     [LSVProgressHUD showInfoWithStatus:@"购买VIP"];
@@ -375,7 +383,7 @@
                 }
             }else if (index == 3){
                 if ([str isEqualToString:lqStrings(@"去升级")]) {
-                    NSURL *url = [NSURL URLWithString:weakSelf.updateItem.download_url];
+                    NSURL *url = [NSURL URLWithString:weakSelf.updateItem.ios_download_url];
                     [[UIApplication sharedApplication] openURL:url];
                 }else if ([str isEqualToString:lqStrings(@"好的")]){
                     [weakSelf.commonAlertView removeFromSuperview];

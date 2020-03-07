@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ZhuanTiHomeItem;
+@class ZhuanTiHomeItem,HotItem;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZHuanTiCell : UITableViewCell
 - (void)refreshWithItem:(ZhuanTiHomeItem*)item downImageType:(NSString *)downImageType;
+
+//分类
+- (void)refreshCategoryWithItem:(HotItem*)item downImageType:(NSString *)downImageType;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -46,9 +46,9 @@
     //type 1 视频  2 同城 3写真
     NSString *str1;
     if (item.type == 1) {
-        str1 = lqStrings(@"同城VIP");
-    }else if (item.type == 2) {
         str1 = lqStrings(@"视频VIP");
+    }else if (item.type == 2) {
+        str1 = lqStrings(@"同城VIP");
     }else if (item.type == 3) {
         str1 = lqStrings(@"写真VIP");
     }

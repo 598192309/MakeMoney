@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AllCategoryViewController : BaseViewController
-
+@property (nonatomic,strong)NSString *type;
 @end
 
 NS_ASSUME_NONNULL_END

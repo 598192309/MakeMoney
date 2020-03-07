@@ -192,7 +192,11 @@
     [AVApi loveVedioWithVedioId:ID Success:^(NSInteger status, NSString * _Nonnull msg) {
         sender.userInteractionEnabled = YES;
         [LSVProgressHUD showInfoWithStatus:msg.length > 0 ? msg : lqStrings(@"收藏成功")];
+        NSInteger num = [sender titleForState:UIControlStateNormal].integerValue;
+        [sender setTitle:IntTranslateStr(num + 1) forState:UIControlStateNormal];
         sender.selected = !sender.selected;
+
+        
     } error:^(NSError *error, id resultObject) {
         sender.userInteractionEnabled = YES;
         [LSVProgressHUD showError:error];
@@ -207,6 +211,8 @@
     [AVApi cancleLoveVedioWithVedioId:ID Success:^(NSInteger status, NSString * _Nonnull msg) {
         sender.userInteractionEnabled = YES;
         [LSVProgressHUD showInfoWithStatus:msg.length > 0 ? msg : lqStrings(@"取消收藏")];
+        NSInteger num = [sender titleForState:UIControlStateNormal].integerValue;
+        [sender setTitle:IntTranslateStr(num - 1) forState:UIControlStateNormal];
         sender.selected = !sender.selected;
 
     } error:^(NSError *error, id resultObject) {
@@ -253,8 +259,8 @@
     __weak __typeof(self) weakSelf = self;
 
     cell.douYinCellSeeBtnClickBlock = ^(UIButton *sender) {
-        //判断是否是会员
-        if (!RI.infoInitItem.is_vip) {
+        //判断是否是会员 是否是新用户
+        if (RI.infoInitItem.is_vip || RI.infoInitItem.is_new_user) {
             [weakSelf.player setPauseByEvent:YES];
             [weakSelf.controlView setPlayBtnHidden:NO];
             AVPlayerController *vc = [AVPlayerController controllerWith:item];

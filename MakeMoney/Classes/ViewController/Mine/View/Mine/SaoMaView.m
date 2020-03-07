@@ -29,6 +29,7 @@
       NSString *erweimaStr = self.urlStr;
       UIImage *image = [UIImage generateQRCodeWithString:erweimaStr Size:Adaptor_Value(200)];
       self.erweimaImageV.image = image;
+    self.urlLable.text = urlStr;
 }
 #pragma mark - 生命周期
 -(instancetype)init{

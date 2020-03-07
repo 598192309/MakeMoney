@@ -80,11 +80,11 @@
             [weakSelf.customTableView.mj_footer setHidden:YES];
         }
         [weakSelf.customTableView reloadData];
-        [weakSelf.customTableView endFooterRefreshing];
+        [weakSelf.customTableView endHeaderRefreshing];
 
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
-        [weakSelf.customTableView endFooterRefreshing];
+        [weakSelf.customTableView endHeaderRefreshing];
 
     }];
 }

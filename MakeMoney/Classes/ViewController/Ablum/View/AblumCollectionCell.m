@@ -64,6 +64,8 @@
 
         _imageV = [[UIImageView alloc] init];
         _imageV.backgroundColor = TitleGrayColor;
+        _imageV.contentMode = UIViewContentModeScaleAspectFill;
+        _imageV.clipsToBounds = YES;
         [contentV addSubview:_imageV];
         [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(Adaptor_Value(5));

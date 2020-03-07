@@ -106,7 +106,7 @@
         }
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
-        [weakSelf.customTableView endHeaderRefreshing];
+        [weakSelf.customTableView endFooterRefreshing];
 
     }];
 }

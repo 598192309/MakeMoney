@@ -36,6 +36,9 @@
 @property (nonatomic,strong)CommonAlertView *tipAlertView;
 
 @property (nonatomic,strong)NSString *goodID;
+
+@property (nonatomic,assign)BOOL clickPayed;
+
 @end
 
 @implementation RechargeCenterViewController
@@ -45,6 +48,13 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - life
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (self.notFirstAppear && self.clickPayed) {
+        self.clickPayed = NO;
+        [self showTipMsg:lqStrings(@"查询支付结果") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"若支付成功后，未能激活VIP，且订单状态为未支付，请在上方输入订单号手动激活") subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"好的"];
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -135,7 +145,7 @@
     NSDictionary *dict = noti.userInfo;
     PayWayItem *item = [dict safeObjectForKey:@"info"];
     PayCenterInfotem *infoItem = [self.dataArr safeObjectAtIndex:self.selectedIndex];
-    [self goPayWithInviteChannelId:item.channel_id goods_id:self.goodID sex_id:RI.infoInitItem.sex_id pay_type:item.type payName:item.name];
+    [self goPayWithInviteChannelId:item.channel_id goods_id:self.goodID sex_id:RI.infoInitItem.sex_id pay_type:IntTranslateStr(infoItem.tag) payName:item.name];
 }
 #pragma mark - act
 - (void)rechargeCenterCustomViewAct{
@@ -191,6 +201,7 @@
     [MineApi goPayWithInviteChannelId:channel_id goods_id:goods_id sex_id:sex_id pay_type:pay_type Success:^(NSInteger status, NSString * _Nonnull msg, PayDetailItem* _Nonnull payDetailItem) {
         [weakSelf.commonAlertView removeFromSuperview];
         weakSelf.commonAlertView = nil;
+        weakSelf.clickPayed = YES;
         
         if ([pay_type isEqualToString:@"1"]) {//跳转到webview加载
 //            BaseWebViewController *vc = [[BaseWebViewController alloc] init];

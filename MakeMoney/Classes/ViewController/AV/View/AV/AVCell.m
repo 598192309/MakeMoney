@@ -164,7 +164,7 @@
         
         _seeTimesBtn = [[EnlargeTouchSizeButton alloc] init];
 //        [_seeTimesBtn addTarget:self action:@selector(seeTimesBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_seeTimesBtn setImage:[UIImage imageNamed:@"hot"] forState:UIControlStateNormal];
+        [_seeTimesBtn setImage:[UIImage imageNamed:@"icon_av_hot_white"] forState:UIControlStateNormal];
         _seeTimesBtn.titleLabel.font = AdaptedFontSize(12);
         [contentV addSubview:_seeTimesBtn];
         [_seeTimesBtn mas_makeConstraints:^(MASConstraintMaker *make) {
