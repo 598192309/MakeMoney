@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MyLoveCell : UICollectionViewCell
-- (void)refreshWithItem:(HotItem *)item;
+- (void)refreshWithItem:(HotItem *)item videoType:(VideoType)type;
 
 //针对写真
 - (void)refreshAblumWithItem:(AblumItem *)item;

@@ -124,7 +124,7 @@
     //获取cell视图，内部通过去缓存池中取，如果缓存池中没有，就自动创建一个新的cell
     MyLoveCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([MyLoveCell class]) forIndexPath:indexPath];
     HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
-    [cell refreshWithItem:item];
+    [cell refreshWithItem:item videoType:VideoType_AV];
     return cell;
 }
 

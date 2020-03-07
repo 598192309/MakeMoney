@@ -22,6 +22,8 @@
 #import "AVPlayerController.h"
 #import "ShareView.h"
 #import<AssetsLibrary/AssetsLibrary.h>
+#import "AVApi.h"
+
 
 @interface ShortVideoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
@@ -183,7 +185,35 @@
         
     }];
 }
+//收藏
+- (void)loveWithId:(NSString *)ID sender:(UIButton *)sender{
+    __weak __typeof(self) weakSelf = self;
+    sender.userInteractionEnabled = NO;
+    [AVApi loveVedioWithVedioId:ID Success:^(NSInteger status, NSString * _Nonnull msg) {
+        sender.userInteractionEnabled = YES;
+        [LSVProgressHUD showInfoWithStatus:msg];
+        sender.selected = !sender.selected;
+    } error:^(NSError *error, id resultObject) {
+        sender.userInteractionEnabled = YES;
 
+    }];
+}
+
+//取消收藏
+- (void)cancleLoveWithID:(NSString *)ID sender:(UIButton *)sender{
+    __weak __typeof(self) weakSelf = self;
+    sender.userInteractionEnabled = NO;
+
+    [AVApi cancleLoveVedioWithVedioId:ID Success:^(NSInteger status, NSString * _Nonnull msg) {
+        sender.userInteractionEnabled = YES;
+        [LSVProgressHUD showInfoWithStatus:msg];
+        sender.selected = !sender.selected;
+
+    } error:^(NSError *error, id resultObject) {
+        sender.userInteractionEnabled = YES;
+
+    }];
+}
 #pragma mark - UIScrollViewDelegate  列表播放必须实现
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -238,6 +268,11 @@
     //点击喜欢
     cell.douYinCellLikeBtnClickBlock = ^(UIButton *sender) {
 //        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+        if (sender.selected) {
+            [weakSelf cancleLoveWithID:item.ID sender:sender];
+        }else{
+            [weakSelf loveWithId:item.ID sender:sender];
+        }
 
     };
     //点击分享
