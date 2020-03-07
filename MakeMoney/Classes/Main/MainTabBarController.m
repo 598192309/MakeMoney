@@ -116,7 +116,7 @@
     //        controller.navigationItem.title = tittle;
     //    controller.title = tittle;//这句代码相当于上面两句代码
     //    [nav.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor]} forState:UIControlStateSelected];
-    nav.tabBarItem.titlePositionAdjustment = UIOffsetMake(0, -3);
+    nav.tabBarItem.titlePositionAdjustment = UIOffsetMake(0, -12);
     
     [self addChildViewController:nav];
 }

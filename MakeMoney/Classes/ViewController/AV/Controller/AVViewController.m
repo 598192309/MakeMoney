@@ -180,11 +180,6 @@
 //    [imageV sd_setImageWithURL:[NSURL URLWithString:self.adsItem.img]];
     __weak __typeof(self) weakSelf = self;
     [imageV sd_setImageWithURL:[NSURL URLWithString:self.adsItem.img] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        if (weakSelf.adsItem.imageSize.height > 0) return ;
-        if (image) {
-            weakSelf.adsItem.imageSize = image.size;
-            [weakSelf.customTableView reloadData];
-        }
     }];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(adsTap:)];
     imageV.userInteractionEnabled = YES;
@@ -193,8 +188,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (self.adsItem.imageSize.height > 0) {
-        return LQScreemW * self.adsItem.imageSize.height / self.adsItem.imageSize.width;
+    if (self.adsItem.width > 0) {
+        return LQScreemW * self.adsItem.height / self.adsItem.width;
     }
     return  0.01;
 }

@@ -85,9 +85,9 @@ typedef NS_ENUM(NSInteger,AdTag) {
 @property (nonatomic,strong)NSString *title;
 @property (nonatomic,assign)NSInteger type;
 @property (nonatomic,strong)NSString *url;
+@property (nonatomic, assign) int width;
+@property (nonatomic, assign) int height;
 
-//自己写
-@property (nonatomic, assign) CGSize imageSize;
 @end
 
 
