@@ -78,7 +78,7 @@
      <string name=“video_av_tag21”>高清</string>
      <string name=“video_av_tag22”>中文</string>
      */
-    self.tagLable.text = item.video_tag;
+    self.tagLable.text = [LqToolKit avTagString:item.video_tag];
     
     __weak __typeof(self) weakSelf = self;
     /**
@@ -137,7 +137,7 @@
             make.bottom.mas_equalTo(weakSelf.imageV.mas_bottom).offset(-Adaptor_Value(10));
         }];
         
-        _titleLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:3];
+        _titleLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleBlackColor fontSize:AdaptedFontSize(15) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:2];
         [contentV addSubview:_titleLable];
         [_titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(contentV.mas_centerX);

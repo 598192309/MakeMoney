@@ -270,4 +270,73 @@
             break;
     }
 }
+
++ (NSString *)shorVideoTagString:(NSString *)videoTag
+{
+    NSMutableString *resultStr = [NSMutableString string];
+    NSArray *listTag = [videoTag componentsSeparatedByString:@","];
+    if ([listTag containsObject:@"1"]) [resultStr appendString:@"#自拍 "];
+    if ([listTag containsObject:@"2"]) [resultStr appendString:@"#口活 "];
+    if ([listTag containsObject:@"3"]) [resultStr appendString:@"#3P "];
+    if ([listTag containsObject:@"4"]) [resultStr appendString:@"#自慰 "];
+    if ([listTag containsObject:@"5"]) [resultStr appendString:@"#学生妹 "];
+    if ([listTag containsObject:@"6"]) [resultStr appendString:@"#人妻 "];
+    if ([listTag containsObject:@"7"]) [resultStr appendString:@"#双飞 "];
+    if ([listTag containsObject:@"8"]) [resultStr appendString:@"#国语对白 "];
+    if ([listTag containsObject:@"9"]) [resultStr appendString:@"#后入 "];
+    if ([listTag containsObject:@"10"]) [resultStr appendString:@"#情趣 "];
+    if ([listTag containsObject:@"11"]) [resultStr appendString:@"#热舞 "];
+    if ([listTag containsObject:@"12"]) [resultStr appendString:@"#疯狂夜场 "];
+    if ([listTag containsObject:@"13"]) [resultStr appendString:@"#露出 "];
+    if ([listTag containsObject:@"14"]) [resultStr appendString:@"#绿奴 "];
+    if ([listTag containsObject:@"15"]) [resultStr appendString:@"#调教 "];
+    if ([listTag containsObject:@"16"]) [resultStr appendString:@"#超清 "];
+    if ([listTag containsObject:@"17"]) [resultStr appendString:@"#约炮 "];
+    if ([listTag containsObject:@"18"]) [resultStr appendString:@"#模特 "];
+    if ([listTag containsObject:@"19"]) [resultStr appendString:@"#巨乳 "];
+    if ([listTag containsObject:@"20"]) [resultStr appendString:@"#主播 "];
+    if ([listTag containsObject:@"21"]) [resultStr appendString:@"#素人 "];
+    if ([listTag containsObject:@"22"]) [resultStr appendString:@"#网红 "];
+    if ([listTag containsObject:@"23"]) [resultStr appendString:@"#偷拍 "];
+    
+    
+    if ([listTag containsObject:@"100"]) [resultStr appendString:@"#迪卡侬 "];
+    if ([listTag containsObject:@"101"]) [resultStr appendString:@"#AI明星换脸 "];
+    if ([listTag containsObject:@"102"]) [resultStr appendString:@"#网曝门事件 "];
+    if ([listTag containsObject:@"103"]) [resultStr appendString:@"#三级片 "];
+    if ([listTag containsObject:@"104"]) [resultStr appendString:@"#动画 "];
+    if ([listTag containsObject:@"105"]) [resultStr appendString:@"#欧美 "];
+    if ([listTag containsObject:@"106"]) [resultStr appendString:@"#萌白酱 "];
+    
+    return resultStr;
+}
+
++ (NSString *)avTagString:(NSString *)videoTag
+{
+    NSMutableString *resultStr = [NSMutableString string];
+    NSArray *listTag = [videoTag componentsSeparatedByString:@","];
+    if ([listTag containsObject:@"1"]) [resultStr appendString:@"巨乳 "];
+    if ([listTag containsObject:@"2"]) [resultStr appendString:@"人妻 "];
+    if ([listTag containsObject:@"3"]) [resultStr appendString:@"伦理 "];
+    if ([listTag containsObject:@"4"]) [resultStr appendString:@"教师 "];
+    if ([listTag containsObject:@"5"]) [resultStr appendString:@"制服 "];
+    if ([listTag containsObject:@"6"]) [resultStr appendString:@"电车 "];
+    if ([listTag containsObject:@"7"]) [resultStr appendString:@"按摩 "];
+    if ([listTag containsObject:@"8"]) [resultStr appendString:@"潮喷 "];
+    if ([listTag containsObject:@"9"]) [resultStr appendString:@"素人 "];
+    if ([listTag containsObject:@"10"]) [resultStr appendString:@"口罩 "];
+    if ([listTag containsObject:@"11"]) [resultStr appendString:@"中出 "];
+    if ([listTag containsObject:@"12"]) [resultStr appendString:@"轮奸 "];
+    if ([listTag containsObject:@"13"]) [resultStr appendString:@"性奴 "];
+    if ([listTag containsObject:@"14"]) [resultStr appendString:@"无码 "];
+    if ([listTag containsObject:@"15"]) [resultStr appendString:@"职场 "];
+    if ([listTag containsObject:@"16"]) [resultStr appendString:@"偷情 "];
+    if ([listTag containsObject:@"17"]) [resultStr appendString:@"SM "];
+    if ([listTag containsObject:@"18"]) [resultStr appendString:@"迷奸 "];
+    if ([listTag containsObject:@"19"]) [resultStr appendString:@"女同 "];
+    if ([listTag containsObject:@"20"]) [resultStr appendString:@"护士 "];
+    if ([listTag containsObject:@"21"]) [resultStr appendString:@"高清 "];
+    if ([listTag containsObject:@"22"]) [resultStr appendString:@"中文 "];
+    return resultStr;
+}
 @end

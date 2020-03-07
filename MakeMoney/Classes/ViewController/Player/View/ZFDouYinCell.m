@@ -147,7 +147,7 @@
     <string name=“video_tag104”>#动画</string>
     <string name=“video_tag105”>#欧美</string>
     <string name=“video_tag106”>#萌白酱</string>*/
-    self.tagLable.text = dataItem.video_tag;
+    self.tagLable.text = [LqToolKit shorVideoTagString:dataItem.video_tag];
 }
 
 
