@@ -127,7 +127,7 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
 
         if (!RI.infoInitItem.is_vip && !weakSelf.isShortVideo && !(weakSelf.item.tag == 1) && !RI.infoInitItem.is_new_user) {//不是会员 只能看5分钟 不是限免 不是新用户限时免费
             if (currentTime > 5 * 60) {
-                [weakSelf.player enterFullScreen:NO animated:NO];
+                [self.player enterFullScreen:NO animated:NO];
                 [self.player.currentPlayerManager pause];
                 [self.controlView resetControlView];
                 [self.player seekToTime:0 completionHandler:^(BOOL finished) {
