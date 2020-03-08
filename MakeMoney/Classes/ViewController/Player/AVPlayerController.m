@@ -220,6 +220,10 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
         weakSelf.item = hotitem;
         [weakSelf startPlay];
     };
+    //收藏取消
+    weakSelf.avTuijianView.loveBlock = ^(EnlargeTouchSizeButton * _Nonnull sender) {
+        [weakSelf loveWithId:weakSelf.item.ID sender:sender];
+    };
 }
 
 - (void)showMsg:(NSString *)msg firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singleBtnTitle:(NSString *)singleBtnTitle{
@@ -275,6 +279,19 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
         RI.infoInitItem.is_new_user = initItem.is_new_user;
     } error:^(NSError *error, id resultObject) {
         
+    }];
+}
+
+//收藏与取消
+- (void)loveWithId:(NSString *)ID sender:(UIButton *)sender{
+    __weak __typeof(self) weakSelf = self;
+    sender.userInteractionEnabled = NO;
+    [AVApi loveAVWithVedioId:ID Success:^(NSInteger status, NSString * _Nonnull msg) {
+        sender.userInteractionEnabled = YES;
+        [LSVProgressHUD showInfoWithStatus:msg];
+    } error:^(NSError *error, id resultObject) {
+        sender.userInteractionEnabled = YES;
+
     }];
 }
 #pragma mark - lazy

@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AVCenterView : UIView
 - (void)configUIWithItem:(HotItem *)item finishi:(void(^)(void))finishBlock;
 - (void)configAds:(AdsItem *)item finishi:(void(^)(void))finishBlock;
+/**收藏 取消 */
+@property (nonatomic, copy) void(^loveBlock)(EnlargeTouchSizeButton *sender);
 @end
 
 NS_ASSUME_NONNULL_END

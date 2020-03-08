@@ -45,6 +45,8 @@
     tableHeaderView.lq_height = H;
     self.customTableView.tableHeaderView = tableHeaderView;
     self.customTableView.tableHeaderView.lq_height = H;
+    
+    [self avCenterViewAct];
 }
 
 
@@ -77,7 +79,14 @@
 }
 
 #pragma mark - act
-
+- (void)avCenterViewAct{
+    __weak __typeof(self) weakSelf = self;
+    self.avCenterView.loveBlock = ^(EnlargeTouchSizeButton * _Nonnull sender) {
+        if (weakSelf.loveBlock) {
+            weakSelf.loveBlock(sender);
+        }
+    };
+}
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView

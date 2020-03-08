@@ -18,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**点击CELL*/
 @property(nonatomic,copy)void(^cellClickBlock)(NSIndexPath *indexPath);
+
+/**收藏 取消 */
+@property (nonatomic, copy) void(^loveBlock)(EnlargeTouchSizeButton *sender);
 @end
 
 NS_ASSUME_NONNULL_END

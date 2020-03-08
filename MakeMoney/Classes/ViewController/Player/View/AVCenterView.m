@@ -16,8 +16,9 @@
 @property (strong, nonatomic)  UILabel *seeCountsLable;
 @property (strong, nonatomic)  UILabel *timeLable;
 @property (strong, nonatomic)  UILabel *tipLable;
-
+@property (nonatomic,strong)EnlargeTouchSizeButton *loveBtn;
 @property (nonatomic,strong)AdsItem *adsItem;
+
 @end
 @implementation AVCenterView
 #pragma mark - 生命周期
@@ -75,6 +76,13 @@
 #pragma mark - act
 - (void)adsTap:(UITapGestureRecognizer *)gest{
     [LqToolKit jumpAdventWithItem:self.adsItem];
+}
+
+//收藏
+- (void)loveBtnClick:(UIButton *)sender{
+    if (self.loveBtn) {
+        self.loveBlock(sender);
+    }
 }
 #pragma mark - lazy
 -(UIView *)header{
@@ -135,6 +143,29 @@
             make.top.mas_equalTo(weakSelf.seeCountsLable.mas_bottom).offset(Adaptor_Value(20));
             make.bottom.mas_equalTo(contentV).offset(-Adaptor_Value(25));
         }];
+        
+        
+        _loveBtn = [[EnlargeTouchSizeButton alloc] init];
+        [_loveBtn addTarget:self action:@selector(loveBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_loveBtn setImage:[UIImage imageNamed:@"icon_home_like_before"] forState:UIControlStateNormal];
+        [_loveBtn setImage:[UIImage imageNamed:@"icon_home_like_after"] forState:UIControlStateSelected];
+        [contentV addSubview:_loveBtn];
+        [_loveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.width.mas_equalTo(Adaptor_Value(20));
+            make.centerY.mas_equalTo(weakSelf.tipLable);
+            make.right.mas_equalTo(contentV).offset(-Adaptor_Value(25));
+        }];
+        _loveBtn.touchSize = CGSizeMake(Adaptor_Value(50), Adaptor_Value(50));
+        _loveBtn.selected = YES;//现在默认选择 现在没有显示 选中和不选中的判断
+
+        UIView *loveBtnBackView = [UIView new];
+        loveBtnBackView.backgroundColor = [UIColor lq_colorWithHexString:@"ffffff" alpha:0.3];
+        [contentV insertSubview:loveBtnBackView belowSubview:_loveBtn];
+        [loveBtnBackView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.width.mas_equalTo(Adaptor_Value(40));
+            make.center.mas_equalTo(weakSelf.loveBtn);
+        }];
+        ViewRadius(loveBtnBackView, Adaptor_Value(20));
 
 
     }
