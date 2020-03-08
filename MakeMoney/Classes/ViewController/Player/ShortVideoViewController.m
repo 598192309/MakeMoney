@@ -23,7 +23,7 @@
 #import "ShareView.h"
 #import<AssetsLibrary/AssetsLibrary.h>
 #import "AVApi.h"
-
+#import "RechargeCenterViewController.h"
 
 @interface ShortVideoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
@@ -441,7 +441,10 @@
             [weakSelf.commonAlertView removeFromSuperview];
             weakSelf.commonAlertView = nil;
             if (index == 2) {//购买VIP
-                [LSVProgressHUD showInfoWithStatus:@"购买VIP"];
+//                [LSVProgressHUD showInfoWithStatus:@"购买VIP"];
+                RechargeCenterViewController *vc = [[RechargeCenterViewController alloc] init];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+                [weakSelf popSelfDelayTime:1.0];
             }
         };
     }
