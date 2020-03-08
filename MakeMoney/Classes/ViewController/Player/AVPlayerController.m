@@ -127,6 +127,7 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
 
         if (!RI.infoInitItem.is_vip && !weakSelf.isShortVideo && !(weakSelf.item.tag == 1) && !RI.infoInitItem.is_new_user) {//不是会员 只能看5分钟 不是限免 不是新用户限时免费
             if (currentTime > 5 * 60) {
+                [weakSelf.player enterFullScreen:NO animated:NO];
                 [self.player.currentPlayerManager pause];
                 [self.controlView resetControlView];
                 [self.player seekToTime:0 completionHandler:^(BOOL finished) {
@@ -134,6 +135,7 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
                     [self.player.currentPlayerManager pause];
                 }];
                 [self showMsg:lqStrings(@"非会员只允许观看5分钟") firstBtnTitle:lqStrings(@"取消") secBtnTitle:lqStrings(@"去充值VIP") singleBtnTitle:@""];
+                
             }
 //            else{
 //                self.player.pauseByEvent = NO;
@@ -226,6 +228,7 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
     [self.commonAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
     }];
+
 }
 #pragma mark - net
 //获取推荐视频

@@ -119,6 +119,7 @@
          [_seeCountsLable mas_makeConstraints:^(MASConstraintMaker *make) {
              make.left.mas_equalTo(weakSelf.titleLable);
              make.top.mas_equalTo(weakSelf.titleLable.mas_bottom).offset(Adaptor_Value(10));
+             make.height.mas_equalTo(Adaptor_Value(20));
          }];
        
 
