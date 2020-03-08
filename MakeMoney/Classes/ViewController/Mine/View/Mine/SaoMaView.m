@@ -51,6 +51,12 @@
 
 }
 
+- (void)setNavTitle:(NSString *)navTitle
+{
+    _navTitle = navTitle;
+    _subTipLable.text = [NSString stringWithFormat:@"保存二维码，并打开%@扫一扫功能扫码支付",[self.navTitle substringToIndex:2]];
+    _tipCopyLable.text = [NSString stringWithFormat:@"或者复制以下链接发到%@聊天界面，并点击链接支付",[self.navTitle substringToIndex:2]];
+}
 
 #pragma mark - 刷新ui
 - (void)configUIWithItem:(NSObject *)item finishi:(void(^)(void))finishBlock{

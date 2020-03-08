@@ -165,6 +165,7 @@
     if (!_saoMaView) {
         _saoMaView = [SaoMaView new];
         _saoMaView.urlStr = self.urlStr;
+        _saoMaView.navTitle = self.navTitle;
     }
     return _saoMaView;
 }

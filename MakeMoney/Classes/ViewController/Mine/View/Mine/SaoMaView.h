@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)void(^saveBtnClickBlock)(UIButton * sender,UIImageView * erweimaImageV);
 /**点击copy*/
 @property(nonatomic,copy)void(^copyBtnClickBlock)(UIButton * sender);
+
+@property (nonatomic, copy) NSString *navTitle;
 @end
 
 NS_ASSUME_NONNULL_END
