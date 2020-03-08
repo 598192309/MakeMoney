@@ -59,12 +59,13 @@
     //如果是新用户 弹框限时免费
     if (RI.infoInitItem.is_new_user) {
         NSString *str;
-        if (RI.infoInitItem.new_user_free_day > 0) {
-            str = [NSString stringWithFormat:@"%ld天",(long)RI.infoInitItem.new_user_free_day];
-        }else{
-            str = [NSString stringWithFormat:@"%ld小时",(long)RI.infoInitItem.new_user_free_hour];
+//        if (RI.infoInitItem.new_user_free_day > 0) {
+//            str = [NSString stringWithFormat:@"%ld天",(long)RI.infoInitItem.new_user_free_day];
+//        }else{
+//
+//        }
+        str = [NSString stringWithFormat:@"%ld小时",(long)RI.infoInitItem.new_user_free_hour];
 
-        }
         [self showFreeMsg:lqStrings(@"临时体验卡") submsg:[NSString stringWithFormat:lqLocalized(@"新用户可以免费体验%@哦～", nil),str] firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:lqStrings(@"好的")];
     }
     
@@ -316,11 +317,12 @@
         HotItem *item = [videoListItem.lists safeObjectAtIndex:indexPath.row];
 
         if (videoListItem.type == VideoType_ShortVideo) {//短视频
-            //判断是否还有观看次数
-            if (RI.infoInitItem.rest_free_times == 0) {
-                [self showMsg:lqStrings(@"今日观看次数已用完,明天再来吧,分享可获得无限观影哦") firstBtnTitle:lqStrings(@"分享") secBtnTitle:lqStrings(@"购买VIP") singleBtnTitle:@""];
-                return;
-            }
+#warning 暂时干掉
+//            //判断是否还有观看次数
+//            if (RI.infoInitItem.rest_free_times == 0) {
+//                [self showMsg:lqStrings(@"今日观看次数已用完,明天再来吧,分享可获得无限观影哦") firstBtnTitle:lqStrings(@"分享") secBtnTitle:lqStrings(@"购买VIP") singleBtnTitle:@""];
+//                return;
+//            }
 
             ShortVideoViewController *vc = [ShortVideoViewController controllerWith:item];
             [self.navigationController pushViewController:vc animated:YES];
