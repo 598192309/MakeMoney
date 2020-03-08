@@ -16,6 +16,8 @@
 @property (nonatomic,strong)UIView *loveView;
 @property (nonatomic,strong)EnlargeTouchSizeButton *loveBtn;
 @property (nonatomic, strong)NSMutableArray *dataSource;
+
+@property (nonatomic , assign) BOOL hadShowOpenVip;
 @end
 
 @implementation AblumDetailViewController
@@ -188,6 +190,16 @@
 
     }
     return _loveView;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat contentOffsetY = scrollView.contentOffset.y;
+    NSLog(@"%f,%f,%d,%d",contentOffsetY,scrollView.contentSize.height,_hadShowOpenVip,RI.infoInitItem.is_album_vip);
+    if (contentOffsetY >= (scrollView.contentSize.height - scrollView.bounds.size.height) && !_hadShowOpenVip && !RI.infoInitItem.is_album_vip) {
+        _hadShowOpenVip = YES;
+        [LSVProgressHUD showInfoWithStatus:@"哥哥，开通VIP才能看全套写真哦~"];
+    }
 }
 @end
 

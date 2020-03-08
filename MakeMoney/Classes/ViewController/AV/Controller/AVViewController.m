@@ -165,7 +165,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     AVHeaderAdsImageView *imageV = [[AVHeaderAdsImageView alloc] init];
-    AdsItem *item = [self.adsItemArr safeObjectAtIndex:section%8];
+    AdsItem *item = [self.adsItemArr safeObjectAtIndex:section / 8];
     __weak __typeof(self) weakSelf = self;
     [imageV configUIWithItem:item finishi:^{
         [weakSelf.customTableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
@@ -175,7 +175,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section % 8 == 0) {
-        AdsItem *item = [self.adsItemArr safeObjectAtIndex:section%8];
+        AdsItem *item = [self.adsItemArr safeObjectAtIndex:section / 8];
         if (item.width > 0 && item) {
             return LQScreemW * item.height / item.width;
         }
