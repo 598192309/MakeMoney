@@ -39,8 +39,10 @@
 - (void)configUIWithItem:(AdsItem *)item finishi:(void(^)(void))finishBlock{
     self.adsItem = item;
     __weak __typeof(self) weakSelf = self;
-    [_adsImageV sd_setImageWithURL:[NSURL URLWithString:item.img]];
-    finishBlock();
+    [_adsImageV sd_setImageWithURL:[NSURL URLWithString:item.img] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+
+    }];
+    
 }
 
 #pragma mark - act
