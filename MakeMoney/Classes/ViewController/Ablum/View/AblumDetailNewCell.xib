@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,14 +17,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="198" height="123"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_bg" translatesAutoresizingMaskIntoConstraints="NO" id="Wo6-tQ-cgC">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="245" verticalCompressionResistancePriority="747" image="app_bg" translatesAutoresizingMaskIntoConstraints="NO" id="Wo6-tQ-cgC">
                         <rect key="frame" x="0.0" y="0.0" width="198" height="123"/>
                     </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Wo6-tQ-cgC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="JPU-e9-xWz"/>
-                    <constraint firstAttribute="bottom" secondItem="Wo6-tQ-cgC" secondAttribute="bottom" id="PqW-NI-Q9f"/>
-                    <constraint firstItem="Wo6-tQ-cgC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="t9I-kQ-6YM"/>
+                    <constraint firstAttribute="bottom" secondItem="Wo6-tQ-cgC" secondAttribute="bottom" id="d5n-rF-tmq"/>
+                    <constraint firstItem="Wo6-tQ-cgC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="kEn-2U-oRx"/>
                     <constraint firstAttribute="trailing" secondItem="Wo6-tQ-cgC" secondAttribute="trailing" id="wlV-18-79c"/>
                 </constraints>
             </tableViewCellContentView>

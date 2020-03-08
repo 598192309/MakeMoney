@@ -10,9 +10,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AblumDetailNewCell : UITableViewCell
-- (void)refreshUIWithImageStr:(NSString*)imageStr;
+@class M_AblumImage;
 
+@interface AblumDetailNewCell : UITableViewCell
+- (void)refreshUIWithAblumImage:(M_AblumImage *)ablum;
+
+@property (nonatomic, copy) void(^imageSizeSetSuccessBlock)(void);
+
+@end
+
+@interface M_AblumImage : NSObject
+@property (nonatomic, copy) NSString *imageUrl;
+@property (nonatomic, assign) CGSize imageSize;
 @end
 
 NS_ASSUME_NONNULL_END

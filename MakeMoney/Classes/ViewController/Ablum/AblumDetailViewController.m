@@ -15,6 +15,7 @@
 
 @property (nonatomic,strong)UIView *loveView;
 @property (nonatomic,strong)EnlargeTouchSizeButton *loveBtn;
+@property (nonatomic, strong)NSMutableArray *dataSource;
 @end
 
 @implementation AblumDetailViewController
@@ -24,6 +25,18 @@
     [super viewWillAppear:animated];
 
 
+}
+
+- (void)setAblumData:(AblumItem *)ablumData
+{
+    _ablumData = ablumData;
+    _dataSource = [NSMutableArray array];
+    for (NSString *url in ablumData.imgs) {
+        M_AblumImage *data = [[M_AblumImage alloc] init];
+        data.imageUrl = url;
+        [_dataSource addObject:data];
+    }
+    [self.customTableView reloadData];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -89,7 +102,7 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.ablumData.imgs.count;
+    return self.dataSource.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -97,9 +110,21 @@
 //    AblumDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AblumDetailCell class]) forIndexPath:indexPath];
     AblumDetailNewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AblumDetailNewCell class]) forIndexPath:indexPath];
 
-    [cell refreshUIWithImageStr:[self.ablumData.imgs safeObjectAtIndex:indexPath.row]];
+    [cell refreshUIWithAblumImage:[_dataSource safeObjectAtIndex:indexPath.row]];
+    __weak __typeof(self) weakSelf = self;
+    cell.imageSizeSetSuccessBlock = ^{
+        [weakSelf.customTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    };
     return cell;
 
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    M_AblumImage *ablum = _dataSource[indexPath.row];
+    if (ablum.imageSize.width > 0) {
+        return LQScreemW * ablum.imageSize.height / ablum.imageSize.width;
+    }
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -165,3 +190,6 @@
     return _loveView;
 }
 @end
+
+
+
