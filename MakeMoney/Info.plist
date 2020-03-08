@@ -28,6 +28,16 @@
 				<string>alipay:</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>jiguang</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>5c8cf6e4604a4d52bdc42ae4</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>

@@ -34,6 +34,19 @@
 		09C51AEF2413927C00705DFC /* AblumDetailNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C51AED2413927C00705DFC /* AblumDetailNewCell.m */; };
 		09C51AF02413927C00705DFC /* AblumDetailNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09C51AEE2413927C00705DFC /* AblumDetailNewCell.xib */; };
 		09C51AF32414A5B200705DFC /* AVHeaderAdsImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C51AF22414A5B200705DFC /* AVHeaderAdsImageView.m */; };
+		09C51AFA2415448700705DFC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C51AF92415448700705DFC /* UIKit.framework */; };
+		09C51AFB241544A000705DFC /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E72D262405631D0004B25C /* CoreTelephony.framework */; };
+		09C51AFD241544AD00705DFC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C51AFC241544AD00705DFC /* CoreGraphics.framework */; };
+		09C51AFF241544B600705DFC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C51AFE241544B600705DFC /* Security.framework */; };
+		09C51B01241544BF00705DFC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C51B00241544BF00705DFC /* Foundation.framework */; };
+		09C51B03241544C700705DFC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C51B02241544C600705DFC /* CoreLocation.framework */; };
+		09C51B05241544CF00705DFC /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C51B04241544CF00705DFC /* CoreFoundation.framework */; };
+		09C51B07241544D900705DFC /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C51B06241544D800705DFC /* CFNetwork.framework */; };
+		09C51B0A241544F500705DFC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C51B09241544F500705DFC /* WebKit.framework */; };
+		09C51B0B2415463400705DFC /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C51B08241544E900705DFC /* libresolv.tbd */; };
+		09C51B1E241548B400705DFC /* jcore-ios-2.2.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C51B1A241548B300705DFC /* jcore-ios-2.2.2.a */; };
+		09C51B1F241548B400705DFC /* janalytics-ios-2.1.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C51B1B241548B300705DFC /* janalytics-ios-2.1.2.a */; };
+		09C51B20241548B400705DFC /* jcore-noidfa-ios-2.2.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C51B1D241548B400705DFC /* jcore-noidfa-ios-2.2.2.a */; };
 		09E72AEB240559F40004B25C /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E72AE2240559F40004B25C /* AFURLResponseSerialization.m */; };
 		09E72AEC240559F40004B25C /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E72AE3240559F40004B25C /* AFHTTPSessionManager.m */; };
 		09E72AED240559F40004B25C /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E72AE5240559F40004B25C /* AFURLSessionManager.m */; };
@@ -325,6 +338,20 @@
 		09C51AEE2413927C00705DFC /* AblumDetailNewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AblumDetailNewCell.xib; sourceTree = "<group>"; };
 		09C51AF12414A5B200705DFC /* AVHeaderAdsImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVHeaderAdsImageView.h; sourceTree = "<group>"; };
 		09C51AF22414A5B200705DFC /* AVHeaderAdsImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVHeaderAdsImageView.m; sourceTree = "<group>"; };
+		09C51AF92415448700705DFC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		09C51AFC241544AD00705DFC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		09C51AFE241544B600705DFC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		09C51B00241544BF00705DFC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		09C51B02241544C600705DFC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		09C51B04241544CF00705DFC /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		09C51B06241544D800705DFC /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		09C51B08241544E900705DFC /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		09C51B09241544F500705DFC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		09C51B19241548B300705DFC /* JANALYTICSEventObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JANALYTICSEventObject.h; sourceTree = "<group>"; };
+		09C51B1A241548B300705DFC /* jcore-ios-2.2.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-2.2.2.a"; sourceTree = "<group>"; };
+		09C51B1B241548B300705DFC /* janalytics-ios-2.1.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "janalytics-ios-2.1.2.a"; sourceTree = "<group>"; };
+		09C51B1C241548B400705DFC /* JANALYTICSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JANALYTICSService.h; sourceTree = "<group>"; };
+		09C51B1D241548B400705DFC /* jcore-noidfa-ios-2.2.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-noidfa-ios-2.2.2.a"; sourceTree = "<group>"; };
 		09E72ADE240559F40004B25C /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
 		09E72ADF240559F40004B25C /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		09E72AE0240559F40004B25C /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
@@ -806,12 +833,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09C51B20241548B400705DFC /* jcore-noidfa-ios-2.2.2.a in Frameworks */,
 				09E72D25240563110004B25C /* libsqlite3.tbd in Frameworks */,
+				09C51AFA2415448700705DFC /* UIKit.framework in Frameworks */,
+				09C51B0A241544F500705DFC /* WebKit.framework in Frameworks */,
+				09C51B03241544C700705DFC /* CoreLocation.framework in Frameworks */,
 				09E72D29240563320004B25C /* SystemConfiguration.framework in Frameworks */,
+				09C51B1F241548B400705DFC /* janalytics-ios-2.1.2.a in Frameworks */,
+				09C51AFF241544B600705DFC /* Security.framework in Frameworks */,
 				09E72D0C24055FAC0004B25C /* UMCommon.framework in Frameworks */,
 				09E72D24240563050004B25C /* libz.tbd in Frameworks */,
+				09C51B0B2415463400705DFC /* libresolv.tbd in Frameworks */,
+				09C51B01241544BF00705DFC /* Foundation.framework in Frameworks */,
+				09C51B07241544D900705DFC /* CFNetwork.framework in Frameworks */,
 				09E72D272405631D0004B25C /* CoreTelephony.framework in Frameworks */,
+				09C51B05241544CF00705DFC /* CoreFoundation.framework in Frameworks */,
+				09C51AFB241544A000705DFC /* CoreTelephony.framework in Frameworks */,
+				09C51AFD241544AD00705DFC /* CoreGraphics.framework in Frameworks */,
 				09E72D0924055FA10004B25C /* UMAnalytics.framework in Frameworks */,
+				09C51B1E241548B400705DFC /* jcore-ios-2.2.2.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1150,6 +1190,15 @@
 		09239AE12404012600A4F727 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				09C51B09241544F500705DFC /* WebKit.framework */,
+				09C51B08241544E900705DFC /* libresolv.tbd */,
+				09C51B06241544D800705DFC /* CFNetwork.framework */,
+				09C51B04241544CF00705DFC /* CoreFoundation.framework */,
+				09C51B02241544C600705DFC /* CoreLocation.framework */,
+				09C51B00241544BF00705DFC /* Foundation.framework */,
+				09C51AFE241544B600705DFC /* Security.framework */,
+				09C51AFC241544AD00705DFC /* CoreGraphics.framework */,
+				09C51AF92415448700705DFC /* UIKit.framework */,
 				11105AE12406071C00521CB2 /* LqTool.framework */,
 				09E72D28240563320004B25C /* SystemConfiguration.framework */,
 				09E72D262405631D0004B25C /* CoreTelephony.framework */,
@@ -1234,9 +1283,22 @@
 			path = LQScrollView;
 			sourceTree = "<group>";
 		};
+		09C51B0C2415479C00705DFC /* Jpush */ = {
+			isa = PBXGroup;
+			children = (
+				09C51B1B241548B300705DFC /* janalytics-ios-2.1.2.a */,
+				09C51B19241548B300705DFC /* JANALYTICSEventObject.h */,
+				09C51B1C241548B400705DFC /* JANALYTICSService.h */,
+				09C51B1A241548B300705DFC /* jcore-ios-2.2.2.a */,
+				09C51B1D241548B400705DFC /* jcore-noidfa-ios-2.2.2.a */,
+			);
+			path = Jpush;
+			sourceTree = "<group>";
+		};
 		09E72ADC240559E20004B25C /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				09C51B0C2415479C00705DFC /* Jpush */,
 				8B9B8BAB240D4AED004B4704 /* ZFPlayer */,
 				8BD54574240BB4CC00C90A31 /* MJRefresh */,
 				09E72D0A24055FAC0004B25C /* UMCCommon */,
@@ -2406,7 +2468,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DS232TBXXN;
+				DEVELOPMENT_TEAM = ATBJJ8434Q;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2423,9 +2485,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MakeMoney/Classes/Tools/Frameworks/shujumohePB",
+					"$(PROJECT_DIR)/Libs/Jpush",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cloudfighting.admin.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lqlq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2436,7 +2499,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DS232TBXXN;
+				DEVELOPMENT_TEAM = ATBJJ8434Q;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2453,9 +2516,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MakeMoney/Classes/Tools/Frameworks/shujumohePB",
+					"$(PROJECT_DIR)/Libs/Jpush",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cloudfighting.admin.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lqlq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
