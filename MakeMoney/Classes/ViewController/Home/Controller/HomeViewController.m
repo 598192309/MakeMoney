@@ -356,6 +356,7 @@
         _infiniteView.boworrWidth = LQScreemW;
         _infiniteView.bannerImageViewContentMode = UIViewContentModeScaleToFill;
         _infiniteView.cellSpace = 0;
+        _infiniteView.autoScrollTimeInterval = 5;
         _infiniteView.showPageControl = YES;
     }
     return _infiniteView;
