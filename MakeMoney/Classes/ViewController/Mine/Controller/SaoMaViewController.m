@@ -6,6 +6,8 @@
 //  Copyright © 2020 lqq. All rights reserved.
 //  支付扫码界面
 
+
+
 #import "SaoMaViewController.h"
 #import "SaoMaView.h"
 #import<AssetsLibrary/AssetsLibrary.h>

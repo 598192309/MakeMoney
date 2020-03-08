@@ -124,6 +124,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param videoTag videoTag
 + (NSString *)avTagString:(NSString *)videoTag;
 
+
+/// 根据版本号判断是否需要升级
+/// @param version1 version1 description
+/// @param version2 version2 description
++ (NSInteger)compareVersion:(NSString *)version1 toVersion:(NSString *)version2;
+
 @end
 
 NS_ASSUME_NONNULL_END

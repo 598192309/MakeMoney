@@ -146,7 +146,7 @@
         //获取当前vesion
         NSDictionary *dict =  [NSBundle mainBundle].infoDictionary;
         NSString *curVersion = dict[@"CFBundleShortVersionString"];
-        if ([curVersion compare:updateItem.ios_version_name] == NSOrderedAscending) {
+        if ([LqToolKit compareVersion:curVersion toVersion:updateItem.ios_version_name] < 0) {
             if (updateItem.status == 2) {//强制
                 [weakSelf showMsg:updateItem.ios_content firstBtnTitle:lqStrings(@"") secBtnTitle:@"" singleBtnTitle:lqStrings(@"去升级")];
 
