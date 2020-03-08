@@ -95,7 +95,15 @@
     
     self.player.playerPlayTimeChanged = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, NSTimeInterval currentTime, NSTimeInterval duration) {
         NSLog(@"播放时长currentTime:%f,总时长duration:%f",currentTime,duration);
+        if (currentTime > 60) {//大于一分钟 重头播放
+            [weakSelf showMsg:lqStrings(@"VIP会员才能观看完整版喔～") firstBtnTitle:lqStrings(@"再想想") secBtnTitle:lqStrings(@"购买VIP") singleBtnTitle:@""];
+            [weakSelf.player.currentPlayerManager pause];
+            [weakSelf.controlView resetControlView];
+            [weakSelf.player seekToTime:0 completionHandler:^(BOOL finished) {
 
+                [weakSelf.player.currentPlayerManager pause];
+            }];
+        }
     };
     
     self.player.presentationSizeChanged = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, CGSize size) {

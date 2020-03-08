@@ -17,11 +17,11 @@
 @property (nonatomic,strong)UILabel *iDLable;
 @property (nonatomic,strong)UILabel *ablumVipTipLable;
 @property (nonatomic,strong)UILabel *ablumVipLable;
-@property (nonatomic,strong)UILabel *cityVipTipLable;
-@property (nonatomic,strong)UILabel *cityVipLable;
+//@property (nonatomic,strong)UILabel *cityVipTipLable;
+//@property (nonatomic,strong)UILabel *cityVipLable;
 @property (nonatomic,strong)UILabel *shipinVipTipLable;
 @property (nonatomic,strong)UILabel *shipinVipLable;
-@property (nonatomic,strong)UILabel *timesLable;
+//@property (nonatomic,strong)UILabel *timesLable;
 
 @property (nonatomic,strong)UIImageView *iconImageV;
 @property (nonatomic,strong)UIImageView *vipImageV;
@@ -66,25 +66,25 @@
 
 #pragma mark - 刷新ui
 - (void)configUIWithItem:(InitItem *)item finishi:(void(^)(void))finishBlock{
-    NSString *str = [NSString stringWithFormat:lqLocalized(@"每日观看次数 %ld/%ld", nil),item.rest_free_times,item.max_free_times];
-    //字体局部变色
-    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:str];
-    if (str.length > 0) {
-        NSRange start  = [str rangeOfString:lqStrings(@"次数 ")];
-        NSRange end  = [str rangeOfString:lqStrings(@"/")];
-        if (start.length > 0 && end.length > 0) {
-            NSRange rangel = NSMakeRange(start.location + start.length , end.location - start.location- start.length );
-            [attr addAttribute:NSForegroundColorAttributeName value:CustomRedColor range:rangel];
-        }
-    }
-    self.timesLable.attributedText = attr;
-    self.cityVipLable.text = item.is_qm_vip ? [self changeStr:item.qm_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
+//    NSString *str = [NSString stringWithFormat:lqLocalized(@"每日观看次数 %ld/%ld", nil),item.rest_free_times,item.max_free_times];
+//    //字体局部变色
+//    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:str];
+//    if (str.length > 0) {
+//        NSRange start  = [str rangeOfString:lqStrings(@"次数 ")];
+//        NSRange end  = [str rangeOfString:lqStrings(@"/")];
+//        if (start.length > 0 && end.length > 0) {
+//            NSRange rangel = NSMakeRange(start.location + start.length , end.location - start.location- start.length );
+//            [attr addAttribute:NSForegroundColorAttributeName value:CustomRedColor range:rangel];
+//        }
+//    }
+//    self.timesLable.attributedText = attr;
+//    self.cityVipLable.text = item.is_qm_vip ? [self changeStr:item.qm_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
     self.ablumVipLable.text = item.is_album_vip ? [self changeStr:item.ablum_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
     self.shipinVipLable.text = item.is_vip ? [self changeStr:item.vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
     
-    self.shipinVipLable.hidden = !item.is_vip;
-    self.shipinVipTipLable.hidden = !item.is_vip;
-    self.timesLable.hidden = item.is_vip;
+//    self.shipinVipLable.hidden = !item.is_vip;
+//    self.shipinVipTipLable.hidden = !item.is_vip;
+//    self.timesLable.hidden = item.is_vip;
     
     if (item.is_new_user ) {
         self.ablumVipLable.text = lqStrings(@"临时体验卡");
@@ -93,7 +93,7 @@
             self.shipinVipLable.text = lqStrings(@"临时体验卡");
             self.shipinVipLable.hidden = NO;
             self.shipinVipTipLable.hidden = NO;
-            self.timesLable.hidden = YES;
+//            self.timesLable.hidden = YES;
 
         }
 
@@ -231,33 +231,35 @@
             
         }];
         
-        _cityVipTipLable = [UILabel lableWithText:lqStrings(@"同城VIP:") textColor:TitleWhiteColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
-        [contentV addSubview:_cityVipTipLable];
-        [_cityVipTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.mas_equalTo(weakSelf.nameLabel);
-            make.top.mas_equalTo(weakSelf.ablumVipTipLable.mas_bottom).offset(Adaptor_Value(10));
-    
-            
-        }];
+//        _cityVipTipLable = [UILabel lableWithText:lqStrings(@"同城VIP:") textColor:TitleWhiteColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+//        [contentV addSubview:_cityVipTipLable];
+//        [_cityVipTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.left.mas_equalTo(weakSelf.nameLabel);
+//            make.top.mas_equalTo(weakSelf.ablumVipTipLable.mas_bottom).offset(Adaptor_Value(10));
+//
+//
+//        }];
+//
+//        _cityVipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? [weakSelf changeStr:RI.infoInitItem.qm_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+//        [contentV addSubview:_cityVipLable];
+//        [_cityVipLable mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.left.mas_equalTo(weakSelf.cityVipTipLable.mas_right).offset(Adaptor_Value(5));
+//            make.centerY.mas_equalTo(weakSelf.cityVipTipLable);
+//
+//        }];
         
-        _cityVipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? [weakSelf changeStr:RI.infoInitItem.qm_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
-        [contentV addSubview:_cityVipLable];
-        [_cityVipLable mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.mas_equalTo(weakSelf.cityVipTipLable.mas_right).offset(Adaptor_Value(5));
-            make.centerY.mas_equalTo(weakSelf.cityVipTipLable);
-            
-        }];
-        
-        _timesLable = [UILabel lableWithText:@"每日观看次数" textColor:TitleWhiteColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
-        [contentV addSubview:_timesLable];
-        [_timesLable mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.mas_equalTo(weakSelf.nameLabel);
-            make.top.mas_equalTo(weakSelf.cityVipLable.mas_bottom).offset(Adaptor_Value(10));
-        }];
-        _timesLable.hidden = RI.infoInitItem.is_vip;
+//        _timesLable = [UILabel lableWithText:@"每日观看次数" textColor:TitleWhiteColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+//        [contentV addSubview:_timesLable];
+//        [_timesLable mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.left.mas_equalTo(weakSelf.nameLabel);
+////            make.top.mas_equalTo(weakSelf.cityVipLable.mas_bottom).offset(Adaptor_Value(10));
+//            make.top.mas_equalTo(weakSelf.ablumVipLable.mas_bottom).offset(Adaptor_Value(10));
+//
+//        }];
+//        _timesLable.hidden = RI.infoInitItem.is_vip;
 
         
         _shipinVipTipLable = [UILabel lableWithText:lqStrings(@"视频VIP:") textColor:TitleWhiteColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
@@ -265,11 +267,13 @@
         [_shipinVipTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.left.mas_equalTo(weakSelf.nameLabel);
-            make.centerY.mas_equalTo(weakSelf.timesLable);
+//            make.centerY.mas_equalTo(weakSelf.timesLable);
+            make.top.mas_equalTo(weakSelf.ablumVipLable.mas_bottom).offset(Adaptor_Value(10));
+
     
             
         }];
-        _shipinVipTipLable.hidden = !RI.infoInitItem.is_vip;
+//        _shipinVipTipLable.hidden = !RI.infoInitItem.is_vip;
         
         _shipinVipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? [weakSelf changeStr:RI.infoInitItem.vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_shipinVipLable];
@@ -279,7 +283,7 @@
             make.centerY.mas_equalTo(weakSelf.shipinVipTipLable);
             
         }];
-        _shipinVipLable.hidden = !RI.infoInitItem.is_vip;
+//        _shipinVipLable.hidden = !RI.infoInitItem.is_vip;
 
   
 

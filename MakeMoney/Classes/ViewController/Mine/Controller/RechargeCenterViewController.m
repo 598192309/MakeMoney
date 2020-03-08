@@ -145,7 +145,7 @@
     NSDictionary *dict = noti.userInfo;
     PayWayItem *item = [dict safeObjectForKey:@"info"];
     PayCenterInfotem *infoItem = [self.dataArr safeObjectAtIndex:self.selectedIndex];
-    [self goPayWithInviteChannelId:item.channel_id goods_id:self.goodID sex_id:RI.infoInitItem.sex_id pay_type:IntTranslateStr(infoItem.tag) payName:item.name];
+    [self goPayWithInviteChannelId:item.channel_id goods_id:self.goodID sex_id:RI.infoInitItem.sex_id pay_type:IntTranslateStr(infoItem.tag) payName:item.name tiaoZhuanType:item.type];
 }
 #pragma mark - act
 - (void)rechargeCenterCustomViewAct{
@@ -191,9 +191,9 @@
     }];
 }
 
-//支付 pay_type 1     跳转到webview加载 data pay_type： 3或4    跳转到新的扫码支付界面
+//支付 tiaoZhuanType 1     跳转到webview加载 data pay_type： 3或4    跳转到新的扫码支付界面
 
-- (void)goPayWithInviteChannelId:(NSString *)channel_id goods_id:(NSString *)goods_id sex_id:(NSString *)sex_id pay_type:(NSString *)pay_type payName:(NSString *)payName{
+- (void)goPayWithInviteChannelId:(NSString *)channel_id goods_id:(NSString *)goods_id sex_id:(NSString *)sex_id pay_type:(NSString *)pay_type payName:(NSString *)payName tiaoZhuanType:(NSString *)tiaoZhuanType{
 
     [self showMsg:lqStrings(@"准备支付，情稍后...") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"支付成功后，请返回当前界面，或手动输入订单号查询支付状态") subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@""];
     [LSVProgressHUD show];
@@ -203,7 +203,7 @@
         weakSelf.commonAlertView = nil;
         weakSelf.clickPayed = YES;
         
-        if ([pay_type isEqualToString:@"1"]) {//跳转到webview加载
+        if ([tiaoZhuanType isEqualToString:@"1"]) {//跳转到webview加载
 //            BaseWebViewController *vc = [[BaseWebViewController alloc] init];
             WebViewViewController *vc = [[WebViewViewController alloc] init];
             NSString *html = payDetailItem.data;
