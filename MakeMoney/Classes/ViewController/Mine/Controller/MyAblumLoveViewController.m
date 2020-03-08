@@ -11,6 +11,7 @@
 #import "MineApi.h"
 #import "MineItem.h"
 #import "NoDataView.h"
+#import "AblumDetailViewController.h"
 
 @interface MyAblumLoveViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -166,7 +167,10 @@
 #pragma mark - UICollectionViewDelegate
 //方块被选中会调用
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"点击选择了第%ld组，第%ld个方块",indexPath.section,indexPath.row);
+//    NSLog(@"点击选择了第%ld组，第%ld个方块",indexPath.section,indexPath.row);
+    AblumDetailViewController *vc = [[AblumDetailViewController alloc] init];
+    vc.ablumData = [self.dataArr safeObjectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 //方块取消选中会调用

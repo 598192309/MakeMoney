@@ -87,7 +87,11 @@
 
 
 #pragma mark - act
-
+- (void)loveBtnClick:(UIButton *)sender{
+    if (self.loveBtnClickBlock) {
+        self.loveBtnClickBlock(sender);
+    }
+}
 #pragma mark - lazy
 - (UIView *)cellBackgroundView{
     if (!_cellBackgroundView) {

@@ -12,12 +12,15 @@
 #import "AVApi.h"
 #import "HomeItem.h"
 #import "AVPlayerController.h"
+#import "AVHeaderAdsImageView.h"
+
 @interface AVViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
 @property (nonatomic,assign)NSInteger pageIndex;
 @property (nonatomic,strong)NSMutableArray *dataArr;
-@property (nonatomic,strong)AdsItem *adsItem;
+@property (nonatomic,strong)NSArray *adsItemArr;
 
+@property (nonatomic,assign)NSInteger selectedAdsIndex;//点击广告index
 @end
 
 @implementation AVViewController
@@ -47,23 +50,7 @@
 }
 
 
-#pragma mark - act
--(void)adsTap:(UITapGestureRecognizer *)gest{
-    if ([self.adsItem.url hasPrefix:@"http"]) {
-        UIApplication *application = [UIApplication sharedApplication];
-        if ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
-            if (@available(iOS 10.0, *)) {
-                [application openURL:[NSURL URLWithString:self.adsItem.url] options:@{} completionHandler:nil];
-            } else {
-                [application openURL:[NSURL URLWithString:self.adsItem.url]];
-            }
-        }else{
-            [application openURL:[NSURL URLWithString:self.adsItem.url]];
 
-        }
-
-    }
-}
 
 #pragma mark -  net
 -(void)requestData{
@@ -115,8 +102,7 @@
 - (void)reqestTopAds{
     __weak __typeof(self) weakSelf = self;
     [HomeApi requestAdWithType:@"3" Success:^(NSArray * _Nonnull adsItemArr, NSString * _Nonnull msg) {
-        AdsItem *item = adsItemArr.firstObject;
-        weakSelf.adsItem = item;
+        weakSelf.adsItemArr = adsItemArr;
         [weakSelf.customTableView reloadData];
     } error:^(NSError *error, id resultObject) {
         
@@ -140,13 +126,15 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+//    return 1;
+    return self.dataArr.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataArr.count;
+//    return self.dataArr.count;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -176,22 +164,34 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIImageView *imageV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, LQScreemW, Adaptor_Value(80))];
-//    [imageV sd_setImageWithURL:[NSURL URLWithString:self.adsItem.img]];
-    __weak __typeof(self) weakSelf = self;
-    [imageV sd_setImageWithURL:[NSURL URLWithString:self.adsItem.img] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//    UIImageView *imageV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, LQScreemW, Adaptor_Value(80))];
+//    __weak __typeof(self) weakSelf = self;
+//    [imageV sd_setImageWithURL:[NSURL URLWithString:[self.dataArr safeObjectAtIndex:(section%8)]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//    }];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(adsTap:)];
+//    imageV.userInteractionEnabled = YES;
+//    [imageV addGestureRecognizer:tap];
+    AVHeaderAdsImageView *imageV = [[AVHeaderAdsImageView alloc] init];
+    int index = arc4random() % (self.adsItemArr.count);
+    AdsItem *item = [self.adsItemArr safeObjectAtIndex:index];
+    [imageV configUIWithItem:item finishi:^{
+        
     }];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(adsTap:)];
-    imageV.userInteractionEnabled = YES;
-    [imageV addGestureRecognizer:tap];
+    imageV.frame = CGRectMake(0, 0, LQScreemW, LQScreemW * item.height / item.width);
     return imageV;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (self.adsItem.width > 0) {
-        return LQScreemW * self.adsItem.height / self.adsItem.width;
+    if (section % 8 == 0) {
+        AdsItem *item = [self.adsItemArr safeObjectAtIndex:section%8];
+        if (item.width > 0) {
+            return LQScreemW * item.height / item.width;
+        }
+        return  100;
     }
-    return  0.01;
+    
+    return 0.01;
+
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{

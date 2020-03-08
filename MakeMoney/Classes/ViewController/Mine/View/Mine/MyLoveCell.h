@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MyLoveCell : UICollectionViewCell
 - (void)refreshWithItem:(HotItem *)item videoType:(VideoType)type;
 
+@property (nonatomic, copy) void(^loveBtnClickBlock)(UIButton *sender);
 
 @end
 

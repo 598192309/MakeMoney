@@ -11,6 +11,8 @@
 #import "MineApi.h"
 #import "MineItem.h"
 #import "NoDataView.h"
+#import "AVPlayerController.h"
+#import "AVApi.h"
 
 @interface MyAVLoveViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -107,7 +109,19 @@
         [weakSelf.collectionView reloadData];
     }];
 }
+//收藏与取消
+- (void)loveWithId:(NSString *)ID sender:(UIButton *)sender{
+    __weak __typeof(self) weakSelf = self;
+    sender.userInteractionEnabled = NO;
+    [AVApi loveAVWithVedioId:ID Success:^(NSInteger status, NSString * _Nonnull msg) {
+        sender.userInteractionEnabled = YES;
+        [LSVProgressHUD showInfoWithStatus:msg];
+        [weakSelf requestData];//重新刷新UI
+    } error:^(NSError *error, id resultObject) {
+        sender.userInteractionEnabled = YES;
 
+    }];
+}
 #pragma mark - UICollectionViewDataSource
 //设置容器中有多少个组
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -125,6 +139,10 @@
     MyLoveCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([MyLoveCell class]) forIndexPath:indexPath];
     HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
     [cell refreshWithItem:item videoType:VideoType_AV];
+    __weak __typeof(self) weakSelf = self;
+    cell.loveBtnClickBlock = ^(UIButton * _Nonnull sender) {
+        [weakSelf loveWithId:item.ID sender:sender];
+    };
     return cell;
 }
 
@@ -167,7 +185,11 @@
 #pragma mark - UICollectionViewDelegate
 //方块被选中会调用
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"点击选择了第%ld组，第%ld个方块",indexPath.section,indexPath.row);
+//    NSLog(@"点击选择了第%ld组，第%ld个方块",indexPath.section,indexPath.row);
+    HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
+
+    AVPlayerController *vc = [AVPlayerController controllerWith:item];
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 //方块取消选中会调用

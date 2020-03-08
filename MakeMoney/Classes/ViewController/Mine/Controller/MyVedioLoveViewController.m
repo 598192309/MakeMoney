@@ -11,7 +11,8 @@
 #import "MineApi.h"
 #import "MineItem.h"
 #import "NoDataView.h"
-
+#import "AVApi.h"
+#import "ShortVideoViewController.h"
 @interface MyVedioLoveViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) UICollectionView *collectionView;//容器视图
@@ -107,7 +108,24 @@
         [weakSelf.collectionView reloadData];
     }];
 }
+//取消收藏
+- (void)cancleLoveWithID:(NSString *)ID sender:(UIButton *)sender{
+    __weak __typeof(self) weakSelf = self;
+    sender.userInteractionEnabled = NO;
 
+    [AVApi cancleLoveVedioWithVedioId:ID Success:^(NSInteger status, NSString * _Nonnull msg) {
+        sender.userInteractionEnabled = YES;
+        [LSVProgressHUD showInfoWithStatus:msg.length > 0 ? msg : lqStrings(@"取消收藏")];
+        NSInteger num = [sender titleForState:UIControlStateNormal].integerValue;
+        [sender setTitle:IntTranslateStr(num - 1) forState:UIControlStateNormal];
+        sender.selected = !sender.selected;
+        [weakSelf requestData];
+    } error:^(NSError *error, id resultObject) {
+        sender.userInteractionEnabled = YES;
+        [LSVProgressHUD showError:error];
+
+    }];
+}
 #pragma mark - UICollectionViewDataSource
 //设置容器中有多少个组
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -126,6 +144,10 @@
 
     HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
     [cell refreshWithItem:item videoType:VideoType_ShortVideo];
+    __weak __typeof(self) weakSelf = self;
+    cell.loveBtnClickBlock = ^(UIButton * _Nonnull sender) {
+        [weakSelf cancleLoveWithID:item.ID sender:sender];
+    };
     return cell;
 }
 
@@ -168,7 +190,10 @@
 #pragma mark - UICollectionViewDelegate
 //方块被选中会调用
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"点击选择了第%ld组，第%ld个方块",indexPath.section,indexPath.row);
+//    NSLog(@"点击选择了第%ld组，第%ld个方块",indexPath.section,indexPath.row);
+    HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
+    ShortVideoViewController *vc = [ShortVideoViewController controllerWith:item];
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 //方块取消选中会调用

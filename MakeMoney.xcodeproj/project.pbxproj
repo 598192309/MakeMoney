@@ -33,6 +33,7 @@
 		09C51AEB24135B5800705DFC /* LqScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C51AE924135B5800705DFC /* LqScrollView.m */; };
 		09C51AEF2413927C00705DFC /* AblumDetailNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C51AED2413927C00705DFC /* AblumDetailNewCell.m */; };
 		09C51AF02413927C00705DFC /* AblumDetailNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09C51AEE2413927C00705DFC /* AblumDetailNewCell.xib */; };
+		09C51AF32414A5B200705DFC /* AVHeaderAdsImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C51AF22414A5B200705DFC /* AVHeaderAdsImageView.m */; };
 		09E72AEB240559F40004B25C /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E72AE2240559F40004B25C /* AFURLResponseSerialization.m */; };
 		09E72AEC240559F40004B25C /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E72AE3240559F40004B25C /* AFHTTPSessionManager.m */; };
 		09E72AED240559F40004B25C /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E72AE5240559F40004B25C /* AFURLSessionManager.m */; };
@@ -322,6 +323,8 @@
 		09C51AEC2413927C00705DFC /* AblumDetailNewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AblumDetailNewCell.h; sourceTree = "<group>"; };
 		09C51AED2413927C00705DFC /* AblumDetailNewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AblumDetailNewCell.m; sourceTree = "<group>"; };
 		09C51AEE2413927C00705DFC /* AblumDetailNewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AblumDetailNewCell.xib; sourceTree = "<group>"; };
+		09C51AF12414A5B200705DFC /* AVHeaderAdsImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVHeaderAdsImageView.h; sourceTree = "<group>"; };
+		09C51AF22414A5B200705DFC /* AVHeaderAdsImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVHeaderAdsImageView.m; sourceTree = "<group>"; };
 		09E72ADE240559F40004B25C /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
 		09E72ADF240559F40004B25C /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		09E72AE0240559F40004B25C /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
@@ -1581,6 +1584,8 @@
 			children = (
 				09830AF82408207F00FBF2C7 /* AVCell.h */,
 				09830AF92408207F00FBF2C7 /* AVCell.m */,
+				09C51AF12414A5B200705DFC /* AVHeaderAdsImageView.h */,
+				09C51AF22414A5B200705DFC /* AVHeaderAdsImageView.m */,
 			);
 			path = AV;
 			sourceTree = "<group>";
@@ -2076,6 +2081,7 @@
 				09E72C5D24055F770004B25C /* ViewController+MASAdditions.m in Sources */,
 				8BD545A5240BB4CC00C90A31 /* UIScrollView+MJRefresh.m in Sources */,
 				8B58D04B2413555400FE426E /* AblumViewController.m in Sources */,
+				09C51AF32414A5B200705DFC /* AVHeaderAdsImageView.m in Sources */,
 				09E72D18240560210004B25C /* SYProgressWebView.m in Sources */,
 				8BD545A7240BB4CC00C90A31 /* MJRefreshConfig.m in Sources */,
 				09E72C8424055F7E0004B25C /* MJPropertyKey.m in Sources */,
@@ -2400,7 +2406,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DS232TBXXN;
+				DEVELOPMENT_TEAM = ATBJJ8434Q;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2418,7 +2424,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/MakeMoney/Classes/Tools/Frameworks/shujumohePB",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cloudfighting.admin.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lqlq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2429,7 +2435,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DS232TBXXN;
+				DEVELOPMENT_TEAM = ATBJJ8434Q;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2447,7 +2453,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/MakeMoney/Classes/Tools/Frameworks/shujumohePB",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cloudfighting.admin.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lqlq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

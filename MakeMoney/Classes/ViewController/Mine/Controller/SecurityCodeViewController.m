@@ -77,7 +77,7 @@
         weakSelf.modifyBtn.hidden = YES;
         [weakSelf.submitBtn mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(weakSelf.codeTV.mas_bottom).offset(Adaptor_Value(40));
-            make.height.mas_equalTo(Adaptor_Value(0));
+            make.height.mas_equalTo(Adaptor_Value(50));
         }];
         weakSelf.textViewPlaceholdLabel.hidden = NO;
 //        self.navigationRightBtn.hidden = YES;
