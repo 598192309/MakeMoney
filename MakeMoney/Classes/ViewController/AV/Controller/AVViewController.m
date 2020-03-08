@@ -141,7 +141,7 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AVCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AVCell class]) ];
-    HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
+    HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.section];
     [cell refreshWithItem: item];
     __weak __typeof(self) weakSelf = self;
     cell.loveBlock = ^(UIButton * _Nonnull sender) {
@@ -157,7 +157,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 //    [LSVProgressHUD showInfoWithStatus:@"点击"];
-    HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
+    HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.section];
 
     AVPlayerController *vc = [AVPlayerController controllerWith:item];
     [self.navigationController pushViewController:vc animated:YES];
