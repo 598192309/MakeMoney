@@ -64,17 +64,14 @@ const char* jailbreak_tool_pathes[] = {
     NSString *md5UUId = [uuid stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     if (!uuid) {
         uuid = [[NSUUID UUID] UUIDString];
-        //拼接随机参数 再MD5 此行别去可删
-        int salt = 100000 + arc4random() %(999999 -100000 + 1);
-        uuid = [uuid stringByAppendingString:[NSString stringWithFormat:@"%d",salt]];
         //md5
         md5UUId = [uuid stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         if(!md5UUId){
             return @"";
         }
-        [SAMKeychain setPassword: md5UUId  forService:@"com.51778Vedio"account:@"uuid"];
-        
     }
+    [SAMKeychain setPassword: md5UUId  forService:@"com.51778Vedio"account:@"uuid"];
+
     return md5UUId;
 }
 
@@ -354,5 +351,7 @@ const char* jailbreak_tool_pathes[] = {
     return phoneType;
     
 }
+
+
 
 @end

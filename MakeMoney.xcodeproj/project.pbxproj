@@ -194,6 +194,7 @@
 		1139808B2410DC6F00663E26 /* SaoMaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1139808A2410DC6F00663E26 /* SaoMaView.m */; };
 		1139808E2411026B00663E26 /* RechargeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1139808D2411026B00663E26 /* RechargeDetailViewController.m */; };
 		11398091241102B000663E26 /* RechargeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11398090241102B000663E26 /* RechargeDetailCell.m */; };
+		115DE5DC2445C42F00937D9B /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 115DE5DA2445C42F00937D9B /* OpenUDID.m */; };
 		11E860B4240CF27D00719378 /* AllCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B3240CF27D00719378 /* AllCategoryViewController.m */; };
 		11E860B7240D06D100719378 /* NoticeAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B6240D06D100719378 /* NoticeAlertView.m */; };
 		11E860BA240D142700719378 /* SYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B8240D142600719378 /* SYPageControl.m */; };
@@ -643,6 +644,8 @@
 		1139808D2411026B00663E26 /* RechargeDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RechargeDetailViewController.m; sourceTree = "<group>"; };
 		1139808F241102B000663E26 /* RechargeDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RechargeDetailCell.h; sourceTree = "<group>"; };
 		11398090241102B000663E26 /* RechargeDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RechargeDetailCell.m; sourceTree = "<group>"; };
+		115DE5DA2445C42F00937D9B /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
+		115DE5DB2445C42F00937D9B /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
 		11E860B2240CF27D00719378 /* AllCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllCategoryViewController.h; sourceTree = "<group>"; };
 		11E860B3240CF27D00719378 /* AllCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllCategoryViewController.m; sourceTree = "<group>"; };
 		11E860B5240D06D100719378 /* NoticeAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoticeAlertView.h; sourceTree = "<group>"; };
@@ -1451,6 +1454,8 @@
 				09E72D34240569920004B25C /* Network.m */,
 				09E72D3724056A5A0004B25C /* DeviceInfo.h */,
 				09E72D3824056A5B0004B25C /* DeviceInfo.m */,
+				115DE5DB2445C42F00937D9B /* OpenUDID.h */,
+				115DE5DA2445C42F00937D9B /* OpenUDID.m */,
 				09E72D3A24056ADC0004B25C /* RunInfo.h */,
 				09E72D3B24056ADC0004B25C /* RunInfo.m */,
 			);
@@ -2108,6 +2113,7 @@
 				09E72AEE240559F40004B25C /* AFURLRequestSerialization.m in Sources */,
 				09E72AEB240559F40004B25C /* AFURLResponseSerialization.m in Sources */,
 				8BD545A9240BB4CC00C90A31 /* UIScrollView+MJExtension.m in Sources */,
+				115DE5DC2445C42F00937D9B /* OpenUDID.m in Sources */,
 				8B9B8BEB240D4AED004B4704 /* ZFOrientationObserver.m in Sources */,
 				09E72C6224055F770004B25C /* View+MASAdditions.m in Sources */,
 				09E72C6324055F770004B25C /* MASConstraint.m in Sources */,
