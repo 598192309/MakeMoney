@@ -134,7 +134,7 @@
        }
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
-        [weakSelf.customCollectionView endHeaderRefreshing];
+        [weakSelf.customCollectionView endFooterRefreshing];
     }];
 }
 
@@ -163,7 +163,7 @@
 
 - (void)requestHotMoreData{
     __weak __typeof(self) weakSelf = self;
-    [HomeApi requestPopularityListwithVideoType:self.video_type pageIndex:@"0" page_size:@"15" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
+    [HomeApi requestPopularityListwithVideoType:self.video_type pageIndex:IntTranslateStr(self.pageIndex) page_size:@"15" Success:^(NSArray * _Nonnull hotItemArr, NSString * _Nonnull msg) {
         [weakSelf.dataArr addObjectsFromArray:hotItemArr];
         [weakSelf.customCollectionView endFooterRefreshing];
         [weakSelf.customCollectionView reloadData];
@@ -197,6 +197,9 @@
     HomeVideoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([HomeVideoCell class]) forIndexPath:indexPath];
     HotItem *hotItem = [self.dataArr safeObjectAtIndex:indexPath.row];
     [cell refreshCellWithItem:hotItem videoType:self.type.integerValue];
+    if (self.video_type.length > 0) {//从人气榜过来的
+        [cell setLoveBtnAppear:YES];
+    }
     return cell;
     
 }

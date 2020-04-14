@@ -41,11 +41,11 @@
 
 
 - (void)refreshUIWithItem:(PayCenterInfotem *)item{
-    self.titleLabel.text = item.price;
-    self.detailLable.text = item.text;
+    self.titleLabel.text = [NSString stringWithFormat:@"%@%@",item.price,item.unit];
+    self.detailLable.text = [NSString stringWithFormat:@"%d%@",item.day,item.text];
     
     //type 1 视频  2 同城
-    self.tipLabel.text = item.type == 2 ? lqStrings(@"同城VIP"):lqStrings(@"视频VIP");
+    self.tipLabel.text = item.name;
 
     
 }

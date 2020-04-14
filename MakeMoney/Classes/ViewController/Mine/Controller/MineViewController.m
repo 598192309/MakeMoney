@@ -42,9 +42,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if (self.notFirstAppear) {
-        [self.mineCustomHeaderView configUIWithItem:nil finishi:^{
-            
-        }];
+        [self requestData];
     }
 
 }
@@ -58,7 +56,7 @@
            // Fallback on earlier versions
            self.automaticallyAdjustsScrollViewInsets = NO;
        }
-    [self.mineCustomHeaderView configUIWithItem:nil finishi:^{
+    [self.mineCustomHeaderView configUIWithItem:RI.infoInitItem finishi:^{
         
     }];
 }
@@ -214,14 +212,15 @@
 }
 #pragma mark -  UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 5;
+//    return 5;
+    return 4;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     switch (section) {
         case 0:
             {
-                return 1;
+                return 2;
             }
             break;
 
@@ -232,17 +231,19 @@
             break;
         case 2:
             {
-                return 3;
+//                return 3;
+                return 2;
             }
             break;
+//        case 3:
+//            {
+//                return 1;
+//            }
+//            break;
         case 3:
             {
-                return 1;
-            }
-            break;
-        case 4:
-            {
-                return 4;
+//                return 4;
+                return 3;
             }
             break;
             
@@ -258,37 +259,48 @@
     NSString *title;
     NSString *subTitle;
     if (indexPath.section == 0) {
-        title = [NSString stringWithFormat:lqLocalized(@"官方邮箱:%@", nil),RI.basicItem.email];
-        subTitle = lqStrings(@"复制");
+        if (indexPath.row == 0) {
+            title = [NSString stringWithFormat:lqLocalized(@"官方邮箱:%@", nil),RI.basicItem.email];
+            subTitle = lqStrings(@"复制");
+        }else{
+            title = lqStrings(@"福利分享群");
+            subTitle = @"";
+        }
+        
     }else if (indexPath.section == 1){
         title = lqStrings(@"我的收藏");
         subTitle = nil;
     }else if (indexPath.section == 2){
+//        if (indexPath.row == 0) {
+//            title = lqStrings(@"绑定手机号");
+//            subTitle = RI.infoInitItem.mobile.length > 0 ? RI.infoInitItem.mobile : lqStrings(@"未绑定");
+//        }else
         if (indexPath.row == 0) {
-            title = lqStrings(@"绑定手机号");
-            subTitle = RI.infoInitItem.mobile.length > 0 ? RI.infoInitItem.mobile : lqStrings(@"未绑定");
-        }else  if (indexPath.row == 1) {
             title = lqStrings(@"我的邀请人");
             subTitle = self.yaoqingren.length == 0 ? lqStrings(@"未绑定") :self.yaoqingren;
-        }else  if (indexPath.row == 2) {
+        }else  if (indexPath.row == 1) {
             title = lqStrings(@"安全码设置");
             subTitle = lqStrings(@"");
         }
 
-    }else if (indexPath.section == 3){
-        title = lqStrings(@"密码锁");
-        subTitle = nil;
-    }else if (indexPath.section == 4){
+    }
+//    else if (indexPath.section == 3){
+//        title = lqStrings(@"密码锁");
+//        subTitle = nil;
+//    }
+    else if (indexPath.section == 3){
         if (indexPath.row == 0) {
             title = lqStrings(@"清理缓存");
-            subTitle = [NSString stringWithFormat:@"%.2fMB",[LqSandBox folderSizeAtPath:[LqSandBox docDownloadImagePath]]];
-        }else  if (indexPath.row == 1) {
-            title = lqStrings(@"问题反馈");
-            subTitle = lqStrings(@"");
-        }else  if (indexPath.row == 2) {
+            subTitle = [NSString stringWithFormat:@"%.2fMB",[LqSandBox folderSizeAtPath:[LqSandBox docDownloadImagePath]] / 5];
+        }
+//        else  if (indexPath.row == 1) {
+//            title = lqStrings(@"问题反馈");
+//            subTitle = lqStrings(@"");
+//        }
+        else  if (indexPath.row == 1) {
             title = lqStrings(@"使用者协定");
             subTitle = lqStrings(@"");
-        }else  if (indexPath.row == 3) {
+        }else  if (indexPath.row == 2) {
             title = lqStrings(@"当前版本");
             NSString *vesion = [LqToolKit appVersionNo];
             subTitle = [NSString stringWithFormat:@"V%@",vesion];
@@ -318,42 +330,59 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-        pasteboard.string = RI.basicItem.email;
-        [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"复制成功", nil)];
+        if (indexPath.row == 0) {
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            pasteboard.string = RI.basicItem.email;
+            [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"复制成功", nil)];
+        }else{//福利分享群
+            NSURL *url = [NSURL URLWithString:RI.basicItem.potato_url];
+            if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                [[UIApplication sharedApplication] openURL:url];
+            }
+        }
+        
     }else if (indexPath.section == 1){//我的收藏
         MyLoveViewController *vc = [[MyLoveViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
 
         
     }else if (indexPath.section == 2){
-        if (indexPath.row == 0) {//绑定手机号
-            if (RI.infoInitItem.mobile.length == 0) {
-                BindMobileFirstStepViewController *vc = [[BindMobileFirstStepViewController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-        }else  if (indexPath.row == 1) {//我的邀请人
+//        if (indexPath.row == 0) {//绑定手机号
+//            if (RI.infoInitItem.mobile.length == 0) {
+//                BindMobileFirstStepViewController *vc = [[BindMobileFirstStepViewController alloc] init];
+//                [self.navigationController pushViewController:vc animated:YES];
+//            }
+//        }else
+            
+        if (indexPath.row == 0) {//我的邀请人
             [[UIApplication sharedApplication].keyWindow addSubview:self.vipExchangeAlertView];
             [self.vipExchangeAlertView refreshContent:lqStrings(@"请填写邀请码")];
             [self.vipExchangeAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
             }];
            
-        }else  if (indexPath.row == 2) {//安全码设置
+        }else  if (indexPath.row == 1) {//安全码设置
             SecurityCodeViewController *vc = [[SecurityCodeViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
             
         }
 
-    }else if (indexPath.section == 3){
-       
-    }else if (indexPath.section == 4){
+    }
+//    else if (indexPath.section == 3){
+//
+//    }else
+    if (indexPath.section == 3){
         if (indexPath.row == 0) {//清理缓存
             [self remindShow: @"" msgColor:[UIColor whiteColor] msgFont:AdaptedFontSize(15) subMsg:lqStrings(@"是否要清理缓存") submsgColor:ThemeBlackColor submsgFont:AdaptedFontSize(16) firstBtnTitle:nil secBtnTitle:nil singeBtnTitle:lqStrings(@"是")];
+            [[SDImageCache sharedImageCache] clearDisk];
+
+            [[SDImageCache sharedImageCache] clearMemory];//可有可无
             
-        }else  if (indexPath.row == 1) {
-            
-        }else  if (indexPath.row == 2) {//使用者协定
+        }
+//        else  if (indexPath.row == 1) {
+//
+//        }
+        else  if (indexPath.row == 1) {//使用者协定
             BaseWebViewController *vc = [[BaseWebViewController alloc] init];
             NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];
             NSString *basePath = [NSString stringWithFormat:@"%@/xieyi.html",mainBundlePath];
@@ -361,7 +390,7 @@
             vc.htmlStr = htmlstr;
             [self.navigationController pushViewController:vc animated:YES];
             
-        }else  if (indexPath.row == 3) {
+        }else  if (indexPath.row == 2) {
             
         }
     }

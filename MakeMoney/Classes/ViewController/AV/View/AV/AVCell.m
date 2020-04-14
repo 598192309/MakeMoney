@@ -142,7 +142,8 @@
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(25));
         }];
         _loveBtn.touchSize = CGSizeMake(Adaptor_Value(50), Adaptor_Value(50));
-        
+        _loveBtn.selected = YES;//现在默认选择 现在没有显示 选中和不选中的判断
+
         UIView *loveBtnBackView = [UIView new];
         loveBtnBackView.backgroundColor = [UIColor lq_colorWithHexString:@"ffffff" alpha:0.3];
         [contentV insertSubview:loveBtnBackView belowSubview:_loveBtn];
@@ -163,7 +164,7 @@
         
         _seeTimesBtn = [[EnlargeTouchSizeButton alloc] init];
 //        [_seeTimesBtn addTarget:self action:@selector(seeTimesBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_seeTimesBtn setImage:[UIImage imageNamed:@"hot"] forState:UIControlStateNormal];
+        [_seeTimesBtn setImage:[UIImage imageNamed:@"icon_av_hot_white"] forState:UIControlStateNormal];
         _seeTimesBtn.titleLabel.font = AdaptedFontSize(12);
         [contentV addSubview:_seeTimesBtn];
         [_seeTimesBtn mas_makeConstraints:^(MASConstraintMaker *make) {

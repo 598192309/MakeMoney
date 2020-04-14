@@ -15,6 +15,8 @@
 @property (strong, nonatomic)  UIImageView *imageV;
 
 @property (nonatomic, strong) ZhuanTiHomeItem *item;
+@property (nonatomic, strong) HotItem *hotItem;
+
 
 @end
 @implementation ZHuanTiCell
@@ -74,7 +76,37 @@
     }];
     
 }
-
+//分类
+- (void)refreshCategoryWithItem:(HotItem*)item downImageType:(NSString *)downImageType{
+    self.imageV.image = nil;
+    self.hotItem  = item;
+    __weak __typeof(self) weakSelf = self;
+    if (!item) {
+        return;
+    }
+    NSString *type;
+    NSString *paramTitle;
+    NSString *key;
+    type = @"vt_imgs";
+    paramTitle = @"vtId";
+    key = @"category";
+    /**
+     
+    对应参数如下
+    /api/v_imgs         vId=                   短视频
+    /api/a_imgs         aId=                   av
+    /api/qm_imgs      qmId=                同城
+    /api/vt_imgs        vtId=                  全部分类
+    /api/s_imgs         sId=                   专题
+     */
+    [HomeApi downImageWithType:type paramTitle:paramTitle ID:item.ID key:key Success:^(UIImage * _Nonnull img,NSString *ID) {
+        if ([weakSelf.hotItem.ID isEqualToString:ID]) {
+            weakSelf.imageV.image = img;
+        }
+    } error:^(NSError *error, id resultObject) {
+        
+    }];
+}
 #pragma mark - act
 
 #pragma mark - lazy

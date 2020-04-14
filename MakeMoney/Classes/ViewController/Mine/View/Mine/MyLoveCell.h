@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-@class HotItem;
+@class HotItem,AblumItem;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MyLoveCell : UICollectionViewCell
-- (void)refreshWithItem:(HotItem *)item;
+- (void)refreshWithItem:(HotItem *)item videoType:(VideoType)type;
+
+@property (nonatomic, copy) void(^loveBtnClickBlock)(UIButton *sender);
+
 @end
 
 NS_ASSUME_NONNULL_END

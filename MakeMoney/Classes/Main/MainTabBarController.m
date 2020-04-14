@@ -20,6 +20,7 @@
 #import "HomeApi.h"
 #import "HomeItem.h"
 #import "NoticeAlertView.h"
+#import "AblumViewController.h"
 
 
 @interface MainTabBarController ()<UITabBarControllerDelegate>
@@ -44,16 +45,19 @@
     [self addChildViewController:vc1 withImageName:@"home" selectedImageName:@"home" withTittle:lqLocalized(@"首页",nil)];
     
     ZhuanTiViewController *vc2 = [[ZhuanTiViewController alloc] init];
-    [self addChildViewController:vc2 withImageName:@"setup" selectedImageName:@"setup" withTittle:lqStrings(@"专题")];
+    [self addChildViewController:vc2 withImageName:@"" selectedImageName:@"" withTittle:lqStrings(@"专题")];
 
     AVViewController *vc3 = [[AVViewController alloc] init];
-    [self addChildViewController:vc3 withImageName:@"user" selectedImageName:@"user" withTittle:lqLocalized(@"AV",nil)];
+    [self addChildViewController:vc3 withImageName:@"" selectedImageName:@"" withTittle:lqLocalized(@"AV",nil)];
     
-    CityViewController *vc4 = [[CityViewController alloc] init];
-    [self addChildViewController:vc4 withImageName:@"user" selectedImageName:@"user" withTittle:lqLocalized(@"同城",nil)];
+//    CityViewController *vc4 = [[CityViewController alloc] init];
+//    [self addChildViewController:vc4 withImageName:@"user" selectedImageName:@"user" withTittle:lqLocalized(@"同城",nil)];
+    
+    AblumViewController *vc4 = [[AblumViewController alloc] init];
+    [self addChildViewController:vc4 withImageName:@"" selectedImageName:@"" withTittle:lqLocalized(@"写真",nil)];
     
     MineViewController *vc5 = [[MineViewController alloc] init];
-    [self addChildViewController:vc5 withImageName:@"user" selectedImageName:@"user" withTittle:lqLocalized(@"我的",nil)];
+    [self addChildViewController:vc5 withImageName:@"" selectedImageName:@"" withTittle:lqLocalized(@"我的",nil)];
     
     [self setupBasic];
     self.delegate = self;
@@ -112,7 +116,7 @@
     //        controller.navigationItem.title = tittle;
     //    controller.title = tittle;//这句代码相当于上面两句代码
     //    [nav.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor]} forState:UIControlStateSelected];
-    nav.tabBarItem.titlePositionAdjustment = UIOffsetMake(0, -3);
+    nav.tabBarItem.titlePositionAdjustment = UIOffsetMake(0, -12);
     
     [self addChildViewController:nav];
 }

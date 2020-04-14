@@ -22,6 +22,8 @@
 #import "AVPlayerController.h"
 #import "ShareView.h"
 #import<AssetsLibrary/AssetsLibrary.h>
+#import "AVApi.h"
+#import "RechargeCenterViewController.h"
 
 @interface ShortVideoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
@@ -93,7 +95,15 @@
     
     self.player.playerPlayTimeChanged = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, NSTimeInterval currentTime, NSTimeInterval duration) {
         NSLog(@"播放时长currentTime:%f,总时长duration:%f",currentTime,duration);
+        if (currentTime > 60) {//大于一分钟 重头播放
+            [weakSelf showMsg:lqStrings(@"VIP会员才能观看完整版喔～") firstBtnTitle:lqStrings(@"再想想") secBtnTitle:lqStrings(@"购买VIP") singleBtnTitle:@""];
+            [weakSelf.player.currentPlayerManager pause];
+            [weakSelf.controlView resetControlView];
+            [weakSelf.player seekToTime:0 completionHandler:^(BOOL finished) {
 
+                [weakSelf.player.currentPlayerManager pause];
+            }];
+        }
     };
     
     self.player.presentationSizeChanged = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, CGSize size) {
@@ -183,7 +193,42 @@
         
     }];
 }
+//收藏
+- (void)loveWithId:(NSString *)ID sender:(UIButton *)sender{
+    __weak __typeof(self) weakSelf = self;
+    sender.userInteractionEnabled = NO;
+    [AVApi loveVedioWithVedioId:ID Success:^(NSInteger status, NSString * _Nonnull msg) {
+        sender.userInteractionEnabled = YES;
+        [LSVProgressHUD showInfoWithStatus:msg.length > 0 ? msg : lqStrings(@"收藏成功")];
+        NSInteger num = [sender titleForState:UIControlStateNormal].integerValue;
+        [sender setTitle:IntTranslateStr(num + 1) forState:UIControlStateNormal];
+        sender.selected = !sender.selected;
 
+        
+    } error:^(NSError *error, id resultObject) {
+        sender.userInteractionEnabled = YES;
+        [LSVProgressHUD showError:error];
+    }];
+}
+
+//取消收藏
+- (void)cancleLoveWithID:(NSString *)ID sender:(UIButton *)sender{
+    __weak __typeof(self) weakSelf = self;
+    sender.userInteractionEnabled = NO;
+
+    [AVApi cancleLoveVedioWithVedioId:ID Success:^(NSInteger status, NSString * _Nonnull msg) {
+        sender.userInteractionEnabled = YES;
+        [LSVProgressHUD showInfoWithStatus:msg.length > 0 ? msg : lqStrings(@"取消收藏")];
+        NSInteger num = [sender titleForState:UIControlStateNormal].integerValue;
+        [sender setTitle:IntTranslateStr(num - 1) forState:UIControlStateNormal];
+        sender.selected = !sender.selected;
+
+    } error:^(NSError *error, id resultObject) {
+        sender.userInteractionEnabled = YES;
+        [LSVProgressHUD showError:error];
+
+    }];
+}
 #pragma mark - UIScrollViewDelegate  列表播放必须实现
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -222,8 +267,8 @@
     __weak __typeof(self) weakSelf = self;
 
     cell.douYinCellSeeBtnClickBlock = ^(UIButton *sender) {
-        //判断是否是会员
-        if (!RI.infoInitItem.is_vip) {
+        //判断是否是会员 是否是新用户
+        if (RI.infoInitItem.is_vip || RI.infoInitItem.is_new_user) {
             [weakSelf.player setPauseByEvent:YES];
             [weakSelf.controlView setPlayBtnHidden:NO];
             AVPlayerController *vc = [AVPlayerController controllerWith:item];
@@ -238,6 +283,11 @@
     //点击喜欢
     cell.douYinCellLikeBtnClickBlock = ^(UIButton *sender) {
 //        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+        if (sender.selected) {
+            [weakSelf cancleLoveWithID:item.ID sender:sender];
+        }else{
+            [weakSelf loveWithId:item.ID sender:sender];
+        }
 
     };
     //点击分享
@@ -391,7 +441,10 @@
             [weakSelf.commonAlertView removeFromSuperview];
             weakSelf.commonAlertView = nil;
             if (index == 2) {//购买VIP
-                [LSVProgressHUD showInfoWithStatus:@"购买VIP"];
+//                [LSVProgressHUD showInfoWithStatus:@"购买VIP"];
+                RechargeCenterViewController *vc = [[RechargeCenterViewController alloc] init];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+                [weakSelf popSelfDelayTime:1.0];
             }
         };
     }

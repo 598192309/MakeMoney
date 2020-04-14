@@ -99,7 +99,7 @@
             
         }
     } error:^(NSError *error, id resultObject) {
-        [weakSelf.customTableView endHeaderRefreshing];
+        [weakSelf.customTableView endFooterRefreshing];
         [weakSelf.customTableView reloadData];
     }];
 }

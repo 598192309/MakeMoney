@@ -16,9 +16,15 @@
 #import "LaunchingViewController.h"
 #import "MineApi.h"
 #import "MineItem.h"
+
+#import "JANALYTICSService.h"
+
 static BOOL isProduction = YES;
 
 static NSString  *YouMengKey = @"5e551f1c0cafb2fd5a00017b";
+static NSString  *JiguangKey = @"5c8cf6e4604a4d52bdc42ae4";
+
+
 @interface AppDelegate ()
 
 @end
@@ -72,6 +78,15 @@ static NSString  *YouMengKey = @"5e551f1c0cafb2fd5a00017b";
     //友盟 统计
     [UMConfigure initWithAppkey:YouMengKey channel:@"App Store"];
 
+    //极光统计
+   JANALYTICSLaunchConfig * config = [[JANALYTICSLaunchConfig alloc] init];
+
+   config.appKey = JiguangKey;
+    
+   config.channel = @"ios";
+    
+   [JANALYTICSService setupWithConfig:config];
+    
     //IQKeyboardManager
     [self IQKeyboardManagerConfig];
     
@@ -141,16 +156,19 @@ static NSString  *YouMengKey = @"5e551f1c0cafb2fd5a00017b";
     if (RI.tradeNo.length == 0) {
         return;
     }
+    [LSVProgressHUD show];
     [MineApi requestPayResultWithTradeNo:RI.tradeNo Success:^(NSInteger status, NSString * _Nonnull msg, NSString * _Nonnull secret) {
         InitItem *item = [InitItem mj_objectWithKeyValues:[RI.infoInitItemJasonStr mj_JSONObject]] ;
         //兑换卡密
         [MineApi autobuyVipWithCard_pwd:secret sex_id:item.sex_id invite_code:item.invite_code Success:^(NSInteger status, NSString * _Nonnull msg) {
             RI.tradeNo = @"";
+            [LSVProgressHUD showInfoWithStatus:msg];
         } error:^(NSError *error, id resultObject) {
-            
+            [LSVProgressHUD showError:error];
         }];
     } error:^(NSError *error, id resultObject) {
-        
+        [LSVProgressHUD showError:error];
+
     }];
 }
 

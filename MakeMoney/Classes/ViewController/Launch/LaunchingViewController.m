@@ -114,8 +114,8 @@
 
     }];
     ViewRadius(weakSelf.jumpBtn, Adaptor_Value(20));
-#warning ceshi
-//    weakSelf.jumpBtn.hidden = YES;
+//#warning ceshi
+    weakSelf.jumpBtn.hidden = YES;
     
 }
 - (void)tap:(UITapGestureRecognizer *)gest{

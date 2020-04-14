@@ -12,12 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 /********版本升级 */
 @interface UpdateItem : NSObject
 /**"1、添加好友推广赚钱。\\n2、添加提现功能。\\n3、VIP专区添加限时免费。", */
-@property (nonatomic,strong)NSString *content;
-@property (nonatomic,strong)NSString *download_url;
+@property (nonatomic,strong)NSString *ios_content;
+@property (nonatomic,strong)NSString *ios_download_url;
 @property (nonatomic,strong)NSString *ID;
 @property (nonatomic,assign)NSInteger status;
-@property (nonatomic,strong)NSString *version_code;
-@property (nonatomic,strong)NSString *version_name;
+@property (nonatomic,strong)NSString *ios_version_code;
+@property (nonatomic,strong)NSString *ios_version_name;
 @end
 
 

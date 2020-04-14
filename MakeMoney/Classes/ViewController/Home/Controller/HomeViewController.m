@@ -26,6 +26,8 @@
 #import "ShortVideoViewController.h"
 #import "MineApi.h"
 #import "MineItem.h"
+#import "MyShareViewController.h"
+#import "RechargeCenterViewController.h"
 @interface HomeViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,SDCycleScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -57,12 +59,13 @@
     //如果是新用户 弹框限时免费
     if (RI.infoInitItem.is_new_user) {
         NSString *str;
-        if (RI.infoInitItem.new_user_free_day > 0) {
-            str = [NSString stringWithFormat:@"%ld天",(long)RI.infoInitItem.new_user_free_day];
-        }else{
-            str = [NSString stringWithFormat:@"%ld小时",(long)RI.infoInitItem.new_user_free_hour];
+//        if (RI.infoInitItem.new_user_free_day > 0) {
+//            str = [NSString stringWithFormat:@"%ld天",(long)RI.infoInitItem.new_user_free_day];
+//        }else{
+//
+//        }
+        str = [NSString stringWithFormat:@"%ld小时",(long)RI.infoInitItem.new_user_free_hour];
 
-        }
         [self showFreeMsg:lqStrings(@"临时体验卡") submsg:[NSString stringWithFormat:lqLocalized(@"新用户可以免费体验%@哦～", nil),str] firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:lqStrings(@"好的")];
     }
     
@@ -140,13 +143,20 @@
     __weak __typeof(self) weakSelf = self;
     [MineApi updateSuccess:^(UpdateItem * _Nonnull updateItem, NSString * _Nonnull msg) {
         weakSelf.updateItem = updateItem;
-        if (updateItem.status == 2) {//强制
-            [weakSelf showMsg:updateItem.content firstBtnTitle:lqStrings(@"") secBtnTitle:@"" singleBtnTitle:lqStrings(@"去升级")];
+        //获取当前vesion
+        NSDictionary *dict =  [NSBundle mainBundle].infoDictionary;
+        NSString *curVersion = dict[@"CFBundleShortVersionString"];
+        if ([LqToolKit compareVersion:curVersion toVersion:updateItem.ios_version_name] < 0) {
+            if (updateItem.status == 2) {//强制
+                [weakSelf showMsg:updateItem.ios_content firstBtnTitle:lqStrings(@"") secBtnTitle:@"" singleBtnTitle:lqStrings(@"去升级")];
 
-        }else{
-            [weakSelf showMsg:updateItem.content firstBtnTitle:lqStrings(@"暂时不升级") secBtnTitle:lqStrings(@"去升级") singleBtnTitle:nil];
+            }else{
+                [weakSelf showMsg:updateItem.ios_content firstBtnTitle:lqStrings(@"暂时不升级") secBtnTitle:lqStrings(@"去升级") singleBtnTitle:nil];
 
+            }
         }
+        
+
     } error:^(NSError *error, id resultObject) {
         
     }];
@@ -203,6 +213,7 @@
         headerView.headerViewTipBtnClickBlock = ^(UIButton * _Nonnull sender) {
             if (indexPath.section == 0) {
                 AllCategoryViewController *vc = [[AllCategoryViewController alloc] init];
+                vc.type = @"0";//短视频
                 [weakSelf.navigationController pushViewController:vc animated:YES];
             }else{
                 ListViewController *vc = [[ListViewController alloc] init];
@@ -221,6 +232,11 @@
             AdsItem *item = [_dataSource.ads safeObjectAtIndex:indexPath.section / 2];
             HomeSectionFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:NSStringFromClass([HomeSectionFooterView class]) forIndexPath:indexPath];
             [footerView refreshViewWith:item];
+            __weak __typeof(self) weakSelf = self;
+//            footerView.imageLoadSuccess = ^{
+////                [weakSelf.collectionView reloadData];
+//                [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
+//            };
             return footerView;
         }
     }
@@ -256,10 +272,10 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
     if (section % 2 == 0) {
         AdsItem *item = [_dataSource.ads safeObjectAtIndex:section / 2];
-//        CGSize size = [UIImage getImageSizeWithURL:item.img];//这个方法造成好卡
-//        CGFloat h = (LQScreemW - 20) / size.width * size.height;
-#warning todo  找个新方法
-        return  CGSizeMake(LQScreemW,Adaptor_Value(50));
+        if (item.width > 0 && item.height > 0) {
+            return CGSizeMake(LQScreemW, LQScreemW * item.height / item.width);
+        }
+        return  CGSizeMake(LQScreemW,100);
     }
     return CGSizeZero;
 }
@@ -301,11 +317,12 @@
         HotItem *item = [videoListItem.lists safeObjectAtIndex:indexPath.row];
 
         if (videoListItem.type == VideoType_ShortVideo) {//短视频
-            //判断是否还有观看次数
-            if (RI.infoInitItem.rest_free_times == 0) {
-                [self showMsg:lqStrings(@"今日观看次数已用完,明天再来吧,分享可获得无限观影哦") firstBtnTitle:lqStrings(@"分享") secBtnTitle:lqStrings(@"购买VIP") singleBtnTitle:@""];
-                return;
-            }
+#warning 暂时干掉
+//            //判断是否还有观看次数
+//            if (RI.infoInitItem.rest_free_times == 0) {
+//                [self showMsg:lqStrings(@"今日观看次数已用完,明天再来吧,分享可获得无限观影哦") firstBtnTitle:lqStrings(@"分享") secBtnTitle:lqStrings(@"购买VIP") singleBtnTitle:@""];
+//                return;
+//            }
 
             ShortVideoViewController *vc = [ShortVideoViewController controllerWith:item];
             [self.navigationController pushViewController:vc animated:YES];
@@ -339,6 +356,7 @@
         _infiniteView.boworrWidth = LQScreemW;
         _infiniteView.bannerImageViewContentMode = UIViewContentModeScaleToFill;
         _infiniteView.cellSpace = 0;
+        _infiniteView.autoScrollTimeInterval = 5;
         _infiniteView.showPageControl = YES;
     }
     return _infiniteView;
@@ -355,22 +373,26 @@
                 if ([str isEqualToString:lqStrings(@"暂时不升级")]) {
                     
                 }else{
-                    [LSVProgressHUD showInfoWithStatus:@"分享"];
+//                    [LSVProgressHUD showInfoWithStatus:@"分享"];
+                    MyShareViewController *vc = [[MyShareViewController alloc] init];
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                    
                     
                 }
             }else if (index == 2) {//购买VIP
                 [weakSelf.commonAlertView removeFromSuperview];
                 weakSelf.commonAlertView = nil;
                 if ([str isEqualToString:lqStrings(@"去升级")]) {
-                    NSURL *url = [NSURL URLWithString:weakSelf.updateItem.download_url];
+                    NSURL *url = [NSURL URLWithString:weakSelf.updateItem.ios_download_url];
                     [[UIApplication sharedApplication] openURL:url];
                 }else{
-                    [LSVProgressHUD showInfoWithStatus:@"购买VIP"];
-                    
+//                    [LSVProgressHUD showInfoWithStatus:@"购买VIP"];
+                    RechargeCenterViewController *vc = [[RechargeCenterViewController alloc] init];
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
                 }
             }else if (index == 3){
                 if ([str isEqualToString:lqStrings(@"去升级")]) {
-                    NSURL *url = [NSURL URLWithString:weakSelf.updateItem.download_url];
+                    NSURL *url = [NSURL URLWithString:weakSelf.updateItem.ios_download_url];
                     [[UIApplication sharedApplication] openURL:url];
                 }else if ([str isEqualToString:lqStrings(@"好的")]){
                     [weakSelf.commonAlertView removeFromSuperview];

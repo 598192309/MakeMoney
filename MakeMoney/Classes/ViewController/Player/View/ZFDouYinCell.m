@@ -147,7 +147,7 @@
     <string name=“video_tag104”>#动画</string>
     <string name=“video_tag105”>#欧美</string>
     <string name=“video_tag106”>#萌白酱</string>*/
-    self.tagLable.text = dataItem.video_tag;
+    self.tagLable.text = [LqToolKit shorVideoTagString:dataItem.video_tag];
 }
 
 
@@ -218,6 +218,8 @@
     if (!_likeBtn) {
         _likeBtn = [LPButton buttonWithType:UIButtonTypeCustom];
         [_likeBtn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+        [_likeBtn setImage:[UIImage imageNamed:@"icon_home_like_after"] forState:UIControlStateSelected];
+
         [_likeBtn setTitle:lqStrings(@" ") forState:UIControlStateNormal];
         [_likeBtn setTitleColor:TitleWhiteColor forState:UIControlStateNormal];
         _likeBtn.style =LPButtonStyleTop;

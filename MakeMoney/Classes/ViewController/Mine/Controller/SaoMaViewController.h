@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SaoMaViewController : BaseViewController
 @property (nonatomic,strong)NSString *navTitle;
+@property (nonatomic,strong)NSString *urlStr;
+
 @end
 
 NS_ASSUME_NONNULL_END

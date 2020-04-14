@@ -11,6 +11,8 @@
 #import "MineApi.h"
 #import "MineItem.h"
 #import "NoDataView.h"
+#import "AVPlayerController.h"
+#import "AVApi.h"
 
 @interface MyAVLoveViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -28,6 +30,7 @@
     [super viewDidLoad];
     
     [self configUI];
+    [self requestData];
 
 }
 
@@ -60,6 +63,7 @@
         self.noDataView = nil;
     }
 }
+
 #pragma mark - net
 - (void)requestData{
     __weak __typeof(self) weakSelf = self;
@@ -101,11 +105,23 @@
             
         }
     } error:^(NSError *error, id resultObject) {
-        [weakSelf.collectionView endHeaderRefreshing];
+        [weakSelf.collectionView endFooterRefreshing];
         [weakSelf.collectionView reloadData];
     }];
 }
+//收藏与取消
+- (void)loveWithId:(NSString *)ID sender:(UIButton *)sender{
+    __weak __typeof(self) weakSelf = self;
+    sender.userInteractionEnabled = NO;
+    [AVApi loveAVWithVedioId:ID Success:^(NSInteger status, NSString * _Nonnull msg) {
+        sender.userInteractionEnabled = YES;
+        [LSVProgressHUD showInfoWithStatus:msg];
+        [weakSelf requestData];//重新刷新UI
+    } error:^(NSError *error, id resultObject) {
+        sender.userInteractionEnabled = YES;
 
+    }];
+}
 #pragma mark - UICollectionViewDataSource
 //设置容器中有多少个组
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -122,7 +138,11 @@
     //获取cell视图，内部通过去缓存池中取，如果缓存池中没有，就自动创建一个新的cell
     MyLoveCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([MyLoveCell class]) forIndexPath:indexPath];
     HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
-    [cell refreshWithItem:item];
+    [cell refreshWithItem:item videoType:VideoType_AV];
+    __weak __typeof(self) weakSelf = self;
+    cell.loveBtnClickBlock = ^(UIButton * _Nonnull sender) {
+        [weakSelf loveWithId:item.ID sender:sender];
+    };
     return cell;
 }
 
@@ -130,7 +150,7 @@
 //设置各个方块的大小尺寸
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat row = 2.0;
-    CGFloat w = (LQScreemW - 2 * Adaptor_Value(10) ) / row;
+    CGFloat w = (LQScreemW - 2 * 10 ) / row;
 //    CGFloat h = [self caculateCellHeight:indexPath];
     CGFloat h = Adaptor_Value(190);
     return CGSizeMake(w , h);
@@ -158,14 +178,18 @@
 //}
 //设置每一组的上下左右间距
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(0, Adaptor_Value(10), 0, Adaptor_Value(10));
+    return UIEdgeInsetsMake(0, 10, 0, 10);
 
 }
 
 #pragma mark - UICollectionViewDelegate
 //方块被选中会调用
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"点击选择了第%ld组，第%ld个方块",indexPath.section,indexPath.row);
+//    NSLog(@"点击选择了第%ld组，第%ld个方块",indexPath.section,indexPath.row);
+    HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
+
+    AVPlayerController *vc = [AVPlayerController controllerWith:item];
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 //方块取消选中会调用
@@ -183,7 +207,7 @@
         //设置顶部视图和底部视图的大小，当滚动方向为垂直时，设置宽度无效，当滚动方向为水平时，设置高度无效
 //        layout.headerReferenceSize = CGSizeMake(LQScreemW, Adaptor_Value(20));
         
-        layout.minimumLineSpacing = Adaptor_Value(5);
+        layout.minimumLineSpacing = 0;
         layout.minimumInteritemSpacing = 0;
         //创建容器视图
         _collectionView=[[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];

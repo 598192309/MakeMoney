@@ -22,6 +22,8 @@
 @property (nonatomic,strong)UITableView *customTableView;
 @property (nonatomic,assign)NSInteger pageIndex;
 @property (nonatomic,strong)NSMutableArray *dataArr;
+@property (nonatomic,assign)NSInteger selectedIndex;
+
 @property (nonatomic,strong)UIImageView *backImageV;
 @property (nonatomic,strong)RechargeCenterCustomView *rechargeCenterCustomView;
 
@@ -31,7 +33,12 @@
 @property (nonatomic,strong)UILabel *bottomTipLable2;
 @property (nonatomic,strong)UILabel *bottomTipLable3;
 @property (nonatomic,strong)CommonAlertView *commonAlertView;
+@property (nonatomic,strong)CommonAlertView *tipAlertView;
+
 @property (nonatomic,strong)NSString *goodID;
+
+@property (nonatomic,assign)BOOL clickPayed;
+
 @end
 
 @implementation RechargeCenterViewController
@@ -41,6 +48,13 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - life
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (self.notFirstAppear && self.clickPayed) {
+        self.clickPayed = NO;
+        [self showTipMsg:lqStrings(@"查询支付结果") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"若支付成功后，未能激活VIP，且订单状态为未支付，请在上方输入订单号手动激活") subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"好的"];
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -55,6 +69,7 @@
     }
     [self requestData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notify:) name:KNotification_PayClick object:nil];
+    [self showTipMsg:lqStrings(@"温馨提示") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"请注意选择VIP类型哦~") subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"好的"];
 }
 - (void)dealloc{
     LQLog(@"dealloc -------%@",NSStringFromClass([self class]));
@@ -116,12 +131,21 @@
         make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
     }];
 }
+
+- (void)showTipMsg:(NSString *)msg msgFont:(UIFont *)msgFont msgColor:(UIColor *)msgColor subTitle:(NSString *)subTitle subFont:(UIFont *)subFont subColor:(UIColor *)subColor firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singleBtnTitle:(NSString *)singleBtnTitle{
+    [self.tipAlertView refreshUIWithTitle:msg titlefont:msgFont titleColor:msgColor subtitle:subTitle subTitleFont:subFont subtitleColor:subColor firstBtnTitle:firstBtnTitle secBtnTitle:secBtnTitle singleBtnTitle:singleBtnTitle];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.tipAlertView];
+    [self.tipAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
+    }];
+}
 #pragma mark - notify
 //点击了支付方式
 - (void)notify:(NSNotification *)noti{
     NSDictionary *dict = noti.userInfo;
     PayWayItem *item = [dict safeObjectForKey:@"info"];
-    [self goPayWithInviteChannelId:item.channel_id goods_id:self.goodID sex_id:RI.infoInitItem.sex_id pay_type:item.type payName:item.name];
+    PayCenterInfotem *infoItem = [self.dataArr safeObjectAtIndex:self.selectedIndex];
+    [self goPayWithInviteChannelId:item.channel_id goods_id:self.goodID sex_id:RI.infoInitItem.sex_id pay_type:IntTranslateStr(infoItem.tag) payName:item.name tiaoZhuanType:item.type];
 }
 #pragma mark - act
 - (void)rechargeCenterCustomViewAct{
@@ -167,18 +191,19 @@
     }];
 }
 
-//支付 pay_type 1     跳转到webview加载 data pay_type： 3或4    跳转到新的扫码支付界面
+//支付 tiaoZhuanType 1     跳转到webview加载 data pay_type： 3或4    跳转到新的扫码支付界面
 
-- (void)goPayWithInviteChannelId:(NSString *)channel_id goods_id:(NSString *)goods_id sex_id:(NSString *)sex_id pay_type:(NSString *)pay_type payName:(NSString *)payName{
-    
+- (void)goPayWithInviteChannelId:(NSString *)channel_id goods_id:(NSString *)goods_id sex_id:(NSString *)sex_id pay_type:(NSString *)pay_type payName:(NSString *)payName tiaoZhuanType:(NSString *)tiaoZhuanType{
+
     [self showMsg:lqStrings(@"准备支付，情稍后...") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"支付成功后，请返回当前界面，或手动输入订单号查询支付状态") subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@""];
     [LSVProgressHUD show];
     __weak __typeof(self) weakSelf = self;
     [MineApi goPayWithInviteChannelId:channel_id goods_id:goods_id sex_id:sex_id pay_type:pay_type Success:^(NSInteger status, NSString * _Nonnull msg, PayDetailItem* _Nonnull payDetailItem) {
         [weakSelf.commonAlertView removeFromSuperview];
         weakSelf.commonAlertView = nil;
+        weakSelf.clickPayed = YES;
         
-        if ([pay_type isEqualToString:@"1"]) {//跳转到webview加载
+        if ([tiaoZhuanType isEqualToString:@"1"]) {//跳转到webview加载
 //            BaseWebViewController *vc = [[BaseWebViewController alloc] init];
             WebViewViewController *vc = [[WebViewViewController alloc] init];
             NSString *html = payDetailItem.data;
@@ -190,6 +215,7 @@
             SaoMaViewController *vc = [[SaoMaViewController alloc] init];
 
             vc.navTitle =[NSString stringWithFormat:lqLocalized(@"%@支付", nil),payName];
+            vc.urlStr = payDetailItem.data;
             
             [weakSelf.navigationController pushViewController:vc animated:YES];
 
@@ -235,10 +261,11 @@
     RechargeCenterCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([RechargeCenterCell class]) forIndexPath:indexPath];
     PayCenterInfotem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
     [cell refreshUIWithItem:item];
-    self.goodID = item.goods_id;
     __weak __typeof(self) weakSelf = self;
     cell.rechargeCenterBuyBtnClickBlock = ^(UIButton * _Nonnull sender) {
 //        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
+        weakSelf.selectedIndex = indexPath.row;
+        weakSelf.goodID = item.goods_id;
         //支付方式弹框
         [weakSelf requestPayWays:sender];
     };
@@ -383,5 +410,17 @@
         };
     }
     return _commonAlertView;
+}
+
+- (CommonAlertView *)tipAlertView{
+    if (!_tipAlertView) {
+        _tipAlertView = [CommonAlertView new];
+        __weak __typeof(self) weakSelf = self;
+        _tipAlertView.commonAlertViewBlock = ^(NSInteger index, NSString * _Nonnull str) {
+            [weakSelf.tipAlertView removeFromSuperview];
+            weakSelf.tipAlertView = nil;
+        };
+    }
+    return _tipAlertView;
 }
 @end

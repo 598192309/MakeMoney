@@ -6,13 +6,15 @@
 //  Copyright © 2020 lqq. All rights reserved.
 //  支付扫码界面
 
+
+
 #import "SaoMaViewController.h"
 #import "SaoMaView.h"
+#import<AssetsLibrary/AssetsLibrary.h>
 
 @interface SaoMaViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
 @property (nonatomic,strong)SaoMaView *saoMaView;
-
 
 @end
 
@@ -62,15 +64,52 @@
 }
 - (void)setUpNav{
     [self addNavigationView];
-    self.navigationView.backgroundColor = [UIColor clearColor];
+    self.navigationTextLabel.text = self.navTitle;
 }
 #pragma mark - act
 - (void)saoMaViewAct{
     __weak __typeof(self) weakSelf = self;
-   
+    self.saoMaView.saveBtnClickBlock = ^(UIButton * _Nonnull sender, UIImageView * _Nonnull erweimaImageV) {
+        [weakSelf saveImageToDiskWithImage:erweimaImageV.image];
+
+    };
+    
+    self.saoMaView.copyBtnClickBlock = ^(UIButton * _Nonnull sender) {
+        NSString *erweimaStr = weakSelf.urlStr;
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = erweimaStr;
+        [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"复制成功", nil)];
+    };
 }
 
+#pragma mark - 保存图片
+- (void)saveImageToDiskWithImage:(UIImage *)image
+{
+    __weak __typeof(self) weakSelf = self;
+    UIImageWriteToSavedPhotosAlbum(image, weakSelf, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
 
+    
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    
+    
+    ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
+    
+    if(author == ALAuthorizationStatusDenied ){
+        //无权限
+        [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"图片保存失败,请前往设置开启相册权限", nil)];
+        return;
+    }
+    
+    if (error) {
+        [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"保存失败，请查看你的相册权限是否开启", nil)];
+    }else{
+        [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"图片已经保存至相册", nil)];
+ 
+    }
+}
 #pragma mark -  UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 0;
@@ -125,6 +164,8 @@
 - (SaoMaView *)saoMaView{
     if (!_saoMaView) {
         _saoMaView = [SaoMaView new];
+        _saoMaView.urlStr = self.urlStr;
+        _saoMaView.navTitle = self.navTitle;
     }
     return _saoMaView;
 }

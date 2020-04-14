@@ -8,6 +8,7 @@
 
 #import "MyLoveCell.h"
 #import "MineItem.h"
+#import "AblumItem.h"
 @interface MyLoveCell()
 @property (nonatomic,strong) UIView * cellBackgroundView;
 @property (strong, nonatomic)  UILabel *titleLabel;
@@ -45,7 +46,7 @@
 
 
 
-- (void)refreshWithItem:(HotItem *)item {
+- (void)refreshWithItem:(HotItem *)item videoType:(VideoType)type{
     self.titleLable.text = item.title;
 
     self.timeLable.text = [item.create_time lq_getTimeFromTimestampWithFormatter:@"yyyy-MM-dd"];
@@ -63,11 +64,17 @@
       */
     self.item = item;
      self.imageV.image = nil;
+    NSString *typeStr = @"v_imgs";
+    NSString *titleStr = @"vId";
+    if (type == VideoType_AV) {
+        typeStr = @"a_imgs";
+        titleStr = @"aId";
+    }
     __weak __typeof(self) weakSelf = self;
     if (!item) {
         return;
     }
-     [HomeApi downImageWithType:@"qm_imgs" paramTitle:@"qmId" ID:item.ID key:@"tongcheng" Success:^(UIImage * _Nonnull img,NSString *ID) {
+     [HomeApi downImageWithType:typeStr paramTitle:titleStr ID:item.ID key:item.video_url Success:^(UIImage * _Nonnull img,NSString *ID) {
          if ([weakSelf.item.ID isEqualToString:ID]) {
              weakSelf.imageV.image = img;
          }
@@ -76,8 +83,15 @@
      }];
     
 }
-#pragma mark - act
 
+
+
+#pragma mark - act
+- (void)loveBtnClick:(UIButton *)sender{
+    if (self.loveBtnClickBlock) {
+        self.loveBtnClickBlock(sender);
+    }
+}
 #pragma mark - lazy
 - (UIView *)cellBackgroundView{
     if (!_cellBackgroundView) {
@@ -111,6 +125,7 @@
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(25));
         }];
         _loveBtn.touchSize = CGSizeMake(Adaptor_Value(50), Adaptor_Value(50));
+        _loveBtn.selected = YES;
         
         UIView *loveBtnBackView = [UIView new];
         loveBtnBackView.backgroundColor = [UIColor lq_colorWithHexString:@"ffffff" alpha:0.3];
@@ -122,7 +137,7 @@
         ViewRadius(loveBtnBackView, Adaptor_Value(20));
         
 
-        _timeLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        _timeLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(10) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_timeLable];
         [_timeLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(Adaptor_Value(Adaptor_Value(30)));
@@ -132,16 +147,16 @@
         
         _seeTimesBtn = [[EnlargeTouchSizeButton alloc] init];
 //        [_seeTimesBtn addTarget:self action:@selector(seeTimesBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_seeTimesBtn setImage:[UIImage imageNamed:@"hot"] forState:UIControlStateNormal];
-        _seeTimesBtn.titleLabel.font = AdaptedFontSize(12);
+        [_seeTimesBtn setImage:[UIImage imageNamed:@"icon_av_hot_white"] forState:UIControlStateNormal];
+        _seeTimesBtn.titleLabel.font = AdaptedFontSize(10);
         [contentV addSubview:_seeTimesBtn];
         [_seeTimesBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(Adaptor_Value(Adaptor_Value(30)));
+            make.height.mas_equalTo(Adaptor_Value(Adaptor_Value(20)));
             make.centerY.mas_equalTo(weakSelf.timeLable);
-            make.left.mas_equalTo(weakSelf.timeLable.mas_right).offset(Adaptor_Value(20));
+            make.centerX.mas_equalTo(contentV);
         }];
         
-        _vedioTimesLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentRight numberofLines:0];
+        _vedioTimesLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(10) lableSize:CGRectZero textAliment:NSTextAlignmentRight numberofLines:0];
         [contentV addSubview:_vedioTimesLable];
         [_vedioTimesLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(Adaptor_Value(Adaptor_Value(30)));
@@ -167,7 +182,7 @@
             make.bottom.mas_equalTo(contentV);
         }];
         
-        _titleLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleBlackColor fontSize:AdaptedFontSize(16) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:2];
+        _titleLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleBlackColor fontSize:AdaptedFontSize(11) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:2];
         [titleBackWhiteView addSubview:_titleLable];
         [_titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));

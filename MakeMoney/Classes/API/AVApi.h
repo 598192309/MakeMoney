@@ -28,6 +28,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /********************短视频的取消*********************/
 + (NetworkTask *)cancleLoveVedioWithVedioId:(NSString *)video_id Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
+
+/********************AV的收藏*********************/
++ (NetworkTask *)loveAVWithVedioId:(NSString *)video_id Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

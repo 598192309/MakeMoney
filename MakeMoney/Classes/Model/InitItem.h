@@ -24,7 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *ablum_vip_end_time;
 
 
-@property (nonatomic,assign)NSInteger new_user_free_day;
 @property (nonatomic,strong)NSString *user_id;
 @property (nonatomic,assign)NSInteger is_new_user;
 @property (nonatomic,assign)NSInteger rest_free_times;
@@ -34,6 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign)NSInteger status;
 @property (nonatomic,assign)NSInteger max_free_times;
 @property (nonatomic,strong)NSString *username;
+@property (nonatomic,assign)NSInteger new_user_free_day;
+
 @property (nonatomic,assign)NSInteger new_user_free_hour;
 
 @end
@@ -56,6 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong)NSString *potato_name;
 @property (nonatomic,strong)NSString *potato_url;
+@property (nonatomic,strong)NSString *album_url;
 
 @end
 NS_ASSUME_NONNULL_END

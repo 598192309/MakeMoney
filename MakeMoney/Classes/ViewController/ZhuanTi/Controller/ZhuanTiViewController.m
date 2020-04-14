@@ -86,7 +86,7 @@
         }
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
-        [weakSelf.customTableView endHeaderRefreshing];
+        [weakSelf.customTableView endFooterRefreshing];
         
 
     }];
@@ -113,7 +113,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return Adaptor_Value(180);
+    return Adaptor_Value(160);
 }
 
 

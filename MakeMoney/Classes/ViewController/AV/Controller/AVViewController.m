@@ -12,11 +12,15 @@
 #import "AVApi.h"
 #import "HomeItem.h"
 #import "AVPlayerController.h"
+#import "AVHeaderAdsImageView.h"
+
 @interface AVViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
 @property (nonatomic,assign)NSInteger pageIndex;
 @property (nonatomic,strong)NSMutableArray *dataArr;
-@property (nonatomic,strong)AdsItem *adsItem;
+@property (nonatomic,strong)NSArray *adsItemArr;
+
+@property (nonatomic,assign)NSInteger selectedAdsIndex;//点击广告index
 @end
 
 @implementation AVViewController
@@ -46,23 +50,7 @@
 }
 
 
-#pragma mark - act
--(void)adsTap:(UITapGestureRecognizer *)gest{
-    if ([self.adsItem.url hasPrefix:@"http"]) {
-        UIApplication *application = [UIApplication sharedApplication];
-        if ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
-            if (@available(iOS 10.0, *)) {
-                [application openURL:[NSURL URLWithString:self.adsItem.url] options:@{} completionHandler:nil];
-            } else {
-                [application openURL:[NSURL URLWithString:self.adsItem.url]];
-            }
-        }else{
-            [application openURL:[NSURL URLWithString:self.adsItem.url]];
 
-        }
-
-    }
-}
 
 #pragma mark -  net
 -(void)requestData{
@@ -105,7 +93,7 @@
         }
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
-        [weakSelf.customTableView endHeaderRefreshing];
+        [weakSelf.customTableView endFooterRefreshing];
 
     }];
 }
@@ -114,68 +102,51 @@
 - (void)reqestTopAds{
     __weak __typeof(self) weakSelf = self;
     [HomeApi requestAdWithType:@"3" Success:^(NSArray * _Nonnull adsItemArr, NSString * _Nonnull msg) {
-        AdsItem *item = adsItemArr.firstObject;
-        weakSelf.adsItem = item;
+        weakSelf.adsItemArr = adsItemArr;
         [weakSelf.customTableView reloadData];
     } error:^(NSError *error, id resultObject) {
         
     }];
 }
 
-//收藏
+//收藏与取消
 - (void)loveWithId:(NSString *)ID sender:(UIButton *)sender{
     __weak __typeof(self) weakSelf = self;
     sender.userInteractionEnabled = NO;
-    [AVApi loveVedioWithVedioId:ID Success:^(NSInteger status, NSString * _Nonnull msg) {
+    [AVApi loveAVWithVedioId:ID Success:^(NSInteger status, NSString * _Nonnull msg) {
         sender.userInteractionEnabled = YES;
         [LSVProgressHUD showInfoWithStatus:msg];
-        sender.selected = !sender.selected;
     } error:^(NSError *error, id resultObject) {
         sender.userInteractionEnabled = YES;
 
     }];
 }
 
-//取消收藏
-- (void)cancleLoveWithID:(NSString *)ID sender:(UIButton *)sender{
-    __weak __typeof(self) weakSelf = self;
-    sender.userInteractionEnabled = NO;
 
-    [AVApi cancleLoveVedioWithVedioId:ID Success:^(NSInteger status, NSString * _Nonnull msg) {
-        sender.userInteractionEnabled = YES;
-        [LSVProgressHUD showInfoWithStatus:msg];
-        sender.selected = !sender.selected;
-
-    } error:^(NSError *error, id resultObject) {
-        sender.userInteractionEnabled = YES;
-
-    }];
-}
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+//    return 1;
+    return self.dataArr.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataArr.count;
+//    return self.dataArr.count;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AVCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AVCell class]) ];
-    HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
+    HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.section];
     [cell refreshWithItem: item];
     __weak __typeof(self) weakSelf = self;
     cell.loveBlock = ^(UIButton * _Nonnull sender) {
-        if (sender.selected) {
-            [weakSelf cancleLoveWithID:item.ID sender:sender];
-        }else{
-            [weakSelf loveWithId:item.ID sender:sender];
-        }
+        [weakSelf loveWithId:item.ID sender:sender];
+
     };
     return cell;
 
@@ -186,31 +157,32 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 //    [LSVProgressHUD showInfoWithStatus:@"点击"];
-    HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
+    HotItem *item = [self.dataArr safeObjectAtIndex:indexPath.section];
 
     AVPlayerController *vc = [AVPlayerController controllerWith:item];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIImageView *imageV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, LQScreemW, Adaptor_Value(80))];
-    [imageV sd_setImageWithURL:[NSURL URLWithString:self.adsItem.img]];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(adsTap:)];
-    imageV.userInteractionEnabled = YES;
-    [imageV addGestureRecognizer:tap];
+    AVHeaderAdsImageView *imageV = [[AVHeaderAdsImageView alloc] init];
+    AdsItem *item = [self.adsItemArr safeObjectAtIndex:section / 8];
+    __weak __typeof(self) weakSelf = self;
+    [imageV configUIWithItem:item finishi:^{
+        [weakSelf.customTableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
+    }];
     return imageV;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (self.adsItem.img.length > 0) {
-//        return Adaptor_Value(80);
-        //根据url 获取图片尺寸
-        CGSize size = [UIImage getImageSizeWithURL:self.adsItem.img];
-        
-        CGFloat h = LQScreemW / size.width * size.height;
-        return h;
+    if (section % 8 == 0) {
+        AdsItem *item = [self.adsItemArr safeObjectAtIndex:section / 8];
+        if (item.width > 0 && item) {
+            return LQScreemW * item.height / item.width;
+        }
     }
+    
     return 0.01;
+
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{

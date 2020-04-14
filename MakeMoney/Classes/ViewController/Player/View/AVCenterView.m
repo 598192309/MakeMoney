@@ -16,8 +16,9 @@
 @property (strong, nonatomic)  UILabel *seeCountsLable;
 @property (strong, nonatomic)  UILabel *timeLable;
 @property (strong, nonatomic)  UILabel *tipLable;
-
+@property (nonatomic,strong)EnlargeTouchSizeButton *loveBtn;
 @property (nonatomic,strong)AdsItem *adsItem;
+
 @end
 @implementation AVCenterView
 #pragma mark - 生命周期
@@ -43,10 +44,6 @@
 #pragma mark - 刷新ui
 - (void)configUIWithItem:(HotItem *)item finishi:(void(^)(void))finishBlock{
 
-//    //根据url 获取图片尺寸
-//    CGSize size = [UIImage getImageSizeWithURL:self.adsItem.img];
-//
-//    CGFloat h = LQScreemW / size.width * size.height;
     self.timeLable.text = [item.create_time lq_getTimeFromTimestampWithFormatter:@"yyyy-MM-dd"];
     self.seeCountsLable.text = [NSString stringWithFormat:lqLocalized(@"%@次播放", nil),item.play];
     self.titleLable.text = item.title;
@@ -56,18 +53,36 @@
 - (void)configAds:(AdsItem *)item finishi:(void(^)(void))finishBlock{
     self.adsItem = item;
     //根据url 获取图片尺寸
-    CGSize size = [UIImage getImageSizeWithURL:item.img];
-    CGFloat h = LQScreemW / size.width * size.height;
-    [self.adsImageV sd_setImageWithURL:[NSURL URLWithString:item.img]];
-    [self.adsImageV mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(h);
+//    CGSize size = [UIImage getImageSizeWithURL:item.img];
+    
+//    CGFloat h = LQScreemW / size.width * size.height;
+//    [self.adsImageV sd_setImageWithURL:[NSURL URLWithString:item.img]];
+//    [self.adsImageV mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.height.mas_equalTo(h);
+//    }];
+    __weak __typeof(self) weakSelf = self;
+    [self.adsImageV sd_setImageWithURL:[NSURL URLWithString:item.img] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (image) {
+            CGFloat h = LQScreemW /image.size.width * image.size.height;
+            [weakSelf.adsImageV mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(h);
+            }];
+            finishBlock();
+
+        }
     }];
-    finishBlock();
 }
 
 #pragma mark - act
 - (void)adsTap:(UITapGestureRecognizer *)gest{
     [LqToolKit jumpAdventWithItem:self.adsItem];
+}
+
+//收藏
+- (void)loveBtnClick:(UIButton *)sender{
+    if (self.loveBtn) {
+        self.loveBlock(sender);
+    }
 }
 #pragma mark - lazy
 -(UIView *)header{
@@ -88,7 +103,7 @@
         [_adsImageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(Adaptor_Value(10));
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
-           make.top.mas_equalTo(TopAdaptor_Value(10));
+           make.top.mas_equalTo(Adaptor_Value(10));
             make.height.mas_equalTo(0);
         }];
         ViewRadius(_adsImageV, 5);
@@ -112,6 +127,7 @@
          [_seeCountsLable mas_makeConstraints:^(MASConstraintMaker *make) {
              make.left.mas_equalTo(weakSelf.titleLable);
              make.top.mas_equalTo(weakSelf.titleLable.mas_bottom).offset(Adaptor_Value(10));
+             make.height.mas_equalTo(Adaptor_Value(20));
          }];
        
 
@@ -127,6 +143,29 @@
             make.top.mas_equalTo(weakSelf.seeCountsLable.mas_bottom).offset(Adaptor_Value(20));
             make.bottom.mas_equalTo(contentV).offset(-Adaptor_Value(25));
         }];
+        
+        
+        _loveBtn = [[EnlargeTouchSizeButton alloc] init];
+        [_loveBtn addTarget:self action:@selector(loveBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_loveBtn setImage:[UIImage imageNamed:@"icon_home_like_before"] forState:UIControlStateNormal];
+        [_loveBtn setImage:[UIImage imageNamed:@"icon_home_like_after"] forState:UIControlStateSelected];
+        [contentV addSubview:_loveBtn];
+        [_loveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.width.mas_equalTo(Adaptor_Value(20));
+            make.centerY.mas_equalTo(weakSelf.tipLable);
+            make.right.mas_equalTo(contentV).offset(-Adaptor_Value(25));
+        }];
+        _loveBtn.touchSize = CGSizeMake(Adaptor_Value(50), Adaptor_Value(50));
+        _loveBtn.selected = YES;//现在默认选择 现在没有显示 选中和不选中的判断
+
+        UIView *loveBtnBackView = [UIView new];
+        loveBtnBackView.backgroundColor = [UIColor lq_colorWithHexString:@"ffffff" alpha:0.3];
+        [contentV insertSubview:loveBtnBackView belowSubview:_loveBtn];
+        [loveBtnBackView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.width.mas_equalTo(Adaptor_Value(40));
+            make.center.mas_equalTo(weakSelf.loveBtn);
+        }];
+        ViewRadius(loveBtnBackView, Adaptor_Value(20));
 
 
     }

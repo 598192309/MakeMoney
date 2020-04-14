@@ -113,6 +113,23 @@ NS_ASSUME_NONNULL_BEGIN
 /// 广告i跳转
 /// @param item 广告
 + (void)jumpAdventWithItem:(AdsItem *)item;
+
+
+/// 短视频标签
+/// @param videoTag videoTag
++ (NSString *)shorVideoTagString:(NSString *)videoTag;
+
+
+/// AV标签
+/// @param videoTag videoTag
++ (NSString *)avTagString:(NSString *)videoTag;
+
+
+/// 根据版本号判断是否需要升级
+/// @param version1 version1 description
+/// @param version2 version2 description
++ (NSInteger)compareVersion:(NSString *)version1 toVersion:(NSString *)version2;
+
 @end
 
 NS_ASSUME_NONNULL_END

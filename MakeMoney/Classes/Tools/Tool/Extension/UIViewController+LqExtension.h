@@ -32,6 +32,10 @@ typedef void(^PopBlock)(UIBarButtonItem *backItem);
 
 + (UIViewController*)topViewController;
 +(UIViewController*)topViewControllerWithRootViewController:(UIViewController*)rootViewController;
+
+
+- (void)popSelfDelayTime:(CGFloat)delayTime;
+- (void)popControllers:(NSArray *)controllers delayTime:(CGFloat)delayTime;
 @end
 
 NS_ASSUME_NONNULL_END

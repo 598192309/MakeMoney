@@ -67,13 +67,23 @@
         [self.imageAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.mas_equalTo(weakSelf);
         }];
-        [self.imageAlertViewImageV sd_setImageWithURL:[NSURL URLWithString:item.img]];
-        
-        CGSize size = [UIImage getImageSizeWithURL:[NSURL URLWithString:item.img]];
-        CGFloat h = Adaptor_Value(250) /size.width * size.height;
-        [self.imageAlertViewImageV mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(h);
+//        [self.imageAlertViewImageV sd_setImageWithURL:[NSURL URLWithString:item.img]];
+//
+//        CGSize size = [UIImage getImageSizeWithURL:[NSURL URLWithString:item.img]];
+//        CGFloat h = Adaptor_Value(250) /size.width * size.height;
+//        [self.imageAlertViewImageV mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.height.mas_equalTo(h);
+//        }];
+        [self.imageAlertViewImageV sd_setImageWithURL:[NSURL URLWithString:item.img] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if (image) {
+                CGFloat h = Adaptor_Value(250) /image.size.width * image.size.height;
+                [weakSelf.imageAlertViewImageV mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.height.mas_equalTo(h);
+                }];
+                
+            }
         }];
+
         
     }
 
