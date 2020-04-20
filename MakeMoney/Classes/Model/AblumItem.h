@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign)NSInteger love;
 @property (nonatomic,strong)NSString * see;
 @property (nonatomic,assign)NSInteger status;
+@property (nonatomic,strong)NSString *gold;
 
 @end
 

@@ -306,14 +306,13 @@
         title = lqStrings(@"我的收藏");
         subTitle = nil;
     }else if (indexPath.section == 2){
-//        if (indexPath.row == 0) {
-//            title = lqStrings(@"绑定手机号");
-//            subTitle = RI.infoInitItem.mobile.length > 0 ? RI.infoInitItem.mobile : lqStrings(@"未绑定");
-//        }else
         if (indexPath.row == 0) {
+            title = lqStrings(@"绑定手机号");
+            subTitle = RI.infoInitItem.mobile.length > 0 ? RI.infoInitItem.mobile : lqStrings(@"未绑定");
+        }else if (indexPath.row == 1) {
             title = lqStrings(@"我的邀请人");
             subTitle = self.yaoqingren.length == 0 ? lqStrings(@"未绑定") :self.yaoqingren;
-        }else  if (indexPath.row == 1) {
+        }else  if (indexPath.row == 2) {
             title = lqStrings(@"安全码设置");
             subTitle = lqStrings(@"");
         }
@@ -382,21 +381,19 @@
 
         
     }else if (indexPath.section == 2){
-//        if (indexPath.row == 0) {//绑定手机号
-//            if (RI.infoInitItem.mobile.length == 0) {
-//                BindMobileFirstStepViewController *vc = [[BindMobileFirstStepViewController alloc] init];
-//                [self.navigationController pushViewController:vc animated:YES];
-//            }
-//        }else
-            
-        if (indexPath.row == 0) {//我的邀请人
+        if (indexPath.row == 0) {//绑定手机号
+            if (RI.infoInitItem.mobile.length == 0) {
+                BindMobileFirstStepViewController *vc = [[BindMobileFirstStepViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }else if (indexPath.row == 1) {//我的邀请人
             [[UIApplication sharedApplication].keyWindow addSubview:self.vipExchangeAlertView];
             [self.vipExchangeAlertView refreshContent:lqStrings(@"请填写邀请码")];
             [self.vipExchangeAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
             }];
            
-        }else  if (indexPath.row == 1) {//安全码设置
+        }else  if (indexPath.row == 2) {//安全码设置
             SecurityCodeViewController *vc = [[SecurityCodeViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
             

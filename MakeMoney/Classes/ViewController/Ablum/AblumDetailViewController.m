@@ -107,7 +107,7 @@
 
 - (void)buyBtnClick:(UIButton *)sender{
     //购买
-    [self showMsg:lqStrings(@"购买写真可以永久观看，本套写真需要花费五金币购买喔~") firstBtnTitle:lqStrings(@"再想想") secBtnTitle:lqStrings(@"好的") singleBtnTitle:nil];
+    [self showMsg:[NSString stringWithFormat:@"购买写真可以永久观看，本套写真需要花费%@金币购买喔~",self.ablumData.gold] firstBtnTitle:lqStrings(@"再想想") secBtnTitle:lqStrings(@"好的") singleBtnTitle:nil];
 }
 
 - (void)showMsg:(NSString *)msg firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singleBtnTitle:(NSString *)singleBtnTitle{
@@ -130,9 +130,20 @@
 }
 //用金币购买
 - (void)buyWithGold{
-//    [LSVProgressHUD show];
+    [LSVProgressHUD show];
+    __weak __typeof(self) weakSelf = self;
+    [AblumApi buyAblumWithGoldWithAblumId:self.ablumData.album_id gold:self.ablumData.gold Success:^(NSInteger status, NSString * _Nonnull msg) {
+        if ([msg isEqualToString:@"金币不足"]) {
+            [weakSelf showMsg:msg firstBtnTitle:lqStrings(@"取消") secBtnTitle:lqStrings(@"购买") singleBtnTitle:nil];
+            [LSVProgressHUD dismiss];
+        }else{
+            [LSVProgressHUD showInfoWithStatus:msg];
+        }
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+
+    }];
     
-    [self showMsg:lqStrings(@"金币不足") firstBtnTitle:lqStrings(@"取消") secBtnTitle:lqStrings(@"购买") singleBtnTitle:nil];
 
 }
 #pragma mark -  UITableViewDataSource
