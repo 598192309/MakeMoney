@@ -29,6 +29,9 @@
 		096C7FC7240C0F6D00914E20 /* AdsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C7FC6240C0F6D00914E20 /* AdsHeaderView.m */; };
 		09830AF7240819A700FBF2C7 /* UserData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 09830AF6240819A700FBF2C7 /* UserData.plist */; };
 		09830AFA2408207F00FBF2C7 /* AVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09830AF92408207F00FBF2C7 /* AVCell.m */; };
+		09A6B743244DCBDC00C8BC9C /* UIButton+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A6B740244DCBDC00C8BC9C /* UIButton+Layout.m */; };
+		09A6B744244DCBDC00C8BC9C /* HSFTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A6B742244DCBDC00C8BC9C /* HSFTabBar.m */; };
+		09A6B747244DCBEC00C8BC9C /* HSFTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A6B745244DCBEB00C8BC9C /* HSFTabBarController.m */; };
 		09C51AE724135AC400705DFC /* LqSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C51AE524135AC300705DFC /* LqSegmentControl.m */; };
 		09C51AEB24135B5800705DFC /* LqScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C51AE924135B5800705DFC /* LqScrollView.m */; };
 		09C51AEF2413927C00705DFC /* AblumDetailNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C51AED2413927C00705DFC /* AblumDetailNewCell.m */; };
@@ -330,6 +333,12 @@
 		09830AF6240819A700FBF2C7 /* UserData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = UserData.plist; sourceTree = "<group>"; };
 		09830AF82408207F00FBF2C7 /* AVCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVCell.h; sourceTree = "<group>"; };
 		09830AF92408207F00FBF2C7 /* AVCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVCell.m; sourceTree = "<group>"; };
+		09A6B73F244DCBDC00C8BC9C /* HSFTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSFTabBar.h; sourceTree = "<group>"; };
+		09A6B740244DCBDC00C8BC9C /* UIButton+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Layout.m"; sourceTree = "<group>"; };
+		09A6B741244DCBDC00C8BC9C /* UIButton+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Layout.h"; sourceTree = "<group>"; };
+		09A6B742244DCBDC00C8BC9C /* HSFTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSFTabBar.m; sourceTree = "<group>"; };
+		09A6B745244DCBEB00C8BC9C /* HSFTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSFTabBarController.m; sourceTree = "<group>"; };
+		09A6B746244DCBEC00C8BC9C /* HSFTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSFTabBarController.h; sourceTree = "<group>"; };
 		09C51AE524135AC300705DFC /* LqSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LqSegmentControl.m; sourceTree = "<group>"; };
 		09C51AE624135AC300705DFC /* LqSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LqSegmentControl.h; sourceTree = "<group>"; };
 		09C51AE924135B5800705DFC /* LqScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LqScrollView.m; sourceTree = "<group>"; };
@@ -963,6 +972,7 @@
 		09239A6B2403FEE400A4F727 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				09A6B73E244DCBDC00C8BC9C /* HSFTabBar */,
 				09239A712403FEE400A4F727 /* MainTabBarController.h */,
 				09239A6C2403FEE400A4F727 /* MainTabBarController.m */,
 				09239A6D2403FEE400A4F727 /* View */,
@@ -1266,6 +1276,19 @@
 				111FD7082412515400E7B419 /* MyLoveCell.m */,
 			);
 			path = Mine;
+			sourceTree = "<group>";
+		};
+		09A6B73E244DCBDC00C8BC9C /* HSFTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				09A6B746244DCBEC00C8BC9C /* HSFTabBarController.h */,
+				09A6B745244DCBEB00C8BC9C /* HSFTabBarController.m */,
+				09A6B73F244DCBDC00C8BC9C /* HSFTabBar.h */,
+				09A6B742244DCBDC00C8BC9C /* HSFTabBar.m */,
+				09A6B740244DCBDC00C8BC9C /* UIButton+Layout.m */,
+				09A6B741244DCBDC00C8BC9C /* UIButton+Layout.h */,
+			);
+			path = HSFTabBar;
 			sourceTree = "<group>";
 		};
 		09C51AE424135AC300705DFC /* LQSegmentControl */ = {
@@ -2126,6 +2149,7 @@
 				8B9B8BE9240D4AED004B4704 /* ZFPlayerGestureControl.m in Sources */,
 				11105E7524067BB900521CB2 /* AVApi.m in Sources */,
 				09E72C7C24055F7E0004B25C /* MJPropertyType.m in Sources */,
+				09A6B743244DCBDC00C8BC9C /* UIButton+Layout.m in Sources */,
 				11105E9024067F1000521CB2 /* InitItem.m in Sources */,
 				11105E4C24066BC900521CB2 /* LqToolKit.m in Sources */,
 				11111696240DFCEA00E9F781 /* RechargeCenterViewController.m in Sources */,
@@ -2201,6 +2225,7 @@
 				09E72C8324055F7E0004B25C /* NSString+MJExtension.m in Sources */,
 				8BD545A6240BB4CC00C90A31 /* MJRefreshConst.m in Sources */,
 				112F56B42411FACB00CE4715 /* BindMobileFirstStepViewController.m in Sources */,
+				09A6B747244DCBEC00C8BC9C /* HSFTabBarController.m in Sources */,
 				112F56C02412237D00CE4715 /* SecurityCodeViewController.m in Sources */,
 				110DFBFA240F85C6002E1C8B /* ShortVideoViewController.m in Sources */,
 				8BD545B9240BB4CC00C90A31 /* MJRefreshComponent.m in Sources */,
@@ -2318,6 +2343,7 @@
 				11398091241102B000663E26 /* RechargeDetailCell.m in Sources */,
 				092399D92403FE1400A4F727 /* main.m in Sources */,
 				11111699240E00A400E9F781 /* RechargeCenterCell.m in Sources */,
+				09A6B744244DCBDC00C8BC9C /* HSFTabBar.m in Sources */,
 				09E72C3624055F6E0004B25C /* IQBarButtonItem.m in Sources */,
 				11105E5224066BC900521CB2 /* UIView+LqExtension.m in Sources */,
 				8BD545B1240BB4CC00C90A31 /* MJRefreshAutoNormalFooter.m in Sources */,

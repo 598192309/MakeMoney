@@ -142,6 +142,11 @@
             }];
         }
     };
+    
+    //签到
+    self.mineCustomHeaderView.mineCustomQiandaoBtnClickBlock = ^(UIButton *sender) {
+        [weakSelf qiandao:sender];
+    };
 }
 
 #pragma mark - net
@@ -208,6 +213,11 @@
         sender.userInteractionEnabled = YES;
 
     }];
+    
+}
+
+- (void)qiandao:(UIButton *)sender{
+    [LSVProgressHUD show];
     
 }
 #pragma mark -  UITableViewDataSource

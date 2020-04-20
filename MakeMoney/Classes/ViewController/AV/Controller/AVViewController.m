@@ -46,7 +46,12 @@
         make.top.mas_equalTo(TopAdaptor_Value(25));
     }];
     
-    
+    if (@available(iOS 11.0, *)) {
+        _customTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        // Fallback on earlier versions
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
 }
 
 

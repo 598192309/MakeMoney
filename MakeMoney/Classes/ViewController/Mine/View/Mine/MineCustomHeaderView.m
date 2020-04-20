@@ -25,6 +25,7 @@
 
 @property (nonatomic,strong)UIImageView *iconImageV;
 @property (nonatomic,strong)UIImageView *vipImageV;
+@property (nonatomic,strong)UIButton *qiandaoBtn;
 
 
 
@@ -35,6 +36,7 @@
 @property (nonatomic,strong)LPButton *qianbaoBtn;
 @property (nonatomic,strong)LPButton *tuiguangBtn;
 @property (nonatomic,strong)LPButton *vipBtn;
+
 
 
 @end
@@ -99,6 +101,14 @@
 
     }
     
+    if (0) {//签到
+        self.qianbaoBtn.selected = YES;
+        ViewBorderRadius(self.qiandaoBtn, Adaptor_Value(17), 1, TitleGrayColor);
+    }else{
+        self.qianbaoBtn.selected = NO;
+        ViewBorderRadius(self.qiandaoBtn, Adaptor_Value(17), 1, [UIColor whiteColor]);
+    }
+    
     finishBlock();
 }
 
@@ -142,6 +152,12 @@
 //    [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
     if (self.mineCustomHeaderViewBtnsBlock) {
         self.mineCustomHeaderViewBtnsBlock(sender,@{});
+    }
+}
+
+- (void)qiandaoBtnClick:(UIButton *)sender{
+    if (self.mineCustomQiandaoBtnClickBlock) {
+        self.mineCustomQiandaoBtnClickBlock(sender);
     }
 }
 //转时间戳 变时间类型
@@ -285,7 +301,23 @@
         }];
 //        _shipinVipLable.hidden = !RI.infoInitItem.is_vip;
 
-  
+        _qianbaoBtn = [[UIButton alloc] init];
+        [_qianbaoBtn addTarget:self action:@selector(qiandaoBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_qianbaoBtn setTitleColor:TitleWhiteColor forState:UIControlStateNormal];
+        [_qianbaoBtn setTitleColor:TitleGrayColor forState:UIControlStateSelected];
+
+        _qianbaoBtn.titleLabel.font = AdaptedFontSize(17);
+        [_qianbaoBtn setTitle:lqStrings(@"签到") forState:UIControlStateNormal];
+        [_qianbaoBtn setTitle:lqStrings(@"已签到") forState:UIControlStateSelected];
+        [contentV addSubview:_qianbaoBtn];
+        [_qianbaoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(contentV).offset(-Adaptor_Value(20));
+            make.height.mas_equalTo(Adaptor_Value(34));
+            make.centerY.mas_equalTo(contentV);
+        }];
+        ViewBorderRadius(_qianbaoBtn, Adaptor_Value(17), 1, TitleWhiteColor);
+        
+
 
 
     }

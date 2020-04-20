@@ -12,6 +12,7 @@
 #import "InitItem.h"
 #import "HomeApi.h"
 #import "HomeItem.h"
+#import "HSFTabBarController.h"
 
 @interface LaunchingViewController ()
 @property(nonatomic,strong)UIImageView *imageView;
@@ -136,9 +137,11 @@
 }
 - (void)codeBtnClick:(UIButton *)sender{
     if ([[sender titleForState:UIControlStateNormal] isEqualToString:lqStrings(@"进入APP")]) {
-            //进入APP
-        MainTabBarController *main = [[MainTabBarController alloc] init];
-        [AppDelegate shareAppDelegate].rootTabbar = main;
+//            //进入APP
+//        MainTabBarController *main = [[MainTabBarController alloc] init];
+//        [AppDelegate shareAppDelegate].rootTabbar = main;
+        HSFTabBarController *main = [[HSFTabBarController alloc] init];
+        [AppDelegate shareAppDelegate].tabBarC = main;
         APPDelegate.window.rootViewController = main ;
     }
 
@@ -150,8 +153,10 @@
 - (void)agreeBtnClick:(UIButton *)sender{
     if (self.chooseBtn.selected) {
             //进入APP
-        MainTabBarController *main = [[MainTabBarController alloc] init];
-        [AppDelegate shareAppDelegate].rootTabbar = main;
+//        MainTabBarController *main = [[MainTabBarController alloc] init];
+//        [AppDelegate shareAppDelegate].rootTabbar = main;
+        HSFTabBarController *main = [[HSFTabBarController alloc] init];
+        [AppDelegate shareAppDelegate].tabBarC = main;
         APPDelegate.window.rootViewController = main ;
     }else{
         [LSVProgressHUD showInfoWithStatus:lqStrings(@"请确认已阅读")];
@@ -228,8 +233,10 @@
         [self addCountBtn];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             //进入APP
-            MainTabBarController *main = [[MainTabBarController alloc] init];
-            [AppDelegate shareAppDelegate].rootTabbar = main;
+//            MainTabBarController *main = [[MainTabBarController alloc] init];
+//            [AppDelegate shareAppDelegate].rootTabbar = main;
+            HSFTabBarController *main = [[HSFTabBarController alloc] init];
+            [AppDelegate shareAppDelegate].tabBarC = main;
             APPDelegate.window.rootViewController = main ;
         });
 
