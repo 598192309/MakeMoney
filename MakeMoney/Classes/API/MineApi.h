@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NetworkTask *)requestAVInfoWithVedioId:(NSString *)video_id  Success:(void(^)(InitItem *initItem,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
 
 /*******************获取余额*********************/
-+ (NetworkTask *)requestBalanceSuccess:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
++ (NetworkTask *)requestBalanceSuccess:(void(^)(NSInteger status,NSString *msg,NSString *balance,NSString *gold))successBlock error:(ErrorBlock)errorBlock;
 
 /*******************推广明细*********************/
 + (NetworkTask *)requestExtendDetailwithVideoInviteCode:(NSString *)invite_code pageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(NSArray *extendArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock;

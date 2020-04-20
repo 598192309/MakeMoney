@@ -108,8 +108,8 @@
 -(void)requestData{
     __weak __typeof(self) weakSelf = self;
     [LSVProgressHUD show];
-    [MineApi requestBalanceSuccess:^(NSInteger status, NSString * _Nonnull msg) {
-        [weakSelf.walletCustomView refreshMoney:msg];
+    [MineApi requestBalanceSuccess:^(NSInteger status, NSString * _Nonnull msg,NSString *balance,NSString *gold) {
+        [weakSelf.walletCustomView refreshMoney:balance gold:gold];
         [LSVProgressHUD dismiss];
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];

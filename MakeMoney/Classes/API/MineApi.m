@@ -100,13 +100,16 @@
 }
 
 /*******************获取余额*********************/
-+ (NetworkTask *)requestBalanceSuccess:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
-    return [NET POST:@"/api/user/balance" parameters:nil criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
++ (NetworkTask *)requestBalanceSuccess:(void(^)(NSInteger status,NSString *msg,NSString *balance,NSString *gold))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/user/balance2" parameters:nil criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
         NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
 
-        NSString *msg = [[resultObject safeObjectForKey:@"msg"] stringValue];
+        NSString *msg = [resultObject safeObjectForKey:@"msg"] ;
+        NSString *balance = [[resultObject safeObjectForKey:@"balance"] stringValue];
+        NSString *gold = [[resultObject safeObjectForKey:@"gold"] stringValue];
+
         if (successBlock) {
-            successBlock(status,msg);
+            successBlock(status,msg,balance,gold);
         }
     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
         if (errorBlock) {
