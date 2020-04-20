@@ -40,7 +40,13 @@
     self.adsItem = item;
     __weak __typeof(self) weakSelf = self;
     [_adsImageV sd_setImageWithURL:[NSURL URLWithString:item.img] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-
+//        if (image) {
+//            CGFloat h = LQScreemW /image.size.width * image.size.height;
+//            [weakSelf.adsImageV mas_updateConstraints:^(MASConstraintMaker *make) {
+//                make.height.mas_equalTo(h);
+//            }];
+//            finishBlock();
+//        }
     }];
     
 }
