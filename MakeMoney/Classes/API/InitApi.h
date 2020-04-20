@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** 初始化   先请求Basic  再Init。 确保都请求成功 失败的话 推出app */
 
-+ (NetworkTask *)initWithSyste:(NSString *)system  Success:(void(^)(InitItem *initItem,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
++ (NetworkTask *)initWithosversion:(NSString *)os_version app_version:(NSString *)app_version lat:(NSString *)lat lang:(NSString *)lang   Success:(void(^)(InitItem *initItem,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
 @end
 
 NS_ASSUME_NONNULL_END

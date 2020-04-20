@@ -185,7 +185,9 @@
     }];
     // 第2个请求：
     dispatch_group_enter(group);
-    [InitApi initWithSyste:@"ios" Success:^(InitItem * _Nonnull initItem, NSString * _Nonnull msg) {
+    NSString *appvesion = [LqToolKit appVersionNo];
+    NSString* phoneVersion = [[UIDevice currentDevice] systemVersion];
+    [InitApi initWithosversion:phoneVersion app_version:appvesion lat:@"" lang:@""  Success:^(InitItem * _Nonnull initItem, NSString * _Nonnull msg) {
         dispatch_group_leave(group);
         RI.infoInitItem = initItem;
         RI.infoInitItemJasonStr = [initItem mj_JSONString];
