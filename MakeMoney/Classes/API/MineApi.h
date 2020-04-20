@@ -181,6 +181,19 @@ NS_ASSUME_NONNULL_BEGIN
 /*******************签到
  *********************/
 + (NetworkTask *)requestQiandaoSuccess:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
+
+/****************************注册 登录*************************/
+/**  登录  */
+
++ (NetworkTask *)loginWithMobile:(NSString *)mobile password:(NSString *)password success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
+
+/**  更新密码  */
+
++ (NetworkTask *)updatePwdWithMobile:(NSString *)mobile password:(NSString *)password success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
+
+/** 检查手机号是否存在  */
+
++ (NetworkTask *)checkMobileRealWithMobile:(NSString *)mobile  success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -32,6 +32,7 @@
 		09A6B743244DCBDC00C8BC9C /* UIButton+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A6B740244DCBDC00C8BC9C /* UIButton+Layout.m */; };
 		09A6B744244DCBDC00C8BC9C /* HSFTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A6B742244DCBDC00C8BC9C /* HSFTabBar.m */; };
 		09A6B747244DCBEC00C8BC9C /* HSFTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A6B745244DCBEB00C8BC9C /* HSFTabBarController.m */; };
+		09A6B74A244DF77600C8BC9C /* BindMobileSetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A6B749244DF77600C8BC9C /* BindMobileSetPwdViewController.m */; };
 		09C51AE724135AC400705DFC /* LqSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C51AE524135AC300705DFC /* LqSegmentControl.m */; };
 		09C51AEB24135B5800705DFC /* LqScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C51AE924135B5800705DFC /* LqScrollView.m */; };
 		09C51AEF2413927C00705DFC /* AblumDetailNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C51AED2413927C00705DFC /* AblumDetailNewCell.m */; };
@@ -339,6 +340,8 @@
 		09A6B742244DCBDC00C8BC9C /* HSFTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSFTabBar.m; sourceTree = "<group>"; };
 		09A6B745244DCBEB00C8BC9C /* HSFTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSFTabBarController.m; sourceTree = "<group>"; };
 		09A6B746244DCBEC00C8BC9C /* HSFTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSFTabBarController.h; sourceTree = "<group>"; };
+		09A6B748244DF77600C8BC9C /* BindMobileSetPwdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BindMobileSetPwdViewController.h; sourceTree = "<group>"; };
+		09A6B749244DF77600C8BC9C /* BindMobileSetPwdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BindMobileSetPwdViewController.m; sourceTree = "<group>"; };
 		09C51AE524135AC300705DFC /* LqSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LqSegmentControl.m; sourceTree = "<group>"; };
 		09C51AE624135AC300705DFC /* LqSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LqSegmentControl.h; sourceTree = "<group>"; };
 		09C51AE924135B5800705DFC /* LqScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LqScrollView.m; sourceTree = "<group>"; };
@@ -1149,6 +1152,8 @@
 				112F56B32411FACB00CE4715 /* BindMobileFirstStepViewController.m */,
 				112F56B82412019100CE4715 /* BindMobileSecStepViewController.h */,
 				112F56B92412019100CE4715 /* BindMobileSecStepViewController.m */,
+				09A6B748244DF77600C8BC9C /* BindMobileSetPwdViewController.h */,
+				09A6B749244DF77600C8BC9C /* BindMobileSetPwdViewController.m */,
 				112F56BE2412237D00CE4715 /* SecurityCodeViewController.h */,
 				112F56BF2412237D00CE4715 /* SecurityCodeViewController.m */,
 				111FD6F824124E5B00E7B419 /* MyLoveViewController.h */,
@@ -2341,6 +2346,7 @@
 				8B9B8C07240D5211004B4704 /* AVPlayerController.m in Sources */,
 				8B9B8BF4240D4AED004B4704 /* ZFIJKPlayerManager.m in Sources */,
 				11398091241102B000663E26 /* RechargeDetailCell.m in Sources */,
+				09A6B74A244DF77600C8BC9C /* BindMobileSetPwdViewController.m in Sources */,
 				092399D92403FE1400A4F727 /* main.m in Sources */,
 				11111699240E00A400E9F781 /* RechargeCenterCell.m in Sources */,
 				09A6B744244DCBDC00C8BC9C /* HSFTabBar.m in Sources */,

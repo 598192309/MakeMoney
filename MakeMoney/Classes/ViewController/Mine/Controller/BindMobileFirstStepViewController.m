@@ -9,6 +9,7 @@
 #import "BindMobileFirstStepViewController.h"
 #import "BindMobileFirstStepView.h"
 #import "BindMobileSecStepViewController.h"
+#import "MineApi.h"
 
 @interface BindMobileFirstStepViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
@@ -79,13 +80,29 @@
     __weak __typeof(self) weakSelf = self;
     //点击确认
     self.bindMobileFirstStepView.confirmBtnClickBlock = ^(UIButton * _Nonnull sender, UITextField * _Nonnull tf) {
-#warning ceshi
-        BindMobileSecStepViewController *vc = [BindMobileSecStepViewController new];
-        [weakSelf.navigationController pushViewController:vc animated:YES];
+        [weakSelf verifyMoblieWithMobile:tf.text sender:sender];
     };
 }
 #pragma mark -  net
+//验证手机号是否存在
+- (void)verifyMoblieWithMobile:(NSString *)mobile sender:(UIButton *)sender{
+    sender.userInteractionEnabled= NO;
+    __weak __typeof(self) weakSelf = self;
+    [LSVProgressHUD show];
+    [MineApi checkMobileRealWithMobile:mobile success:^(NSInteger status, NSString * _Nonnull msg) {
+        sender.userInteractionEnabled = YES;
+        if (status == 1) {
+            BindMobileSecStepViewController *vc = [BindMobileSecStepViewController new];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }else{
+            
+        }
 
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+        sender.userInteractionEnabled = YES;
+    }];
+}
 
 #pragma mark -  UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
