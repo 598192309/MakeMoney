@@ -83,6 +83,7 @@
     if (self.loveBtn) {
         self.loveBlock(sender);
     }
+    sender.selected = !sender.selected;
 }
 #pragma mark - lazy
 -(UIView *)header{
@@ -147,16 +148,23 @@
         
         _loveBtn = [[EnlargeTouchSizeButton alloc] init];
         [_loveBtn addTarget:self action:@selector(loveBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_loveBtn setImage:[UIImage imageNamed:@"icon_home_like_before"] forState:UIControlStateNormal];
-        [_loveBtn setImage:[UIImage imageNamed:@"icon_home_like_after"] forState:UIControlStateSelected];
+//        [_loveBtn setImage:[UIImage imageNamed:@"icon_home_like_before"] forState:UIControlStateNormal];
+//        [_loveBtn setImage:[UIImage imageNamed:@"icon_home_like_after"] forState:UIControlStateSelected];
+        [_loveBtn setTitle:lqStrings(@"收藏") forState:UIControlStateNormal];
+        [_loveBtn setTitleColor:TitleBlackColor forState:UIControlStateNormal];
+        [_loveBtn setTitle:lqStrings(@"已收藏") forState:UIControlStateSelected];
+        [_loveBtn setTitleColor:TitleGrayColor forState:UIControlStateSelected];
+        _loveBtn.titleLabel.font = AdaptedFontSize(15);
+
+
         [contentV addSubview:_loveBtn];
         [_loveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.width.mas_equalTo(Adaptor_Value(20));
+            make.height.mas_equalTo(Adaptor_Value(20));
             make.centerY.mas_equalTo(weakSelf.tipLable);
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(25));
         }];
         _loveBtn.touchSize = CGSizeMake(Adaptor_Value(50), Adaptor_Value(50));
-        _loveBtn.selected = YES;//现在默认选择 现在没有显示 选中和不选中的判断
+//        _loveBtn.selected = YES;//现在默认选择 现在没有显示 选中和不选中的判断
 
         UIView *loveBtnBackView = [UIView new];
         loveBtnBackView.backgroundColor = [UIColor lq_colorWithHexString:@"ffffff" alpha:0.3];

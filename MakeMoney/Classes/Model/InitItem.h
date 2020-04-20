@@ -36,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign)NSInteger new_user_free_day;
 
 @property (nonatomic,assign)NSInteger new_user_free_hour;
+@property (nonatomic,assign)NSInteger sign_in;
 
 @end
 

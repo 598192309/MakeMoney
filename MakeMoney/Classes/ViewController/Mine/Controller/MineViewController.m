@@ -33,6 +33,9 @@
 @property (nonatomic,strong)InitItem *dataItem;
 
 @property (nonatomic,strong)NSString *yaoqingren;//邀请人
+
+@property (nonatomic,strong)CommonAlertView *tipAlertView;
+
 @end
 
 @implementation MineViewController
@@ -218,7 +221,29 @@
 
 - (void)qiandao:(UIButton *)sender{
     [LSVProgressHUD show];
+    sender.userInteractionEnabled = NO;
     
+    __weak __typeof(self) weakSelf = self;
+    [MineApi requestQiandaoSuccess:^(NSInteger status, NSString * _Nonnull msg) {
+        [LSVProgressHUD dismiss];
+        sender.userInteractionEnabled = YES;
+        sender.selected = YES;
+        ViewBorderRadius(sender, Adaptor_Value(15), 1, TitleGrayColor);
+        [weakSelf showTipMsg:msg msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:@"" subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"好的"];
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+        sender.userInteractionEnabled = YES;
+
+    }];
+    
+}
+
+- (void)showTipMsg:(NSString *)msg msgFont:(UIFont *)msgFont msgColor:(UIColor *)msgColor subTitle:(NSString *)subTitle subFont:(UIFont *)subFont subColor:(UIColor *)subColor firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singleBtnTitle:(NSString *)singleBtnTitle{
+    [self.tipAlertView refreshUIWithTitle:msg titlefont:msgFont titleColor:msgColor subtitle:subTitle subTitleFont:subFont subtitleColor:subColor firstBtnTitle:firstBtnTitle secBtnTitle:secBtnTitle singleBtnTitle:singleBtnTitle];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.tipAlertView];
+    [self.tipAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
+    }];
 }
 #pragma mark -  UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -573,5 +598,17 @@
         };
     }
     return _vipExchangeAlertView;
+}
+
+- (CommonAlertView *)tipAlertView{
+    if (!_tipAlertView) {
+        _tipAlertView = [CommonAlertView new];
+        __weak __typeof(self) weakSelf = self;
+        _tipAlertView.commonAlertViewBlock = ^(NSInteger index, NSString * _Nonnull str) {
+            [weakSelf.tipAlertView removeFromSuperview];
+            weakSelf.tipAlertView = nil;
+        };
+    }
+    return _tipAlertView;
 }
 @end
