@@ -10,7 +10,6 @@
 #import "MyAVLoveViewController.h"
 #import "MyVedioLoveViewController.h"
 #import "MyAblumLoveViewController.h"
-#import "GroupCoinSegmentrol.h"
 #import "LqScrollView.h"
 #import "LqSegmentControl.h"
 @interface MyLoveViewController ()<UIScrollViewDelegate>

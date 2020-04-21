@@ -10,9 +10,6 @@
 #import "AFHTTPSessionManager.h"
 #import "DeviceInfo.h"
 #import "Constant.h"
-#import "OpenUDID.h"
-
-
 
 @implementation NetworkTask{
     NSURLSessionDataTask *_sessionDatatask;
@@ -84,11 +81,9 @@
 
 //    RI.token = udid;
     
-//    NSString *neverChangeStr = [DeviceInfo getNerverChangeUUID];
-    NSString* openUDID = [OpenUDID value];
-    
+    NSString *neverChangeStr = [DeviceInfo getNerverChangeUUID];
 
-    [_manager.requestSerializer setValue:openUDID forHTTPHeaderField:@"token"];
+    [_manager.requestSerializer setValue:neverChangeStr forHTTPHeaderField:@"token"];
 
 //
 //

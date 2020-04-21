@@ -19,11 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (NetworkTask *)requestPayRecordswithPageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(NSArray *payRecordItemArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
 
 
-/********************充值中心 *********************/
-+ (NetworkTask *)requestPayCenterInfoSuccess:(void(^)(NSArray *payCenterInfotemArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
-
-
-
+/********************充值中心
+//tag : 0 视频 1同城2写真
+ *********************/
++ (NetworkTask *)requestPayCenterInfoWithTag:(NSString *)tag Success:(void(^)(NSArray *payCenterInfotemArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
 
 
 /********************更新短视频的播放次数*********************/

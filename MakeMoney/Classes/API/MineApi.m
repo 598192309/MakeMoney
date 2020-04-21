@@ -41,9 +41,12 @@
     }];
 }
 
-/********************充值中心 *********************/
-+ (NetworkTask *)requestPayCenterInfoSuccess:(void(^)(NSArray *payCenterInfotemArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
-    return [NET POST:@"/api/pay_type" parameters:nil criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+/********************充值中心
+//tag : 0 视频 1同城2写真
+ *********************/
+
++ (NetworkTask *)requestPayCenterInfoWithTag:(NSString *)tag Success:(void(^)(NSArray *payCenterInfotemArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/pay_type_new" parameters:@{@"tag":SAFE_NIL_STRING(tag)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
         NSArray *payCenterInfotemArr = [PayCenterInfotem mj_objectArrayWithKeyValuesArray:[resultObject safeObjectForKey:@"data"]];
         NSString *msg = [resultObject safeObjectForKey:@"msg"];
         if (successBlock) {

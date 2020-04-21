@@ -66,7 +66,7 @@
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn setTitle:items[i] forState:UIControlStateNormal];
             [btn setTitleColor:_titleNormalColor ? _titleNormalColor : TitleGrayColor forState:UIControlStateNormal];
-            btn.titleLabel.font = AdaptedFontSize(17);
+            btn.titleLabel.font = AdaptedFontSize(20);
             [btn addTarget:self action:@selector(butClicked:) forControlEvents:UIControlEventTouchUpInside];
             [self.buttons safeAddObject:btn];
             [self addSubview:btn];
@@ -96,7 +96,7 @@
     }
 //    _indicateView.frame = CGRectMake(0, self.lq_height - 2, self.indicateViewWidth > 0 ? self.indicateViewWidth : Adaptor_Value(15), Adaptor_Value(4));
     if (self.indicateViewWidth > 0) {
-        _indicateView.frame = CGRectMake(0, self.lq_height - 2,  self.indicateViewWidth, Adaptor_Value(4));
+        _indicateView.frame = CGRectMake(0, self.lq_height - 2,  self.indicateViewWidth, 2);
     }else{
         _indicateView.frame = CGRectMake(0, self.lq_height - 2,  Adaptor_Value(15), Adaptor_Value(4));
 
