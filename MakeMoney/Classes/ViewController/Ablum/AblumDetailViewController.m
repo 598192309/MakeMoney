@@ -10,14 +10,21 @@
 #import "AblumItem.h"
 #import "AblumApi.h"
 #import "AblumDetailNewCell.h"
+#import "RechargeCenterViewController.h"
 @interface AblumDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView  *customTableView;
 
 @property (nonatomic,strong)UIView *loveView;
 @property (nonatomic,strong)EnlargeTouchSizeButton *loveBtn;
+
+@property (nonatomic,strong)EnlargeTouchSizeButton *buyBtn;
+
 @property (nonatomic, strong)NSMutableArray *dataSource;
 
 @property (nonatomic , assign) BOOL hadShowOpenVip;
+
+@property (nonatomic,strong)CommonAlertView *commonAlertView;
+
 @end
 
 @implementation AblumDetailViewController
@@ -37,6 +44,9 @@
         M_AblumImage *data = [[M_AblumImage alloc] init];
         data.imageUrl = url;
         [_dataSource addObject:data];
+    }
+    if (ablumData.status == 1) {//已购买
+        self.buyBtn.hidden = YES;
     }
     [self.customTableView reloadData];
 }
@@ -70,8 +80,16 @@
     [self.view addSubview:self.loveView];
     [self.loveView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(weakSelf.view).offset(-Adaptor_Value(20));
-        make.bottom.mas_equalTo(weakSelf.view).offset(-Adaptor_Value(40));
+        make.bottom.mas_equalTo(weakSelf.view).offset(-Adaptor_Value(60));
     }];
+    
+    [self.view addSubview:self.buyBtn];
+    [self.buyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.height.width.mas_equalTo(weakSelf.loveView);
+        make.top.mas_equalTo(weakSelf.loveView.mas_bottom).offset(Adaptor_Value(20));
+    }];
+    ViewRadius(self.buyBtn, Adaptor_Value(20));
+
 
 }
 
@@ -86,6 +104,19 @@
     //收藏 与取消
     [self love];
 }
+
+- (void)buyBtnClick:(UIButton *)sender{
+    //购买
+    [self showMsg:[NSString stringWithFormat:@"购买写真可以永久观看，本套写真需要花费%@金币购买喔~",self.ablumData.gold] firstBtnTitle:lqStrings(@"再想想") secBtnTitle:lqStrings(@"好的") singleBtnTitle:nil];
+}
+
+- (void)showMsg:(NSString *)msg firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singleBtnTitle:(NSString *)singleBtnTitle{
+    [self.commonAlertView refreshUIWithTitle:msg titlefont:AdaptedFontSize(15) titleColor:TitleBlackColor firstBtnTitle:firstBtnTitle secBtnTitle:secBtnTitle singleBtnTitle:singleBtnTitle];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.commonAlertView];
+    [self.commonAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
+    }];
+}
 #pragma mark - net
 //收藏 与取消
 - (void)love{
@@ -97,7 +128,24 @@
         [LSVProgressHUD showError:error];
     }];
 }
+//用金币购买
+- (void)buyWithGold{
+    [LSVProgressHUD show];
+    __weak __typeof(self) weakSelf = self;
+    [AblumApi buyAblumWithGoldWithAblumId:self.ablumData.album_id gold:self.ablumData.gold Success:^(NSInteger status, NSString * _Nonnull msg) {
+        if ([msg isEqualToString:@"金币不足"]) {
+            [weakSelf showMsg:msg firstBtnTitle:lqStrings(@"取消") secBtnTitle:lqStrings(@"购买") singleBtnTitle:nil];
+            [LSVProgressHUD dismiss];
+        }else{
+            [LSVProgressHUD showInfoWithStatus:msg];
+        }
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
 
+    }];
+    
+
+}
 #pragma mark -  UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -171,9 +219,9 @@
         [_loveView addSubview:contentV];
         [contentV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(weakSelf.loveView);
-            make.height.width.mas_equalTo(Adaptor_Value(50));
+            make.height.width.mas_equalTo(Adaptor_Value(40));
         }];
-        ViewRadius(contentV, Adaptor_Value(25));
+        ViewRadius(contentV, Adaptor_Value(20));
         
         
         _loveBtn = [[EnlargeTouchSizeButton alloc] init];
@@ -183,15 +231,27 @@
         _loveBtn.selected = YES;//现在默认选择 现在没有显示 选中和不选中的判断
         [contentV addSubview:_loveBtn];
         [_loveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.width.mas_equalTo(Adaptor_Value(30));
+            make.height.width.mas_equalTo(Adaptor_Value(20));
             make.center.mas_equalTo(contentV);
         }];
-        _loveBtn.touchSize = CGSizeMake(Adaptor_Value(50), Adaptor_Value(50));
+        _loveBtn.touchSize = CGSizeMake(Adaptor_Value(40), Adaptor_Value(40));
 
     }
     return _loveView;
 }
 
+
+- (EnlargeTouchSizeButton *)buyBtn{
+    if (!_buyBtn) {
+        _buyBtn = [[EnlargeTouchSizeButton alloc] init];
+        [_buyBtn addTarget:self action:@selector(buyBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_buyBtn setTitle:lqStrings(@"购买") forState:UIControlStateNormal];
+        [_buyBtn setBackgroundColor:TitleWhiteColor];
+        [_buyBtn setTitleColor:LightYellowColor forState:UIControlStateNormal];
+        _buyBtn.titleLabel.font = AdaptedFontSize(13);
+    }
+    return _buyBtn;
+}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat contentOffsetY = scrollView.contentOffset.y;
@@ -200,6 +260,33 @@
         _hadShowOpenVip = YES;
         [LSVProgressHUD showInfoWithStatus:@"哥哥，开通VIP才能看全套写真哦~"];
     }
+}
+
+
+- (CommonAlertView *)commonAlertView{
+    if (!_commonAlertView) {
+        _commonAlertView = [CommonAlertView new];
+        __weak __typeof(self) weakSelf = self;
+        _commonAlertView.commonAlertViewBlock = ^(NSInteger index, NSString * _Nonnull str) {
+
+            [weakSelf.commonAlertView removeFromSuperview];
+            weakSelf.commonAlertView = nil;
+            if (index == 1) {
+                
+            }else if (index == 2) {
+                if ([str isEqualToString:lqStrings(@"好的")]) {
+                    //用金币购买
+                    [weakSelf buyWithGold];
+                }else{//购买  去VIP充值
+                    RechargeCenterViewController *vc = [[RechargeCenterViewController alloc] init];
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                }
+
+            }
+
+        };
+    }
+    return _commonAlertView;
 }
 @end
 

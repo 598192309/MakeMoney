@@ -16,6 +16,9 @@
 @property (nonatomic,strong)UILabel *moneyTipLabel;
 @property (nonatomic,strong)UILabel *moneyLabel;
 
+@property (nonatomic,strong)UILabel *jinbiTipLabel;
+@property (nonatomic,strong)UILabel *jinbiLabel;
+
 @property (nonatomic,strong)UILabel *tipLabel;
 
 @property (nonatomic,strong)UIView *textFBackView;
@@ -74,8 +77,9 @@
 }
 
 #pragma mark - 刷新ui
-- (void)refreshMoney:(NSString *)money{
+- (void)refreshMoney:(NSString *)money gold:(NSString*)gold{
     self.moneyLabel.text = money;
+    self.jinbiLabel.text = gold;
 }
 #pragma mark - act
 - (void)confirmBtnClick:(UIButton *)sender{
@@ -116,18 +120,32 @@
         }];
         ViewRadius(_moneyView, 20);
         
-        _moneyTipLabel = [UILabel lableWithText:lqStrings(@"账户余额(元)") textColor:TitleBlackColor fontSize:AdaptedBoldFontSize(18) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        _moneyTipLabel = [UILabel lableWithText:lqStrings(@"账户余额(元)") textColor:TitleBlackColor fontSize:AdaptedBoldFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
         [_moneyView addSubview:_moneyTipLabel];
         [_moneyTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(Adaptor_Value(25));
             make.left.mas_equalTo(Adaptor_Value(25));
         }];
         
-        _moneyLabel = [UILabel lableWithText:lqStrings(@"0") textColor:TitleBlackColor fontSize:AdaptedBoldFontSize(20) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        _moneyLabel = [UILabel lableWithText:lqStrings(@"0") textColor:LightYellowColor fontSize:AdaptedBoldFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
         [_moneyView addSubview:_moneyLabel];
         [_moneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(weakSelf.moneyTipLabel.mas_bottom).offset(Adaptor_Value(10));
             make.left.mas_equalTo(weakSelf.moneyTipLabel);
+        }];
+        
+        _jinbiTipLabel = [UILabel lableWithText:lqStrings(@"金币余额(个)") textColor:TitleBlackColor fontSize:AdaptedBoldFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [_moneyView addSubview:_jinbiTipLabel];
+        [_jinbiTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(weakSelf.moneyTipLabel);
+            make.left.mas_equalTo(Adaptor_Value(200));
+        }];
+        
+        _jinbiLabel = [UILabel lableWithText:lqStrings(@"0") textColor:LightYellowColor fontSize:AdaptedBoldFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [_moneyView addSubview:_jinbiLabel];
+        [_jinbiLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(weakSelf.moneyLabel);
+            make.left.mas_equalTo(weakSelf.jinbiTipLabel);
         }];
         
         
@@ -137,6 +155,9 @@
             make.top.mas_equalTo(weakSelf.moneyView.mas_bottom).offset(Adaptor_Value(10));
             make.left.mas_equalTo(weakSelf.moneyView);
         }];
+        
+        
+        
         
         _textFBackView = [UIView new];
         _textFBackView.backgroundColor = TitleWhiteColor;

@@ -15,6 +15,9 @@
 /**点击*/
 @property(nonatomic,copy)void(^mineCustomHeaderViewBtnsBlock)(UIButton *sender,NSDictionary *dict);
 
+/**点击签到*/
+@property(nonatomic,copy)void(^mineCustomQiandaoBtnClickBlock)(UIButton *sender);
+
 - (void)configUIWithItem:(InitItem *)item finishi:(void(^)(void))finishBlock;
 
 - (void)setAvter:(UIImage *)image;

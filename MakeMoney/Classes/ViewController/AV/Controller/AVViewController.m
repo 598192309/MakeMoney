@@ -46,7 +46,12 @@
         make.top.mas_equalTo(TopAdaptor_Value(25));
     }];
     
-    
+    if (@available(iOS 11.0, *)) {
+        _customTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        // Fallback on earlier versions
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
 }
 
 
@@ -177,7 +182,8 @@
     if (section % 8 == 0) {
         AdsItem *item = [self.adsItemArr safeObjectAtIndex:section / 8];
         if (item.width > 0 && item) {
-            return LQScreemW * item.height / item.width;
+            CGFloat a = LQScreemW * item.height / (item.width + 0.01);
+            return LQScreemW * item.height / (item.width + 0.01);
         }
     }
     

@@ -12,6 +12,7 @@
 #import "InitItem.h"
 #import "HomeApi.h"
 #import "HomeItem.h"
+#import "HSFTabBarController.h"
 
 @interface LaunchingViewController ()
 @property(nonatomic,strong)UIImageView *imageView;
@@ -136,9 +137,11 @@
 }
 - (void)codeBtnClick:(UIButton *)sender{
     if ([[sender titleForState:UIControlStateNormal] isEqualToString:lqStrings(@"进入APP")]) {
-            //进入APP
-        MainTabBarController *main = [[MainTabBarController alloc] init];
-        [AppDelegate shareAppDelegate].rootTabbar = main;
+//            //进入APP
+//        MainTabBarController *main = [[MainTabBarController alloc] init];
+//        [AppDelegate shareAppDelegate].rootTabbar = main;
+        HSFTabBarController *main = [[HSFTabBarController alloc] init];
+        [AppDelegate shareAppDelegate].tabBarC = main;
         APPDelegate.window.rootViewController = main ;
     }
 
@@ -150,8 +153,10 @@
 - (void)agreeBtnClick:(UIButton *)sender{
     if (self.chooseBtn.selected) {
             //进入APP
-        MainTabBarController *main = [[MainTabBarController alloc] init];
-        [AppDelegate shareAppDelegate].rootTabbar = main;
+//        MainTabBarController *main = [[MainTabBarController alloc] init];
+//        [AppDelegate shareAppDelegate].rootTabbar = main;
+        HSFTabBarController *main = [[HSFTabBarController alloc] init];
+        [AppDelegate shareAppDelegate].tabBarC = main;
         APPDelegate.window.rootViewController = main ;
     }else{
         [LSVProgressHUD showInfoWithStatus:lqStrings(@"请确认已阅读")];
@@ -180,7 +185,9 @@
     }];
     // 第2个请求：
     dispatch_group_enter(group);
-    [InitApi initWithSyste:@"ios" Success:^(InitItem * _Nonnull initItem, NSString * _Nonnull msg) {
+    NSString *appvesion = [LqToolKit appVersionNo];
+    NSString* phoneVersion = [[UIDevice currentDevice] systemVersion];
+    [InitApi initWithosversion:phoneVersion app_version:appvesion lat:@"" lang:@""  Success:^(InitItem * _Nonnull initItem, NSString * _Nonnull msg) {
         dispatch_group_leave(group);
         RI.infoInitItem = initItem;
         RI.infoInitItemJasonStr = [initItem mj_JSONString];
@@ -228,8 +235,10 @@
         [self addCountBtn];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             //进入APP
-            MainTabBarController *main = [[MainTabBarController alloc] init];
-            [AppDelegate shareAppDelegate].rootTabbar = main;
+//            MainTabBarController *main = [[MainTabBarController alloc] init];
+//            [AppDelegate shareAppDelegate].rootTabbar = main;
+            HSFTabBarController *main = [[HSFTabBarController alloc] init];
+            [AppDelegate shareAppDelegate].tabBarC = main;
             APPDelegate.window.rootViewController = main ;
         });
 

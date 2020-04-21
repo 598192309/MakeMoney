@@ -33,6 +33,9 @@
 @property (nonatomic,strong)InitItem *dataItem;
 
 @property (nonatomic,strong)NSString *yaoqingren;//邀请人
+
+@property (nonatomic,strong)CommonAlertView *tipAlertView;
+
 @end
 
 @implementation MineViewController
@@ -142,6 +145,11 @@
             }];
         }
     };
+    
+    //签到
+    self.mineCustomHeaderView.mineCustomQiandaoBtnClickBlock = ^(UIButton *sender) {
+        [weakSelf qiandao:sender];
+    };
 }
 
 #pragma mark - net
@@ -210,6 +218,33 @@
     }];
     
 }
+
+- (void)qiandao:(UIButton *)sender{
+    [LSVProgressHUD show];
+    sender.userInteractionEnabled = NO;
+    
+    __weak __typeof(self) weakSelf = self;
+    [MineApi requestQiandaoSuccess:^(NSInteger status, NSString * _Nonnull msg) {
+        [LSVProgressHUD dismiss];
+        sender.userInteractionEnabled = YES;
+        sender.selected = YES;
+        ViewBorderRadius(sender, Adaptor_Value(15), 1, TitleGrayColor);
+        [weakSelf showTipMsg:msg msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:@"" subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"好的"];
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+        sender.userInteractionEnabled = YES;
+
+    }];
+    
+}
+
+- (void)showTipMsg:(NSString *)msg msgFont:(UIFont *)msgFont msgColor:(UIColor *)msgColor subTitle:(NSString *)subTitle subFont:(UIFont *)subFont subColor:(UIColor *)subColor firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singleBtnTitle:(NSString *)singleBtnTitle{
+    [self.tipAlertView refreshUIWithTitle:msg titlefont:msgFont titleColor:msgColor subtitle:subTitle subTitleFont:subFont subtitleColor:subColor firstBtnTitle:firstBtnTitle secBtnTitle:secBtnTitle singleBtnTitle:singleBtnTitle];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.tipAlertView];
+    [self.tipAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
+    }];
+}
 #pragma mark -  UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 //    return 5;
@@ -271,14 +306,13 @@
         title = lqStrings(@"我的收藏");
         subTitle = nil;
     }else if (indexPath.section == 2){
-//        if (indexPath.row == 0) {
-//            title = lqStrings(@"绑定手机号");
-//            subTitle = RI.infoInitItem.mobile.length > 0 ? RI.infoInitItem.mobile : lqStrings(@"未绑定");
-//        }else
         if (indexPath.row == 0) {
+            title = lqStrings(@"绑定手机号");
+            subTitle = RI.infoInitItem.mobile.length > 0 ? RI.infoInitItem.mobile : lqStrings(@"未绑定");
+        }else if (indexPath.row == 1) {
             title = lqStrings(@"我的邀请人");
             subTitle = self.yaoqingren.length == 0 ? lqStrings(@"未绑定") :self.yaoqingren;
-        }else  if (indexPath.row == 1) {
+        }else  if (indexPath.row == 2) {
             title = lqStrings(@"安全码设置");
             subTitle = lqStrings(@"");
         }
@@ -347,21 +381,19 @@
 
         
     }else if (indexPath.section == 2){
-//        if (indexPath.row == 0) {//绑定手机号
-//            if (RI.infoInitItem.mobile.length == 0) {
-//                BindMobileFirstStepViewController *vc = [[BindMobileFirstStepViewController alloc] init];
-//                [self.navigationController pushViewController:vc animated:YES];
-//            }
-//        }else
-            
-        if (indexPath.row == 0) {//我的邀请人
+        if (indexPath.row == 0) {//绑定手机号
+            if (RI.infoInitItem.mobile.length == 0) {
+                BindMobileFirstStepViewController *vc = [[BindMobileFirstStepViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }else if (indexPath.row == 1) {//我的邀请人
             [[UIApplication sharedApplication].keyWindow addSubview:self.vipExchangeAlertView];
             [self.vipExchangeAlertView refreshContent:lqStrings(@"请填写邀请码")];
             [self.vipExchangeAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
             }];
            
-        }else  if (indexPath.row == 1) {//安全码设置
+        }else  if (indexPath.row == 2) {//安全码设置
             SecurityCodeViewController *vc = [[SecurityCodeViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
             
@@ -563,5 +595,17 @@
         };
     }
     return _vipExchangeAlertView;
+}
+
+- (CommonAlertView *)tipAlertView{
+    if (!_tipAlertView) {
+        _tipAlertView = [CommonAlertView new];
+        __weak __typeof(self) weakSelf = self;
+        _tipAlertView.commonAlertViewBlock = ^(NSInteger index, NSString * _Nonnull str) {
+            [weakSelf.tipAlertView removeFromSuperview];
+            weakSelf.tipAlertView = nil;
+        };
+    }
+    return _tipAlertView;
 }
 @end

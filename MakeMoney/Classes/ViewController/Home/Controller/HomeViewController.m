@@ -56,6 +56,13 @@
     [self requestData];
     [self updateVesion];
     
+    if (@available(iOS 11.0, *)) {
+        _collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        // Fallback on earlier versions
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
     //如果是新用户 弹框限时免费
     if (RI.infoInitItem.is_new_user) {
         NSString *str;

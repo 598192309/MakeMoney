@@ -25,6 +25,7 @@
 
 @property (nonatomic,strong)UIImageView *iconImageV;
 @property (nonatomic,strong)UIImageView *vipImageV;
+@property (nonatomic,strong)UIButton *qiandaoBtn;
 
 
 
@@ -35,6 +36,7 @@
 @property (nonatomic,strong)LPButton *qianbaoBtn;
 @property (nonatomic,strong)LPButton *tuiguangBtn;
 @property (nonatomic,strong)LPButton *vipBtn;
+
 
 
 @end
@@ -99,6 +101,14 @@
 
     }
     
+    if (item.sign_in) {//签到
+        self.qiandaoBtn.selected = YES;
+        ViewBorderRadius(self.qiandaoBtn, Adaptor_Value(15), 1, TitleGrayColor);
+    }else{
+        self.qiandaoBtn.selected = NO;
+        ViewBorderRadius(self.qiandaoBtn, Adaptor_Value(15), 1, LightYellowColor);
+    }
+    
     finishBlock();
 }
 
@@ -142,6 +152,12 @@
 //    [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
     if (self.mineCustomHeaderViewBtnsBlock) {
         self.mineCustomHeaderViewBtnsBlock(sender,@{});
+    }
+}
+
+- (void)qiandaoBtnClick:(UIButton *)sender{
+    if (self.mineCustomQiandaoBtnClickBlock) {
+        self.mineCustomQiandaoBtnClickBlock(sender);
     }
 }
 //转时间戳 变时间类型
@@ -285,7 +301,24 @@
         }];
 //        _shipinVipLable.hidden = !RI.infoInitItem.is_vip;
 
-  
+        _qiandaoBtn = [[UIButton alloc] init];
+        [_qiandaoBtn addTarget:self action:@selector(qiandaoBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_qiandaoBtn setTitleColor:LightYellowColor forState:UIControlStateNormal];
+        [_qiandaoBtn setTitleColor:TitleGrayColor forState:UIControlStateSelected];
+
+        _qiandaoBtn.titleLabel.font = AdaptedFontSize(15);
+        [_qiandaoBtn setTitle:lqStrings(@"签到") forState:UIControlStateNormal];
+        [_qiandaoBtn setTitle:lqStrings(@"已签到") forState:UIControlStateSelected];
+        [contentV addSubview:_qiandaoBtn];
+        [_qiandaoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(contentV).offset(-Adaptor_Value(20));
+            make.height.mas_equalTo(Adaptor_Value(30));
+            make.centerY.mas_equalTo(contentV);
+            make.width.mas_equalTo(Adaptor_Value(80));
+        }];
+        ViewBorderRadius(_qiandaoBtn, Adaptor_Value(15), 1, LightYellowColor);
+        
+
 
 
     }

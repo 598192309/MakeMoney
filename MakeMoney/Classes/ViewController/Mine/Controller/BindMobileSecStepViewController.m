@@ -8,6 +8,8 @@
 
 #import "BindMobileSecStepViewController.h"
 #import "BindMobileSecStepView.h"
+#import "MineApi.h"
+#import "BindMobileSetPwdViewController.h"
 
 @interface BindMobileSecStepViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
@@ -78,15 +80,44 @@
     __weak __typeof(self) weakSelf = self;
     //点击确认
     self.bindMobileSecStepView.confirmBtnClickBlock = ^(UIButton * _Nonnull sender, UITextField * _Nonnull tf) {
-        
+        [weakSelf checkCodeWithMobile:weakSelf.mobile code:tf.text sender:sender];
     };
     //点击发送验证码
     self.bindMobileSecStepView.codeBtnClickBlock = ^(UIButton * _Nonnull sender, UITextField * _Nonnull tf) {
-        
+        [weakSelf requestCodeWithMobile:weakSelf.mobile sender:sender];
     };
 }
 #pragma mark -  net
+//获取验证码
+- (void)requestCodeWithMobile:(NSString *)mobile  sender:(UIButton *)sender{
+    [LSVProgressHUD show];
+    sender.userInteractionEnabled = NO;
+    [MineApi requestCodeWithMobile:mobile Success:^(NSInteger status, NSString * _Nonnull msg) {
+        sender.userInteractionEnabled = YES;
+        [sender startWithTime:60 title:lqStrings(@"") titleColor:TitleWhiteColor countDownTitle:NSLocalizedString(@"s", nil) countDownTitleColor:TitleWhiteColor mainColor:[UIColor lq_colorWithHexString:@"#666666" alpha:0.5] countColor:[UIColor lq_colorWithHexString:@"#303030" alpha:0.3]];
+        
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+        sender.userInteractionEnabled = YES;
 
+    }];
+}
+
+//验证验证码
+- (void)checkCodeWithMobile:(NSString *)mobile code:(NSString *)code  sender:(UIButton *)sender{
+    [LSVProgressHUD show];
+    sender.userInteractionEnabled = NO;
+    __weak __typeof(self) weakSelf = self;
+    [MineApi checkCodeWithMobile:mobile code:code Success:^(NSInteger status, NSString * _Nonnull msg) {
+        sender.userInteractionEnabled = YES;
+        BindMobileSetPwdViewController *vc = [[BindMobileSetPwdViewController alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+        sender.userInteractionEnabled = YES;
+
+    }];
+}
 
 #pragma mark -  UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

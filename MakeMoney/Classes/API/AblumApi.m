@@ -49,4 +49,21 @@
 }
 
 
+/*******************写真用金币购买
+
+ *********************/
++ (NetworkTask *)buyAblumWithGoldWithAblumId:(NSString *)album_id gold:(NSString *)gold Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/album/buy" parameters:@{@"album_id":SAFE_NIL_STRING(album_id),@"gold":SAFE_NIL_STRING(gold)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+        NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+        NSString *msg = [resultObject safeObjectForKey:@"msg"];
+        if (successBlock) {
+            successBlock(status,msg);
+        }
+    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+        if (errorBlock) {
+            errorBlock(error,resultObject);
+        }
+    }];
+}
+
 @end

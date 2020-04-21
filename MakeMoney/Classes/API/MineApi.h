@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NetworkTask *)requestAVInfoWithVedioId:(NSString *)video_id  Success:(void(^)(InitItem *initItem,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
 
 /*******************获取余额*********************/
-+ (NetworkTask *)requestBalanceSuccess:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
++ (NetworkTask *)requestBalanceSuccess:(void(^)(NSInteger status,NSString *msg,NSString *balance,NSString *gold))successBlock error:(ErrorBlock)errorBlock;
 
 /*******************推广明细*********************/
 + (NetworkTask *)requestExtendDetailwithVideoInviteCode:(NSString *)invite_code pageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(NSArray *extendArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
@@ -176,6 +176,23 @@ NS_ASSUME_NONNULL_BEGIN
  成功返回： (非VIP，imgs返回10条，VIP返回全集，自己拿集合分页加载)
  *********************/
 + (NetworkTask *)requestAblumLoveListWithPageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(NSInteger status,NSString *msg,NSArray *ablumItemArr))successBlock error:(ErrorBlock)errorBlock;
+
+/*******************签到
+ *********************/
++ (NetworkTask *)requestQiandaoSuccess:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
+
+/****************************注册 登录*************************/
+/**  登录  */
+
++ (NetworkTask *)loginWithMobile:(NSString *)mobile password:(NSString *)password success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
+
+/**  更新密码  */
+
++ (NetworkTask *)updatePwdWithMobile:(NSString *)mobile password:(NSString *)password success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
+
+/** 检查手机号是否存在  */
+
++ (NetworkTask *)checkMobileRealWithMobile:(NSString *)mobile  success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
 @end
 
 NS_ASSUME_NONNULL_END

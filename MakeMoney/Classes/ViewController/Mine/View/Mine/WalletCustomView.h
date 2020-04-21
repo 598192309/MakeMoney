@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**点击提现 */
 @property(nonatomic,copy)void(^walletCustomViewCashBtnClickBlock)(UIButton * sender,NSDictionary *dict);
 
-- (void)refreshMoney:(NSString *)money;
+- (void)refreshMoney:(NSString *)money gold:(NSString*)gold;
 @end
 
 NS_ASSUME_NONNULL_END

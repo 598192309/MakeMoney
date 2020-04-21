@@ -25,6 +25,12 @@ NS_ASSUME_NONNULL_BEGIN
 + (NetworkTask *)loveAblumWithAblumId:(NSString *)album_id Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
 
 
+/*******************写真用金币购买
+
+ *********************/
++ (NetworkTask *)buyAblumWithGoldWithAblumId:(NSString *)album_id gold:(NSString *)gold Success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -103,13 +103,16 @@
 }
 
 /*******************获取余额*********************/
-+ (NetworkTask *)requestBalanceSuccess:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
-    return [NET POST:@"/api/user/balance" parameters:nil criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
++ (NetworkTask *)requestBalanceSuccess:(void(^)(NSInteger status,NSString *msg,NSString *balance,NSString *gold))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/user/balance2" parameters:nil criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
         NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
 
-        NSString *msg = [[resultObject safeObjectForKey:@"msg"] stringValue];
+        NSString *msg = [resultObject safeObjectForKey:@"msg"] ;
+        NSString *balance = [[resultObject safeObjectForKey:@"balance"] stringValue];
+        NSString *gold = [[resultObject safeObjectForKey:@"gold"] stringValue];
+
         if (successBlock) {
-            successBlock(status,msg);
+            successBlock(status,msg,balance,gold);
         }
     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
         if (errorBlock) {
@@ -540,6 +543,79 @@
             errorBlock(error,resultObject);
         }
     }];
+}
+
+/*******************签到
+ *********************/
++ (NetworkTask *)requestQiandaoSuccess:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/sign_in" parameters:nil criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+        NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+        NSString *msg = [resultObject safeObjectForKey:@"msg"];
+
+        if (successBlock) {
+            successBlock(status,msg);
+        }
+    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+        if (errorBlock) {
+            errorBlock(error,resultObject);
+        }
+    }];
+}
+/**  登录  检查密码
+ "msg": "58e17cf5d2952bdb91251c3c8bc4c504",   //返回token保存到请求头
+
+ */
+
++ (NetworkTask *)loginWithMobile:(NSString *)mobile password:(NSString *)password success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/check_pwd2" parameters:@{@"mobile":SAFE_NIL_STRING(mobile),@"password":SAFE_NIL_STRING(password)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+         NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+         NSString *msg = [resultObject safeObjectForKey:@"msg"];
+
+         if (successBlock) {
+             successBlock(status,msg);
+         }
+     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+         if (errorBlock) {
+             errorBlock(error,resultObject);
+         }
+     }];
+}
+
+/**  更新密码  */
+
++ (NetworkTask *)updatePwdWithMobile:(NSString *)mobile password:(NSString *)password success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/update_pwd2" parameters:@{@"mobile":SAFE_NIL_STRING(mobile),@"password":SAFE_NIL_STRING(password)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+         NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+         NSString *msg = [resultObject safeObjectForKey:@"msg"];
+
+         if (successBlock) {
+             successBlock(status,msg);
+         }
+     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+         if (errorBlock) {
+             errorBlock(error,resultObject);
+         }
+     }];
+}
+
+/** 检查手机号是否存在
+ "status": 0,      1.手机号不存在(自动获取验证码)      2.手机号已存在（号码存在输入验证码界面）
+
+ */
+
++ (NetworkTask *)checkMobileRealWithMobile:(NSString *)mobile  success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:@"/api/check_mobile2" parameters:@{@"mobile":SAFE_NIL_STRING(mobile)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+         NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+         NSString *msg = [resultObject safeObjectForKey:@"msg"];
+
+         if (successBlock) {
+             successBlock(status,msg);
+         }
+     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+         if (errorBlock) {
+             errorBlock(error,resultObject);
+         }
+     }];
 }
 
 @end
