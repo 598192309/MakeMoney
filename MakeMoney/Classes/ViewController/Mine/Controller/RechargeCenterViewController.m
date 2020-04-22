@@ -17,6 +17,7 @@
 #import "VideoRechargeViewController.h"
 #import "CityRechargeViewController.h"
 #import "AblumRechargeViewController.h"
+#import "BindMobileFirstStepViewController.h"
 
 @interface RechargeCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UIImageView *backImageV;
@@ -40,6 +41,14 @@
 #pragma mark - life
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    if (self.notFirstAppear) {
+
+        if (RI.infoInitItem.mobile.length == 0) {//没绑定
+            [self showTipMsg:lqStrings(@"购买VIP需要先绑定手机号喔~") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:@"" subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"去绑定"];
+        }else{
+            [self showTipMsg:lqStrings(@"温馨提示") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"请注意选择VIP类型哦~") subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"好的"];
+        }
+    }
 
 }
 - (void)viewDidLoad {
@@ -52,7 +61,13 @@
        // Fallback on earlier versions
        self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    [self showTipMsg:lqStrings(@"温馨提示") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"请注意选择VIP类型哦~") subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"好的"];
+    if (RI.infoInitItem.mobile.length == 0) {//没绑定
+        [self showTipMsg:lqStrings(@"购买VIP需要先绑定手机号喔~") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:@"" subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"再看看" secBtnTitle:@"去绑定" singleBtnTitle:@""];
+
+    }else{
+        [self showTipMsg:lqStrings(@"温馨提示") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"请注意选择VIP类型哦~") subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"好的"];
+
+    }
     [self configUI];
     [self setUpNav];
 
@@ -273,8 +288,23 @@
         _tipAlertView = [CommonAlertView new];
         __weak __typeof(self) weakSelf = self;
         _tipAlertView.commonAlertViewBlock = ^(NSInteger index, NSString * _Nonnull str) {
-            [weakSelf.tipAlertView removeFromSuperview];
-            weakSelf.tipAlertView = nil;
+            if (index == 1) {
+                //再看看
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+                [weakSelf.tipAlertView removeFromSuperview];
+                weakSelf.tipAlertView = nil;
+            }else if (index == 2) {
+                BindMobileFirstStepViewController *vc = [[BindMobileFirstStepViewController alloc] init];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+                [weakSelf.tipAlertView removeFromSuperview];
+                weakSelf.tipAlertView = nil;
+            }
+            if (index == 3) {
+            
+                [weakSelf.tipAlertView removeFromSuperview];
+                weakSelf.tipAlertView = nil;
+            }
+
         };
     }
     return _tipAlertView;

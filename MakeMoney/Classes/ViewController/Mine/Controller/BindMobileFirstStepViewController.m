@@ -22,7 +22,19 @@
 @end
 
 @implementation BindMobileFirstStepViewController
+#pragma mark - 重写
+//右滑返回功能，默认开启（YES）
+- (BOOL)gestureRecognizerShouldBegin{
 
+    return NO;
+}
+-(void)backClick:(UIButton*)button{
+    if (self.isFindBackPwd) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 #pragma mark - life
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -120,6 +132,7 @@
         if (!weakSelf.isFindBackPwd) {
             vc.isFisrtlogin = YES;
         }
+        vc.isFindBackPwd = weakSelf.isFindBackPwd;
         [weakSelf.navigationController pushViewController:vc animated:YES];
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];

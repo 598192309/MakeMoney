@@ -10,6 +10,7 @@
 #import "MineApi.h"
 #import "SAMKeychain.h"
 #import "BindMobileFirstStepViewController.h"
+#import "RechargeCenterViewController.h"
 
 @interface BindMobileSetPwdViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
@@ -129,8 +130,16 @@
         [LSVProgressHUD showInfoWithStatus:msg];
 
         sender.userInteractionEnabled = YES;
+        UIViewController *secVC = (UIViewController *)[self.navigationController.childViewControllers safeObjectAtIndex:1];
+        if ([secVC isKindOfClass:[RechargeCenterViewController class]]) {
+            //从充值中心来 回充值中心去
+            RI.infoInitItem.mobile = mobile;
+            [weakSelf.navigationController popToViewController:secVC animated:YES];
+        }else{
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+
+        }
         
-        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
 
     } error:^(NSError *error, id resultObject) {
 //        [LSVProgressHUD showError:error];
@@ -304,7 +313,7 @@
         }];
         _pwdTf.textColor = [UIColor blackColor];
         [_pwdTf addTarget:self action:@selector(textFDidChange:) forControlEvents:UIControlEventEditingChanged];
-        _pwdTf.placeholder = weakSelf.isFisrtlogin ?lqStrings(@"请输入密码"): lqStrings(@"请设置密码");
+        _pwdTf.placeholder = (weakSelf.isFisrtlogin || weakSelf.islogin) ?lqStrings(@"请输入密码"): lqStrings(@"请设置密码");
         [_pwdTf setPlaceholderColor:TitleGrayColor font:nil];
         _pwdTf.font = AdaptedFontSize(18);
 
@@ -329,8 +338,8 @@
         [_confirmBtn setTitle:lqStrings(@"下一步") forState:UIControlStateNormal];
         [_tfBackView addSubview:_confirmBtn];
         [_confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_greaterThanOrEqualTo(weakSelf.pwdTf.mas_bottom).offset(Adaptor_Value(20));
-            make.top.mas_equalTo(weakSelf.pwdTf.mas_bottom).offset(Adaptor_Value(10));
+//            make.top.mas_greaterThanOrEqualTo(weakSelf.pwdTf.mas_bottom).offset(Adaptor_Value(20));
+            make.top.mas_equalTo(weakSelf.forgetBtn.mas_bottom).offset(Adaptor_Value(10));
             make.centerX.mas_equalTo(weakSelf.tfBackView);
             make.height.mas_equalTo(Adaptor_Value(60));
             make.left.mas_equalTo(Adaptor_Value(20));
