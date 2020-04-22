@@ -95,7 +95,7 @@
     __weak __typeof(self) weakSelf = self;
     //查看联系方式
     self.cityDetailCustomView.contactBtnClickBlock = ^(UIButton * _Nonnull sender) {
-        [weakSelf showTipMsg:@"" msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"哥哥想联系我么？你必须是同城VIP会员喔，么么哒") subFont:AdaptedFontSize(13) subColor:TitleBlackColor firstBtnTitle:@"取消" secBtnTitle:@"购买VIP" singleBtnTitle:@""];
+        [weakSelf showTipMsg:@"" msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"哥哥想联系我么？你必须是同城VIP会员喔，么么哒") subFont:AdaptedFontSize(15) subColor:TitleBlackColor firstBtnTitle:@"取消" secBtnTitle:@"购买VIP" singleBtnTitle:@""];
 
     };
 }
