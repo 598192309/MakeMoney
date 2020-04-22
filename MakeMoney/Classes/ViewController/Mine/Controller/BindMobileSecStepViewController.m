@@ -10,6 +10,7 @@
 #import "BindMobileSecStepView.h"
 #import "MineApi.h"
 #import "BindMobileSetPwdViewController.h"
+#import "BindMobileFirstStepViewController.h"
 
 @interface BindMobileSecStepViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
@@ -35,6 +36,7 @@
        // Fallback on earlier versions
        self.automaticallyAdjustsScrollViewInsets = NO;
     }
+    [self requestCodeWithMobile:self.mobile sender:self.bindMobileSecStepView.codeBtn];
 }
 - (void)dealloc{
     LQLog(@"dealloc -------%@",NSStringFromClass([self class]));
@@ -111,6 +113,14 @@
     [MineApi checkCodeWithMobile:mobile code:code Success:^(NSInteger status, NSString * _Nonnull msg) {
         sender.userInteractionEnabled = YES;
         BindMobileSetPwdViewController *vc = [[BindMobileSetPwdViewController alloc] init];
+        vc.mobile = mobile;
+        //上个
+        MainTabBarController *tab = (MainTabBarController*)[UIApplication sharedApplication].keyWindow.rootViewController;
+        BaseNavigationController *nav = [tab.childViewControllers safeObjectAtIndex:tab.selectedIndex];
+        UIViewController *last = (UIViewController *)[nav.childViewControllers safeObjectAtIndex:(nav.childViewControllers.count - 1 - 1)];
+        if ([last isKindOfClass:[BindMobileFirstStepViewController class]] ) {
+            vc.islogin = YES;
+        }
         [weakSelf.navigationController pushViewController:vc animated:YES];
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
@@ -179,6 +189,8 @@
 - (BindMobileSecStepView *)bindMobileSecStepView{
     if (!_bindMobileSecStepView) {
         _bindMobileSecStepView = [BindMobileSecStepView new];
+        _bindMobileSecStepView.isFindBackPwd = _isFindBackPwd;
+
     }
     return _bindMobileSecStepView;
 }

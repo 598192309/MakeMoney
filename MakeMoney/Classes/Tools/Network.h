@@ -57,6 +57,9 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)switchHost:(nullable  NSString*)host;
 
 -(void)setauthorization:(NSString *)authorization;
+
+-(void)setToken:(NSString *)token;
+
 NS_ASSUME_NONNULL_END
 
 #endif

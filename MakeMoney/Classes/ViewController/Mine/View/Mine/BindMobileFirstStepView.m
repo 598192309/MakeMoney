@@ -22,7 +22,12 @@
 
 @end
 @implementation BindMobileFirstStepView
-#pragma mark - 生命周期
+#pragma mark - setter
+- (void)setIsFindBackPwd:(BOOL)isFindBackPwd{
+    _isFindBackPwd = isFindBackPwd;
+    self.tipLable.text = lqStrings(@"找回密码");
+    self.mobileTf.placeholder = lqStrings(@"请输入绑定的手机号码");
+}
 #pragma mark - 生命周期
 -(instancetype)init{
     if (self = [super init]) {
@@ -104,7 +109,7 @@
         [_mobileTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.left.mas_equalTo(Adaptor_Value(20));
-            make.top.mas_equalTo(weakSelf.tipLable.mas_bottom).offset(Adaptor_Value(50));
+            make.top.mas_equalTo(weakSelf.tipLable.mas_bottom).offset(Adaptor_Value(30));
         }];
         
         _mobileTf = [[UITextField alloc] init];

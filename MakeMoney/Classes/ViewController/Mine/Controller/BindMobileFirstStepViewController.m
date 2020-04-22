@@ -10,6 +10,7 @@
 #import "BindMobileFirstStepView.h"
 #import "BindMobileSecStepViewController.h"
 #import "MineApi.h"
+#import "BindMobileSetPwdViewController.h"
 
 @interface BindMobileFirstStepViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
@@ -91,11 +92,14 @@
     [LSVProgressHUD show];
     [MineApi checkMobileRealWithMobile:mobile success:^(NSInteger status, NSString * _Nonnull msg) {
         sender.userInteractionEnabled = YES;
-        if (status == 1) {
+        if (status == 1 && weakSelf.isFindBackPwd) {//手机号码不存在 进入验证码界面 或者找回密码时
             BindMobileSecStepViewController *vc = [BindMobileSecStepViewController new];
+            vc.mobile = mobile;
             [weakSelf.navigationController pushViewController:vc animated:YES];
-        }else{
-            
+        }else{//手机号码存在 进入输入密码界面
+            BindMobileSetPwdViewController *vc = [[BindMobileSetPwdViewController alloc] init];
+            vc.mobile = mobile;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
         }
 
     } error:^(NSError *error, id resultObject) {
@@ -164,6 +168,7 @@
 - (BindMobileFirstStepView *)bindMobileFirstStepView{
     if (!_bindMobileFirstStepView) {
         _bindMobileFirstStepView = [BindMobileFirstStepView new];
+        _bindMobileFirstStepView.isFindBackPwd = _isFindBackPwd;
     }
     return _bindMobileFirstStepView;
 }

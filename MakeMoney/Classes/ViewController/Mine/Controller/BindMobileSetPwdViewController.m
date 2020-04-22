@@ -8,6 +8,8 @@
 
 #import "BindMobileSetPwdViewController.h"
 #import "MineApi.h"
+#import "SAMKeychain.h"
+#import "BindMobileFirstStepViewController.h"
 
 @interface BindMobileSetPwdViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
@@ -17,9 +19,10 @@
 
 @property (nonatomic,strong)UIView *tfBackView;
 @property (nonatomic,strong)UILabel *tipLable;
-
+@property (nonatomic,strong)UILabel *wrongTipLable;
 @property (nonatomic,strong)UITextField *pwdTf;
 @property (nonatomic,strong)UIButton *seeBtn;
+@property (nonatomic,strong)UIButton *forgetBtn;
 @property (nonatomic,strong)UIButton *confirmBtn;
 
 
@@ -81,7 +84,19 @@
 #pragma mark - act
 #pragma mark - act
 - (void)confirmBtnClick:(UIButton *)sender{
-    [self loginWithMobile:self.mobile pwd:self.pwdTf.text sender:sender];
+    if (self.islogin) {
+        [self loginWithMobile:self.mobile pwd:self.pwdTf.text sender:sender];
+
+    }else{
+        [self setPwdWithMobile:self.mobile pwd:self.pwdTf.text sender:sender];
+
+    }
+}
+
+- (void)forgetBtnClick:(UIButton *)sender{
+    BindMobileFirstStepViewController *vc = [[BindMobileFirstStepViewController alloc] init];
+    vc.isFindBackPwd = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)seeBtnClick:(UIButton *)sender{
@@ -94,14 +109,43 @@
     
 }
 #pragma mark -  net
-//设置密码 登录
+// 登录
 - (void)loginWithMobile:(NSString *)mobile pwd:(NSString *)pwd sender:(UIButton *)sender{
     [LSVProgressHUD show];
     sender.userInteractionEnabled = NO;
+    __weak __typeof(self) weakSelf = self;
     [MineApi loginWithMobile:mobile password:pwd success:^(NSInteger status, NSString * _Nonnull msg) {
         //    "msg": "58e17cf5d2952bdb91251c3c8bc4c504",   //返回token保存到请求头
+        //讲数据保存一下
+        [SAMKeychain setPassword:msg  forService:@"com.51778Vedio"account:@"uuid"];
+
+        [NET setToken:msg];
+        [LSVProgressHUD dismiss];
+
+        sender.userInteractionEnabled = YES;
         
-        
+        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+
+    } error:^(NSError *error, id resultObject) {
+//        [LSVProgressHUD showError:error];
+        [LSVProgressHUD dismiss];
+        sender.userInteractionEnabled = YES;
+
+        weakSelf.wrongTipLable.text = error.errorMsg;
+        [weakSelf.forgetBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(Adaptor_Value(30));
+        }];
+    }];
+}
+
+//设置密码
+- (void)setPwdWithMobile:(NSString *)mobile pwd:(NSString *)pwd sender:(UIButton *)sender{
+    [LSVProgressHUD show];
+    sender.userInteractionEnabled = NO;
+    __weak __typeof(self) weakSelf = self;
+    [MineApi updatePwdWithMobile:mobile password:pwd success:^(NSInteger status, NSString * _Nonnull msg) {
+        //s设置成功 再登录
+        [weakSelf loginWithMobile:mobile pwd:pwd sender:sender];
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
     }];
@@ -204,6 +248,17 @@
             
         }];
         
+        _wrongTipLable = [UILabel lableWithText:lqStrings(@"") textColor:[UIColor redColor] fontSize:AdaptedFontSize(14) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        [_tfBackView addSubview:_wrongTipLable];
+        [_wrongTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.mas_equalTo(Adaptor_Value(10));
+            make.right.mas_equalTo(weakSelf.tfBackView).offset(-Adaptor_Value(10));
+
+            make.top.mas_equalTo(weakSelf.tipLable.mas_bottom).offset(Adaptor_Value(10));
+            
+        }];
+        
         _seeBtn = [[UIButton alloc] init];
         [_seeBtn addTarget:self action:@selector(seeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_seeBtn setTitleColor:ThemeBlackColor forState:UIControlStateNormal];
@@ -214,7 +269,7 @@
         [_seeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(weakSelf.tfBackView).offset(-Adaptor_Value(20));
             make.height.mas_equalTo(Adaptor_Value(50));
-            make.top.mas_equalTo(weakSelf.tipLable.mas_bottom).offset(Adaptor_Value(50));
+            make.top.mas_equalTo(weakSelf.wrongTipLable.mas_bottom).offset(Adaptor_Value(20));
         }];
         
         _pwdTf = [[UITextField alloc] init];
@@ -232,7 +287,17 @@
         [_pwdTf setPlaceholderColor:TitleGrayColor font:nil];
         _pwdTf.font = AdaptedFontSize(18);
 
-        
+        _forgetBtn = [[UIButton alloc] init];
+        [_forgetBtn addTarget:self action:@selector(forgetBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_forgetBtn setTitleColor:ThemeBlackColor forState:UIControlStateNormal];
+        _forgetBtn.titleLabel.font = AdaptedFontSize(15);
+        [_forgetBtn setTitle:lqStrings(@"忘记密码") forState:UIControlStateNormal];
+        [_tfBackView addSubview:_forgetBtn];
+        [_forgetBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(weakSelf.pwdTf.mas_bottom).offset(Adaptor_Value(10));
+            make.height.mas_equalTo(Adaptor_Value(0));
+            make.right.mas_equalTo(weakSelf.seeBtn);
+        }];
         
         _confirmBtn = [[UIButton alloc] init];
         [_confirmBtn addTarget:self action:@selector(confirmBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -242,7 +307,8 @@
         [_confirmBtn setTitle:lqStrings(@"下一步") forState:UIControlStateNormal];
         [_tfBackView addSubview:_confirmBtn];
         [_confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(weakSelf.pwdTf.mas_bottom).offset(Adaptor_Value(20));
+            make.top.mas_greaterThanOrEqualTo(weakSelf.pwdTf.mas_bottom).offset(Adaptor_Value(20));
+            make.top.mas_equalTo(weakSelf.pwdTf.mas_bottom).offset(Adaptor_Value(10));
             make.centerX.mas_equalTo(weakSelf.tfBackView);
             make.height.mas_equalTo(Adaptor_Value(60));
             make.left.mas_equalTo(Adaptor_Value(20));

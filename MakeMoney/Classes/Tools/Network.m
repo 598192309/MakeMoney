@@ -509,7 +509,11 @@
     [_manager.requestSerializer setValue:authorization forHTTPHeaderField:@"Authorization"];
 
 }
+//提供给外面修改token的
+-(void)setToken:(NSString *)token{
+    [_manager.requestSerializer setValue:token forHTTPHeaderField:@"token"];
 
+}
 
 - (void)logDebugInfoWithOperation:(NSURLSessionDataTask *)task error:(NSError *)error responseObject:(id)responseObject{
     //打印信息

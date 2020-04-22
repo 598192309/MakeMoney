@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)void(^confirmBtnClickBlock)(UIButton * sender,UITextField *tf);
 /**点击获取验证码*/
 @property(nonatomic,copy)void(^codeBtnClickBlock)(UIButton * sender,UITextField *tf);
+@property (nonatomic,assign)BOOL isFindBackPwd;//找回密码
+@property (nonatomic,strong)UIButton *codeBtn;
+
 @end
 
 NS_ASSUME_NONNULL_END
