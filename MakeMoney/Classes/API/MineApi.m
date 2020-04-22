@@ -566,8 +566,29 @@
 
  */
 
-+ (NetworkTask *)loginWithMobile:(NSString *)mobile password:(NSString *)password success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
-    return [NET POST:@"/api/check_pwd2" parameters:@{@"mobile":SAFE_NIL_STRING(mobile),@"password":SAFE_NIL_STRING(password)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
++ (NetworkTask *)loginWithMobile:(NSString *)mobile password:(NSString *)password success:(void(^)(NSInteger status,NSString *msg,NSString *token))successBlock error:(ErrorBlock)errorBlock{
+    NSString *md5password = [RSAEncryptor MD5WithString:SAFE_NIL_STRING(password)];
+
+    return [NET POST:@"/api/check_pwd2" parameters:@{@"mobile":SAFE_NIL_STRING(mobile),@"password":SAFE_NIL_STRING(md5password)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+         NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
+         NSString *msg = [resultObject safeObjectForKey:@"msg"];
+        NSString *token = [resultObject safeObjectForKey:@"token"];
+
+         if (successBlock) {
+             successBlock(status,msg,token);
+         }
+     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+         if (errorBlock) {
+             errorBlock(error,resultObject);
+         }
+     }];
+}
+/**  设置密码  */
+
++ (NetworkTask *)setPwdWithMobile:(NSString *)mobile password:(NSString *)password success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
+    NSString *md5password = [RSAEncryptor MD5WithString:SAFE_NIL_STRING(password)];
+
+    return [NET POST:@"/api/set_pwd2" parameters:@{@"mobile":SAFE_NIL_STRING(mobile),@"password":SAFE_NIL_STRING(md5password)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
          NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
          NSString *msg = [resultObject safeObjectForKey:@"msg"];
 
@@ -580,11 +601,12 @@
          }
      }];
 }
-
 /**  更新密码  */
 
 + (NetworkTask *)updatePwdWithMobile:(NSString *)mobile password:(NSString *)password success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
-    return [NET POST:@"/api/update_pwd2" parameters:@{@"mobile":SAFE_NIL_STRING(mobile),@"password":SAFE_NIL_STRING(password)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+    NSString *md5password = [RSAEncryptor MD5WithString:SAFE_NIL_STRING(password)];
+
+    return [NET POST:@"/api/update_pwd2" parameters:@{@"mobile":SAFE_NIL_STRING(mobile),@"password":SAFE_NIL_STRING(md5password)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
          NSInteger status = [[resultObject safeObjectForKey:@"status"] integerValue];
          NSString *msg = [resultObject safeObjectForKey:@"msg"];
 

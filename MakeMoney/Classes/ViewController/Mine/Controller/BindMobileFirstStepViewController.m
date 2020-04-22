@@ -92,13 +92,13 @@
     [LSVProgressHUD show];
     [MineApi checkMobileRealWithMobile:mobile success:^(NSInteger status, NSString * _Nonnull msg) {
         sender.userInteractionEnabled = YES;
-        if (status == 1 && weakSelf.isFindBackPwd) {//手机号码不存在 进入验证码界面 或者找回密码时
-            BindMobileSecStepViewController *vc = [BindMobileSecStepViewController new];
-            vc.mobile = mobile;
-            [weakSelf.navigationController pushViewController:vc animated:YES];
+        [LSVProgressHUD dismiss];
+        if (status == 1 || weakSelf.isFindBackPwd) {//手机号码不存在 进入验证码界面 或者找回密码时
+            [weakSelf requestCodeWithMobile:mobile sender:sender];
         }else{//手机号码存在 进入输入密码界面
             BindMobileSetPwdViewController *vc = [[BindMobileSetPwdViewController alloc] init];
             vc.mobile = mobile;
+            vc.islogin = YES;
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }
 
@@ -107,7 +107,26 @@
         sender.userInteractionEnabled = YES;
     }];
 }
+//获取验证码
+- (void)requestCodeWithMobile:(NSString *)mobile  sender:(UIButton *)sender{
+    [LSVProgressHUD show];
+    sender.userInteractionEnabled = NO;
+    __weak __typeof(self) weakSelf = self;
+    [MineApi requestCodeWithMobile:mobile Success:^(NSInteger status, NSString * _Nonnull msg) {
+        sender.userInteractionEnabled = YES;
+        [LSVProgressHUD showInfoWithStatus:msg];
+        BindMobileSecStepViewController *vc = [BindMobileSecStepViewController new];
+        vc.mobile = mobile;
+        if (!weakSelf.isFindBackPwd) {
+            vc.isFisrtlogin = YES;
+        }
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+        sender.userInteractionEnabled = YES;
 
+    }];
+}
 #pragma mark -  UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 0;

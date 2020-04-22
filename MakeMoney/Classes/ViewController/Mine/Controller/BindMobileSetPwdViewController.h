@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BindMobileSetPwdViewController : BaseViewController
 @property (nonatomic,strong)NSString *mobile;
-@property (nonatomic,assign)BOOL islogin;//是登录 还是设置密码
+@property (nonatomic,assign)BOOL islogin;//是登录 还是更新密码
+@property (nonatomic,assign)BOOL isFisrtlogin;//是第一次登录
 
 @end
 

@@ -184,8 +184,10 @@ NS_ASSUME_NONNULL_BEGIN
 /****************************注册 登录*************************/
 /**  登录  */
 
-+ (NetworkTask *)loginWithMobile:(NSString *)mobile password:(NSString *)password success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
++ (NetworkTask *)loginWithMobile:(NSString *)mobile password:(NSString *)password success:(void(^)(NSInteger status,NSString *msg,NSString *token))successBlock error:(ErrorBlock)errorBlock;
+/**  设置密码  */
 
++ (NetworkTask *)setPwdWithMobile:(NSString *)mobile password:(NSString *)password success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
 /**  更新密码  */
 
 + (NetworkTask *)updatePwdWithMobile:(NSString *)mobile password:(NSString *)password success:(void(^)(NSInteger status,NSString *msg))successBlock error:(ErrorBlock)errorBlock;

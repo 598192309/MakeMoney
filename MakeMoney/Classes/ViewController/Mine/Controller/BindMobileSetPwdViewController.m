@@ -43,6 +43,8 @@
        // Fallback on earlier versions
        self.automaticallyAdjustsScrollViewInsets = NO;
     }
+
+    
 }
 - (void)dealloc{
     LQLog(@"dealloc -------%@",NSStringFromClass([self class]));
@@ -84,12 +86,16 @@
 #pragma mark - act
 #pragma mark - act
 - (void)confirmBtnClick:(UIButton *)sender{
-    if (self.islogin) {
-        [self loginWithMobile:self.mobile pwd:self.pwdTf.text sender:sender];
-
-    }else{
+    if (self.isFisrtlogin) {
         [self setPwdWithMobile:self.mobile pwd:self.pwdTf.text sender:sender];
+    }else {
+        if (self.islogin) {
+            [self loginWithMobile:self.mobile pwd:self.pwdTf.text sender:sender];
 
+        }else{
+            [self updatePwdWithMobile:self.mobile pwd:self.pwdTf.text sender:sender];
+
+        }
     }
 }
 
@@ -114,13 +120,13 @@
     [LSVProgressHUD show];
     sender.userInteractionEnabled = NO;
     __weak __typeof(self) weakSelf = self;
-    [MineApi loginWithMobile:mobile password:pwd success:^(NSInteger status, NSString * _Nonnull msg) {
+    [MineApi loginWithMobile:mobile password:pwd success:^(NSInteger status, NSString * _Nonnull msg,NSString *token) {
         //    "msg": "58e17cf5d2952bdb91251c3c8bc4c504",   //返回token保存到请求头
         //讲数据保存一下
-        [SAMKeychain setPassword:msg  forService:@"com.51778Vedio"account:@"uuid"];
+        [SAMKeychain setPassword:token  forService:@"com.51778Vedio"account:@"uuid"];
 
-        [NET setToken:msg];
-        [LSVProgressHUD dismiss];
+        [NET setToken:token];
+        [LSVProgressHUD showInfoWithStatus:msg];
 
         sender.userInteractionEnabled = YES;
         
@@ -135,6 +141,21 @@
         [weakSelf.forgetBtn mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(Adaptor_Value(30));
         }];
+        weakSelf.forgetBtn.hidden = NO;
+
+    }];
+}
+
+//更新密码
+- (void)updatePwdWithMobile:(NSString *)mobile pwd:(NSString *)pwd sender:(UIButton *)sender{
+    [LSVProgressHUD show];
+    sender.userInteractionEnabled = NO;
+    __weak __typeof(self) weakSelf = self;
+    [MineApi updatePwdWithMobile:mobile password:pwd success:^(NSInteger status, NSString * _Nonnull msg) {
+        //更新成功 再登录
+        [weakSelf loginWithMobile:mobile pwd:pwd sender:sender];
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
     }];
 }
 
@@ -143,7 +164,7 @@
     [LSVProgressHUD show];
     sender.userInteractionEnabled = NO;
     __weak __typeof(self) weakSelf = self;
-    [MineApi updatePwdWithMobile:mobile password:pwd success:^(NSInteger status, NSString * _Nonnull msg) {
+    [MineApi setPwdWithMobile:mobile password:pwd success:^(NSInteger status, NSString * _Nonnull msg) {
         //s设置成功 再登录
         [weakSelf loginWithMobile:mobile pwd:pwd sender:sender];
     } error:^(NSError *error, id resultObject) {
@@ -283,7 +304,7 @@
         }];
         _pwdTf.textColor = [UIColor blackColor];
         [_pwdTf addTarget:self action:@selector(textFDidChange:) forControlEvents:UIControlEventEditingChanged];
-        _pwdTf.placeholder = lqStrings(@"请设置密码");
+        _pwdTf.placeholder = weakSelf.isFisrtlogin ?lqStrings(@"请输入密码"): lqStrings(@"请设置密码");
         [_pwdTf setPlaceholderColor:TitleGrayColor font:nil];
         _pwdTf.font = AdaptedFontSize(18);
 
@@ -298,6 +319,7 @@
             make.height.mas_equalTo(Adaptor_Value(0));
             make.right.mas_equalTo(weakSelf.seeBtn);
         }];
+        _forgetBtn.hidden = YES;
         
         _confirmBtn = [[UIButton alloc] init];
         [_confirmBtn addTarget:self action:@selector(confirmBtnClick:) forControlEvents:UIControlEventTouchUpInside];

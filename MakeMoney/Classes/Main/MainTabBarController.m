@@ -50,8 +50,8 @@
     AVViewController *vc3 = [[AVViewController alloc] init];
     [self addChildViewController:vc3 withImageName:@"" selectedImageName:@"" withTittle:lqLocalized(@"AV",nil)];
     
-    AblumViewController *vc5 = [[AblumViewController alloc] init];
-    [self addChildViewController:vc5 withImageName:@"" selectedImageName:@"" withTittle:lqLocalized(@"写真",nil)];
+//    AblumViewController *vc5 = [[AblumViewController alloc] init];
+//    [self addChildViewController:vc5 withImageName:@"" selectedImageName:@"" withTittle:lqLocalized(@"写真",nil)];
     
     CityViewController *vc4 = [[CityViewController alloc] init];
     [self addChildViewController:vc4 withImageName:@"" selectedImageName:@"" withTittle:lqLocalized(@"同城",nil)];

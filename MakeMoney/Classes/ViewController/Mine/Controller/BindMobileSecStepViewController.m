@@ -36,7 +36,8 @@
        // Fallback on earlier versions
        self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    [self requestCodeWithMobile:self.mobile sender:self.bindMobileSecStepView.codeBtn];
+    
+    [self.bindMobileSecStepView.codeBtn startWithTime:60 title:lqStrings(@"") titleColor:TitleBlackColor countDownTitle:NSLocalizedString(@"s", nil) countDownTitleColor:TitleBlackColor mainColor:[UIColor clearColor] countColor:[UIColor clearColor]];
 }
 - (void)dealloc{
     LQLog(@"dealloc -------%@",NSStringFromClass([self class]));
@@ -96,7 +97,8 @@
     sender.userInteractionEnabled = NO;
     [MineApi requestCodeWithMobile:mobile Success:^(NSInteger status, NSString * _Nonnull msg) {
         sender.userInteractionEnabled = YES;
-        [sender startWithTime:60 title:lqStrings(@"") titleColor:TitleWhiteColor countDownTitle:NSLocalizedString(@"s", nil) countDownTitleColor:TitleWhiteColor mainColor:[UIColor lq_colorWithHexString:@"#666666" alpha:0.5] countColor:[UIColor lq_colorWithHexString:@"#303030" alpha:0.3]];
+        [LSVProgressHUD showInfoWithStatus:msg];
+        [sender startWithTime:60 title:lqStrings(@"") titleColor:TitleBlackColor countDownTitle:NSLocalizedString(@"s", nil) countDownTitleColor:TitleBlackColor mainColor:[UIColor clearColor] countColor:[UIColor clearColor]];
         
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
@@ -112,15 +114,11 @@
     __weak __typeof(self) weakSelf = self;
     [MineApi checkCodeWithMobile:mobile code:code Success:^(NSInteger status, NSString * _Nonnull msg) {
         sender.userInteractionEnabled = YES;
+        [LSVProgressHUD dismiss];
         BindMobileSetPwdViewController *vc = [[BindMobileSetPwdViewController alloc] init];
         vc.mobile = mobile;
-        //上个
-        MainTabBarController *tab = (MainTabBarController*)[UIApplication sharedApplication].keyWindow.rootViewController;
-        BaseNavigationController *nav = [tab.childViewControllers safeObjectAtIndex:tab.selectedIndex];
-        UIViewController *last = (UIViewController *)[nav.childViewControllers safeObjectAtIndex:(nav.childViewControllers.count - 1 - 1)];
-        if ([last isKindOfClass:[BindMobileFirstStepViewController class]] ) {
-            vc.islogin = YES;
-        }
+        vc.islogin = !weakSelf.isFindBackPwd;
+        vc.isFisrtlogin = weakSelf.isFisrtlogin;
         [weakSelf.navigationController pushViewController:vc animated:YES];
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];

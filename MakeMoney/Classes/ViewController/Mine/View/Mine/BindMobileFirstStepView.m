@@ -25,8 +25,11 @@
 #pragma mark - setter
 - (void)setIsFindBackPwd:(BOOL)isFindBackPwd{
     _isFindBackPwd = isFindBackPwd;
-    self.tipLable.text = lqStrings(@"找回密码");
-    self.mobileTf.placeholder = lqStrings(@"请输入绑定的手机号码");
+    if (_isFindBackPwd) {
+        self.tipLable.text = lqStrings(@"找回密码");
+        self.mobileTf.placeholder = lqStrings(@"请输入绑定的手机号码");
+    }
+
 }
 #pragma mark - 生命周期
 -(instancetype)init{

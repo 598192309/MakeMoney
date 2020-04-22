@@ -15,9 +15,9 @@
 @property (strong, nonatomic) UIWindow *window;
 
 
-//@property (strong, nonatomic) MainTabBarController *rootTabbar;
+@property (strong, nonatomic) MainTabBarController *rootTabbar;
 
-@property (nonatomic,strong) HSFTabBarController *tabBarC;
+//@property (nonatomic,strong) HSFTabBarController *tabBarC;
 
 
 + (AppDelegate* )shareAppDelegate;
