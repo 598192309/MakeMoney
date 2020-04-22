@@ -35,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *video;
 @property (nonatomic,strong)NSString *wechat;
 
+@property (nonatomic,strong)NSString *count;
+@property (nonatomic,strong)NSString *region_name;
 
 @end
 

@@ -289,6 +289,8 @@
 		8BD545BD240BE71700C90A31 /* HomeVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD545BB240BE71700C90A31 /* HomeVideoCell.m */; };
 		8BD545BE240BE71700C90A31 /* HomeVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD545BC240BE71700C90A31 /* HomeVideoCell.xib */; };
 		8BD545C1240C101E00C90A31 /* HomeSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD545C0240C101E00C90A31 /* HomeSectionFooterView.m */; };
+		8BE5DC24245087260087E70A /* CityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE5DC23245087260087E70A /* CityDetailViewController.m */; };
+		8BE5DC27245087C30087E70A /* CityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE5DC26245087C30087E70A /* CityListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -847,6 +849,10 @@
 		8BD545BC240BE71700C90A31 /* HomeVideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeVideoCell.xib; sourceTree = "<group>"; };
 		8BD545BF240C101E00C90A31 /* HomeSectionFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeSectionFooterView.h; sourceTree = "<group>"; };
 		8BD545C0240C101E00C90A31 /* HomeSectionFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeSectionFooterView.m; sourceTree = "<group>"; };
+		8BE5DC22245087260087E70A /* CityDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityDetailViewController.h; sourceTree = "<group>"; };
+		8BE5DC23245087260087E70A /* CityDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityDetailViewController.m; sourceTree = "<group>"; };
+		8BE5DC25245087C30087E70A /* CityListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityListViewController.h; sourceTree = "<group>"; };
+		8BE5DC26245087C30087E70A /* CityListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1202,6 +1208,10 @@
 			children = (
 				11105ADD2406006800521CB2 /* CityViewController.h */,
 				11105ADE2406006800521CB2 /* CityViewController.m */,
+				8BE5DC22245087260087E70A /* CityDetailViewController.h */,
+				8BE5DC23245087260087E70A /* CityDetailViewController.m */,
+				8BE5DC25245087C30087E70A /* CityListViewController.h */,
+				8BE5DC26245087C30087E70A /* CityListViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2279,6 +2289,7 @@
 				8BD545C1240C101E00C90A31 /* HomeSectionFooterView.m in Sources */,
 				111FD6F424124B1800E7B419 /* AblumApi.m in Sources */,
 				8B9B8BF5240D4AED004B4704 /* ZFAVPlayerManager.m in Sources */,
+				8BE5DC24245087260087E70A /* CityDetailViewController.m in Sources */,
 				8B9B8BED240D4AED004B4704 /* UIScrollView+ZFPlayer.m in Sources */,
 				11105AEF24060EFA00521CB2 /* HomeTopCell.m in Sources */,
 				09E72CEF24055F8E0004B25C /* UIImage+MultiFormat.m in Sources */,
@@ -2368,6 +2379,7 @@
 				8B9B8C00240D4AED004B4704 /* ZFSpeedLoadingView.m in Sources */,
 				11105E7B24067BE500521CB2 /* MineApi.m in Sources */,
 				09E72C8124055F7E0004B25C /* NSObject+MJProperty.m in Sources */,
+				8BE5DC27245087C30087E70A /* CityListViewController.m in Sources */,
 				09E72CEB24055F8E0004B25C /* SDWebImageDecoder.m in Sources */,
 				09E72CF224055F8E0004B25C /* SDImageCache.m in Sources */,
 				8B9B8BF2240D4AED004B4704 /* ZFReachabilityManager.m in Sources */,

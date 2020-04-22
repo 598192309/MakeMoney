@@ -13,6 +13,7 @@
 #import "CityItem.h"
 #import "HomeCollectionHeaderView.h"
 #import "AdsHeaderView.h"
+#import "CityListViewController.h"
 
 @interface CityViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -132,12 +133,20 @@
 }
 //设置顶部视图和底部视图
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    __weak __typeof(self) weakSelf = self;
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
        
         if (indexPath.section == 0) {
             //获取顶部视图
             HomeCollectionTopHeaderView *headerView=[HomeCollectionTopHeaderView headerViewWithCollectionView:collectionView forIndexPath:indexPath];
             [headerView refreshUIWithTitle:lqStrings(@"高端兼职") titleImageStr:@"icon_hot_man" tipBtnTitle:lqStrings(@"按城市>>") bannerImageUrlArr:self.bannerImageUrlArr];
+            headerView.headerViewTipBtnClickBlock = ^(UIButton * _Nonnull sender) {
+                CityListViewController *vc = [[CityListViewController alloc] init];
+                vc.regionID = @"";
+                vc.navStr =lqStrings(@"按城市查询");
+
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            };
             return headerView;
         }
         //获取顶部视图
@@ -157,6 +166,12 @@
         }
        HomeCollectionHeaderView *headerView=[HomeCollectionHeaderView headerViewWithCollectionView:collectionView forIndexPath:indexPath];
         [headerView refreshUIWithTitle:title titleImageStr:imageStr tipBtnTitle:subTitle];
+        headerView.headerViewTipBtnClickBlock = ^(UIButton * _Nonnull sender) {
+            CityListViewController *vc = [[CityListViewController alloc] init];
+            vc.regionID = @"";
+            vc.navStr = indexPath.section == 1 ? lqStrings(@"按地区查询"):lqStrings(@"最新推荐");
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        };
        return headerView;
     }
     AdsHeaderView *footerView = [AdsHeaderView footerViewWithCollectionView:collectionView forIndexPath:indexPath];
