@@ -17,12 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (NetworkTask *)requestCityInfoSuccess:(void(^)(CityInfoItem *cityInfoItem,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
 
 
-/*******************同城列表
- region_id       分类id
- page_index
- page_size
- *********************/
-+ (NetworkTask *)requestCityListwithRegionId:(NSString *)region_id pageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(NSArray *cityItemArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
 
 /*******************同城详情
  

@@ -54,8 +54,9 @@
     
     [self.view addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.mas_equalTo(weakSelf.view);
+        make.left.right.mas_equalTo(weakSelf.view);
         make.top.mas_equalTo(TopAdaptor_Value(25));
+        make.bottom.mas_equalTo(weakSelf.view).offset(-TabbarH);
     }];
 
 }
@@ -144,7 +145,8 @@
                 CityListViewController *vc = [[CityListViewController alloc] init];
                 vc.regionID = @"";
                 vc.navStr =lqStrings(@"按城市查询");
-
+                vc.cityType = CityType_High;
+                vc.regionID = @"100";//100 全部
                 [weakSelf.navigationController pushViewController:vc animated:YES];
             };
             return headerView;
@@ -170,6 +172,8 @@
             CityListViewController *vc = [[CityListViewController alloc] init];
             vc.regionID = @"";
             vc.navStr = indexPath.section == 1 ? lqStrings(@"按地区查询"):lqStrings(@"最新推荐");
+            vc.cityType = indexPath.section == 1 ? CityType_QM : CityType_New;
+
             [weakSelf.navigationController pushViewController:vc animated:YES];
         };
        return headerView;

@@ -31,8 +31,12 @@
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     
-    
-    [self requestData];
+    if (self.cityType == CityType_QM || self.cityType == CityType_New) {
+        [self requestData];
+
+    }else{//高端
+        [self requestHighData];
+    }
     
     
 }
@@ -56,7 +60,8 @@
 #pragma mark - net
 - (void)requestData{
     __weak __typeof(self) weakSelf = self;
-    [CityApi requestCityListwithRegionId:self.regionID pageIndex:@"0" page_size:@"25" Success:^(NSArray * _Nonnull cityItemArr, NSString * _Nonnull msg) {
+    [CityApi requestQMNewCityListWithType:IntTranslateStr(self.cityType) pageIndex:@"0" page_size:@"25" Success:^(NSArray * _Nonnull cityItemArr, NSString * _Nonnull msg) {
+
         weakSelf.pageIndex = cityItemArr.count ;
         weakSelf.cityInfoDataItemArr = [NSMutableArray arrayWithArray:cityItemArr];
         if (cityItemArr.count >= 25 ) {
@@ -79,7 +84,54 @@
 
 - (void)requestMoreData{
     __weak __typeof(self) weakSelf = self;
-    [CityApi requestCityListwithRegionId:self.regionID pageIndex:IntTranslateStr(self.pageIndex) page_size:@"25" Success:^(NSArray * _Nonnull cityItemArr, NSString * _Nonnull msg) {
+    [CityApi requestQMNewCityListWithType:IntTranslateStr(self.cityType) pageIndex:IntTranslateStr(self.pageIndex) page_size:@"25" Success:^(NSArray * _Nonnull cityItemArr, NSString * _Nonnull msg) {
+        [weakSelf.cityInfoDataItemArr addObjectsFromArray:cityItemArr];
+        [weakSelf.collectionView endFooterRefreshing];
+        [weakSelf.collectionView reloadData];
+        if (cityItemArr.count < 25) {
+            [weakSelf.collectionView endRefreshingWithNoMoreData];
+        }else{
+            weakSelf.pageIndex = weakSelf.cityInfoDataItemArr.count ;
+            
+        }
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+        [weakSelf.collectionView endHeaderRefreshing];
+
+    }];
+}
+
+//高端
+- (void)requestHighData{
+    __weak __typeof(self) weakSelf = self;
+    // region_id       分类id //100.全部
+
+    [CityApi requestQMNewCityListWithRegionID:self.regionID pageIndex:@"0" page_size:@"25" Success:^(NSArray * _Nonnull cityItemArr, NSString * _Nonnull msg) {
+
+        weakSelf.pageIndex = cityItemArr.count ;
+        weakSelf.cityInfoDataItemArr = [NSMutableArray arrayWithArray:cityItemArr];
+        if (cityItemArr.count >= 25 ) {
+            [weakSelf.collectionView addFooterWithRefreshingTarget:self refreshingAction:@selector(requestMoreData)];
+            [weakSelf.collectionView.mj_footer setHidden:NO];
+    
+        }else{
+            [weakSelf.collectionView endHeaderRefreshing];
+            //消除尾部"没有更多数据"的状态
+            [weakSelf.collectionView.mj_footer setHidden:YES];
+        }
+        [weakSelf.collectionView endHeaderRefreshing];
+        [weakSelf.collectionView reloadData];
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+        [weakSelf.collectionView endHeaderRefreshing];
+
+    }];
+}
+- (void)requestHighMoreData{
+    __weak __typeof(self) weakSelf = self;
+    // region_id       分类id //100.全部
+
+    [CityApi requestQMNewCityListWithRegionID:self.regionID pageIndex:IntTranslateStr(self.pageIndex) page_size:@"25" Success:^(NSArray * _Nonnull cityItemArr, NSString * _Nonnull msg) {
         [weakSelf.cityInfoDataItemArr addObjectsFromArray:cityItemArr];
         [weakSelf.collectionView endFooterRefreshing];
         [weakSelf.collectionView reloadData];
@@ -105,7 +157,7 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
    
     
-    return 10;
+    return self.cityInfoDataItemArr.count;
 }
 //设置方块的视图
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{

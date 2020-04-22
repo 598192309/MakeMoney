@@ -26,24 +26,7 @@
         }
     }];
 }
-/*******************同城列表
- region_id       分类id
- page_index
- page_size
- *********************/
-+ (NetworkTask *)requestCityListwithRegionId:(NSString *)region_id pageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(NSArray *cityItemArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
-    return [NET POST:@"/api/qm/find" parameters:@{@"region_id":SAFE_NIL_STRING(region_id),@"page_index":SAFE_NIL_STRING(page_index),@"page_size":SAFE_NIL_STRING(page_size)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
-        NSArray *cityItemArr = [CityListItem mj_objectArrayWithKeyValuesArray:[resultObject safeObjectForKey:@"data"]];
-        NSString *msg = [resultObject safeObjectForKey:@"msg"];
-        if (successBlock) {
-            successBlock(cityItemArr,msg);
-        }
-    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
-        if (errorBlock) {
-            errorBlock(error,resultObject);
-        }
-    }];
-}
+
 
 
 
@@ -51,7 +34,7 @@
  
  *********************/
 + (NetworkTask *)requestCityDetailwithId:(NSString *)Id pageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(CityListItem *cityItem,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
-    return [NET POST:@"/api/qm/find" parameters:@{@"id":SAFE_NIL_STRING(Id)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+    return [NET POST:@"/api/qm_id/find" parameters:@{@"id":SAFE_NIL_STRING(Id)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
         CityListItem *cityItem = [CityListItem mj_objectWithKeyValues:[resultObject safeObjectForKey:@"data"]];
         NSString *msg = [resultObject safeObjectForKey:@"msg"];
         if (successBlock) {
