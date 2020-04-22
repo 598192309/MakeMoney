@@ -14,6 +14,7 @@
 #import "HomeCollectionHeaderView.h"
 #import "AdsHeaderView.h"
 #import "CityListViewController.h"
+#import "CityDetailViewController.h"
 
 @interface CityViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -242,6 +243,18 @@
 //方块被选中会调用
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"点击选择了第%ld组，第%ld个方块",indexPath.section,indexPath.row);
+    CityListItem *item;
+    if (indexPath.section == 0) {
+        item = [self.cityInfoDataItem.upmarketLists safeObjectAtIndex:indexPath.row];
+    }else if (indexPath.section == 1) {
+        item = [self.cityInfoDataItem.hotLists safeObjectAtIndex:indexPath.row];
+    }else if (indexPath.section == 2) {
+        item = [self.cityInfoDataItem.theNewLists safeObjectAtIndex:indexPath.row];
+    }
+    
+    CityDetailViewController *vc = [[CityDetailViewController alloc] init];
+    vc.ID = item.ID;
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 //方块取消选中会调用

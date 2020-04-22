@@ -291,6 +291,7 @@
 		8BD545C1240C101E00C90A31 /* HomeSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD545C0240C101E00C90A31 /* HomeSectionFooterView.m */; };
 		8BE5DC24245087260087E70A /* CityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE5DC23245087260087E70A /* CityDetailViewController.m */; };
 		8BE5DC27245087C30087E70A /* CityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE5DC26245087C30087E70A /* CityListViewController.m */; };
+		8BE5DC2A24509DE10087E70A /* CityDetailCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE5DC2924509DE10087E70A /* CityDetailCustomView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -853,6 +854,8 @@
 		8BE5DC23245087260087E70A /* CityDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityDetailViewController.m; sourceTree = "<group>"; };
 		8BE5DC25245087C30087E70A /* CityListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityListViewController.h; sourceTree = "<group>"; };
 		8BE5DC26245087C30087E70A /* CityListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityListViewController.m; sourceTree = "<group>"; };
+		8BE5DC2824509DE10087E70A /* CityDetailCustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityDetailCustomView.h; sourceTree = "<group>"; };
+		8BE5DC2924509DE10087E70A /* CityDetailCustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityDetailCustomView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1223,6 +1226,8 @@
 				1135C9D92408BA7800478696 /* CityCell.m */,
 				096C7FC5240C0F6D00914E20 /* AdsHeaderView.h */,
 				096C7FC6240C0F6D00914E20 /* AdsHeaderView.m */,
+				8BE5DC2824509DE10087E70A /* CityDetailCustomView.h */,
+				8BE5DC2924509DE10087E70A /* CityDetailCustomView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2158,6 +2163,7 @@
 				09E72C5E24055F770004B25C /* MASCompositeConstraint.m in Sources */,
 				09E72AEC240559F40004B25C /* AFHTTPSessionManager.m in Sources */,
 				8B9B8BFD240D4AED004B4704 /* ZFPlayerControlView.m in Sources */,
+				8BE5DC2A24509DE10087E70A /* CityDetailCustomView.m in Sources */,
 				09E72C6124055F770004B25C /* NSArray+MASAdditions.m in Sources */,
 				11111693240DF61600E9F781 /* MyShareCustomView.m in Sources */,
 				8B9B8BEA240D4AED004B4704 /* ZFPlayerController.m in Sources */,

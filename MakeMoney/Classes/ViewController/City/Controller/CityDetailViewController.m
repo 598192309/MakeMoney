@@ -9,12 +9,17 @@
 #import "CityDetailViewController.h"
 #import "CityApi.h"
 #import "CityItem.h"
+#import "CityDetailCustomView.h"
+#import "RechargeCenterViewController.h"
 
 @interface CityDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView  *customTableView;
 @property (nonatomic, strong)NSMutableArray *dataSource;
 @property (nonatomic,strong)UIImageView *backImageV;
-
+@property (nonatomic,strong)CityDetailCustomView *cityDetailCustomView;
+@property (nonatomic,strong)UIView *tabelHeaderV;
+@property (nonatomic,strong)CommonAlertView *tipAlertView;
+@property (nonatomic,strong)CityListItem *cityListItem;
 @end
 
 @implementation CityDetailViewController
@@ -22,7 +27,15 @@
 #pragma mark - 生命周期
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
+    if (self.notFirstAppear) {
+        __weak __typeof(self) weakSelf = self;
+        [weakSelf.cityDetailCustomView configUIWithItem:self.cityListItem finishi:^{
+            CGFloat H = [weakSelf.cityDetailCustomView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+            weakSelf.tabelHeaderV.lq_height = H;
+            weakSelf.customTableView.tableHeaderView = weakSelf.tabelHeaderV;
+            weakSelf.customTableView.tableHeaderView.lq_height = H;
+        }];
+    }
 
 }
 
@@ -37,6 +50,7 @@
        // Fallback on earlier versions
        self.automaticallyAdjustsScrollViewInsets = NO;
     }
+    [self requestData];
 }
 
 - (void)dealloc{
@@ -57,17 +71,56 @@
         make.top.mas_equalTo(NavMaxY);
     }];
     
+    UIView *tableHeaderView = [[UIView alloc] init];
+    [tableHeaderView addSubview:self.cityDetailCustomView];
+    self.tabelHeaderV = tableHeaderView;
+    [self.cityDetailCustomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(tableHeaderView);
+    }];
+    CGFloat H = [tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    tableHeaderView.lq_height = H;
+    self.customTableView.tableHeaderView = tableHeaderView;
+    self.customTableView.tableHeaderView.lq_height = H;
+
+    [self cityDetailCustomViewACT];
+    
 }
 
 - (void)setUpNav{
     [self addNavigationView];
     self.navigationView.backgroundColor = [UIColor clearColor];
 }
+#pragma mark -- act
+- (void)cityDetailCustomViewACT{
+    __weak __typeof(self) weakSelf = self;
+    //查看联系方式
+    self.cityDetailCustomView.contactBtnClickBlock = ^(UIButton * _Nonnull sender) {
+        [weakSelf showTipMsg:@"" msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"哥哥想联系我么？你必须是同城VIP会员喔，么么哒") subFont:AdaptedFontSize(13) subColor:TitleBlackColor firstBtnTitle:@"取消" secBtnTitle:@"购买VIP" singleBtnTitle:@""];
+
+    };
+}
+
+- (void)showTipMsg:(NSString *)msg msgFont:(UIFont *)msgFont msgColor:(UIColor *)msgColor subTitle:(NSString *)subTitle subFont:(UIFont *)subFont subColor:(UIColor *)subColor firstBtnTitle:(NSString *)firstBtnTitle secBtnTitle:(NSString *)secBtnTitle singleBtnTitle:(NSString *)singleBtnTitle{
+    [self.tipAlertView refreshUIWithTitle:msg titlefont:msgFont titleColor:msgColor subtitle:subTitle subTitleFont:subFont subtitleColor:subColor firstBtnTitle:firstBtnTitle secBtnTitle:secBtnTitle singleBtnTitle:singleBtnTitle];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.tipAlertView];
+    [self.tipAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
+    }];
+}
 #pragma mark -- net
 - (void)requestData{
     [LSVProgressHUD show];
+    __weak __typeof(self) weakSelf = self;
     [CityApi requestCityDetailwithId:self.ID pageIndex:@"0" page_size:@"100" Success:^(CityListItem * _Nonnull cityItem, NSString * _Nonnull msg) {
         [LSVProgressHUD dismiss];
+        weakSelf.cityListItem = cityItem;
+        weakSelf.navigationTextLabel.text = cityItem.title;
+        [weakSelf.cityDetailCustomView configUIWithItem:cityItem finishi:^{
+            CGFloat H = [weakSelf.cityDetailCustomView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+            weakSelf.tabelHeaderV.lq_height = H;
+            weakSelf.customTableView.tableHeaderView = weakSelf.tabelHeaderV;
+            weakSelf.customTableView.tableHeaderView.lq_height = H;
+        }];
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
     }];
@@ -145,5 +198,27 @@
     }
     return _backImageV;
 }
+- (CommonAlertView *)tipAlertView{
+    if (!_tipAlertView) {
+        _tipAlertView = [CommonAlertView new];
+        __weak __typeof(self) weakSelf = self;
+        _tipAlertView.commonAlertViewBlock = ^(NSInteger index, NSString * _Nonnull str) {
+            if (index == 2) {
+                RechargeCenterViewController *vc = [[RechargeCenterViewController alloc] init];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }
+            
+            [weakSelf.tipAlertView removeFromSuperview];
+            weakSelf.tipAlertView = nil;
 
+        };
+    }
+    return _tipAlertView;
+}
+- (CityDetailCustomView *)cityDetailCustomView{
+    if(!_cityDetailCustomView){
+        _cityDetailCustomView = [CityDetailCustomView new];
+    }
+    return _cityDetailCustomView;
+}
 @end
