@@ -115,7 +115,7 @@
         contentV.backgroundColor = ThemeBlackColor;
         
         _imageV = [[UIImageView alloc] init];
-        _imageV.backgroundColor = TitleGrayColor;
+        _imageV.backgroundColor = ThemeBlackColor;
         [contentV addSubview:_imageV];
         [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.right.mas_equalTo(contentV);

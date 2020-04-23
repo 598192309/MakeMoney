@@ -64,7 +64,7 @@
     [self.view addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.mas_equalTo(weakSelf.view);
-        make.top.mas_equalTo(TopAdaptor_Value(25));
+        make.top.mas_equalTo(NavMaxY);
     }];
     
     //nav
@@ -106,8 +106,9 @@
 #pragma mark - net
 - (void)requestData{
     __weak __typeof(self) weakSelf = self;
+    [LSVProgressHUD show];
     [CityApi requestQMNewCityListWithType:IntTranslateStr(self.cityType) pageIndex:@"0" page_size:@"25" Success:^(NSArray * _Nonnull cityItemArr, NSString * _Nonnull msg) {
-
+        [LSVProgressHUD dismiss];
         weakSelf.pageIndex = cityItemArr.count ;
         weakSelf.cityInfoDataItemArr = [NSMutableArray arrayWithArray:cityItemArr];
         if (cityItemArr.count >= 25 ) {
@@ -151,7 +152,7 @@
 - (void)requestHighData{
     __weak __typeof(self) weakSelf = self;
     // region_id       分类id //100.全部
-
+    [LSVProgressHUD show];
     [CityApi requestHighCityListWithRegionID:self.regionID pageIndex:@"0" page_size:@"25" Success:^(NSArray * _Nonnull cityItemArr, NSString * _Nonnull msg) {
         [LSVProgressHUD dismiss];
 

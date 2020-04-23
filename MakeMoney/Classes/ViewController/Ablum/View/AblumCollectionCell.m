@@ -63,7 +63,7 @@
         contentV.backgroundColor = TitleWhiteColor;
 
         _imageV = [[UIImageView alloc] init];
-        _imageV.backgroundColor = TitleGrayColor;
+        _imageV.backgroundColor = ThemeBlackColor;
         _imageV.contentMode = UIViewContentModeScaleAspectFill;
         _imageV.clipsToBounds = YES;
         [contentV addSubview:_imageV];
