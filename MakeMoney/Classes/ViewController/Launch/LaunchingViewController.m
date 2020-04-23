@@ -187,7 +187,7 @@
     dispatch_group_enter(group);
     NSString *appvesion = [LqToolKit appVersionNo];
     NSString* phoneVersion = [[UIDevice currentDevice] systemVersion];
-    [InitApi initWithosversion:phoneVersion app_version:appvesion lat:@"" lang:@""  Success:^(InitItem * _Nonnull initItem, NSString * _Nonnull msg) {
+    [InitApi initWithosversion:phoneVersion app_version:appvesion lat:@"0" lang:@"0"  Success:^(InitItem * _Nonnull initItem, NSString * _Nonnull msg) {
         dispatch_group_leave(group);
         RI.infoInitItem = initItem;
         RI.infoInitItemJasonStr = [initItem mj_JSONString];
