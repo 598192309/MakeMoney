@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "MainTabBarController.h"
-#import "HSFTabBarController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -17,7 +16,6 @@
 
 @property (strong, nonatomic) MainTabBarController *rootTabbar;
 
-//@property (nonatomic,strong) HSFTabBarController *tabBarC;
 
 
 + (AppDelegate* )shareAppDelegate;

@@ -62,6 +62,8 @@
     [self.mineCustomHeaderView configUIWithItem:RI.infoInitItem finishi:^{
         
     }];
+    self.navigationController.navigationBar.hidden =YES;//tabbar超过5个 隐藏more
+
 }
 
 - (void)dealloc{

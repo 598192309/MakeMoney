@@ -38,3 +38,6 @@
 #import "UIViewController+YCPopover.h"
 #import "LScreenShot.h"
 #endif /* PrefixHeader_pch */
+
+
+#import "AxcAE_TabBarDefine.h"

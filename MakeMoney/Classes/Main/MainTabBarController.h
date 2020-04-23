@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "AxcAE_TabBar.h"
 @interface MainTabBarController : UITabBarController
+@property (nonatomic, strong) AxcAE_TabBar *axcTabBar;
 
 @end
