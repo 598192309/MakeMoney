@@ -54,7 +54,7 @@
  *********************/
 + (NetworkTask *)requestCityDetailImageswithQmid:(NSString *)qmId  imgId:(NSString *)imgId key:(NSString *)key Success:(void(^)(UIImage *img))successBlock error:(ErrorBlock)errorBlock{
 
-    NSString *imageKey = [RSAEncryptor MD5WithString:[NSString stringWithFormat:@"%@-%@-%@",qmId ,imgId,key]];
+    NSString *imageKey = [RSAEncryptor MD5WithString:[NSString stringWithFormat:@"/api/qm_imgs/find-%@-%@-%@",qmId ,imgId,key]];
     NSString *imageDir = [LqSandBox docDownloadImagePath];
     NSString *imagePath = [imageDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",imageKey]];
     if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
@@ -62,7 +62,7 @@
         return nil;
     }
 
-    return [NET POST:@"/api/qm_imgs/find" parameters:@{@"qmId":SAFE_NIL_STRING(qmId),@"imgId":SAFE_NIL_STRING(imgId)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+    return [NET POST:@"/api/qm_imgs/find" parameters:@{@"qmId":SAFE_NIL_STRING(qmId),@"imgId":SAFE_NIL_STRING(imgId)} criticalValue:@{@"NoEncode":@YES} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
 
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 NSString *img = resultObject;

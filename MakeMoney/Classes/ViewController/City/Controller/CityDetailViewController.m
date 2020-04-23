@@ -158,7 +158,7 @@
 
     AblumDetailNewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AblumDetailNewCell class]) forIndexPath:indexPath];
 
-    [cell refreshUIWithAblumImage:[self.imagesArr safeObjectAtIndex:indexPath.row]];
+    [cell refreshTongchengDetailUIWithImage:[self.imagesArr safeObjectAtIndex:indexPath.row]];
     __weak __typeof(self) weakSelf = self;
     cell.imageSizeSetSuccessBlock = ^{
         [weakSelf.customTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
@@ -168,10 +168,10 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    M_AblumImage *ablum = _dataSource[indexPath.row];
-//    if (ablum.imageSize.width > 0) {
-//        return LQScreemW * ablum.imageSize.height / ablum.imageSize.width;
-//    }
+    UIImage  *image = [self.imagesArr safeObjectAtIndex:indexPath.row];
+    if (image.size.width > 0) {
+        return LQScreemW * image.size.height / image.size.width;
+    }
     return 0;
 }
 
@@ -202,7 +202,7 @@
         _customTableView.showsHorizontalScrollIndicator = NO;
         _customTableView.backgroundColor = [UIColor clearColor];
         _customTableView.separatorColor = [UIColor clearColor];
-//        [_customTableView registerNib:[UINib nibWithNibName:NSStringFromClass([AblumDetailNewCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([AblumDetailNewCell class])];
+        [_customTableView registerNib:[UINib nibWithNibName:NSStringFromClass([AblumDetailNewCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([AblumDetailNewCell class])];
 
         
     }

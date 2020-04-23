@@ -11,6 +11,7 @@
 #import "CityItem.h"
 #import "CityCell.h"
 #import "CityListSearchView.h"
+#import "CityDetailViewController.h"
 
 @interface CityListViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -330,7 +331,12 @@
 #pragma mark - UICollectionViewDelegate
 //方块被选中会调用
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"点击选择了第%ld组，第%ld个方块",indexPath.section,indexPath.row);
+//    NSLog(@"点击选择了第%ld组，第%ld个方块",indexPath.section,indexPath.row);
+    CityListItem *item = [self.cityInfoDataItemArr safeObjectAtIndex:indexPath.row];
+
+    CityDetailViewController *vc = [[CityDetailViewController alloc] init];
+    vc.ID = item.ID;
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 //方块取消选中会调用
