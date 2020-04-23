@@ -170,7 +170,7 @@
 {
     UIImage  *image = [self.imagesArr safeObjectAtIndex:indexPath.row];
     if (image.size.width > 0) {
-        return LQScreemW * image.size.height / image.size.width;
+        return (LQScreemW - Adaptor_Value(50)) * image.size.height / image.size.width;
     }
     return 0;
 }

@@ -10,6 +10,8 @@
 
 @interface AblumDetailNewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *contentImageV;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewLeadingCons;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewTrailingCons;
 @property (nonatomic, strong) M_AblumImage *ablumImage;
 @end
 
@@ -42,6 +44,8 @@
 }
 - (void)refreshTongchengDetailUIWithImage:(UIImage *)image{
     self.contentImageV.image = image;
+    self.imageViewLeadingCons.constant = Adaptor_Value(25);
+    self.imageViewTrailingCons.constant = -Adaptor_Value(25);
 }
 @end
 
