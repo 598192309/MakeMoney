@@ -147,18 +147,18 @@
 #pragma mark -  UITableViewDataSource
     
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return self.imagesArr.count;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.imagesArr.count;
+    return 1;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
     AblumDetailNewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AblumDetailNewCell class]) forIndexPath:indexPath];
 
-    [cell refreshTongchengDetailUIWithImage:[self.imagesArr safeObjectAtIndex:indexPath.row]];
+    [cell refreshTongchengDetailUIWithImage:[self.imagesArr safeObjectAtIndex:indexPath.section]];
     __weak __typeof(self) weakSelf = self;
     cell.imageSizeSetSuccessBlock = ^{
         [weakSelf.customTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
@@ -168,7 +168,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIImage  *image = [self.imagesArr safeObjectAtIndex:indexPath.row];
+    UIImage  *image = [self.imagesArr safeObjectAtIndex:indexPath.section];
     if (image.size.width > 0) {
         return (LQScreemW - Adaptor_Value(50)) * image.size.height / image.size.width;
     }
@@ -176,7 +176,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0.01;
+    return 10;
     
 }
 

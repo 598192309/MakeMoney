@@ -45,7 +45,7 @@
 - (void)refreshTongchengDetailUIWithImage:(UIImage *)image{
     self.contentImageV.image = image;
     self.imageViewLeadingCons.constant = Adaptor_Value(25);
-    self.imageViewTrailingCons.constant = -Adaptor_Value(25);
+    self.imageViewTrailingCons.constant = Adaptor_Value(25);
 }
 @end
 
