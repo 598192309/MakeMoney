@@ -12,10 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CityListSearchView : UIView
 /**点击关闭*/
-@property(nonatomic,copy)void(^closeBlock)();
-- (void)show;
+@property(nonatomic,copy)void(^closeBlock)(void);
+/**点击cell*/
+@property(nonatomic,copy)void(^cellClickBlock)(NSIndexPath *indexpath);
 
-- (void)dismiss;
+
+@property (nonatomic,strong)NSMutableArray *dataArr;
+
 @end
 
 @interface LabelCollectionViewCell : UICollectionViewCell

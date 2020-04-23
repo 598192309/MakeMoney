@@ -10,19 +10,26 @@
 #import "CityApi.h"
 #import "CityItem.h"
 #import "CityCell.h"
+#import "CityListSearchView.h"
+
 @interface CityListViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) UICollectionView *collectionView;//容器视图
 
 @property (nonatomic,strong)NSMutableArray *cityInfoDataItemArr;
 @property (nonatomic,assign)NSInteger pageIndex;
+@property (nonatomic,strong)CityListSearchView *searchView;
+@property (nonatomic,strong)NSMutableArray *searchViewDataArr;
+
 @end
 
 @implementation CityListViewController
 #pragma mark -重写
 - (void)navigationRightBtnClick:(UIButton *)button{
-    //弹框
     
+    //获取list
+    [self requestList:button];
+
 }
 #pragma mark - life
 - (void)viewDidLoad {
@@ -45,7 +52,9 @@
     
     
 }
-
+- (void)dealloc{
+    
+}
 #pragma mark - ui
 - (void)configUI{
     __weak __typeof(self) weakSelf = self;
@@ -64,6 +73,34 @@
         [self.navigationRightBtn setTitle:lqStrings(@"全部") forState:UIControlStateNormal];
     }
 
+}
+#pragma mark - act
+//弹框
+- (void)showSearchView{
+    __weak __typeof(self) weakSelf = self;
+    //弹框
+    [weakSelf.view addSubview:self.searchView];
+    weakSelf.searchView.dataArr = weakSelf.searchViewDataArr;
+
+    [weakSelf.searchView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.top.mas_equalTo(weakSelf.view);
+    }];
+    weakSelf.searchView.closeBlock = ^() {
+        [weakSelf.searchView removeFromSuperview];
+        weakSelf.searchView = nil;
+    };
+    
+    weakSelf.searchView.cellClickBlock = ^(NSIndexPath * _Nonnull indexpath) {
+        //根据region 查询
+        CityListItem *item = [weakSelf.searchViewDataArr safeObjectAtIndex:indexpath.row];
+        weakSelf.regionID = item.region_id;
+        [weakSelf checkInfoWithRegionID];
+        [weakSelf.searchView removeFromSuperview];
+        weakSelf.searchView = nil;
+        if(weakSelf.cityType == CityType_QM || self.cityType == CityType_High){
+            [weakSelf.navigationRightBtn setTitle:item.region_name forState:UIControlStateNormal];
+        }
+    };
 }
 #pragma mark - net
 - (void)requestData{
@@ -114,7 +151,8 @@
     __weak __typeof(self) weakSelf = self;
     // region_id       分类id //100.全部
 
-    [CityApi requestQMNewCityListWithRegionID:self.regionID pageIndex:@"0" page_size:@"25" Success:^(NSArray * _Nonnull cityItemArr, NSString * _Nonnull msg) {
+    [CityApi requestHighCityListWithRegionID:self.regionID pageIndex:@"0" page_size:@"25" Success:^(NSArray * _Nonnull cityItemArr, NSString * _Nonnull msg) {
+        [LSVProgressHUD dismiss];
 
         weakSelf.pageIndex = cityItemArr.count ;
         weakSelf.cityInfoDataItemArr = [NSMutableArray arrayWithArray:cityItemArr];
@@ -139,7 +177,7 @@
     __weak __typeof(self) weakSelf = self;
     // region_id       分类id //100.全部
 
-    [CityApi requestQMNewCityListWithRegionID:self.regionID pageIndex:IntTranslateStr(self.pageIndex) page_size:@"25" Success:^(NSArray * _Nonnull cityItemArr, NSString * _Nonnull msg) {
+    [CityApi requestHighCityListWithRegionID:self.regionID pageIndex:IntTranslateStr(self.pageIndex) page_size:@"25" Success:^(NSArray * _Nonnull cityItemArr, NSString * _Nonnull msg) {
         [weakSelf.cityInfoDataItemArr addObjectsFromArray:cityItemArr];
         [weakSelf.collectionView endFooterRefreshing];
         [weakSelf.collectionView reloadData];
@@ -155,7 +193,90 @@
 
     }];
 }
+//点击全部 获取list
+-(void)requestList:(UIButton *)sender{
+    sender.userInteractionEnabled= NO;
+    [LSVProgressHUD show];
+    __weak __typeof(self) weakSelf = self;
+    if (self.cityType == CityType_QM) {
+        [CityApi requestCityListQMSearchListSuccess:^(NSArray * _Nonnull cityItemArr, NSString * _Nonnull msg) {
+            [LSVProgressHUD dismiss];
+            sender.userInteractionEnabled = YES;
+            weakSelf.searchViewDataArr = [NSMutableArray arrayWithArray:cityItemArr];
+            
+            //弹框
+            [weakSelf showSearchView];
+        } error:^(NSError *error, id resultObject) {
+            [LSVProgressHUD showError:error];
+            sender.userInteractionEnabled = YES;
 
+        }];
+    }else{
+        [CityApi requestCityListHighSearchListSuccess:^(NSArray * _Nonnull cityItemArr, NSString * _Nonnull msg) {
+            [LSVProgressHUD dismiss];
+            sender.userInteractionEnabled = YES;
+            weakSelf.searchViewDataArr = [NSMutableArray arrayWithArray:cityItemArr];
+            //弹框
+            [weakSelf showSearchView];
+        } error:^(NSError *error, id resultObject) {
+            [LSVProgressHUD showError:error];
+            sender.userInteractionEnabled = YES;
+        }];
+    }
+}
+
+//根据region 查询
+- (void)checkInfoWithRegionID{
+    [LSVProgressHUD show];
+    __weak __typeof(self) weakSelf = self;
+    if (self.cityType == CityType_QM) {
+        [CityApi requestQMCityListWithRegionID:self.regionID pageIndex:@"0" page_size:@"25" Success:^(NSArray * _Nonnull cityItemArr, NSString * _Nonnull msg) {
+            [LSVProgressHUD dismiss];
+                weakSelf.pageIndex = cityItemArr.count ;
+                weakSelf.cityInfoDataItemArr = [NSMutableArray arrayWithArray:cityItemArr];
+                if (cityItemArr.count >= 25 ) {
+                    [weakSelf.collectionView addFooterWithRefreshingTarget:self refreshingAction:@selector(requestQMCityListWithRegionIDMoreData)];
+                    [weakSelf.collectionView.mj_footer setHidden:NO];
+            
+                }else{
+                    [weakSelf.collectionView endHeaderRefreshing];
+                    //消除尾部"没有更多数据"的状态
+                    [weakSelf.collectionView.mj_footer setHidden:YES];
+                }
+                [weakSelf.collectionView endHeaderRefreshing];
+                [weakSelf.collectionView reloadData];
+                
+        } error:^(NSError *error, id resultObject) {
+            [weakSelf.collectionView endHeaderRefreshing];
+            [LSVProgressHUD showError:error];
+        }];
+    }else{
+//        [CityApi requestHighCityListWithRegionID:regionID pageIndex:@"0" page_size:@"25" Success:^(NSArray * _Nonnull cityItemArr, NSString * _Nonnull msg) {
+//
+//        } error:^(NSError *error, id resultObject) {
+//
+//        }];
+        [self requestHighData];
+    }
+}
+
+- (void)requestQMCityListWithRegionIDMoreData{
+    __weak __typeof(self) weakSelf = self;
+    [CityApi requestQMCityListWithRegionID:self.regionID pageIndex:IntTranslateStr(self.cityInfoDataItemArr.count) page_size:@"25" Success:^(NSArray * _Nonnull cityItemArr, NSString * _Nonnull msg) {
+        [weakSelf.cityInfoDataItemArr addObjectsFromArray:cityItemArr];
+        [weakSelf.collectionView endFooterRefreshing];
+        [weakSelf.collectionView reloadData];
+        if (cityItemArr.count < 25) {
+            [weakSelf.collectionView endRefreshingWithNoMoreData];
+        }else{
+            weakSelf.pageIndex = weakSelf.cityInfoDataItemArr.count ;
+            
+        }
+    } error:^(NSError *error, id resultObject) {
+        [weakSelf.collectionView endFooterRefreshing];
+
+    }];
+}
 #pragma mark - UICollectionViewDataSource
 //设置容器中有多少个组
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -246,6 +367,13 @@
         [_collectionView addHeaderWithRefreshingTarget:self refreshingAction:@selector(requestData)];
     }
     return _collectionView;
+}
+
+- (CityListSearchView *)searchView{
+    if (!_searchView) {
+        _searchView = [CityListSearchView new];
+    }
+    return _searchView;
 }
 
 @end

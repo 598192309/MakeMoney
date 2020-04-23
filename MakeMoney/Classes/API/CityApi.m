@@ -138,7 +138,7 @@
  page_index
  page_size
  *********************/
-+ (NetworkTask *)requestQMNewCityListWithRegionID:(NSString *)region_id pageIndex:(NSString *)page_index page_size:(NSString *)page_size  Success:(void(^)(NSArray *cityItemArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
++ (NetworkTask *)requestHighCityListWithRegionID:(NSString *)region_id pageIndex:(NSString *)page_index page_size:(NSString *)page_size  Success:(void(^)(NSArray *cityItemArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
     return [NET POST:@"/api/highend_region_id/find" parameters:@{@"region_id":SAFE_NIL_STRING(region_id ),@"page_index":SAFE_NIL_STRING(page_index),@"page_size":SAFE_NIL_STRING(page_size)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
         NSArray *cityItemArr = [CityListItem mj_objectArrayWithKeyValuesArray:[resultObject safeObjectForKey:@"data"]];
         NSString *msg = [resultObject safeObjectForKey:@"msg"];

@@ -8,17 +8,21 @@
 
 #import "CityListSearchView.h"
 #import "CustomerAlignTypeLayout.h"
+#import "CityItem.h"
 @interface CityListSearchView()<UICollectionViewDataSource,UICollectionViewDelegate>
 @property (nonatomic,strong)UIView *header;
 @property (nonatomic,strong)UILabel *tipLable;
 @property (nonatomic,strong)UIView *lineView;
 @property (nonatomic,strong)UICollectionView *customCollectionView;
 @property (nonatomic,strong)UIView *customCoverView;
-@property (nonatomic,strong)NSMutableArray *dataArr;
 @end
 
 @implementation CityListSearchView
 
+- (void)setDataArr:(NSMutableArray *)dataArr{
+    _dataArr= dataArr;
+    [self.customCollectionView reloadData];
+}
 
 #pragma mark - 生命周期
 - (instancetype)init
@@ -42,57 +46,29 @@
 
 - (void)setUI{
     
-    [self addSubview:self.header];
     [self addSubview:self.customCoverView];
+    [self addSubview:self.header];
 
-    [self addSubview:self.customCollectionView];
     __weak __typeof(self) weakSelf = self;
-    [self.header mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.mas_equalTo(weakSelf);
-    }];
+
     [self.customCoverView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(weakSelf);
     }];
-    [self.customCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.mas_equalTo(weakSelf);
-        make.top.mas_equalTo(weakSelf.header.mas_bottom);
+    
+    [self.header mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(weakSelf);
+        make.top.mas_equalTo(Adaptor_Value(150));
+        make.left.mas_equalTo(Adaptor_Value(50));
     }];
+
 
 }
 #pragma mark --act
-- (void)show{
-    //约束动画
-    __weak __typeof(self) weakSelf = self;
-    [self layoutIfNeeded];//如果其约束还没有生成的时候需要动画的话，就请先强制刷新后才写动画，否则所有没生成的约束会直接跑动画
-    
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        [weakSelf.header mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(weakSelf);
-            
-        }];
-        
-        [weakSelf layoutIfNeeded];//强制绘制
-    }];
-}
+
 - (void)dismiss{
-    __weak __typeof(self) weakSelf = self;
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        [weakSelf.header mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(weakSelf).offset(285);
-            
-        }];
-        [weakSelf layoutIfNeeded];//强制绘制
-    } completion:^(BOOL finished) {
-        if (weakSelf.closeBlock) {
-            weakSelf.closeBlock();
-        }
-        
-    }];
-    
-    
-    
+    if (self.closeBlock) {
+        self.closeBlock();
+    }
 }
 
 #pragma mark -collection delegate/datasource
@@ -109,8 +85,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     LabelCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([LabelCollectionViewCell class]) forIndexPath:indexPath];
-    
-    [cell configUIWithStr:@"111"];
+    CityListItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
+    [cell configUIWithStr:item.region_name];
 
     
     return cell;
@@ -122,14 +98,16 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
    
-
+    if (self.cellClickBlock) {
+        self.cellClickBlock(indexPath);
+    }
     
 }
 
 //设置每个item的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-//    SearchDataItem *item = [self.historyArr safeObjectAtIndex:indexPath.row];
-    NSString *str = @"111";
+    CityListItem *item = [self.dataArr safeObjectAtIndex:indexPath.row];
+    NSString *str = item.region_name;
     CGSize size = [str boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:AdaptedFontSize(15)} context:nil].size;
     return CGSizeMake(size.width + Adaptor_Value(15) * 2,Adaptor_Value(30));
 }
@@ -147,14 +125,15 @@
     if (!_header) {
         _header = [UIView new];
         UIView *contentV = [UIView new];
-        contentV.backgroundColor = [UIColor clearColor];
+        contentV.backgroundColor = [UIColor whiteColor];
         [_header addSubview:contentV];
         __weak __typeof(self) weakSelf = self;
         [contentV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(weakSelf.header);
         }];
+        ViewRadius(contentV, 5);
             
-        _tipLable = [UILabel lableWithText:@"" textColor:TitleBlackColor fontSize:AdaptedFontSize(18) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        _tipLable = [UILabel lableWithText:lqStrings(@"按地区查询") textColor:TitleBlackColor fontSize:AdaptedFontSize(18) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_tipLable];
         [_tipLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(contentV);
@@ -168,6 +147,14 @@
         [_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.left.mas_equalTo(contentV);
             make.top.mas_equalTo(weakSelf.tipLable.mas_bottom).offset(Adaptor_Value(10));
+            make.height.mas_equalTo(kOnePX);
+        }];
+        
+        [contentV addSubview:self.customCollectionView];
+        [weakSelf.customCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.left.right.mas_equalTo(contentV);
+            make.top.mas_equalTo(weakSelf.lineView.mas_bottom).offset(Adaptor_Value(10));
+            make.height.mas_equalTo(Adaptor_Value(300));
         }];
         
     }

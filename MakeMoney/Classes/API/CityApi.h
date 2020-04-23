@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
  page_index
  page_size
  *********************/
-+ (NetworkTask *)requestQMNewCityListWithRegionID:(NSString *)region_id pageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(NSArray *cityItemArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
++ (NetworkTask *)requestHighCityListWithRegionID:(NSString *)region_id pageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(NSArray *cityItemArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
 
 
 /*******************同城列表  按地区查QM
