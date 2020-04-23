@@ -11,15 +11,16 @@
 #import "CityItem.h"
 #import "CityDetailCustomView.h"
 #import "RechargeCenterViewController.h"
+#import "AblumDetailNewCell.h"
 
 @interface CityDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView  *customTableView;
-@property (nonatomic, strong)NSMutableArray *dataSource;
 @property (nonatomic,strong)UIImageView *backImageV;
 @property (nonatomic,strong)CityDetailCustomView *cityDetailCustomView;
 @property (nonatomic,strong)UIView *tabelHeaderV;
 @property (nonatomic,strong)CommonAlertView *tipAlertView;
 @property (nonatomic,strong)CityListItem *cityListItem;
+@property (nonatomic,strong)NSMutableArray *imagesArr;
 @end
 
 @implementation CityDetailViewController
@@ -41,7 +42,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.imagesArr = [NSMutableArray array];
     [self configUI];
     [self setUpNav];
     if (@available(iOS 11.0, *)) {
@@ -121,10 +122,27 @@
             weakSelf.customTableView.tableHeaderView = weakSelf.tabelHeaderV;
             weakSelf.customTableView.tableHeaderView.lq_height = H;
         }];
+        //循环获取image
+        for (int i = 1; i < 9; i++) {
+            [weakSelf requestImagesWithqmid:cityItem.ID imgID:IntTranslateStr(i) key:cityItem.title];
+        }
+        
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
     }];
     
+}
+
+- (void)requestImagesWithqmid:(NSString *)qmid imgID:(NSString *)imgid key:(NSString *)key{
+    __weak __typeof(self) weakSelf = self;
+    [CityApi requestCityDetailImageswithQmid:qmid imgId:imgid key:key Success:^(UIImage * _Nonnull img) {
+        if (img) {
+            [weakSelf.imagesArr addObject:img];
+        }
+        [weakSelf.customTableView reloadData];
+    } error:^(NSError *error, id resultObject) {
+        
+    }];
 }
 #pragma mark -  UITableViewDataSource
     
@@ -133,20 +151,19 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataSource.count;
+    return self.imagesArr.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-//    AblumDetailNewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AblumDetailNewCell class]) forIndexPath:indexPath];
-//
-//    [cell refreshUIWithAblumImage:[_dataSource safeObjectAtIndex:indexPath.row]];
-//    __weak __typeof(self) weakSelf = self;
-//    cell.imageSizeSetSuccessBlock = ^{
-//        [weakSelf.customTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-//    };
-//    return cell;
-    return nil;
+    AblumDetailNewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AblumDetailNewCell class]) forIndexPath:indexPath];
+
+    [cell refreshUIWithAblumImage:[self.imagesArr safeObjectAtIndex:indexPath.row]];
+    __weak __typeof(self) weakSelf = self;
+    cell.imageSizeSetSuccessBlock = ^{
+        [weakSelf.customTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    };
+    return cell;
 
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

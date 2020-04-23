@@ -22,7 +22,11 @@ NS_ASSUME_NONNULL_BEGIN
  
  *********************/
 + (NetworkTask *)requestCityDetailwithId:(NSString *)Id pageIndex:(NSString *)page_index page_size:(NSString *)page_size Success:(void(^)(CityListItem *cityItem,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
-
+/*******************同城详情  获取对应图片
+ 传两个参数  qmId  和  imgId
+ imgId 循环传1~8   有图片就显示就好了 是最多只会有8张图片
+ *********************/
++ (NetworkTask *)requestCityDetailImageswithQmid:(NSString *)qmId  imgId:(NSString *)imgId key:(NSString *)key Success:(void(^)(UIImage *img))successBlock error:(ErrorBlock)errorBlock;
 
 /*******************同城列表  qm分类里 点击查询 获取的查询列表
  

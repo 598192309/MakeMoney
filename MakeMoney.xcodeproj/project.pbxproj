@@ -199,6 +199,7 @@
 		111FD7092412515400E7B419 /* MyLoveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 111FD7082412515400E7B419 /* MyLoveCell.m */; };
 		111FD70C241258B100E7B419 /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 111FD70B241258B100E7B419 /* NoDataView.m */; };
 		1120F42524079F9D00550055 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1120F42224079F9D00550055 /* GTMBase64.m */; };
+		112C53FC24513831006A91EE /* LQTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 112C53FB24513831006A91EE /* LQTabBar.m */; };
 		112F56AE2411DD2100CE4715 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F56AD2411DD2100CE4715 /* ShareView.m */; };
 		112F56B12411EF4600CE4715 /* LScreenShot.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F56AF2411EF4600CE4715 /* LScreenShot.m */; };
 		112F56B42411FACB00CE4715 /* BindMobileFirstStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F56B32411FACB00CE4715 /* BindMobileFirstStepViewController.m */; };
@@ -670,6 +671,8 @@
 		1120F41F24079F9D00550055 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		1120F42124079F9D00550055 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		1120F42224079F9D00550055 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
+		112C53FA24513831006A91EE /* LQTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LQTabBar.h; sourceTree = "<group>"; };
+		112C53FB24513831006A91EE /* LQTabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LQTabBar.m; sourceTree = "<group>"; };
 		112F56AC2411DD2100CE4715 /* ShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
 		112F56AD2411DD2100CE4715 /* ShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
 		112F56AF2411EF4600CE4715 /* LScreenShot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LScreenShot.m; sourceTree = "<group>"; };
@@ -994,6 +997,8 @@
 				09239A712403FEE400A4F727 /* MainTabBarController.h */,
 				09239A6C2403FEE400A4F727 /* MainTabBarController.m */,
 				09239A6D2403FEE400A4F727 /* View */,
+				112C53FA24513831006A91EE /* LQTabBar.h */,
+				112C53FB24513831006A91EE /* LQTabBar.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -2305,6 +2310,7 @@
 				09E72CF324055F8E0004B25C /* SDWebImageDownloaderOperation.m in Sources */,
 				09E72D3924056A5B0004B25C /* DeviceInfo.m in Sources */,
 				09E72D3C24056ADC0004B25C /* RunInfo.m in Sources */,
+				112C53FC24513831006A91EE /* LQTabBar.m in Sources */,
 				8B9B8BF8240D4AED004B4704 /* ZFVolumeBrightnessView.m in Sources */,
 				8BD545B4240BB4CC00C90A31 /* MJRefreshGifHeader.m in Sources */,
 				09E72D36240569920004B25C /* Network.m in Sources */,

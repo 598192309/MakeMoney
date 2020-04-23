@@ -40,7 +40,9 @@
         }
     }];
 }
-
+- (void)refreshTongchengDetailUIWithImage:(UIImage *)image{
+    self.contentImageV.image = image;
+}
 @end
 
 

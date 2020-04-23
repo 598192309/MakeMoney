@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AblumDetailNewCell : UITableViewCell
 - (void)refreshUIWithAblumImage:(M_AblumImage *)ablum;
 
+- (void)refreshTongchengDetailUIWithImage:(UIImage *)image;
+
+
 @property (nonatomic, copy) void(^imageSizeSetSuccessBlock)(void);
 
 @end

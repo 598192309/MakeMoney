@@ -46,6 +46,41 @@
         }
     }];
 }
+/*******************同城详情  获取对应图片
+ 传两个参数  qmId  和  imgId
+ imgId 循环传1~8   有图片就显示就好了 是最多只会有8张图片
+ 
+ key 单纯用来保存的时候 区分的
+ *********************/
++ (NetworkTask *)requestCityDetailImageswithQmid:(NSString *)qmId  imgId:(NSString *)imgId key:(NSString *)key Success:(void(^)(UIImage *img))successBlock error:(ErrorBlock)errorBlock{
+
+    NSString *imageKey = [RSAEncryptor MD5WithString:[NSString stringWithFormat:@"%@-%@-%@",qmId ,imgId,key]];
+    NSString *imageDir = [LqSandBox docDownloadImagePath];
+    NSString *imagePath = [imageDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",imageKey]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
+        successBlock([UIImage imageWithContentsOfFile:imagePath]);
+        return nil;
+    }
+
+    return [NET POST:@"/api/qm_imgs/find" parameters:@{@"qmId":SAFE_NIL_STRING(qmId),@"imgId":SAFE_NIL_STRING(imgId)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSString *img = resultObject;
+                UIImage *downImage = [UIImage base64stringToImage:img];
+                BOOL success = [UIImagePNGRepresentation(downImage) writeToFile:imagePath atomically:YES];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (successBlock) {
+                        successBlock(downImage);
+                    }
+                });
+            });
+
+    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+        if (errorBlock) {
+            errorBlock(error,resultObject);
+        }
+    }];
+}
 
 /*******************同城列表  qm分类查询列表
 

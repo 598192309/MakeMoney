@@ -21,6 +21,7 @@
 #import "HomeItem.h"
 #import "NoticeAlertView.h"
 #import "AblumViewController.h"
+#import "LQTabBar.h"
 
 
 @interface MainTabBarController ()<UITabBarControllerDelegate>
