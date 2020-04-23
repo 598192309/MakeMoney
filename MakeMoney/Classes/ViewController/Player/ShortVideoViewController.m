@@ -274,6 +274,8 @@
             AVPlayerController *vc = [AVPlayerController controllerWith:item];
             vc.isShortVideo = YES;
             [weakSelf.navigationController pushViewController:vc animated:YES];
+            [weakSelf popSelfDelayTime:1.0];
+
             
         }else{
 //            [LSVProgressHUD showInfoWithStatus:@"购买会员"];
