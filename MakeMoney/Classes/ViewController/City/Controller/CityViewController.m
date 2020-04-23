@@ -149,6 +149,8 @@
                 vc.navStr =lqStrings(@"按城市查询");
                 vc.cityType = CityType_High;
                 vc.regionID = @"100";//100 全部
+                vc.hidesBottomBarWhenPushed = YES;//x这里可能是tabbar超过5个的原因 不会去掉BaseNavigationController pushViewController方法
+
                 [weakSelf.navigationController pushViewController:vc animated:YES];
             };
             return headerView;
@@ -175,6 +177,7 @@
             vc.regionID = @"";
             vc.navStr = indexPath.section == 1 ? lqStrings(@"按地区查询"):lqStrings(@"最新推荐");
             vc.cityType = indexPath.section == 1 ? CityType_QM : CityType_New;
+            vc.hidesBottomBarWhenPushed = YES;//x这里可能是tabbar超过5个的原因 不会去掉BaseNavigationController pushViewController方法
 
             [weakSelf.navigationController pushViewController:vc animated:YES];
         };
@@ -255,6 +258,7 @@
     
     CityDetailViewController *vc = [[CityDetailViewController alloc] init];
     vc.ID = item.ID;
+    vc.hidesBottomBarWhenPushed = YES;//x这里可能是tabbar超过5个的原因 不会去掉BaseNavigationController pushViewController方法
     [self.navigationController pushViewController:vc animated:YES];
     
 }
