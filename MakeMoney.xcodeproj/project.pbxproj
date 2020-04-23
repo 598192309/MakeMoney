@@ -292,6 +292,8 @@
 		8BE5DC24245087260087E70A /* CityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE5DC23245087260087E70A /* CityDetailViewController.m */; };
 		8BE5DC27245087C30087E70A /* CityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE5DC26245087C30087E70A /* CityListViewController.m */; };
 		8BE5DC2A24509DE10087E70A /* CityDetailCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE5DC2924509DE10087E70A /* CityDetailCustomView.m */; };
+		8BE5DC2D245157380087E70A /* CityListSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE5DC2C245157380087E70A /* CityListSearchView.m */; };
+		8BE5DC302451590C0087E70A /* CustomerAlignTypeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE5DC2F2451590C0087E70A /* CustomerAlignTypeLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -857,6 +859,10 @@
 		8BE5DC26245087C30087E70A /* CityListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityListViewController.m; sourceTree = "<group>"; };
 		8BE5DC2824509DE10087E70A /* CityDetailCustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityDetailCustomView.h; sourceTree = "<group>"; };
 		8BE5DC2924509DE10087E70A /* CityDetailCustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityDetailCustomView.m; sourceTree = "<group>"; };
+		8BE5DC2B245157380087E70A /* CityListSearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityListSearchView.h; sourceTree = "<group>"; };
+		8BE5DC2C245157380087E70A /* CityListSearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityListSearchView.m; sourceTree = "<group>"; };
+		8BE5DC2E2451590C0087E70A /* CustomerAlignTypeLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerAlignTypeLayout.h; sourceTree = "<group>"; };
+		8BE5DC2F2451590C0087E70A /* CustomerAlignTypeLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerAlignTypeLayout.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1223,12 +1229,16 @@
 		09239A942403FEE400A4F727 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8BE5DC2E2451590C0087E70A /* CustomerAlignTypeLayout.h */,
+				8BE5DC2F2451590C0087E70A /* CustomerAlignTypeLayout.m */,
 				1135C9D82408BA7800478696 /* CityCell.h */,
 				1135C9D92408BA7800478696 /* CityCell.m */,
 				096C7FC5240C0F6D00914E20 /* AdsHeaderView.h */,
 				096C7FC6240C0F6D00914E20 /* AdsHeaderView.m */,
 				8BE5DC2824509DE10087E70A /* CityDetailCustomView.h */,
 				8BE5DC2924509DE10087E70A /* CityDetailCustomView.m */,
+				8BE5DC2B245157380087E70A /* CityListSearchView.h */,
+				8BE5DC2C245157380087E70A /* CityListSearchView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2161,6 +2171,7 @@
 				11105E5724066BC900521CB2 /* UIColor+LqExtension.m in Sources */,
 				11105ADF2406006800521CB2 /* CityViewController.m in Sources */,
 				8BD54571240BA80000C90A31 /* HomeSectionHeaderView.m in Sources */,
+				8BE5DC302451590C0087E70A /* CustomerAlignTypeLayout.m in Sources */,
 				09E72C3324055F6E0004B25C /* IQTextView.m in Sources */,
 				09E72C5E24055F770004B25C /* MASCompositeConstraint.m in Sources */,
 				09E72AEC240559F40004B25C /* AFHTTPSessionManager.m in Sources */,
@@ -2338,6 +2349,7 @@
 				8BD545BD240BE71700C90A31 /* HomeVideoCell.m in Sources */,
 				11105E5C24066BC900521CB2 /* LqWGS84TOGCJ02.m in Sources */,
 				11105E5824066BC900521CB2 /* UILabel+LqExtension.m in Sources */,
+				8BE5DC2D245157380087E70A /* CityListSearchView.m in Sources */,
 				8B58D04E241355C500FE426E /* AblumCollectionCell.m in Sources */,
 				113980882410DB3C00663E26 /* SaoMaViewController.m in Sources */,
 				09E72D17240560210004B25C /* BaseWebViewController.m in Sources */,

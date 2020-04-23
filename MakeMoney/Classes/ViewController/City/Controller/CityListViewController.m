@@ -19,6 +19,11 @@
 @end
 
 @implementation CityListViewController
+#pragma mark -重写
+- (void)navigationRightBtnClick:(UIButton *)button{
+    //弹框
+    
+}
 #pragma mark - life
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,6 +60,9 @@
     //nav
     [self addNavigationView];
     self.navigationTextLabel.text = self.navStr;
+    if(self.cityType == CityType_QM || self.cityType == CityType_High){
+        [self.navigationRightBtn setTitle:lqStrings(@"全部") forState:UIControlStateNormal];
+    }
 
 }
 #pragma mark - net

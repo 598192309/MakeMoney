@@ -45,6 +45,7 @@
     [self reqestBannerAds];
     [self requestAds];
     
+    self.navigationController.navigationBar.hidden =YES;//tabbar超过5个 隐藏more
 
 }
 
