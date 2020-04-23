@@ -89,7 +89,11 @@
 //    self.timesLable.hidden = item.is_vip;
     
     if (item.is_new_user ) {
-        self.ablumVipLable.text = item.is_album_vip ? [self changeStr:item.ablum_vip_end_time format:@"yyyy-MM-dd"] : lqStrings(@"临时体验卡");
+        if (item.is_album_vip) {
+            self.ablumVipLable.text =  [self changeStr:item.ablum_vip_end_time format:@"yyyy-MM-dd"];
+        }else{
+            self.ablumVipLable.text =  lqStrings(@"临时体验卡");
+        }
 
         if (!item.is_vip) {
             self.shipinVipLable.text = lqStrings(@"临时体验卡");
