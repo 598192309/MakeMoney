@@ -40,7 +40,7 @@
 #pragma mark - 刷新ui
 - (void)configUIWithItem:(CityListItem *)item finishi:(void(^)(void))finishBlock{
     self.timeLabel.text = [item.create_time lq_getTimeFromTimestampWithFormatter:@"yyyy-MM-dd HH:mm"];
-    if (RI.infoInitItem.is_qm_vip) {
+    if (RI.infoInitItem.is_qm_vip || !item.is_vip) {//没有设置需要VIP才可观看的
         if (item.qq.length > 0) {
             item.text = [NSString stringWithFormat:@"%@\nQQ:%@",item.text,item.qq];
         }
@@ -50,6 +50,9 @@
         if (item.mobile.length > 0) {
             item.text = [NSString stringWithFormat:@"%@\n电话%@",item.text,item.mobile];
         }
+        self.contactBtn.hidden = YES;
+    }else{
+        self.contactBtn.hidden = NO;
     }
     NSAttributedString *att = [item.text lq_getAttributedStringWithLineSpace:5 kern:0 aliment:NSTextAlignmentLeft];
 
