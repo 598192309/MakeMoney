@@ -84,10 +84,6 @@
     self.ablumVipLable.text = item.is_album_vip ? [self changeStr:item.ablum_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
     self.shipinVipLable.text = item.is_vip ? [self changeStr:item.vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
     
-//    self.shipinVipLable.hidden = !item.is_vip;
-//    self.shipinVipTipLable.hidden = !item.is_vip;
-//    self.timesLable.hidden = item.is_vip;
-    
     if (item.is_new_user ) {
         if (item.ablum_vip_end_time.length > 0 ) {
             self.ablumVipLable.text =  [self changeStr:item.ablum_vip_end_time format:@"yyyy-MM-dd"];

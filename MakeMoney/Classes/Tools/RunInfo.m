@@ -46,6 +46,9 @@
 
         _basicItemJasonStr = [[NSUserDefaults standardUserDefaults ] objectForKey:kBasicItemJasonStr] ? [[NSUserDefaults standardUserDefaults ] objectForKey:kBasicItemJasonStr] : @"";
         _infoInitItemJasonStr = [[NSUserDefaults standardUserDefaults ] objectForKey:kInfoInitItemJasonStr] ? [[NSUserDefaults standardUserDefaults ] objectForKey:kInfoInitItemJasonStr] : @"";
+        
+        _yaoqingren_code = [[NSUserDefaults standardUserDefaults ] objectForKey:kYaoqingrenCode] ? [[NSUserDefaults standardUserDefaults ] objectForKey:kYaoqingrenCode] : @"";
+
 
 
     }
@@ -78,6 +81,12 @@
 - (void)setInfoInitItemJasonStr:(NSString *)infoInitItemJasonStr{
     _infoInitItemJasonStr = infoInitItemJasonStr;
     [[NSUserDefaults standardUserDefaults] setObject:infoInitItemJasonStr forKey:kInfoInitItemJasonStr];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setYaoqingren_code:(NSString *)yaoqingren_code{
+    _yaoqingren_code = yaoqingren_code;
+    [[NSUserDefaults standardUserDefaults] setObject:yaoqingren_code forKey:kYaoqingrenCode];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 @end

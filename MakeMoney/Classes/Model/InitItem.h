@@ -28,7 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign)NSInteger is_new_user;
 @property (nonatomic,assign)NSInteger rest_free_times;
 @property (nonatomic,strong)NSString *invite_code;
-@property (nonatomic,strong)NSString *yaoqingren_code;
 
 @property (nonatomic,assign)NSInteger vip_level;
 @property (nonatomic,assign)NSInteger is_login;

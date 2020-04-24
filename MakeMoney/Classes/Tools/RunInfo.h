@@ -22,6 +22,8 @@ extern NSString* const STAPPErrorDomain;
 @property (nonatomic,strong)NSString *basicItemJasonStr;//不能保存item 转json保存
 
 @property (nonatomic,strong)InitItem *infoInitItem;
+@property (nonatomic,strong)NSString *yaoqingren_code;
+
 @property (nonatomic,strong)NSString *infoInitItemJasonStr;//不能保存item 转json保存
 
 @property (nonatomic,strong)NSString *tradeNo;//支付订单

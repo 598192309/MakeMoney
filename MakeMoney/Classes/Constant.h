@@ -264,6 +264,7 @@ alpha:(a)]
 #define kBasicItemJasonStr         @"kBasicItemJasonStr"
 #define kInfoInitItemJasonStr        @"kInfoInitItemJasonStr"
 
+#define kYaoqingrenCode        @"kYaoqingrenCode"
 
 
 #define KNotification_PayClick @"KNotification_PayClick"//支付方式点击

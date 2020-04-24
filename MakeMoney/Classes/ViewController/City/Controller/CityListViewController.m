@@ -172,7 +172,10 @@
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
         [weakSelf.collectionView endHeaderRefreshing];
-
+        if ([error.errorMsg containsString:@"注意营养"]) {
+            weakSelf.cityInfoDataItemArr = [NSMutableArray array];
+            [weakSelf.collectionView reloadData];
+        }
     }];
 }
 - (void)requestHighMoreData{
@@ -251,6 +254,10 @@
         } error:^(NSError *error, id resultObject) {
             [weakSelf.collectionView endHeaderRefreshing];
             [LSVProgressHUD showError:error];
+            if ([error.errorMsg containsString:@"注意营养"]) {
+                weakSelf.cityInfoDataItemArr = [NSMutableArray array];
+                [weakSelf.collectionView reloadData];
+            }
         }];
     }else{
 //        [CityApi requestHighCityListWithRegionID:regionID pageIndex:@"0" page_size:@"25" Success:^(NSArray * _Nonnull cityItemArr, NSString * _Nonnull msg) {

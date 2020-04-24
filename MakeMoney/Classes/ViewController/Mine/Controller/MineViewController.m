@@ -182,7 +182,7 @@
 -(void)requestSetInfo{
     __weak __typeof(self) weakSelf = self;
     [MineApi requestSetInfoWithCode:RI.infoInitItem.invite_code Success:^(NSInteger status, NSString * _Nonnull msg, NSString * _Nonnull mobile, NSString * _Nonnull invite_code) {
-        RI.infoInitItem.yaoqingren_code = invite_code;
+        RI.yaoqingren_code = invite_code;
         [weakSelf.customTableView reloadData];
     } error:^(NSError *error, id resultObject) {
         
@@ -322,7 +322,7 @@
             subTitle = RI.infoInitItem.mobile.length > 0 ? RI.infoInitItem.mobile : lqStrings(@"未绑定");
         }else if (indexPath.row == 1) {
             title = lqStrings(@"我的邀请人");
-            subTitle = RI.infoInitItem.yaoqingren_code.length == 0 ? lqStrings(@"未绑定") :RI.infoInitItem.yaoqingren_code;
+            subTitle = RI.yaoqingren_code.length == 0 ? lqStrings(@"未绑定") :RI.yaoqingren_code;
         }else  if (indexPath.row == 2) {
             title = lqStrings(@"安全码设置");
             subTitle = lqStrings(@"");
@@ -402,7 +402,7 @@
                 [self.navigationController pushViewController:vc animated:YES];
             }
         }else if (indexPath.row == 1) {//我的邀请人
-            if (RI.infoInitItem.yaoqingren_code.length > 0) {
+            if (RI.yaoqingren_code.length > 0) {
                 return;
             }
             [[UIApplication sharedApplication].keyWindow addSubview:self.vipExchangeAlertView];
