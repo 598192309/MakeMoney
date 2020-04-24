@@ -92,7 +92,7 @@ static NSString  *JiguangKey = @"5c8cf6e4604a4d52bdc42ae4";
     [self IQKeyboardManagerConfig];
     
     //ShareInstallSDK   推广的，推链接出去，别人通过连接注册就能自动成为好友
-    [ShareInstallSDK setAppKey:@"7RBKREB67B6RHB" withDelegate:self WithOptions:launchOptions clearCustomParams:NO];
+//    [ShareInstallSDK setAppKey:@"7RBKREB67B6RHB" withDelegate:self WithOptions:launchOptions clearCustomParams:NO];
 
 
     return YES;
@@ -128,12 +128,12 @@ static NSString  *JiguangKey = @"5c8cf6e4604a4d52bdc42ae4";
 }
 
 #pragma mark ShareInstallDelegate
-//通过ShareInstall获取自定义参数，数据为空时也会调用此方法
-- (void)getInstallParamsFromSmartInstall:(id) params withError: (NSError *) error{
-    NSLog(@"安装参数params=%@",params);
-    //绑定邀请人
-
-}
+////通过ShareInstall获取自定义参数，数据为空时也会调用此方法
+//- (void)getInstallParamsFromSmartInstall:(id) params withError: (NSError *) error{
+//    NSLog(@"安装参数params=%@",params);
+//    //绑定邀请人
+//
+//}
 
 #pragma mark - 自定义
 

@@ -94,16 +94,27 @@
     };
     
     self.player.playerPlayTimeChanged = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, NSTimeInterval currentTime, NSTimeInterval duration) {
-        NSLog(@"播放时长currentTime:%f,总时长duration:%f",currentTime,duration);
-        if (currentTime > 60) {//大于一分钟 重头播放
-            [weakSelf showMsg:lqStrings(@"VIP会员才能观看完整版喔～") firstBtnTitle:lqStrings(@"再想想") secBtnTitle:lqStrings(@"购买VIP") singleBtnTitle:@""];
-            [weakSelf.player.currentPlayerManager pause];
-            [weakSelf.controlView resetControlView];
-            [weakSelf.player seekToTime:0 completionHandler:^(BOOL finished) {
-
+        
+        if (RI.infoInitItem.is_vip || RI.infoInitItem.is_new_user) {
+            
+        }else{
+            NSInteger maxTime = 60;
+            //视频少于5分钟只给播放1分钟，视频长超过5分钟，允许播放5分钟
+            if (duration > 60 * 5) {
+                maxTime = 60 * 5;
+            }
+            NSLog(@"播放时长currentTime:%f,总时长duration:%f",currentTime,duration);
+            if (currentTime > maxTime) {//大于一分钟 重头播放
+                [weakSelf showMsg:lqStrings(@"VIP会员才能观看完整版喔～") firstBtnTitle:lqStrings(@"再想想") secBtnTitle:lqStrings(@"购买VIP") singleBtnTitle:@""];
                 [weakSelf.player.currentPlayerManager pause];
-            }];
+                [weakSelf.controlView resetControlView];
+                [weakSelf.player seekToTime:0 completionHandler:^(BOOL finished) {
+
+                    [weakSelf.player.currentPlayerManager pause];
+                }];
+            }
         }
+
     };
     
     self.player.presentationSizeChanged = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, CGSize size) {
