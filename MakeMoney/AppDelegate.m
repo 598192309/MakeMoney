@@ -18,6 +18,7 @@
 #import "MineItem.h"
 
 #import "JANALYTICSService.h"
+#import "ShareInstallSDK.h"
 
 static BOOL isProduction = YES;
 
@@ -90,6 +91,9 @@ static NSString  *JiguangKey = @"5c8cf6e4604a4d52bdc42ae4";
     //IQKeyboardManager
     [self IQKeyboardManagerConfig];
     
+    //ShareInstallSDK   推广的，推链接出去，别人通过连接注册就能自动成为好友
+    [ShareInstallSDK setAppKey:@"7RBKREB67B6RHB" withDelegate:self WithOptions:launchOptions clearCustomParams:NO];
+
 
     return YES;
 }

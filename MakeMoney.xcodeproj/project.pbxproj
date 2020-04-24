@@ -23,6 +23,7 @@
 		09239ADA2403FFCE00A4F727 /* LorginApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 09239AD92403FFCE00A4F727 /* LorginApi.m */; };
 		093E58BF2406A87A004E5F72 /* SAMKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 093E58BB2406A879004E5F72 /* SAMKeychainQuery.m */; };
 		093E58C02406A87A004E5F72 /* SAMKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 093E58BD2406A879004E5F72 /* SAMKeychain.m */; };
+		09569DB72453194E00CFE519 /* libShareInstallSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09569DB62453194E00CFE519 /* libShareInstallSDK.a */; };
 		096C7FC0240BC16800914E20 /* MineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C7FBC240BC16800914E20 /* MineCell.m */; };
 		096C7FC1240BC16800914E20 /* MineCustomHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C7FBF240BC16800914E20 /* MineCustomHeaderView.m */; };
 		096C7FC4240BC3D800914E20 /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C7FC3240BC3D800914E20 /* CustomAlertView.m */; };
@@ -330,6 +331,8 @@
 		093E58BC2406A879004E5F72 /* SAMKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMKeychain.h; sourceTree = "<group>"; };
 		093E58BD2406A879004E5F72 /* SAMKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMKeychain.m; sourceTree = "<group>"; };
 		093E58BE2406A87A004E5F72 /* SAMKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMKeychainQuery.h; sourceTree = "<group>"; };
+		09569DB52453194E00CFE519 /* ShareInstallSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareInstallSDK.h; sourceTree = "<group>"; };
+		09569DB62453194E00CFE519 /* libShareInstallSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libShareInstallSDK.a; sourceTree = "<group>"; };
 		096C7FBC240BC16800914E20 /* MineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineCell.m; sourceTree = "<group>"; };
 		096C7FBD240BC16800914E20 /* MineCustomHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineCustomHeaderView.h; sourceTree = "<group>"; };
 		096C7FBE240BC16800914E20 /* MineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineCell.h; sourceTree = "<group>"; };
@@ -884,6 +887,7 @@
 				09C51B01241544BF00705DFC /* Foundation.framework in Frameworks */,
 				09C51B07241544D900705DFC /* CFNetwork.framework in Frameworks */,
 				09E72D272405631D0004B25C /* CoreTelephony.framework in Frameworks */,
+				09569DB72453194E00CFE519 /* libShareInstallSDK.a in Frameworks */,
 				09C51B05241544CF00705DFC /* CoreFoundation.framework in Frameworks */,
 				09C51AFB241544A000705DFC /* CoreTelephony.framework in Frameworks */,
 				09C51AFD241544AD00705DFC /* CoreGraphics.framework in Frameworks */,
@@ -1276,6 +1280,23 @@
 			path = Keychain;
 			sourceTree = "<group>";
 		};
+		09569DB32453194E00CFE519 /* ShareInstallSDK1.2.2 */ = {
+			isa = PBXGroup;
+			children = (
+				09569DB42453194E00CFE519 /* Headers */,
+				09569DB62453194E00CFE519 /* libShareInstallSDK.a */,
+			);
+			path = ShareInstallSDK1.2.2;
+			sourceTree = "<group>";
+		};
+		09569DB42453194E00CFE519 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				09569DB52453194E00CFE519 /* ShareInstallSDK.h */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
 		096C7FBB240BC16800914E20 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
@@ -1354,6 +1375,7 @@
 		09E72ADC240559E20004B25C /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				09569DB32453194E00CFE519 /* ShareInstallSDK1.2.2 */,
 				09C51B0C2415479C00705DFC /* Jpush */,
 				8B9B8BAB240D4AED004B4704 /* ZFPlayer */,
 				8BD54574240BB4CC00C90A31 /* MJRefresh */,
@@ -2551,7 +2573,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K2LM5SN748;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libs/UMCAnalytics",
@@ -2568,9 +2590,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/MakeMoney/Classes/Tools/Frameworks/shujumohePB",
 					"$(PROJECT_DIR)/Libs/Jpush",
+					"$(PROJECT_DIR)/Libs/ShareInstallSDK1.2.2",
 				);
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.video.baofu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.video.facai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2582,7 +2605,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K2LM5SN748;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libs/UMCAnalytics",
@@ -2599,9 +2622,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/MakeMoney/Classes/Tools/Frameworks/shujumohePB",
 					"$(PROJECT_DIR)/Libs/Jpush",
+					"$(PROJECT_DIR)/Libs/ShareInstallSDK1.2.2",
 				);
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.video.baofu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.video.facai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

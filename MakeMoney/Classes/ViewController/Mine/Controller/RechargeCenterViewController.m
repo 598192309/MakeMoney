@@ -48,10 +48,10 @@
         if (RI.infoInitItem.mobile.length == 0) {//没绑定
             [self showTipMsg:lqStrings(@"购买VIP需要先绑定手机号喔~") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:@"" subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"去绑定"];
         }else{
-            if (!self.showWenxin) {
-                [self showTipMsg:lqStrings(@"温馨提示") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"请注意选择VIP类型哦~") subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"好的"];
-                self.showWenxin = YES;
-            }
+//            if (!self.showWenxin) {
+//                [self showTipMsg:lqStrings(@"温馨提示") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"请注意选择VIP类型哦~") subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"好的"];
+//                self.showWenxin = YES;
+//            }
         }
         [self requestOrder:RI.tradeNo];
     }
@@ -71,8 +71,8 @@
         [self showTipMsg:lqStrings(@"购买VIP需要先绑定手机号喔~") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:@"" subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"再看看" secBtnTitle:@"去绑定" singleBtnTitle:@""];
 
     }else{
-        [self showTipMsg:lqStrings(@"温馨提示") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"请注意选择VIP类型哦~") subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"好的"];
-        self.showWenxin = YES;
+//        [self showTipMsg:lqStrings(@"温馨提示") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"请注意选择VIP类型哦~") subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"好的"];
+//        self.showWenxin = YES;
 
     }
     [self configUI];
