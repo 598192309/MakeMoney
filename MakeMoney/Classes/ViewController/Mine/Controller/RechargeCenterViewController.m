@@ -52,9 +52,8 @@
                 [self showTipMsg:lqStrings(@"温馨提示") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"请注意选择VIP类型哦~") subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"好的"];
                 self.showWenxin = YES;
             }
-
-            
         }
+        [self requestOrder:RI.tradeNo];
     }
 
 }

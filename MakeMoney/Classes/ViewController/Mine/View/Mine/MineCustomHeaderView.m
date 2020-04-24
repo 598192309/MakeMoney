@@ -89,13 +89,13 @@
 //    self.timesLable.hidden = item.is_vip;
     
     if (item.is_new_user ) {
-        if (item.ablum_vip_end_time.length > 0 || item.ablum_vip_end_time.floatValue > 0) {
+        if (item.ablum_vip_end_time.length > 0 ) {
             self.ablumVipLable.text =  [self changeStr:item.ablum_vip_end_time format:@"yyyy-MM-dd"];
         }else{
             self.ablumVipLable.text =  lqStrings(@"临时体验卡");
         }
 
-        if (item.vip_end_time.length > 0 || item.vip_end_time.floatValue > 0) {
+        if (item.vip_end_time.length > 0 ) {
             self.shipinVipLable.text =  [self changeStr:item.vip_end_time format:@"yyyy-MM-dd"];
 //            self.shipinVipLable.hidden = NO;
 //            self.shipinVipTipLable.hidden = NO;

@@ -78,7 +78,7 @@ typedef NS_ENUM(NSInteger,AdTag) {
 @property (nonatomic,strong)NSString *end_time;
 @property (nonatomic,strong)NSString *ID;
 @property (nonatomic,strong)NSString *img;
-@property (nonatomic,assign)NSInteger qm_id;
+@property (nonatomic,strong)NSString *qm_id;
 @property (nonatomic,assign)NSInteger status;
 @property (nonatomic,assign)AdTag tag;
 @property (nonatomic,assign)NSInteger time;

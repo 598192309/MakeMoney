@@ -264,7 +264,7 @@
         {
 //            [LSVProgressHUD showInfoWithStatus:@"跳转到同城详情页面"];
             CityDetailViewController *vc = [[CityDetailViewController alloc] init];
-            vc.ID = item.ID;
+            vc.ID = item.qm_id;
             vc.hidesBottomBarWhenPushed = YES;//x这里可能是tabbar超过5个的原因 不会去掉BaseNavigationController pushViewController方法
             MainTabBarController *main = (MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
             BaseNavigationController *nav = [main.childViewControllers safeObjectAtIndex:main.selectedIndex];
