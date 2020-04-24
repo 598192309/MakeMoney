@@ -108,7 +108,7 @@
 
 - (void)seeBtnClick:(UIButton *)sender{
     sender.selected = !sender.selected;
-    self.pwdTf.secureTextEntry = sender.selected;
+    self.pwdTf.secureTextEntry = !self.pwdTf.secureTextEntry;
 }
 
 #pragma  mark - UITextField delegate
@@ -316,6 +316,13 @@
         _pwdTf.placeholder = (weakSelf.isFisrtlogin || weakSelf.islogin) ?lqStrings(@"请输入密码"): lqStrings(@"请设置密码");
         [_pwdTf setPlaceholderColor:TitleGrayColor font:nil];
         _pwdTf.font = AdaptedFontSize(18);
+        _pwdTf.secureTextEntry = YES;
+        
+        //上个
+        UIViewController *lastlVC = (UIViewController *)[weakSelf.navigationController.childViewControllers safeObjectAtIndex:(self.navigationController.childViewControllers.count - 1 - 1  )];
+        if ([lastlVC isKindOfClass:[BindMobileFirstStepViewController class]]) {
+            _wrongTipLable.text = lqStrings(@"当前手机号已被绑定，此操作会交换账号");
+        }
 
         _forgetBtn = [[UIButton alloc] init];
         [_forgetBtn addTarget:self action:@selector(forgetBtnClick:) forControlEvents:UIControlEventTouchUpInside];

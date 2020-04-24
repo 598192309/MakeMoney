@@ -127,6 +127,13 @@ static NSString  *JiguangKey = @"5c8cf6e4604a4d52bdc42ae4";
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark ShareInstallDelegate
+//通过ShareInstall获取自定义参数，数据为空时也会调用此方法
+- (void)getInstallParamsFromSmartInstall:(id) params withError: (NSError *) error{
+    NSLog(@"安装参数params=%@",params);
+    //绑定邀请人
+
+}
 
 #pragma mark - 自定义
 

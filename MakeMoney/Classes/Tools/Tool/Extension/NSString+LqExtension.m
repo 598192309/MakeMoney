@@ -324,6 +324,9 @@
 - (NSString *)lq_getTimeFromTimestampWithFormatter:(NSString *)fmt{
     //将对象类型的时间转换为NSDate类型
     double time = self.doubleValue ;
+    if (time == 0) {
+        return nil;
+    }
 
     NSDate * myDate=[NSDate dateWithTimeIntervalSince1970:time];
 

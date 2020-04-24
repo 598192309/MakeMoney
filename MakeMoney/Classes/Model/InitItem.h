@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *sex_id;
 @property (nonatomic,strong)NSString *vip_end_time;
 @property (nonatomic,strong)NSString *qm_vip_end_time;
-@property (nonatomic,strong)NSString *ablum_vip_end_time;
+@property (nonatomic,strong)NSString *album_vip_end_time;
 
 
 @property (nonatomic,strong)NSString *user_id;

@@ -81,17 +81,17 @@
 //    }
 //    self.timesLable.attributedText = attr;
     self.cityVipLable.text = item.is_qm_vip ? [self changeStr:item.qm_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
-    self.ablumVipLable.text = item.is_album_vip ? [self changeStr:item.ablum_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
+    self.ablumVipLable.text = item.is_album_vip ? [self changeStr:item.album_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
     self.shipinVipLable.text = item.is_vip ? [self changeStr:item.vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
     
     if (item.is_new_user ) {
-        if (item.ablum_vip_end_time.length > 0 ) {
-            self.ablumVipLable.text =  [self changeStr:item.ablum_vip_end_time format:@"yyyy-MM-dd"];
+        if (item.album_vip_end_time.floatValue > 0 ) {
+            self.ablumVipLable.text =  [self changeStr:item.album_vip_end_time format:@"yyyy-MM-dd"];
         }else{
             self.ablumVipLable.text =  lqStrings(@"临时体验卡");
         }
 
-        if (item.vip_end_time.length > 0 ) {
+        if (item.vip_end_time.floatValue > 0 ) {
             self.shipinVipLable.text =  [self changeStr:item.vip_end_time format:@"yyyy-MM-dd"];
 //            self.shipinVipLable.hidden = NO;
 //            self.shipinVipTipLable.hidden = NO;
@@ -241,7 +241,7 @@
             
         }];
         
-        _ablumVipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? [weakSelf changeStr:RI.infoInitItem.ablum_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        _ablumVipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? [weakSelf changeStr:RI.infoInitItem.album_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_ablumVipLable];
         [_ablumVipLable mas_makeConstraints:^(MASConstraintMaker *make) {
             
