@@ -187,7 +187,9 @@
         RI.shallinstallCode = @"";
 
     } error:^(NSError *error, id resultObject) {
-        [LSVProgressHUD showError:error];
+//        [LSVProgressHUD showError:error];
+        RI.shallinstallCode = @"";
+
     }];
     
 }

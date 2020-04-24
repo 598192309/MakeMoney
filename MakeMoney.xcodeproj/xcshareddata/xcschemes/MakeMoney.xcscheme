@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "092399C22403FE0F00A4F727"
-               BuildableName = "MakeMoney.app"
+               BuildableName = "51778&#x89c6;&#x9891;.app"
                BlueprintName = "MakeMoney"
                ReferencedContainer = "container:MakeMoney.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "092399C22403FE0F00A4F727"
-            BuildableName = "MakeMoney.app"
+            BuildableName = "51778&#x89c6;&#x9891;.app"
             BlueprintName = "MakeMoney"
             ReferencedContainer = "container:MakeMoney.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "092399C22403FE0F00A4F727"
-            BuildableName = "MakeMoney.app"
+            BuildableName = "51778&#x89c6;&#x9891;.app"
             BlueprintName = "MakeMoney"
             ReferencedContainer = "container:MakeMoney.xcodeproj">
          </BuildableReference>
