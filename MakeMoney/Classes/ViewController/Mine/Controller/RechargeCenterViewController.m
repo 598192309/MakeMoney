@@ -30,6 +30,8 @@
 @property (nonatomic,strong)VideoRechargeViewController *videoVC;
 @property (nonatomic,strong)CityRechargeViewController *cityVC;
 @property (nonatomic,strong)AblumRechargeViewController *ablumVC;
+@property (nonatomic,assign)BOOL showWenxin;//显示过温馨提示 请注意选择VIP类型哦~
+
 @end
 
 @implementation RechargeCenterViewController
@@ -46,7 +48,12 @@
         if (RI.infoInitItem.mobile.length == 0) {//没绑定
             [self showTipMsg:lqStrings(@"购买VIP需要先绑定手机号喔~") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:@"" subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"去绑定"];
         }else{
-            [self showTipMsg:lqStrings(@"温馨提示") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"请注意选择VIP类型哦~") subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"好的"];
+            if (!self.showWenxin) {
+                [self showTipMsg:lqStrings(@"温馨提示") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"请注意选择VIP类型哦~") subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"好的"];
+                self.showWenxin = YES;
+            }
+
+            
         }
     }
 
@@ -66,6 +73,7 @@
 
     }else{
         [self showTipMsg:lqStrings(@"温馨提示") msgFont:AdaptedBoldFontSize(15) msgColor:ThemeBlackColor subTitle:lqStrings(@"请注意选择VIP类型哦~") subFont:AdaptedFontSize(14) subColor:TitleBlackColor firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:@"好的"];
+        self.showWenxin = YES;
 
     }
     [self configUI];
