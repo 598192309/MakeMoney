@@ -83,7 +83,7 @@
     self.cityVipLable.text = item.is_qm_vip ? [self changeStr:item.qm_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
     self.ablumVipLable.text = item.is_album_vip ? [self changeStr:item.album_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
     self.shipinVipLable.text = item.is_vip ? [self changeStr:item.vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
-    
+    self.iDLable.text = [NSString stringWithFormat:lqLocalized(@"ID:%@", nil),item.sex_id];
     if (item.is_new_user ) {
         if (item.album_vip_end_time.floatValue > 0 ) {
             self.ablumVipLable.text =  [self changeStr:item.album_vip_end_time format:@"yyyy-MM-dd"];

@@ -265,6 +265,7 @@ alpha:(a)]
 #define kInfoInitItemJasonStr        @"kInfoInitItemJasonStr"
 
 #define kYaoqingrenCode        @"kYaoqingrenCode"
+#define kShallInstallCode        @"kShallInstallCode"
 
 
 #define KNotification_PayClick @"KNotification_PayClick"//支付方式点击
@@ -287,7 +288,7 @@ alpha:(a)]
 #define kURL_Reachability__Address @"www.baidu.com"
 
 /**二维码key */
-#define  ErweimaShareKey @"ARBKR7HE27AFB2"
+#define  ErweimaShareKey @"K6BKREEFB6E262"
 
 #endif
 

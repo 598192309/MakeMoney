@@ -92,7 +92,7 @@ static NSString  *JiguangKey = @"5c8cf6e4604a4d52bdc42ae4";
     [self IQKeyboardManagerConfig];
     
     //ShareInstallSDK   推广的，推链接出去，别人通过连接注册就能自动成为好友
-//    [ShareInstallSDK setAppKey:@"7RBKREB67B6RHB" withDelegate:self WithOptions:launchOptions clearCustomParams:NO];
+    [ShareInstallSDK setAppKey:@"7RBKREB67B6RHB" withDelegate:self WithOptions:launchOptions clearCustomParams:NO];
 
 
     return YES;
@@ -127,13 +127,85 @@ static NSString  *JiguangKey = @"5c8cf6e4604a4d52bdc42ae4";
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+
+//iOS9以上 URL Scheme
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(nonnull NSDictionary *)options
+{
+    //判断是否通过ShareInstall URL Scheme 唤起App
+    if ([ShareInstallSDK handLinkURL:url]) {
+        return YES;
+    }else{
+        //其他代码
+        return YES;
+    }
+    
+    return YES;
+}
+
+//Universal Links 通用链接
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
+{
+    
+    //判断是否通过ShareInstall Universal Links 唤起App
+    if ([ShareInstallSDK continueUserActivity:userActivity]) {
+        return YES ;
+        
+    }else{
+        //其他代码
+        return YES;
+    }
+    
+    
+}
+
 #pragma mark ShareInstallDelegate
-////通过ShareInstall获取自定义参数，数据为空时也会调用此方法
-//- (void)getInstallParamsFromSmartInstall:(id) params withError: (NSError *) error{
-//    NSLog(@"安装参数params=%@",params);
-//    //绑定邀请人
+- (void)getInstallParamsFromSmartInstall:(id) params withError: (NSError *) error{
+    
+    NSLog(@"安装参数params=%@",params);
+    //弹出提示框(便于调试，调试完成后删除此代码)
+    NSDictionary *paramsDic = [params mj_JSONObject];
+    NSString *code = [paramsDic safeObjectForKey:@"code"];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"直接点击App进来的" message:code delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+//    [alert show];
+    
+    RI.shallinstallCode = code;
+
+}
+
+//
+//- (void)getWakeUpParamsFromSmartInstall: (id) params withError: (NSError *) error{
+//
+//    NSLog(@"唤醒参数params=%@",params);
+//    //弹出提示框(便于调试，调试完成后删除此代码)
+//    NSDictionary *paramsDic = [params mj_JSONObject];
+//    NSString *code = [paramsDic safeObjectForKey:code];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"URL shceme或Universal Links唤醒" message:code delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+//    [alert show];
 //
 //}
+
+
+#pragma mark json转字典
+-(NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString
+{
+    if (jsonString == nil) {
+        return @{};
+    }
+    
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    if (!jsonData) {
+        return nil;
+    }
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err)
+    {
+        return @{};
+    }
+    return dic;
+}
 
 #pragma mark - 自定义
 

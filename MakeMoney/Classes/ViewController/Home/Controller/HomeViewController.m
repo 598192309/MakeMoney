@@ -76,6 +76,8 @@
         [self showFreeMsg:lqStrings(@"临时体验卡") submsg:[NSString stringWithFormat:lqLocalized(@"新用户可以免费体验%@哦～", nil),str] firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:lqStrings(@"好的")];
     }
     
+    [self bandingYaoqingmaWithNum:RI.shallinstallCode];
+    
 }
 - (void)dealloc{
     LQLog(@"dealloc -------%@",NSStringFromClass([self class]));
@@ -167,6 +169,23 @@
     } error:^(NSError *error, id resultObject) {
         
     }];
+}
+
+//绑定邀请码
+- (void)bandingYaoqingmaWithNum:(NSString *)number{
+    if (number.length == 0 || RI.yaoqingren_code.length > 0) {
+        return;
+    }
+    [LSVProgressHUD show];
+    __weak __typeof(self) weakSelf = self;
+    [MineApi requestPayResultWithsexID:RI.infoInitItem.sex_id invite_code:number invite_code2:RI.infoInitItem.invite_code Success:^(NSInteger status, NSString * _Nonnull msg) {
+        [LSVProgressHUD showInfoWithStatus:msg];
+        RI.yaoqingren_code = number;
+
+    } error:^(NSError *error, id resultObject) {
+        [LSVProgressHUD showError:error];
+    }];
+    
 }
 #pragma mark - UICollectionViewDataSource
 //设置容器中有多少个组

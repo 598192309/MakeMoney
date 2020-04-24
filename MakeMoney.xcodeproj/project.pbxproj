@@ -333,6 +333,7 @@
 		093E58BE2406A87A004E5F72 /* SAMKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMKeychainQuery.h; sourceTree = "<group>"; };
 		09569DB52453194E00CFE519 /* ShareInstallSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareInstallSDK.h; sourceTree = "<group>"; };
 		09569DB62453194E00CFE519 /* libShareInstallSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libShareInstallSDK.a; sourceTree = "<group>"; };
+		09569DB82453299E00CFE519 /* MakeMoney.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MakeMoney.entitlements; sourceTree = "<group>"; };
 		096C7FBC240BC16800914E20 /* MineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineCell.m; sourceTree = "<group>"; };
 		096C7FBD240BC16800914E20 /* MineCustomHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineCustomHeaderView.h; sourceTree = "<group>"; };
 		096C7FBE240BC16800914E20 /* MineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineCell.h; sourceTree = "<group>"; };
@@ -920,6 +921,7 @@
 		092399C52403FE0F00A4F727 /* MakeMoney */ = {
 			isa = PBXGroup;
 			children = (
+				09569DB82453299E00CFE519 /* MakeMoney.entitlements */,
 				092399DF2403FEE400A4F727 /* Classes */,
 				092399C62403FE0F00A4F727 /* AppDelegate.h */,
 				092399C72403FE0F00A4F727 /* AppDelegate.m */,
@@ -2571,6 +2573,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MakeMoney/MakeMoney.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K2LM5SN748;
 				ENABLE_BITCODE = NO;
@@ -2603,6 +2606,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MakeMoney/MakeMoney.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K2LM5SN748;
 				ENABLE_BITCODE = NO;
