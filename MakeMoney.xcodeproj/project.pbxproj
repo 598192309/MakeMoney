@@ -298,7 +298,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		092399C32403FE0F00A4F727 /* MakeMoney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MakeMoney.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		092399C32403FE0F00A4F727 /* 51778视频.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "51778视频.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		092399C62403FE0F00A4F727 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		092399C72403FE0F00A4F727 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		092399CC2403FE0F00A4F727 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -913,7 +913,7 @@
 		092399C42403FE0F00A4F727 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				092399C32403FE0F00A4F727 /* MakeMoney.app */,
+				092399C32403FE0F00A4F727 /* 51778视频.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2116,7 +2116,7 @@
 			);
 			name = MakeMoney;
 			productName = MakeMoney;
-			productReference = 092399C32403FE0F00A4F727 /* MakeMoney.app */;
+			productReference = 092399C32403FE0F00A4F727 /* 51778视频.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -2597,7 +2597,7 @@
 				);
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.video.baofu;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "51778视频";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2630,7 +2630,7 @@
 				);
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.video.baofu;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "51778视频";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
