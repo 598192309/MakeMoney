@@ -124,7 +124,7 @@
     
     //copy分享链接
     self.myShareCustomView.myshareCustomHeaderViewCopyBtnClickBlock = ^(EnlargeTouchSizeButton * _Nonnull sender, NSDictionary * _Nonnull dict) {
-        NSString *erweimaStr = [NSString stringWithFormat:@"%@/share5.html?appkey=%@&code=%@",RI.basicItem.share_url,ErweimaShareKey,RI.infoInitItem.invite_code];
+        NSString *erweimaStr = [NSString stringWithFormat:@"%@%@/share5.html?appkey=%@&code=%@",RI.basicItem.share_text,RI.basicItem.share_url,ErweimaShareKey,RI.infoInitItem.invite_code];
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = erweimaStr;
         [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"复制成功", nil)];

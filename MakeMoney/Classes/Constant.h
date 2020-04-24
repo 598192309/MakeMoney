@@ -146,8 +146,8 @@ object:nil];
 
 
 #else
-//#define KHOST @"http://app.51778.me"
-#define KHOST @"http://29688b6n03.zicp.vip:39554"
+#define KHOST @"http://app.51778.me"
+//#define KHOST @"http://29688b6n03.zicp.vip:39554"
 
 #endif
 
