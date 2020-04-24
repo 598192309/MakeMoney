@@ -173,7 +173,10 @@
 
 //绑定邀请码
 - (void)bandingYaoqingmaWithNum:(NSString *)number{
-    if (number.length == 0 || RI.yaoqingren_code.length > 0) {
+    if ( RI.yaoqingren_code.length > 0) {
+        return;
+    }
+    if (number.length == 0 ) {
         return;
     }
     [LSVProgressHUD show];
@@ -181,6 +184,7 @@
     [MineApi requestPayResultWithsexID:RI.infoInitItem.sex_id invite_code:number invite_code2:RI.infoInitItem.invite_code Success:^(NSInteger status, NSString * _Nonnull msg) {
         [LSVProgressHUD showInfoWithStatus:msg];
         RI.yaoqingren_code = number;
+        RI.shallinstallCode = @"";
 
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
