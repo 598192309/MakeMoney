@@ -161,7 +161,7 @@
     }];
 }
 
-//支付 tiaoZhuanType 1     跳转到webview加载 data pay_type： 3或4    跳转到新的扫码支付界面
+//支付 tiaoZhuanType 1  5   跳转到webview加载 data pay_type： 3或4    跳转到新的扫码支付界面
 
 - (void)goPayWithInviteChannelId:(NSString *)channel_id goods_id:(NSString *)goods_id sex_id:(NSString *)sex_id pay_type:(NSString *)pay_type payName:(NSString *)payName tiaoZhuanType:(NSString *)tiaoZhuanType{
 
@@ -173,7 +173,7 @@
         weakSelf.commonAlertView = nil;
         weakSelf.clickPayed = YES;
         
-        if ([tiaoZhuanType isEqualToString:@"1"]) {//跳转到webview加载
+        if ([tiaoZhuanType isEqualToString:@"1"] || [tiaoZhuanType isEqualToString:@"5"]) {//跳转到webview加载
 //            BaseWebViewController *vc = [[BaseWebViewController alloc] init];
             WebViewViewController *vc = [[WebViewViewController alloc] init];
             NSString *html = payDetailItem.data;
