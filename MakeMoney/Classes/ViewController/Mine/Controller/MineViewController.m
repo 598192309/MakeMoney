@@ -32,8 +32,6 @@
 
 @property (nonatomic,strong)InitItem *dataItem;
 
-@property (nonatomic,strong)NSString *yaoqingren;//邀请人
-
 @property (nonatomic,strong)CommonAlertView *tipAlertView;
 
 @end
@@ -184,6 +182,7 @@
 -(void)requestSetInfo{
     __weak __typeof(self) weakSelf = self;
     [MineApi requestSetInfoWithCode:RI.infoInitItem.invite_code Success:^(NSInteger status, NSString * _Nonnull msg, NSString * _Nonnull mobile, NSString * _Nonnull invite_code) {
+        RI.infoInitItem.yaoqingren_code = invite_code;
         [weakSelf.customTableView reloadData];
     } error:^(NSError *error, id resultObject) {
         
@@ -202,6 +201,7 @@
         [LSVProgressHUD showInfoWithStatus:msg];
         sender.userInteractionEnabled = YES;
         //刷新数据 是否是VIP了
+        [weakSelf requestData];
 
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
@@ -221,6 +221,7 @@
     [MineApi requestPayResultWithsexID:RI.infoInitItem.sex_id invite_code:number invite_code2:RI.infoInitItem.invite_code Success:^(NSInteger status, NSString * _Nonnull msg) {
         sender.userInteractionEnabled = YES;
         [LSVProgressHUD showInfoWithStatus:msg];
+        [weakSelf requestSetInfo];
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
         sender.userInteractionEnabled = YES;
@@ -321,7 +322,7 @@
             subTitle = RI.infoInitItem.mobile.length > 0 ? RI.infoInitItem.mobile : lqStrings(@"未绑定");
         }else if (indexPath.row == 1) {
             title = lqStrings(@"我的邀请人");
-            subTitle = self.yaoqingren.length == 0 ? lqStrings(@"未绑定") :self.yaoqingren;
+            subTitle = RI.infoInitItem.yaoqingren_code.length == 0 ? lqStrings(@"未绑定") :RI.infoInitItem.yaoqingren_code;
         }else  if (indexPath.row == 2) {
             title = lqStrings(@"安全码设置");
             subTitle = lqStrings(@"");
@@ -401,6 +402,9 @@
                 [self.navigationController pushViewController:vc animated:YES];
             }
         }else if (indexPath.row == 1) {//我的邀请人
+            if (RI.infoInitItem.yaoqingren_code.length > 0) {
+                return;
+            }
             [[UIApplication sharedApplication].keyWindow addSubview:self.vipExchangeAlertView];
             [self.vipExchangeAlertView refreshContent:lqStrings(@"请填写邀请码")];
             [self.vipExchangeAlertView mas_makeConstraints:^(MASConstraintMaker *make) {

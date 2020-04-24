@@ -92,7 +92,7 @@
         [_checkBtn addTarget:self action:@selector(checkBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_checkBtn setTitleColor:TitleBlackColor forState:UIControlStateNormal];
         _checkBtn.titleLabel.font = AdaptedBoldFontSize(17);
-        [_checkBtn setTitle:lqStrings(@"查询") forState:UIControlStateNormal];
+        [_checkBtn setTitle:lqStrings(@"激活") forState:UIControlStateNormal];
         [contentV addSubview:_checkBtn];
         [_checkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(weakSelf.orderTF);
