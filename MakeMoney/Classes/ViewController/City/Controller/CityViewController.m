@@ -25,6 +25,8 @@
 @property (nonatomic,strong)NSMutableArray *bannerImageUrlArr;
 
 @property (nonatomic,strong)NSArray *bottomAdsArr;
+
+@property (nonatomic,strong)NSArray *adsItemArr;
 @end
 
 @implementation CityViewController
@@ -85,6 +87,7 @@
         for (AdsItem *item  in adsItemArr) {
             [weakSelf.bannerImageUrlArr addObject:item.img];
         }
+        weakSelf.adsItemArr = adsItemArr;
         [weakSelf.collectionView reloadData];
     } error:^(NSError *error, id resultObject) {
         
@@ -152,6 +155,11 @@
                 vc.hidesBottomBarWhenPushed = YES;//x这里可能是tabbar超过5个的原因 不会去掉BaseNavigationController pushViewController方法
 
                 [weakSelf.navigationController pushViewController:vc animated:YES];
+            };
+            //点击banner
+            headerView.bannerClickBlock = ^(NSInteger index){
+                AdsItem *item = [self.adsItemArr safeObjectAtIndex:index];
+                [LqToolKit jumpAdventWithItem:item];
             };
             return headerView;
         }

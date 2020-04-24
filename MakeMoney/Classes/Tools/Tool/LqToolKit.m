@@ -8,6 +8,7 @@
 
 #import "LqToolKit.h"
 #import "AVPlayerController.h"
+#import "CityDetailViewController.h"
 @implementation LqToolKit
 
 /**
@@ -231,7 +232,7 @@
 
 
 #pragma MakeMoney
-
+//banner 点击
 /// 广告i跳转
 /// @param item 广告
 + (void)jumpAdventWithItem:(AdsItem *)item {
@@ -251,7 +252,7 @@
         {
 //            [LSVProgressHUD showInfoWithStatus:@"跳转到AV详情页面"];
             AVPlayerController *vc = [AVPlayerController controllerWith:item];
-            //上上一个界面
+            
             MainTabBarController *main = (MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
             BaseNavigationController *nav = [main.childViewControllers safeObjectAtIndex:main.selectedIndex];
             UIViewController *currentvc = [nav.childViewControllers lastObject];
@@ -261,8 +262,16 @@
             break;
         case AdTag_QMDetailVC:
         {
-            [LSVProgressHUD showInfoWithStatus:@"跳转到同城详情页面"];
-
+//            [LSVProgressHUD showInfoWithStatus:@"跳转到同城详情页面"];
+            CityDetailViewController *vc = [[CityDetailViewController alloc] init];
+            vc.ID = item.ID;
+            vc.hidesBottomBarWhenPushed = YES;//x这里可能是tabbar超过5个的原因 不会去掉BaseNavigationController pushViewController方法
+            MainTabBarController *main = (MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            BaseNavigationController *nav = [main.childViewControllers safeObjectAtIndex:main.selectedIndex];
+            UIViewController *currentvc = [nav.childViewControllers lastObject];
+            
+            [currentvc.navigationController pushViewController:vc animated:YES];
+            
         }
             break;
             

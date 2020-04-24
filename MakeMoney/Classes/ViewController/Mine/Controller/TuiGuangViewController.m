@@ -84,6 +84,7 @@
     self.tuiGuangCustomView.tuiGuangCustomViewCheckBtnClickBlock = ^(UIButton * _Nonnull sender, NSDictionary * _Nonnull dict) {
 //        [LSVProgressHUD showInfoWithStatus:[sender titleForState:UIControlStateNormal]];
         IncomeDetailViewController *vc = [[IncomeDetailViewController alloc] init];
+        vc.inviteCode = RI.infoInitItem.invite_code;
         [weakSelf.navigationController pushViewController:vc animated:YES];
     };
 }

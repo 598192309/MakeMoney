@@ -66,7 +66,10 @@
 /** 点击图片回调 */
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
     
-    [LSVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"*****%ld",(long)index]];
+//    [LSVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"*****%ld",(long)index]];
+    if (self.bannerClickBlock) {
+        self.bannerClickBlock(index);
+    }
 }
 #pragma mark - lazy
 -(UIView *)header{

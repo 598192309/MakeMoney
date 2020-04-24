@@ -18,6 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**点击tipBtn*/
 @property(nonatomic,copy)void(^headerViewTipBtnClickBlock)(UIButton *sender);
+
+/**点击banner*/
+@property(nonatomic,copy)void(^bannerClickBlock)(NSInteger index);
+
 @end
 
 NS_ASSUME_NONNULL_END
