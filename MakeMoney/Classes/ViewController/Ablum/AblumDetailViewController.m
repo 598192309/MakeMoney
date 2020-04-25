@@ -80,7 +80,7 @@
     [self.view addSubview:self.loveView];
     [self.loveView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(weakSelf.view).offset(-Adaptor_Value(20));
-        make.bottom.mas_equalTo(weakSelf.view).offset(-Adaptor_Value(60));
+        make.bottom.mas_equalTo(weakSelf.view).offset(-Adaptor_Value(80));
     }];
     
     [self.view addSubview:self.buyBtn];
