@@ -49,7 +49,7 @@
         
         _yaoqingren_code = [[NSUserDefaults standardUserDefaults ] objectForKey:kYaoqingrenCode] ? [[NSUserDefaults standardUserDefaults ] objectForKey:kYaoqingrenCode] : @"";
 
-        _shallinstallCode = [[NSUserDefaults standardUserDefaults ] objectForKey:kShallInstallCode] ? [[NSUserDefaults standardUserDefaults ] objectForKey:kShallInstallCode] : @"";
+//        _shallinstallCode = [[NSUserDefaults standardUserDefaults ] objectForKey:kShallInstallCode] ? [[NSUserDefaults standardUserDefaults ] objectForKey:kShallInstallCode] : @"";
 
 
     }
@@ -91,9 +91,9 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void)setShallinstallCode:(NSString *)shallinstallCode{
-    _shallinstallCode = shallinstallCode;
-    [[NSUserDefaults standardUserDefaults] setObject:shallinstallCode forKey:kShallInstallCode];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
+//- (void)setShallinstallCode:(NSString *)shallinstallCode{
+//    _shallinstallCode = shallinstallCode;
+//    [[NSUserDefaults standardUserDefaults] setObject:shallinstallCode forKey:kShallInstallCode];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//}
 @end

@@ -28,6 +28,7 @@
 #import "MineItem.h"
 #import "MyShareViewController.h"
 #import "RechargeCenterViewController.h"
+#import "ShareInstallSDK.h"
 @interface HomeViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,SDCycleScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -76,7 +77,16 @@
         [self showFreeMsg:lqStrings(@"临时体验卡") submsg:[NSString stringWithFormat:lqLocalized(@"新用户可以免费体验%@哦～", nil),str] firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:lqStrings(@"好的")];
     }
     
-    [self bandingYaoqingmaWithNum:RI.shallinstallCode];
+    __weak __typeof(self) weakSelf = self;
+    [[ShareInstallSDK getInitializeInstance] getInstallCallBackBlock:^(NSString*jsonStr){
+        if(jsonStr){//动态安装参数
+        //拿到参数，处理客户自己的逻辑
+//            [LSVProgressHUD showWithStatus:jsonStr];
+            NSDictionary *paramsDic = [jsonStr mj_JSONObject];
+            NSString *code = [paramsDic safeObjectForKey:@"code"];
+            [weakSelf bandingYaoqingmaWithNum:jsonStr];
+        }
+    }];
     
 }
 - (void)dealloc{
@@ -179,20 +189,30 @@
     if (number.length == 0 ) {
         return;
     }
-    [LSVProgressHUD show];
+    //获取配置信息 比如绑定的手机号 邀请人
     __weak __typeof(self) weakSelf = self;
-    [MineApi requestPayResultWithsexID:RI.infoInitItem.sex_id invite_code:number invite_code2:RI.infoInitItem.invite_code Success:^(NSInteger status, NSString * _Nonnull msg) {
-        [LSVProgressHUD showInfoWithStatus:msg];
-        RI.yaoqingren_code = number;
-        RI.shallinstallCode = @"";
 
+    [MineApi requestSetInfoWithCode:RI.infoInitItem.invite_code Success:^(NSInteger status, NSString * _Nonnull msg, NSString * _Nonnull mobile, NSString * _Nonnull invite_code) {
+        RI.yaoqingren_code = invite_code;
+        if ( RI.yaoqingren_code.length > 0) {
+            return;
+        }
+        [MineApi requestPayResultWithsexID:RI.infoInitItem.sex_id invite_code:number invite_code2:RI.infoInitItem.invite_code Success:^(NSInteger status, NSString * _Nonnull msg) {
+            RI.yaoqingren_code = number;
+    //        RI.shallinstallCode = @"";
+
+        } error:^(NSError *error, id resultObject) {
+    //        [LSVProgressHUD showError:error];
+    //        RI.shallinstallCode = @"";
+
+        }];
     } error:^(NSError *error, id resultObject) {
-//        [LSVProgressHUD showError:error];
-        RI.shallinstallCode = @"";
-
+        
     }];
+
     
 }
+
 #pragma mark - UICollectionViewDataSource
 //设置容器中有多少个组
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{

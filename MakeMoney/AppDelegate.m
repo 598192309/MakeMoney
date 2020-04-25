@@ -159,18 +159,18 @@ static NSString  *JiguangKey = @"5c8cf6e4604a4d52bdc42ae4";
 }
 
 #pragma mark ShareInstallDelegate
-- (void)getInstallParamsFromSmartInstall:(id) params withError: (NSError *) error{
-    
-    NSLog(@"安装参数params=%@",params);
-    //弹出提示框(便于调试，调试完成后删除此代码)
-    NSDictionary *paramsDic = [params mj_JSONObject];
-    NSString *code = [paramsDic safeObjectForKey:@"code"];
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"直接点击App进来的" message:code delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-//    [alert show];
-    
-    RI.shallinstallCode = code;
-
-}
+//- (void)getInstallParamsFromSmartInstall:(id) params withError: (NSError *) error{
+//    
+//    NSLog(@"安装参数params=%@",params);
+//    //弹出提示框(便于调试，调试完成后删除此代码)
+//    NSDictionary *paramsDic = [params mj_JSONObject];
+//    NSString *code = [paramsDic safeObjectForKey:@"code"];
+////    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"直接点击App进来的" message:code delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+////    [alert show];
+//    
+//    RI.shallinstallCode = code;
+//
+//}
 
 //
 //- (void)getWakeUpParamsFromSmartInstall: (id) params withError: (NSError *) error{

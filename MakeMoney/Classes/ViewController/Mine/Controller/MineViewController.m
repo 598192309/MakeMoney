@@ -493,6 +493,7 @@
         //下拉刷新
         [_customTableView addHeaderWithRefreshingTarget:self refreshingAction:@selector(requestData)];
         _customTableView.tableFooterView = [UIView new];
+        [_customTableView beginHeaderRefreshing];
         
     }
     return _customTableView;
