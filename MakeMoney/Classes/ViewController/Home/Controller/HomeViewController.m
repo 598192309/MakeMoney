@@ -84,7 +84,7 @@
 //            [LSVProgressHUD showWithStatus:jsonStr];
             NSDictionary *paramsDic = [jsonStr mj_JSONObject];
             NSString *code = [paramsDic safeObjectForKey:@"code"];
-            [weakSelf bandingYaoqingmaWithNum:jsonStr];
+            [weakSelf bandingYaoqingmaWithNum:code];
         }
     }];
     
