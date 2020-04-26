@@ -37,8 +37,8 @@
         make.edges.mas_equalTo(weakSelf);
     }];
     
-    //生成对应的二维码
-    NSString *erweimaStr = [NSString stringWithFormat:@"%@%@/share5.html?appkey=%@&code=%@",RI.basicItem.share_text,RI.basicItem.share_url,ErweimaShareKey,RI.infoInitItem.invite_code];
+    //生成对应的二维码 这里不要中文
+    NSString *erweimaStr = [NSString stringWithFormat:@"%@/share5.html?appkey=%@&code=%@",RI.basicItem.share_url,ErweimaShareKey,RI.infoInitItem.invite_code];
     UIImage *image = [UIImage generateIconQRCodeWithString:erweimaStr Size:Adaptor_Value(200) icon:[UIImage imageNamed:@"ic_erweima"]];
     self.erweimaImageV.image = image;
 
