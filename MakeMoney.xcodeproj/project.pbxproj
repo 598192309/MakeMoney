@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		091C3CCD2455BA1C009D1976 /* libShareInstallSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 091C3CCC2455BA1C009D1976 /* libShareInstallSDK.a */; };
 		092399C82403FE0F00A4F727 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 092399C72403FE0F00A4F727 /* AppDelegate.m */; };
 		092399CE2403FE0F00A4F727 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 092399CD2403FE0F00A4F727 /* ViewController.m */; };
 		092399D12403FE0F00A4F727 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 092399CF2403FE0F00A4F727 /* Main.storyboard */; };
@@ -23,11 +24,12 @@
 		09239ADA2403FFCE00A4F727 /* LorginApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 09239AD92403FFCE00A4F727 /* LorginApi.m */; };
 		093E58BF2406A87A004E5F72 /* SAMKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 093E58BB2406A879004E5F72 /* SAMKeychainQuery.m */; };
 		093E58C02406A87A004E5F72 /* SAMKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 093E58BD2406A879004E5F72 /* SAMKeychain.m */; };
-		09569DB72453194E00CFE519 /* libShareInstallSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09569DB62453194E00CFE519 /* libShareInstallSDK.a */; };
 		096C7FC0240BC16800914E20 /* MineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C7FBC240BC16800914E20 /* MineCell.m */; };
 		096C7FC1240BC16800914E20 /* MineCustomHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C7FBF240BC16800914E20 /* MineCustomHeaderView.m */; };
 		096C7FC4240BC3D800914E20 /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C7FC3240BC3D800914E20 /* CustomAlertView.m */; };
 		096C7FC7240C0F6D00914E20 /* AdsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C7FC6240C0F6D00914E20 /* AdsHeaderView.m */; };
+		096F78A72455D18400B8A809 /* JKCrashProtect.m in Sources */ = {isa = PBXBuildFile; fileRef = 096F78A52455D18400B8A809 /* JKCrashProtect.m */; };
+		096F78A82455D18400B8A809 /* NSObject+Cache.m in Sources */ = {isa = PBXBuildFile; fileRef = 096F78A62455D18400B8A809 /* NSObject+Cache.m */; };
 		09830AF7240819A700FBF2C7 /* UserData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 09830AF6240819A700FBF2C7 /* UserData.plist */; };
 		09830AFA2408207F00FBF2C7 /* AVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09830AF92408207F00FBF2C7 /* AVCell.m */; };
 		09A6B74A244DF77600C8BC9C /* BindMobileSetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A6B749244DF77600C8BC9C /* BindMobileSetPwdViewController.m */; };
@@ -298,6 +300,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		091C3CCB2455BA1C009D1976 /* ShareInstallSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareInstallSDK.h; sourceTree = "<group>"; };
+		091C3CCC2455BA1C009D1976 /* libShareInstallSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libShareInstallSDK.a; sourceTree = "<group>"; };
 		092399C32403FE0F00A4F727 /* 51778视频.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "51778视频.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		092399C62403FE0F00A4F727 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		092399C72403FE0F00A4F727 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -331,8 +335,6 @@
 		093E58BC2406A879004E5F72 /* SAMKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMKeychain.h; sourceTree = "<group>"; };
 		093E58BD2406A879004E5F72 /* SAMKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMKeychain.m; sourceTree = "<group>"; };
 		093E58BE2406A87A004E5F72 /* SAMKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMKeychainQuery.h; sourceTree = "<group>"; };
-		09569DB52453194E00CFE519 /* ShareInstallSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareInstallSDK.h; sourceTree = "<group>"; };
-		09569DB62453194E00CFE519 /* libShareInstallSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libShareInstallSDK.a; sourceTree = "<group>"; };
 		09569DB82453299E00CFE519 /* MakeMoney.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MakeMoney.entitlements; sourceTree = "<group>"; };
 		096C7FBC240BC16800914E20 /* MineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineCell.m; sourceTree = "<group>"; };
 		096C7FBD240BC16800914E20 /* MineCustomHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineCustomHeaderView.h; sourceTree = "<group>"; };
@@ -342,6 +344,10 @@
 		096C7FC3240BC3D800914E20 /* CustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlertView.m; sourceTree = "<group>"; };
 		096C7FC5240C0F6D00914E20 /* AdsHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdsHeaderView.h; sourceTree = "<group>"; };
 		096C7FC6240C0F6D00914E20 /* AdsHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdsHeaderView.m; sourceTree = "<group>"; };
+		096F78A32455D18400B8A809 /* JKCrashProtect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKCrashProtect.h; sourceTree = "<group>"; };
+		096F78A42455D18400B8A809 /* NSObject+Cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Cache.h"; sourceTree = "<group>"; };
+		096F78A52455D18400B8A809 /* JKCrashProtect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCrashProtect.m; sourceTree = "<group>"; };
+		096F78A62455D18400B8A809 /* NSObject+Cache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Cache.m"; sourceTree = "<group>"; };
 		09830AF6240819A700FBF2C7 /* UserData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = UserData.plist; sourceTree = "<group>"; };
 		09830AF82408207F00FBF2C7 /* AVCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVCell.h; sourceTree = "<group>"; };
 		09830AF92408207F00FBF2C7 /* AVCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVCell.m; sourceTree = "<group>"; };
@@ -888,7 +894,7 @@
 				09C51B01241544BF00705DFC /* Foundation.framework in Frameworks */,
 				09C51B07241544D900705DFC /* CFNetwork.framework in Frameworks */,
 				09E72D272405631D0004B25C /* CoreTelephony.framework in Frameworks */,
-				09569DB72453194E00CFE519 /* libShareInstallSDK.a in Frameworks */,
+				091C3CCD2455BA1C009D1976 /* libShareInstallSDK.a in Frameworks */,
 				09C51B05241544CF00705DFC /* CoreFoundation.framework in Frameworks */,
 				09C51AFB241544A000705DFC /* CoreTelephony.framework in Frameworks */,
 				09C51AFD241544AD00705DFC /* CoreGraphics.framework in Frameworks */,
@@ -900,6 +906,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		091C3CC92455BA1C009D1976 /* ShareInstallSDK1.2.2 */ = {
+			isa = PBXGroup;
+			children = (
+				091C3CCA2455BA1C009D1976 /* Headers */,
+				091C3CCC2455BA1C009D1976 /* libShareInstallSDK.a */,
+			);
+			path = ShareInstallSDK1.2.2;
+			sourceTree = "<group>";
+		};
+		091C3CCA2455BA1C009D1976 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				091C3CCB2455BA1C009D1976 /* ShareInstallSDK.h */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
 		092399BA2403FE0F00A4F727 = {
 			isa = PBXGroup;
 			children = (
@@ -1282,23 +1305,6 @@
 			path = Keychain;
 			sourceTree = "<group>";
 		};
-		09569DB32453194E00CFE519 /* ShareInstallSDK1.2.2 */ = {
-			isa = PBXGroup;
-			children = (
-				09569DB42453194E00CFE519 /* Headers */,
-				09569DB62453194E00CFE519 /* libShareInstallSDK.a */,
-			);
-			path = ShareInstallSDK1.2.2;
-			sourceTree = "<group>";
-		};
-		09569DB42453194E00CFE519 /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				09569DB52453194E00CFE519 /* ShareInstallSDK.h */,
-			);
-			path = Headers;
-			sourceTree = "<group>";
-		};
 		096C7FBB240BC16800914E20 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
@@ -1344,6 +1350,17 @@
 			path = Mine;
 			sourceTree = "<group>";
 		};
+		096F78A22455D17600B8A809 /* Crash */ = {
+			isa = PBXGroup;
+			children = (
+				096F78A32455D18400B8A809 /* JKCrashProtect.h */,
+				096F78A52455D18400B8A809 /* JKCrashProtect.m */,
+				096F78A42455D18400B8A809 /* NSObject+Cache.h */,
+				096F78A62455D18400B8A809 /* NSObject+Cache.m */,
+			);
+			path = Crash;
+			sourceTree = "<group>";
+		};
 		09C51AE424135AC300705DFC /* LQSegmentControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -1377,7 +1394,7 @@
 		09E72ADC240559E20004B25C /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				09569DB32453194E00CFE519 /* ShareInstallSDK1.2.2 */,
+				091C3CC92455BA1C009D1976 /* ShareInstallSDK1.2.2 */,
 				09C51B0C2415479C00705DFC /* Jpush */,
 				8B9B8BAB240D4AED004B4704 /* ZFPlayer */,
 				8BD54574240BB4CC00C90A31 /* MJRefresh */,
@@ -1735,6 +1752,7 @@
 		11105E1724066BC800521CB2 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				096F78A22455D17600B8A809 /* Crash */,
 				093E58BA2406A861004E5F72 /* Keychain */,
 				11105E4424066BC800521CB2 /* LqTool.h */,
 				11105E4224066BC800521CB2 /* Reachability.h */,
@@ -2260,6 +2278,7 @@
 				8B9B8BFC240D4AED004B4704 /* ZFSliderView.m in Sources */,
 				111FD6FA24124E5B00E7B419 /* MyLoveViewController.m in Sources */,
 				8B9B8C10240E993F004B4704 /* TixianDetailViewController.m in Sources */,
+				096F78A82455D18400B8A809 /* NSObject+Cache.m in Sources */,
 				8B9B8BF1240D4AED004B4704 /* ZFKVOController.m in Sources */,
 				111FD70624124F3F00E7B419 /* GroupCoinSegmentrol.m in Sources */,
 				11105E4E24066BC900521CB2 /* UIScrollView+LqExtension.m in Sources */,
@@ -2365,6 +2384,7 @@
 				113980822410A0BB00663E26 /* PopPayWayViewController.m in Sources */,
 				11105E5E24066BC900521CB2 /* SystemAlertViewController.m in Sources */,
 				09E72C8024055F7E0004B25C /* MJExtensionConst.m in Sources */,
+				096F78A72455D18400B8A809 /* JKCrashProtect.m in Sources */,
 				8B58D0462411416400FE426E /* WebViewViewController.m in Sources */,
 				11105E5924066BC900521CB2 /* UIButton+LqExtension.m in Sources */,
 				09E72D1B240560210004B25C /* BaseViewController.m in Sources */,
@@ -2574,6 +2594,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MakeMoney/MakeMoney.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K2LM5SN748;
 				ENABLE_BITCODE = NO;
@@ -2598,6 +2619,7 @@
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.video.baofu;
 				PRODUCT_NAME = "51778视频";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2607,6 +2629,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MakeMoney/MakeMoney.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K2LM5SN748;
 				ENABLE_BITCODE = NO;
@@ -2631,6 +2654,7 @@
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.video.baofu;
 				PRODUCT_NAME = "51778视频";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

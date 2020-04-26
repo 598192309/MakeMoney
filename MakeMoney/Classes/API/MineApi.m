@@ -287,6 +287,14 @@
 
         NSString *msg = [resultObject safeObjectForKey:@"msg"];
         InitItem *initItem = [InitItem mj_objectWithKeyValues:[resultObject safeObjectForKey:@"data"]];
+        //is_new_user = 1 && mobile ！= nil    新账号
+        if (initItem.is_new_user == 1 && initItem.mobile.length != 0) {
+            initItem.is_new_user = 1;
+        }else{
+            //is_new_user = 1 && mobile == nil    可能是设备变了
+              //is_new_user = 0 && mobile ！= nil    老用户
+            initItem.is_new_user = NO;
+        }
         
         RI.infoInitItem = initItem;
         RI.infoInitItemJasonStr = [initItem mj_JSONString];

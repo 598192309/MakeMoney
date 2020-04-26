@@ -29,6 +29,7 @@
 #import "MyShareViewController.h"
 #import "RechargeCenterViewController.h"
 #import "ShareInstallSDK.h"
+#import "BindMobileFirstStepView.h"
 @interface HomeViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,SDCycleScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -65,8 +66,9 @@
     }
     
     //如果是新用户 弹框限时免费
+    NSString *str;
+
     if (RI.infoInitItem.is_new_user) {
-        NSString *str;
 //        if (RI.infoInitItem.new_user_free_day > 0) {
 //            str = [NSString stringWithFormat:@"%ld天",(long)RI.infoInitItem.new_user_free_day];
 //        }else{
@@ -75,6 +77,11 @@
         str = [NSString stringWithFormat:@"%ld小时",(long)RI.infoInitItem.new_user_free_hour];
 
         [self showFreeMsg:lqStrings(@"临时体验卡") submsg:[NSString stringWithFormat:lqLocalized(@"新用户可以免费体验%@哦～", nil),str] firstBtnTitle:@"" secBtnTitle:@"" singleBtnTitle:lqStrings(@"好的")];
+    }else if (RI.infoInitItem.mobile.length == 0){//没有注册绑定用户
+        str = [NSString stringWithFormat:@"%ld小时",(long)RI.infoInitItem.new_user_free_hour];
+
+        [self showFreeMsg:lqStrings(@"温馨提示") submsg:[NSString stringWithFormat:lqLocalized(@"新用户注册绑定可以免费体验%@哦～", nil),str] firstBtnTitle:@"再看看" secBtnTitle:@"去绑定" singleBtnTitle:lqStrings(@"")];
+        
     }
     
     __weak __typeof(self) weakSelf = self;
@@ -469,6 +476,10 @@
         _freeAlertView.commonAlertViewBlock = ^(NSInteger index, NSString * _Nonnull str) {
             [weakSelf.freeAlertView removeFromSuperview];
             weakSelf.freeAlertView = nil;
+            if (index == 2) {//去绑定
+                BindMobileFirstStepView *vc = [[BindMobileFirstStepView alloc] init];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }
         };
     }
     return _freeAlertView;

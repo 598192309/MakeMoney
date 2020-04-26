@@ -188,7 +188,6 @@
 //每次播放 刷新用户信息 获取播放次数
 - (void)requestUserInfo{
     [MineApi requestUserInfoSuccess:^(NSInteger status, NSString * _Nonnull msg, InitItem *initItem) {
-        RI.infoInitItem = initItem;
     } error:^(NSError *error, id resultObject) {
         
     }];
@@ -199,7 +198,7 @@
     __weak __typeof(self) weakSelf = self;
     [MineApi requestShortVedioInfoWithVedioId:video_id is_vip:RI.infoInitItem.is_vip type:0 Success:^(InitItem * _Nonnull initItem, NSString * _Nonnull msg) {
         [weakSelf requestUserInfo];
-        RI.infoInitItem.is_new_user = initItem.is_new_user;
+//        RI.infoInitItem.is_new_user = initItem.is_new_user;
     } error:^(NSError *error, id resultObject) {
         
     }];

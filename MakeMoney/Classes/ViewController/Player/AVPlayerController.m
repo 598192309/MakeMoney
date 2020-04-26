@@ -276,7 +276,15 @@ static NSString *kVideoCover = @"https://upload-images.jianshu.io/upload_images/
 - (void)updatePlayTimes{
     __weak __typeof(self) weakSelf = self;
     [MineApi requestAVInfoWithVedioId:self.item.ID Success:^(InitItem * _Nonnull initItem, NSString * _Nonnull msg) {
-        RI.infoInitItem.is_new_user = initItem.is_new_user;
+//        //is_new_user = 1 && mobile ！= nil    新账号
+//        if (initItem.is_new_user == 1 && initItem.mobile.length != 0) {
+//            initItem.is_new_user = 1;
+//        }else{
+//            //is_new_user = 1 && mobile == nil    可能是设备变了
+//              //is_new_user = 0 && mobile ！= nil    老用户
+//            initItem.is_new_user = NO;
+//        }
+//        RI.infoInitItem.is_new_user = initItem.is_new_user;
     } error:^(NSError *error, id resultObject) {
         
     }];
