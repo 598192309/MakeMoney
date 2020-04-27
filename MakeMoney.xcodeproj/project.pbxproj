@@ -48,7 +48,6 @@
 		09C51B07241544D900705DFC /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C51B06241544D800705DFC /* CFNetwork.framework */; };
 		09C51B0A241544F500705DFC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C51B09241544F500705DFC /* WebKit.framework */; };
 		09C51B0B2415463400705DFC /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C51B08241544E900705DFC /* libresolv.tbd */; };
-		09C51B1E241548B400705DFC /* jcore-ios-2.2.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C51B1A241548B300705DFC /* jcore-ios-2.2.2.a */; };
 		09C51B1F241548B400705DFC /* janalytics-ios-2.1.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C51B1B241548B300705DFC /* janalytics-ios-2.1.2.a */; };
 		09C51B20241548B400705DFC /* jcore-noidfa-ios-2.2.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C51B1D241548B400705DFC /* jcore-noidfa-ios-2.2.2.a */; };
 		09E72AEB240559F40004B25C /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E72AE2240559F40004B25C /* AFURLResponseSerialization.m */; };
@@ -372,7 +371,6 @@
 		09C51B08241544E900705DFC /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		09C51B09241544F500705DFC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		09C51B19241548B300705DFC /* JANALYTICSEventObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JANALYTICSEventObject.h; sourceTree = "<group>"; };
-		09C51B1A241548B300705DFC /* jcore-ios-2.2.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-2.2.2.a"; sourceTree = "<group>"; };
 		09C51B1B241548B300705DFC /* janalytics-ios-2.1.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "janalytics-ios-2.1.2.a"; sourceTree = "<group>"; };
 		09C51B1C241548B400705DFC /* JANALYTICSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JANALYTICSService.h; sourceTree = "<group>"; };
 		09C51B1D241548B400705DFC /* jcore-noidfa-ios-2.2.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-noidfa-ios-2.2.2.a"; sourceTree = "<group>"; };
@@ -899,7 +897,6 @@
 				09C51AFB241544A000705DFC /* CoreTelephony.framework in Frameworks */,
 				09C51AFD241544AD00705DFC /* CoreGraphics.framework in Frameworks */,
 				09E72D0924055FA10004B25C /* UMAnalytics.framework in Frameworks */,
-				09C51B1E241548B400705DFC /* jcore-ios-2.2.2.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1385,7 +1382,6 @@
 				09C51B1B241548B300705DFC /* janalytics-ios-2.1.2.a */,
 				09C51B19241548B300705DFC /* JANALYTICSEventObject.h */,
 				09C51B1C241548B400705DFC /* JANALYTICSService.h */,
-				09C51B1A241548B300705DFC /* jcore-ios-2.2.2.a */,
 				09C51B1D241548B400705DFC /* jcore-noidfa-ios-2.2.2.a */,
 			);
 			path = Jpush;
@@ -2617,6 +2613,7 @@
 					"$(PROJECT_DIR)/Libs/ShareInstallSDK1.2.2",
 				);
 				MARKETING_VERSION = 1.0.1;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.video.baofu;
 				PRODUCT_NAME = "51778视频";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2652,6 +2649,7 @@
 					"$(PROJECT_DIR)/Libs/ShareInstallSDK1.2.2",
 				);
 				MARKETING_VERSION = 1.0.1;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.video.baofu;
 				PRODUCT_NAME = "51778视频";
 				PROVISIONING_PROFILE_SPECIFIER = "";
