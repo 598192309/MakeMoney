@@ -141,8 +141,8 @@ object:nil];
 
 
 #ifdef DEBUG
-#define KHOST @"http://29688b6n03.zicp.vip:39554"
-//#define KHOST @"http://app.51778.me"
+//#define KHOST @"http://29688b6n03.zicp.vip:39554"
+#define KHOST @"http://app.51778.me"
 
 
 #else
@@ -290,7 +290,7 @@ alpha:(a)]
 #define kURL_Reachability__Address @"www.baidu.com"
 
 /**二维码key */
-#define  ErweimaShareKey @"K6BKREEFB6E262"
+#define  ErweimaShareKey @"K6BKRRHHFFHE2F"
 
 #endif
 

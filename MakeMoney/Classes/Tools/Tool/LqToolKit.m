@@ -261,7 +261,7 @@
 //            BaseNavigationController *nav = [main.childViewControllers safeObjectAtIndex:main.selectedIndex];
 //            UIViewController *currentvc = [nav.childViewControllers lastObject];
             HSFTabBarController *main = (HSFTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            BaseNavigationController *nav = [main.childViewControllers safeObjectAtIndex:main.selectedIndex];
+            BaseNavigationController *nav = [main.childVCArr safeObjectAtIndex:main.selectedIndex];
             UIViewController *currentvc = [nav.childViewControllers lastObject];
             [currentvc.navigationController pushViewController:vc animated:YES];
         }
@@ -278,7 +278,7 @@
 //
 //            [currentvc.navigationController pushViewController:vc animated:YES];
             HSFTabBarController *main = (HSFTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            BaseNavigationController *nav = [main.childViewControllers safeObjectAtIndex:main.selectedIndex];
+            BaseNavigationController *nav = [main.childVCArr safeObjectAtIndex:main.selectedIndex];
             UIViewController *currentvc = [nav.childViewControllers lastObject];
             [currentvc.navigationController pushViewController:vc animated:YES];
             
