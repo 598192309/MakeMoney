@@ -145,6 +145,14 @@
     
     return vc;
 }
+- (NSArray<UIViewController *> *)popToRootViewControllerAnimated:(BOOL)animated{
+    NSArray *arr = [super popToRootViewControllerAnimated:animated];
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [delegate.tabBarC.tabBar mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(delegate.tabBarC.tabBarHeight);
+    }];
+    return arr;
+}
 -(void)back:(UIBarButtonItem *)sender{
     [self.view endEditing:YES];
     UIViewController * currentVC = self.topViewController;

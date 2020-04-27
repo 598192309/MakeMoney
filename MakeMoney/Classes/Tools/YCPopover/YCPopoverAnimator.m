@@ -80,7 +80,7 @@
     transitionContext.containerView.layer.shadowOpacity = 0.5f;
     transitionContext.containerView.layer.shadowRadius = 10.0f;
     
-    WeakSelf(weakSelf)
+    __weak __typeof(self) weakSelf = self;
     if (self.popoverType == YCPopoverTypeAlert) {
         presentedView.alpha = 0.0f;
         presentedView.transform = CGAffineTransformMakeScale(1.2, 1.2);
@@ -107,7 +107,7 @@
 - (void)animationForDismissedView:(nonnull id<UIViewControllerContextTransitioning>)transitionContext{
     UIView *presentedView = [transitionContext viewForKey:UITransitionContextFromViewKey];
     
-    WeakSelf(weakSelf)
+    __weak __typeof(self) weakSelf = self;
     if (self.popoverType == YCPopoverTypeAlert) {
         // 消失
         [UIView animateWithDuration:kAnimationDuration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
