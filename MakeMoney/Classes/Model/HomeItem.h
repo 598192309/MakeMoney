@@ -71,7 +71,7 @@ typedef NS_ENUM(NSInteger,AdTag) {
 
 @end
 /**广告 */
-@interface AdsItem : HotItem
+@interface AdsItem : NSObject
 @property (nonatomic,strong)NSString *av_url;
 @property (nonatomic,strong)NSString *create_time;
 @property (nonatomic,strong)NSString *desc;

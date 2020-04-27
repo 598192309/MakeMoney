@@ -251,7 +251,11 @@
         case AdTag_AVDetailVC:
         {
 //            [LSVProgressHUD showInfoWithStatus:@"跳转到AV详情页面"];
-            AVPlayerController *vc = [AVPlayerController controllerWith:item];
+            HotItem *hot = [[HotItem alloc] init];
+            hot.vip_video_url = item.av_url;
+            hot.ID = item.qm_id;
+            hot.title = item.title;
+            AVPlayerController *vc = [AVPlayerController controllerWith:hot];
             
 //            MainTabBarController *main = (MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
 //            BaseNavigationController *nav = [main.childViewControllers safeObjectAtIndex:main.selectedIndex];
