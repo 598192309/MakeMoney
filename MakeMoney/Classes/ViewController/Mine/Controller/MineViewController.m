@@ -129,22 +129,18 @@
     self.mineCustomHeaderView.mineCustomHeaderViewBtnsBlock = ^(UIButton *sender, NSDictionary *dict) {
         if ([[sender titleForState:UIControlStateNormal] isEqualToString:lqStrings(@"我的邀请码")]) {
             MyShareViewController *vc = [[MyShareViewController alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;//x这里可能是tabbar超过5个的原因 不会去掉BaseNavigationController pushViewController方法
 
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }else if ([[sender titleForState:UIControlStateNormal] isEqualToString:lqStrings(@"充值中心")]) {
             RechargeCenterViewController *vc = [[RechargeCenterViewController alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;//x这里可能是tabbar超过5个的原因 不会去掉BaseNavigationController pushViewController方法
 
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }else if ([[sender titleForState:UIControlStateNormal] isEqualToString:lqStrings(@"我的钱包")]) {
             WalletViewController *vc = [[WalletViewController alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;//x这里可能是tabbar超过5个的原因 不会去掉BaseNavigationController pushViewController方法
 
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }else if ([[sender titleForState:UIControlStateNormal] isEqualToString:lqStrings(@"推广赚钱")]) {
             TuiGuangViewController *vc = [[TuiGuangViewController alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;//x这里可能是tabbar超过5个的原因 不会去掉BaseNavigationController pushViewController方法
 
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }else if ([[sender titleForState:UIControlStateNormal] isEqualToString:lqStrings(@"VIP兑换")]) {
@@ -398,7 +394,6 @@
         
     }else if (indexPath.section == 1){//我的收藏
         MyLoveViewController *vc = [[MyLoveViewController alloc]init];
-        vc.hidesBottomBarWhenPushed = YES;//x这里可能是tabbar超过5个的原因 不会去掉BaseNavigationController pushViewController方法
 
         [self.navigationController pushViewController:vc animated:YES];
 
@@ -407,8 +402,6 @@
         if (indexPath.row == 0) {//绑定手机号
             if (RI.infoInitItem.mobile.length == 0) {
                 BindMobileFirstStepViewController *vc = [[BindMobileFirstStepViewController alloc] init];
-                vc.hidesBottomBarWhenPushed = YES;//x这里可能是tabbar超过5个的原因 不会去掉BaseNavigationController pushViewController方法
-
                 [self.navigationController pushViewController:vc animated:YES];
             }
         }else if (indexPath.row == 1) {//我的邀请人
@@ -423,7 +416,6 @@
            
         }else  if (indexPath.row == 2) {//安全码设置
             SecurityCodeViewController *vc = [[SecurityCodeViewController alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;//x这里可能是tabbar超过5个的原因 不会去掉BaseNavigationController pushViewController方法
 
             [self.navigationController pushViewController:vc animated:YES];
             
@@ -450,7 +442,6 @@
             NSString *basePath = [NSString stringWithFormat:@"%@/xieyi.html",mainBundlePath];
             NSString *htmlstr = [NSString stringWithContentsOfFile:basePath encoding:NSUTF8StringEncoding error:nil];
             vc.htmlStr = htmlstr;
-            vc.hidesBottomBarWhenPushed = YES;//x这里可能是tabbar超过5个的原因 不会去掉BaseNavigationController pushViewController方法
 
             [self.navigationController pushViewController:vc animated:YES];
             
