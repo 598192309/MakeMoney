@@ -14,6 +14,15 @@
 #import "HomeItem.h"
 //#import "HSFTabBarController.h"
 
+
+#import "HomeViewController.h"
+#import "MineViewController.h"
+#import "LorginViewController.h"
+#import "CityViewController.h"
+#import "ZhuanTiViewController.h"
+#import "AVViewController.h"
+#import "AblumViewController.h"
+
 @interface LaunchingViewController ()
 @property(nonatomic,strong)UIImageView *imageView;
 @property(nonatomic,strong)UIButton *countingBtn;
@@ -138,11 +147,10 @@
 - (void)codeBtnClick:(UIButton *)sender{
     if ([[sender titleForState:UIControlStateNormal] isEqualToString:lqStrings(@"进入APP")]) {
 //            //进入APP
-        MainTabBarController *main = [[MainTabBarController alloc] init];
-        [AppDelegate shareAppDelegate].rootTabbar = main;
-//        HSFTabBarController *main = [[HSFTabBarController alloc] init];
-//        [AppDelegate shareAppDelegate].tabBarC = main;
-        APPDelegate.window.rootViewController = main ;
+//        MainTabBarController *main = [[MainTabBarController alloc] init];
+//        [AppDelegate shareAppDelegate].rootTabbar = main;
+//        APPDelegate.window.rootViewController = main ;
+        [self intoApp];
     }
 
 }
@@ -153,14 +161,80 @@
 - (void)agreeBtnClick:(UIButton *)sender{
     if (self.chooseBtn.selected) {
             //进入APP
-        MainTabBarController *main = [[MainTabBarController alloc] init];
-        [AppDelegate shareAppDelegate].rootTabbar = main;
-//        HSFTabBarController *main = [[HSFTabBarController alloc] init];
-//        [AppDelegate shareAppDelegate].tabBarC = main;
-        APPDelegate.window.rootViewController = main ;
+//        MainTabBarController *main = [[MainTabBarController alloc] init];
+//        [AppDelegate shareAppDelegate].rootTabbar = main;
+//        APPDelegate.window.rootViewController = main ;
+        [self intoApp];
+
     }else{
         [LSVProgressHUD showInfoWithStatus:lqStrings(@"请确认已阅读")];
     }
+}
+
+/* 请看这里 */
+-(void)intoApp{
+    HomeViewController *vc1 = [HomeViewController controller];
+    ZhuanTiViewController *vc2 = [[ZhuanTiViewController alloc]init];
+    AVViewController *vc3 = [[AVViewController alloc]init];
+    AblumViewController *vc4 = [[AblumViewController alloc]init];
+    CityViewController *vc5 = [[CityViewController alloc]init];
+    MineViewController *vc6 = [[MineViewController alloc]init];
+    
+    BaseNavigationController *navi1 = [[BaseNavigationController alloc]initWithRootViewController:vc1];
+    BaseNavigationController *navi2 = [[BaseNavigationController alloc]initWithRootViewController:vc2];
+    BaseNavigationController *navi3 = [[BaseNavigationController alloc]initWithRootViewController:vc3];
+    BaseNavigationController *navi4 = [[BaseNavigationController alloc]initWithRootViewController:vc4];
+    BaseNavigationController *navi5 = [[BaseNavigationController alloc]initWithRootViewController:vc5];
+    BaseNavigationController *navi6 = [[BaseNavigationController alloc]initWithRootViewController:vc6];
+    
+    HSFTabBarController *tabbarC = [[HSFTabBarController alloc]init];
+    [AppDelegate shareAppDelegate].tabBarC = tabbarC;
+    tabbarC.childVCArr = @[navi1, navi2, navi3, navi4, navi5, navi6];
+    tabbarC.source = @[@{@"title":lqStrings(@"首页"), @"selImg":@"", @"norImg":@""},
+                              @{@"title":lqStrings(@"专题"), @"selImg":@"", @"norImg":@""},
+                              @{@"title":lqStrings(@"AV"), @"selImg":@"", @"norImg":@""},
+                              @{@"title":lqStrings(@"写真"), @"selImg":@"", @"norImg":@""},
+                              @{@"title":lqStrings(@"同城"), @"selImg":@"", @"norImg":@""},
+                              @{@"title":lqStrings(@"我的"), @"selImg":@"", @"norImg":@""}];
+    tabbarC.norColor = TitleGrayColor;
+    tabbarC.selColor = TitleWhiteColor;
+    tabbarC.isHaveTopline = NO;//是否有顶部的黑线
+//    self.tabBarC.isHaveBottomline = YES;//是否有底部的黑线
+    tabbarC.loadAll = NO;//是否一次全部加载
+    tabbarC.canScroll = NO;
+    tabbarC.tabBarHeight = TabbarH;
+
+    
+    //设置样式
+//    self.tabBarC.barPosition = HSFTabBarPosition_top;
+    tabbarC.barPosition = HSFTabBarPosition_bottom;
+    
+//    self.tabBarC.indicatorPosition = HSFIndicatorPosition_top;
+//    self.tabBarC.indicatorPosition = HSFIndicatorPosition_bottom;
+    
+//    self.tabBarC.style = HSFTabBarStyle_baseline;
+//    self.tabBarC.baseline_color = [UIColor redColor];
+//    self.tabBarC.baseline_height = 3;
+//    self.tabBarC.baseline_insert = 10;
+
+//    self.tabBarC.style = HSFTabBarStyle_dot;
+//    self.tabBarC.dot_color = [UIColor redColor];
+//    self.tabBarC.dot_size = CGSizeMake(10, 10);
+//    self.tabBarC.dot_insert = 5;
+    
+//    self.tabBarC.style = HSFTabBarStyle_block;
+//    self.tabBarC.block_color = [[UIColor greenColor] colorWithAlphaComponent:0.6];
+
+    tabbarC.style = HSFTabBarStyle_baseline;
+    tabbarC.baseline_color = [UIColor whiteColor];
+    tabbarC.baseline_height = 2;
+    tabbarC.baseline_insert = 5;
+
+    //添加paddingLine
+//    [self.tabBarC.tabBar setPaddingLineWithPadding_color:[UIColor groupTableViewBackgroundColor] padding_insert:10];
+    
+    [tabbarC setUp];//最后必须setUp
+    APPDelegate.window.rootViewController = tabbarC;
 }
 #pragma mark - net
 -(void)initAPP{
@@ -240,14 +314,14 @@
 
     } error:^(NSError *error, id resultObject) {
         //广告请求回来 倒计时开始
-        [self addCountBtn];
+        [weakSelf addCountBtn];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             //进入APP
-            MainTabBarController *main = [[MainTabBarController alloc] init];
-            [AppDelegate shareAppDelegate].rootTabbar = main;
-//            HSFTabBarController *main = [[HSFTabBarController alloc] init];
-//            [AppDelegate shareAppDelegate].tabBarC = main;
-            APPDelegate.window.rootViewController = main ;
+//            MainTabBarController *main = [[MainTabBarController alloc] init];
+//            [AppDelegate shareAppDelegate].rootTabbar = main;
+//            APPDelegate.window.rootViewController = main ;
+            [weakSelf intoApp];
+
         });
 
     }];

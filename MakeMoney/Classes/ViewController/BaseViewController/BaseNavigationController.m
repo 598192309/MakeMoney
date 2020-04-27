@@ -108,41 +108,42 @@
 -(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
     
     if (self.viewControllers.count>0) {
-        viewController.hidesBottomBarWhenPushed = YES;//处理隐藏tabbar
+//        viewController.hidesBottomBarWhenPushed = YES;//处理隐藏tabbar
         if ([viewController isKindOfClass:[BaseViewController class]]) {
             BaseViewController *vc = (BaseViewController *)viewController;
             if (vc.isHideBackItem == YES) {
                 vc.navigationItem.hidesBackButton = YES;
             }
 
-            //            else{
-            //给push的每个VC加返回按钮
-            //                NSString *imageName = [vc backItemImageName];
-            //                NSString *nightImageName = [vc backNightItemImageName];
-            //
-            //                UIBarButtonItem * widthItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-            //                widthItem.width = 6;
-            //
-            //                vc.navigationItem.leftBarButtonItems =@[ widthItem,[UIBarButtonItem itemWithIcon:imageName night:nightImageName highIcon:@"" target:self action:@selector(back:)]];
-            
-            //            }
         }
-        //        else{
-        //            UIBarButtonItem * widthItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-        //            widthItem.width = 6;
-        //
-        //            UIBarButtonItem * backItem = [UIBarButtonItem itemWithIcon:@"HomeFanhui" night:@"HomeFanhuiOn" highIcon:@"" target:self action:@selector(back:)];
-        //
-        //            viewController.navigationItem.leftBarButtonItems = @[widthItem,backItem];
-        //        }
+
         
     }else{
         
     }
-    //    viewController.navigationController.navigationBar.dk_barTintColorPicker = DKColorPickerWithColors([UIColor whiteColor],[UIColor grayColor]);
     
+    ////push时隐藏tabbar
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [delegate.tabBarC.tabBar mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(0);
+    }];
+
     [super pushViewController:viewController animated:animated];
     
+}
+
+//pop
+- (nullable UIViewController *)popViewControllerAnimated:(BOOL)animated{
+    UIViewController *vc = [super popViewControllerAnimated:animated];
+    
+    if (self.childViewControllers.count == 1) {
+        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        [delegate.tabBarC.tabBar mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(delegate.tabBarC.tabBarHeight);
+        }];
+    }
+    
+    return vc;
 }
 -(void)back:(UIBarButtonItem *)sender{
     [self.view endEditing:YES];

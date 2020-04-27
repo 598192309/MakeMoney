@@ -95,7 +95,6 @@ static NSString  *JiguangKey = @"5c8cf6e4604a4d52bdc42ae4";
     [ShareInstallSDK setAppKey:@"K6BKREEFB6E262" withDelegate:self WithOptions:launchOptions clearCustomParams:NO];
 
 
-
     return YES;
 }
 

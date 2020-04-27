@@ -21,6 +21,7 @@
 #import "SecurityCodeViewController.h"
 #import "BaseWebViewController.h"
 #import "MyLoveViewController.h"
+#import "ShareInstallSDK.h"
 
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (strong, nonatomic) UITableView  *customTableView;
@@ -62,6 +63,7 @@
     }];
     self.navigationController.navigationBar.hidden =YES;//tabbar超过5个 隐藏more
     self.navigationController.delegate = self;
+    
 }
 
 - (void)dealloc{
@@ -168,7 +170,7 @@
         weakSelf.dataItem = initItem;
         [weakSelf.customTableView endHeaderRefreshing];
         [weakSelf.mineCustomHeaderView configUIWithItem:initItem finishi:^{
-            
+             
         }];
         [weakSelf.customTableView reloadData];
     } error:^(NSError *error, id resultObject) {
@@ -211,6 +213,9 @@
 }
 //绑定邀请码
 - (void)bandingYaoqingmaWithNum:(NSString *)number sender:(UIButton *)sender{
+    if ( RI.yaoqingren_code.length > 0) {
+        return;
+    }
     if (number.length == 0) {
         [LSVProgressHUD showInfoWithStatus:lqStrings(@"请填写邀请码")];
         return;

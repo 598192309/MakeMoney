@@ -57,6 +57,7 @@
        self.automaticallyAdjustsScrollViewInsets = NO;
     }
     [self requestData];
+ 
 }
 
 - (void)dealloc{

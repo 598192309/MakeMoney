@@ -28,8 +28,8 @@
 #import "MineItem.h"
 #import "MyShareViewController.h"
 #import "RechargeCenterViewController.h"
+#import "BindMobileFirstStepViewController.h"
 #import "ShareInstallSDK.h"
-#import "BindMobileFirstStepView.h"
 @interface HomeViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,SDCycleScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -91,10 +91,10 @@
 //            [LSVProgressHUD showWithStatus:jsonStr];
             NSDictionary *paramsDic = [jsonStr mj_JSONObject];
             NSString *code = [paramsDic safeObjectForKey:@"code"];
-            [weakSelf bandingYaoqingmaWithNum:code];
+//            [weakSelf bandingYaoqingmaWithNum:code];
         }
     }];
-    
+//
 }
 - (void)dealloc{
     LQLog(@"dealloc -------%@",NSStringFromClass([self class]));
@@ -188,37 +188,37 @@
     }];
 }
 
-//绑定邀请码
-- (void)bandingYaoqingmaWithNum:(NSString *)number{
-    if ( RI.yaoqingren_code.length > 0) {
-        return;
-    }
-    if (number.length == 0 ) {
-        return;
-    }
-    //获取配置信息 比如绑定的手机号 邀请人
-    __weak __typeof(self) weakSelf = self;
-
-    [MineApi requestSetInfoWithCode:RI.infoInitItem.invite_code Success:^(NSInteger status, NSString * _Nonnull msg, NSString * _Nonnull mobile, NSString * _Nonnull invite_code) {
-        RI.yaoqingren_code = invite_code;
-        if ( RI.yaoqingren_code.length > 0) {
-            return;
-        }
-        [MineApi requestPayResultWithsexID:RI.infoInitItem.sex_id invite_code:number invite_code2:RI.infoInitItem.invite_code Success:^(NSInteger status, NSString * _Nonnull msg) {
-            RI.yaoqingren_code = number;
-    //        RI.shallinstallCode = @"";
-
-        } error:^(NSError *error, id resultObject) {
-    //        [LSVProgressHUD showError:error];
-    //        RI.shallinstallCode = @"";
-
-        }];
-    } error:^(NSError *error, id resultObject) {
-        
-    }];
-
-    
-}
+////绑定邀请码
+//- (void)bandingYaoqingmaWithNum:(NSString *)number{
+//    if ( RI.yaoqingren_code.length > 0) {
+//        return;
+//    }
+//    if (number.length == 0 ) {
+//        return;
+//    }
+//    //获取配置信息 比如绑定的手机号 邀请人
+//    __weak __typeof(self) weakSelf = self;
+//
+//    [MineApi requestSetInfoWithCode:RI.infoInitItem.invite_code Success:^(NSInteger status, NSString * _Nonnull msg, NSString * _Nonnull mobile, NSString * _Nonnull invite_code) {
+//        RI.yaoqingren_code = invite_code;
+//        if ( RI.yaoqingren_code.length > 0) {
+//            return;
+//        }
+//        [MineApi requestPayResultWithsexID:RI.infoInitItem.sex_id invite_code:number invite_code2:RI.infoInitItem.invite_code Success:^(NSInteger status, NSString * _Nonnull msg) {
+//            RI.yaoqingren_code = number;
+//    //        RI.shallinstallCode = @"";
+//
+//        } error:^(NSError *error, id resultObject) {
+//    //        [LSVProgressHUD showError:error];
+//    //        RI.shallinstallCode = @"";
+//
+//        }];
+//    } error:^(NSError *error, id resultObject) {
+//
+//    }];
+//
+//
+//}
 
 #pragma mark - UICollectionViewDataSource
 //设置容器中有多少个组
@@ -477,7 +477,7 @@
             [weakSelf.freeAlertView removeFromSuperview];
             weakSelf.freeAlertView = nil;
             if (index == 2) {//去绑定
-                BindMobileFirstStepView *vc = [[BindMobileFirstStepView alloc] init];
+                BindMobileFirstStepViewController *vc = [[BindMobileFirstStepViewController alloc] init];
                 [weakSelf.navigationController pushViewController:vc animated:YES];
             }
         };

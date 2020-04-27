@@ -236,6 +236,7 @@
     [self.vcs addObject:nav];
     // 5.1添加构造Model到集合
     [self.tabBarConfs addObject:model];
+    
 }
 //#pragma mark <UITabBarControllerDelegate>
 //- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
