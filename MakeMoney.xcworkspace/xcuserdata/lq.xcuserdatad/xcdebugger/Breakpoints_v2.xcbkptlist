@@ -50,16 +50,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BFF926F8-2545-4C5A-A19B-D3FA0D2680C7"
+            uuid = "400A88B0-CBA1-4B65-84C6-FCB404872A3A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MakeMoney/Classes/ViewController/Mine/Controller/BindMobileSetPwdViewController.m"
+            filePath = "MakeMoney/Classes/ViewController/Mine/View/Mine/MineCustomHeaderView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
-            landmarkName = "-loginWithMobile:pwd:sender:"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "-configUIWithItem:finishi:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

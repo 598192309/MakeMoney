@@ -80,30 +80,58 @@
 //        }
 //    }
 //    self.timesLable.attributedText = attr;
-    self.cityVipLable.text = item.is_qm_vip ? [self changeStr:item.qm_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
-    self.ablumVipLable.text = item.is_album_vip ? [self changeStr:item.album_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
-    self.shipinVipLable.text = item.is_vip ? [self changeStr:item.vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
     self.iDLable.text = [NSString stringWithFormat:lqLocalized(@"ID:%@", nil),item.sex_id];
-  
-    if (item.is_new_user ) {
-        if (item.album_vip_end_time.floatValue > 0 ) {
-            self.ablumVipLable.text =  [self changeStr:item.album_vip_end_time format:@"yyyy-MM-dd"];
-        }else{
-            self.ablumVipLable.text =  lqStrings(@"临时体验卡");
+    //写真
+    if (item.is_album_vip) {
+        if (item.is_new_user) {
+            if (item.album_vip_end_time.floatValue > 0 ) {
+                self.ablumVipLable.text =  [self changeStr:item.album_vip_end_time format:@"yyyy-MM-dd"];
+            }else{
+                self.ablumVipLable.text =  lqStrings(@"临时体验卡");
+            }
+        }else{//可能不是新用户 没绑定手机
+            self.ablumVipLable.text = item.album_vip_end_time.floatValue > 0 ? [self changeStr:item.album_vip_end_time format:@"yyyy-MM-dd"] :lqStrings(@"未开通");
         }
-
-        if (item.vip_end_time.floatValue > 0 ) {
-            self.shipinVipLable.text =  [self changeStr:item.vip_end_time format:@"yyyy-MM-dd"];
-//            self.shipinVipLable.hidden = NO;
-//            self.shipinVipTipLable.hidden = NO;
-//            self.timesLable.hidden = YES;
-
-        }else{
-            self.shipinVipLable.text = lqStrings(@"临时体验卡");
-
-        }
-
+    }else{
+        self.ablumVipLable.text = item.is_new_user ?  lqStrings(@"临时体验卡") :lqStrings(@"未开通");
     }
+    //视频
+    if (item.is_vip) {
+        if (item.is_new_user) {
+            if (item.vip_end_time.floatValue > 0 ) {
+                self.shipinVipLable.text =  [self changeStr:item.vip_end_time format:@"yyyy-MM-dd"];
+            }else{
+                self.shipinVipLable.text =  lqStrings(@"临时体验卡");
+            }
+        }else{
+            self.shipinVipLable.text = item.vip_end_time.floatValue > 0  ? [self changeStr:item.vip_end_time format:@"yyyy-MM-dd"] : lqStrings(@"未开通");
+        }
+    }else{
+        self.shipinVipLable.text = item.is_new_user ?  lqStrings(@"临时体验卡") : lqStrings(@"未开通");
+    }
+    //同城
+    self.cityVipLable.text = item.is_qm_vip ? [self changeStr:item.qm_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
+//
+//    
+//    if (item.is_new_user ) {
+//        if (item.album_vip_end_time.floatValue > 0 ) {
+//            self.ablumVipLable.text =  [self changeStr:item.album_vip_end_time format:@"yyyy-MM-dd"];
+//        }else{
+//            self.ablumVipLable.text =  lqStrings(@"临时体验卡");
+//        }
+//
+//        if (item.vip_end_time.floatValue > 0 ) {
+//            self.shipinVipLable.text =  [self changeStr:item.vip_end_time format:@"yyyy-MM-dd"];
+////            self.shipinVipLable.hidden = NO;
+////            self.shipinVipTipLable.hidden = NO;
+////            self.timesLable.hidden = YES;
+//
+//        }else{
+//            self.shipinVipLable.text = lqStrings(@"临时体验卡");
+//
+//        }
+//
+//    }
     
     if (item.sign_in) {//签到
         self.qiandaoBtn.selected = YES;

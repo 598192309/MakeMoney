@@ -130,7 +130,7 @@
         [_mobileTf setPlaceholderColor:TitleGrayColor font:nil];
         _mobileTf.font = AdaptedFontSize(18);
 
-        
+        _mobileTf.keyboardType = UIKeyboardTypeNumberPad;
         
         _confirmBtn = [[UIButton alloc] init];
         [_confirmBtn addTarget:self action:@selector(confirmBtnClick:) forControlEvents:UIControlEventTouchUpInside];

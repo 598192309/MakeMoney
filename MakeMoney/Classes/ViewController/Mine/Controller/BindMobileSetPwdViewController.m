@@ -122,12 +122,12 @@
     sender.userInteractionEnabled = NO;
     __weak __typeof(self) weakSelf = self;
     [MineApi loginWithMobile:mobile password:pwd success:^(NSInteger status, NSString * _Nonnull msg,NSString *token) {
-        //    "msg": "58e17cf5d2952bdb91251c3c8bc4c504",   //返回token保存到请求头
-        //讲数据保存一下
-        [SAMKeychain setPassword:token  forService:@"com.51778Vedio"account:@"uuid"];
-
-        [NET setToken:token];
-        [LSVProgressHUD showInfoWithStatus:msg];
+//        //    "msg": "58e17cf5d2952bdb91251c3c8bc4c504",   //返回token保存到请求头
+//        //讲数据保存一下
+//        [SAMKeychain setPassword:token  forService:@"com.51778Vedio"account:@"uuid"];
+//
+//        [NET setToken:token];
+//        [LSVProgressHUD showInfoWithStatus:msg];
 
         sender.userInteractionEnabled = YES;
         UIViewController *secVC = (UIViewController *)[self.navigationController.childViewControllers safeObjectAtIndex:1];
@@ -139,7 +139,7 @@
             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
 
         }
-        
+        [LSVProgressHUD dismiss];
         NOTIFY_POST(KNotification_BindMobileSuccess);
         
 
