@@ -50,16 +50,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "400A88B0-CBA1-4B65-84C6-FCB404872A3A"
+            uuid = "2F16AF4C-B320-4CDF-BA2B-9421B9BFB2E6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MakeMoney/Classes/ViewController/Mine/View/Mine/MineCustomHeaderView.m"
+            filePath = "MakeMoney/Classes/Tools/Tool/LqToolKit.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "-configUIWithItem:finishi:"
+            startingLineNumber = "262"
+            endingLineNumber = "262"
+            landmarkName = "+jumpAdventWithItem:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

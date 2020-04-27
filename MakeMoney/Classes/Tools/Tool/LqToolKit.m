@@ -253,10 +253,12 @@
 //            [LSVProgressHUD showInfoWithStatus:@"跳转到AV详情页面"];
             AVPlayerController *vc = [AVPlayerController controllerWith:item];
             
-            MainTabBarController *main = (MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+//            MainTabBarController *main = (MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+//            BaseNavigationController *nav = [main.childViewControllers safeObjectAtIndex:main.selectedIndex];
+//            UIViewController *currentvc = [nav.childViewControllers lastObject];
+            HSFTabBarController *main = (HSFTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
             BaseNavigationController *nav = [main.childViewControllers safeObjectAtIndex:main.selectedIndex];
             UIViewController *currentvc = [nav.childViewControllers lastObject];
-            
             [currentvc.navigationController pushViewController:vc animated:YES];
         }
             break;
@@ -266,10 +268,14 @@
             CityDetailViewController *vc = [[CityDetailViewController alloc] init];
             vc.ID = item.qm_id;
             vc.hidesBottomBarWhenPushed = YES;//x这里可能是tabbar超过5个的原因 不会去掉BaseNavigationController pushViewController方法
-            MainTabBarController *main = (MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+//            MainTabBarController *main = (MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+//            BaseNavigationController *nav = [main.childViewControllers safeObjectAtIndex:main.selectedIndex];
+//            UIViewController *currentvc = [nav.childViewControllers lastObject];
+//
+//            [currentvc.navigationController pushViewController:vc animated:YES];
+            HSFTabBarController *main = (HSFTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
             BaseNavigationController *nav = [main.childViewControllers safeObjectAtIndex:main.selectedIndex];
             UIViewController *currentvc = [nav.childViewControllers lastObject];
-            
             [currentvc.navigationController pushViewController:vc animated:YES];
             
         }

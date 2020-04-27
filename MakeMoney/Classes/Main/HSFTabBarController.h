@@ -64,6 +64,7 @@ typedef NS_ENUM(NSInteger, HSFTabBarPosition) {
 @property (nonatomic,assign) CGFloat arrow_insert;//上下缩进
 
 
+@property (nonatomic,assign) NSInteger selectedIndex;//上下缩进
 
 #pragma mark -tabbarController 必须在所有需要的属性配置完之后setUp 且必须setUp
 -(void)setUp;

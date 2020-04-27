@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MainTabBarController.h"
+//#import "MainTabBarController.h"
 #import "HSFTabBarController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

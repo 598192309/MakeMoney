@@ -164,6 +164,7 @@
     }
     //滑动
     [self.scrollView setContentOffset:CGPointMake(self.scrollView.frame.size.width * index, 0) animated:self.canScroll];
+    self.selectedIndex = index;
 }
 
 #pragma mark -UIScrollViewDelegate

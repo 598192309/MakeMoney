@@ -176,8 +176,21 @@
     sender.userInteractionEnabled = NO;
     __weak __typeof(self) weakSelf = self;
     [MineApi setPwdWithMobile:mobile password:pwd success:^(NSInteger status, NSString * _Nonnull msg) {
-        //s设置成功 再登录
-        [weakSelf loginWithMobile:mobile pwd:pwd sender:sender];
+        //s设置成功 不用再登录了 已经登录了
+        //        [weakSelf loginWithMobile:mobile pwd:pwd sender:sender];
+
+        UIViewController *secVC = (UIViewController *)[self.navigationController.childViewControllers safeObjectAtIndex:1];
+        if ([secVC isKindOfClass:[RechargeCenterViewController class]]) {
+            //从充值中心来 回充值中心去
+            RI.infoInitItem.mobile = mobile;
+            [weakSelf.navigationController popToViewController:secVC animated:YES];
+        }else{
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+
+        }
+        [LSVProgressHUD dismiss];
+        NOTIFY_POST(KNotification_BindMobileSuccess);
+
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
     }];
