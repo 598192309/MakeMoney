@@ -310,6 +310,8 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             weakSelf.countingBtn.hidden = YES;
             weakSelf.jumpBtn.hidden = NO;
+            //自动进入
+            [weakSelf intoApp];
         });
 
     } error:^(NSError *error, id resultObject) {

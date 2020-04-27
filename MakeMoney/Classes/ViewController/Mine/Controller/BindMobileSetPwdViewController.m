@@ -140,6 +140,8 @@
 
         }
         
+        NOTIFY_POST(KNotification_BindMobileSuccess);
+        
 
     } error:^(NSError *error, id resultObject) {
 //        [LSVProgressHUD showError:error];

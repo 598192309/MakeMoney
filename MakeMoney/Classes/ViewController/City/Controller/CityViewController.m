@@ -47,7 +47,6 @@
     [self reqestBannerAds];
     [self requestAds];
     
-    self.navigationController.navigationBar.hidden =YES;//tabbar超过5个 隐藏more
 
 }
 
@@ -60,7 +59,7 @@
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(weakSelf.view);
         make.top.mas_equalTo(TopAdaptor_Value(25));
-        make.bottom.mas_equalTo(weakSelf.view).offset(-TabbarH);
+        make.bottom.mas_equalTo(weakSelf.view);
     }];
 
 }

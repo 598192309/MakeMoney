@@ -61,9 +61,9 @@
     [self.mineCustomHeaderView configUIWithItem:RI.infoInitItem finishi:^{
         
     }];
-    self.navigationController.navigationBar.hidden =YES;//tabbar超过5个 隐藏more
-    self.navigationController.delegate = self;
-    
+
+    NOTIFY_ADD(bingmobileNotify:, KNotification_BindMobileSuccess);
+
 }
 
 - (void)dealloc{
@@ -161,7 +161,12 @@
         [weakSelf qiandao:sender];
     };
 }
-
+#pragma mark - notify
+- (void)bingmobileNotify:(NSNotification *)note{
+    //刷新
+    [self requestData];
+    [self requestSetInfo];
+}
 #pragma mark - net
 //更新用户信息
 - (void)requestData{
