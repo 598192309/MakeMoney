@@ -290,7 +290,7 @@ alpha:(a)]
 #define kURL_Reachability__Address @"www.baidu.com"
 
 /**二维码key */
-#define  ErweimaShareKey @"K6BKRRHHFFHE2F"
+#define  ErweimaShareKey @"B6BKR6AAA7FAEA"
 
 #endif
 

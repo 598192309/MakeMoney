@@ -478,7 +478,7 @@
         };
         
         _shareView.copyBtnClickBlock = ^(UIButton * _Nonnull sender, UIImageView * _Nonnull erweimaImageV) {
-            NSString *erweimaStr = [NSString stringWithFormat:@"%@%@/share6.html?appkey=%@&code=%@",RI.basicItem.share_text,RI.basicItem.share_url,ErweimaShareKey,RI.infoInitItem.invite_code];
+            NSString *erweimaStr = [NSString stringWithFormat:@"%@%@/share8.html?appkey=%@&code=%@",RI.basicItem.share_text,RI.basicItem.share_url,ErweimaShareKey,RI.infoInitItem.invite_code];
             UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
             pasteboard.string = erweimaStr;
             [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"复制成功", nil)];

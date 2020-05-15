@@ -57,7 +57,7 @@
     }];
     
     //生成对应的二维码 这里不要中文
-    NSString *erweimaStr = [NSString stringWithFormat:@"%@/share6.html?appkey=%@&code=%@",RI.basicItem.share_url,ErweimaShareKey,RI.infoInitItem.invite_code];
+    NSString *erweimaStr = [NSString stringWithFormat:@"%@/share8.html?appkey=%@&code=%@",RI.basicItem.share_url,ErweimaShareKey,RI.infoInitItem.invite_code];
     UIImage *image = [UIImage generateIconQRCodeWithString:erweimaStr Size:Adaptor_Value(200) icon:[UIImage imageNamed:@"ic_erweima"]];
     self.erweimaImageV.image = image;
     
@@ -65,7 +65,7 @@
 -(void)refreshUIWithItme:(HotItem *)item{
     self.titlelabel.text = item.title;
     [self.yaoqingmaBtn setTitle:[NSString stringWithFormat:lqLocalized(@"邀请码 %@", nil),RI.infoInitItem.invite_code] forState:UIControlStateNormal];
-    NSString *erweimaStr = [NSString stringWithFormat:@"%@%@/share6.html?appkey=%@&code=%@",RI.basicItem.share_text,RI.basicItem.share_url,ErweimaShareKey,RI.infoInitItem.invite_code];
+    NSString *erweimaStr = [NSString stringWithFormat:@"%@%@/share8.html?appkey=%@&code=%@",RI.basicItem.share_text,RI.basicItem.share_url,ErweimaShareKey,RI.infoInitItem.invite_code];
 
     self.urlLable.text = [NSString stringWithFormat:lqLocalized(@"如果扫码不能打开，请手动在流浪起输入地址：%@", nil),erweimaStr];
     
