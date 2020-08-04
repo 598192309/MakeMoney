@@ -46,6 +46,16 @@
 @end
 
 @implementation HomeViewController
+#pragma mark - 重写
+- (void)navigationRightBtnClick:(UIButton *)button{
+    [LSVProgressHUD showInfoWithStatus:[button titleForState:UIControlStateNormal]];
+}
+
+-(void)navigationRightSecBtnClick:(UIButton*)button{
+    [LSVProgressHUD showInfoWithStatus:[button titleForState:UIControlStateNormal]];
+
+}
+#pragma mark - instance
 + (instancetype)controller
 {
     HomeViewController *vc = [[UIStoryboard storyboardWithName:@"Home" bundle:nil] instantiateViewControllerWithIdentifier:@"HomeViewController"];
@@ -55,6 +65,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configUI];
+    [self setUpNav];
     [self requestData];
     [self updateVesion];
     
@@ -110,7 +121,33 @@
     _collectionView.mj_header = _refreshHeader;
     
     [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([HomeVideoCell class]) bundle:nil] forCellWithReuseIdentifier:NSStringFromClass([HomeVideoCell class])];
+    
+}
 
+- (void)setUpNav{
+    __weak __typeof(self) weakSelf = self;
+
+    [self addNavigationView];
+    [self.navigationRightBtn setTitle:lqStrings(@"分类") forState:UIControlStateNormal];
+    [self.navigationRightBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(weakSelf.navigationView).with.offset(-Adaptor_Value(10));
+        make.centerY.mas_equalTo(weakSelf.navigationTextLabel);
+        make.height.mas_equalTo(Adaptor_Value(40));
+        make.width.mas_equalTo(Adaptor_Value(40));
+
+    }];
+    [self.navigationRightSecBtn setTitle:lqStrings(@"搜你想搜看你想看") forState:UIControlStateNormal];
+    [self.navigationRightSecBtn setBackgroundColor:[UIColor lq_colorWithHexString:@"bcbcbc" alpha:0.8]];
+    [self.navigationRightSecBtn setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
+    [self.navigationRightSecBtn setIconInLeftWithSpacing:5];
+    [self.navigationRightSecBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(weakSelf.navigationRightBtn.mas_left).offset(-Adaptor_Value(10));
+        make.left.mas_equalTo(Adaptor_Value(10));
+        make.height.mas_equalTo(Adaptor_Value(30));
+        make.centerY.mas_equalTo(weakSelf.navigationRightBtn);
+    }];
+    ViewRadius(self.navigationRightSecBtn, Adaptor_Value(15));
+    self.navigationBackButton.hidden = YES;
 }
 
 #pragma mark - act
