@@ -22,6 +22,7 @@
 #import "BaseWebViewController.h"
 #import "MyLoveViewController.h"
 #import "ShareInstallSDK.h"
+#import "MenuView.h"
 
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (strong, nonatomic) UITableView  *customTableView;
@@ -272,7 +273,7 @@
     switch (section) {
         case 0:
             {
-                return 2;
+                return 1;
             }
             break;
 
@@ -312,12 +313,10 @@
     NSString *subTitle;
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            title = [NSString stringWithFormat:lqLocalized(@"官方邮箱:%@", nil),RI.basicItem.email];
-            subTitle = lqStrings(@"复制");
-        }else{
-            title = lqStrings(@"福利分享群");
+            title = lqStrings(@"回家不迷路");
             subTitle = @"";
         }
+
         
     }else if (indexPath.section == 1){
         title = lqStrings(@"我的收藏");
@@ -381,15 +380,45 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
+//        if (indexPath.row == 0) {
+//            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+//            pasteboard.string = RI.basicItem.email;
+//            [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"复制成功", nil)];
+//        }else{//福利分享群
+//            NSURL *url = [NSURL URLWithString:RI.basicItem.potato_url];
+//            if ([[UIApplication sharedApplication] canOpenURL:url]) {
+//                [[UIApplication sharedApplication] openURL:url];
+//            }
+//        }
         if (indexPath.row == 0) {
-            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-            pasteboard.string = RI.basicItem.email;
-            [LSVProgressHUD showInfoWithStatus:NSLocalizedString(@"复制成功", nil)];
-        }else{//福利分享群
-            NSURL *url = [NSURL URLWithString:RI.basicItem.potato_url];
-            if ([[UIApplication sharedApplication] canOpenURL:url]) {
-                [[UIApplication sharedApplication] openURL:url];
-            }
+            //回家不迷路 弹框
+            MenuView *menu = [[MenuView alloc] initWithFrame:CGRectMake(0, 0, LQScreemW, 200)];
+            [menu showAlertStyle:GXAlertStyleSheet backgoundTapDismissEnable:YES usingSpring:YES];
+            //切换khost
+            __weak __typeof(menu) weakmenu = menu;
+            menu.cellClickBlock = ^(NSString * _Nonnull str, NSInteger index) {
+                [weakmenu hideToView:YES];
+                if (index == 0) {//土豆福利分享群
+                    NSURL *url = [NSURL URLWithString:RI.basicItem.potato_url];
+                    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                        [[UIApplication sharedApplication] openURL:url];
+                    }
+                }else if (index == 1) {//云盘回家地址
+                    NSURL *url = [NSURL URLWithString:RI.basicItem.yunpan];
+                    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                        [[UIApplication sharedApplication] openURL:url];
+                    }
+                }else if (index == 2) {//github回家地址
+                    NSURL *url = [NSURL URLWithString:RI.basicItem.github];
+                    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                        [[UIApplication sharedApplication] openURL:url];
+                    }
+                }else if (index == 3) {//官方客服QQ
+                    
+                }else if (index == 4) {//官方邮箱
+                    
+                }
+            };
         }
         
     }else if (indexPath.section == 1){//我的收藏

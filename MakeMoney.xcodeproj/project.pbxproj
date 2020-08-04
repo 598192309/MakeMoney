@@ -224,6 +224,9 @@
 		11A0C4E32446B46000DC9221 /* AblumRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A0C4E22446B46000DC9221 /* AblumRechargeViewController.m */; };
 		11D0076C24D9123900C92EA8 /* MangHuaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D0076B24D9123900C92EA8 /* MangHuaViewController.m */; };
 		11D0076F24D9124A00C92EA8 /* VedioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D0076E24D9124A00C92EA8 /* VedioViewController.m */; };
+		11D0077924D947DF00C92EA8 /* GXAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D0077524D947DE00C92EA8 /* GXAlertManager.m */; };
+		11D0077A24D947DF00C92EA8 /* UIView+GXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D0077624D947DE00C92EA8 /* UIView+GXAlertView.m */; };
+		11D0077B24D947DF00C92EA8 /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D0077824D947DE00C92EA8 /* MenuView.m */; };
 		11E860B4240CF27D00719378 /* AllCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B3240CF27D00719378 /* AllCategoryViewController.m */; };
 		11E860B7240D06D100719378 /* NoticeAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B6240D06D100719378 /* NoticeAlertView.m */; };
 		11E860BA240D142700719378 /* SYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B8240D142600719378 /* SYPageControl.m */; };
@@ -731,6 +734,12 @@
 		11D0076B24D9123900C92EA8 /* MangHuaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MangHuaViewController.m; sourceTree = "<group>"; };
 		11D0076D24D9124A00C92EA8 /* VedioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VedioViewController.h; sourceTree = "<group>"; };
 		11D0076E24D9124A00C92EA8 /* VedioViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VedioViewController.m; sourceTree = "<group>"; };
+		11D0077324D947DE00C92EA8 /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
+		11D0077424D947DE00C92EA8 /* UIView+GXAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GXAlertView.h"; sourceTree = "<group>"; };
+		11D0077524D947DE00C92EA8 /* GXAlertManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXAlertManager.m; sourceTree = "<group>"; };
+		11D0077624D947DE00C92EA8 /* UIView+GXAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GXAlertView.m"; sourceTree = "<group>"; };
+		11D0077724D947DE00C92EA8 /* GXAlertManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXAlertManager.h; sourceTree = "<group>"; };
+		11D0077824D947DE00C92EA8 /* MenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuView.m; sourceTree = "<group>"; };
 		11E860B2240CF27D00719378 /* AllCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllCategoryViewController.h; sourceTree = "<group>"; };
 		11E860B3240CF27D00719378 /* AllCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllCategoryViewController.m; sourceTree = "<group>"; };
 		11E860B5240D06D100719378 /* NoticeAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoticeAlertView.h; sourceTree = "<group>"; };
@@ -1838,6 +1847,7 @@
 		1118B7AF240C99560098A1D4 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				11D0077224D947B700C92EA8 /* GXAlert */,
 				1118B7B0240C996E0098A1D4 /* ListViewController.h */,
 				1118B7B1240C996E0098A1D4 /* ListViewController.m */,
 			);
@@ -1931,6 +1941,19 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		11D0077224D947B700C92EA8 /* GXAlert */ = {
+			isa = PBXGroup;
+			children = (
+				11D0077724D947DE00C92EA8 /* GXAlertManager.h */,
+				11D0077524D947DE00C92EA8 /* GXAlertManager.m */,
+				11D0077324D947DE00C92EA8 /* MenuView.h */,
+				11D0077824D947DE00C92EA8 /* MenuView.m */,
+				11D0077424D947DE00C92EA8 /* UIView+GXAlertView.h */,
+				11D0077624D947DE00C92EA8 /* UIView+GXAlertView.m */,
+			);
+			path = GXAlert;
 			sourceTree = "<group>";
 		};
 		8B58D0472413552D00FE426E /* Ablum */ = {
@@ -2404,6 +2427,7 @@
 				8B9B8C22240EC0F8004B4704 /* LPButton.m in Sources */,
 				11105E662406721500521CB2 /* SDCycleScrollView.m in Sources */,
 				09E72D2D2405641C0004B25C /* UIScrollView+LQRefresh.m in Sources */,
+				11D0077B24D947DF00C92EA8 /* MenuView.m in Sources */,
 				11A0C4E02446B44E00DC9221 /* CityRechargeViewController.m in Sources */,
 				11105E6224066BC900521CB2 /* SafeControl.m in Sources */,
 				09E72C3824055F6E0004B25C /* IQPreviousNextView.m in Sources */,
@@ -2444,6 +2468,7 @@
 				112C540624513DD1006A91EE /* AxcAE_TabBar.m in Sources */,
 				113980822410A0BB00663E26 /* PopPayWayViewController.m in Sources */,
 				11105E5E24066BC900521CB2 /* SystemAlertViewController.m in Sources */,
+				11D0077A24D947DF00C92EA8 /* UIView+GXAlertView.m in Sources */,
 				09E72C8024055F7E0004B25C /* MJExtensionConst.m in Sources */,
 				8B58D0462411416400FE426E /* WebViewViewController.m in Sources */,
 				11105E5924066BC900521CB2 /* UIButton+LqExtension.m in Sources */,
@@ -2514,6 +2539,7 @@
 				112F56BA2412019100CE4715 /* BindMobileSecStepViewController.m in Sources */,
 				093E58BF2406A87A004E5F72 /* SAMKeychainQuery.m in Sources */,
 				09E72C3F24055F6E0004B25C /* IQUIView+Hierarchy.m in Sources */,
+				11D0077924D947DF00C92EA8 /* GXAlertManager.m in Sources */,
 				09E72D0324055F960004B25C /* SVProgressAnimatedView.m in Sources */,
 				112F56B12411EF4600CE4715 /* LScreenShot.m in Sources */,
 			);

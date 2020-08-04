@@ -37,7 +37,14 @@
 #import "CommonAlertView.h"
 #import "UIViewController+YCPopover.h"
 #import "LScreenShot.h"
+#import "AxcAE_TabBarDefine.h"
+#import "UIView+GXAlertView.h"
+
+
+
+
 #endif /* PrefixHeader_pch */
 
 
-#import "AxcAE_TabBarDefine.h"
+
+
