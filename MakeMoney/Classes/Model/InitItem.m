@@ -12,8 +12,20 @@
 
 @end
 
+@implementation TabItem
 
+@end
 @implementation BasicItem
 
++ (NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{
+             @"ID":@"id",
+             @"New_user_free_hour":@"new_user_free_hour"
+
+             };
+}
++ (NSDictionary *)mj_objectClassInArray{
+    return @{@"bottomTabs" :[TabItem class]};
+}
 
 @end

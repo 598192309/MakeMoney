@@ -40,7 +40,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign)NSInteger sign_in;
 
 @end
+@interface TabItem : NSObject
+@property (nonatomic,strong)NSString *name;
+@property (nonatomic,strong)NSString *type;
 
+@end
 
 @interface BasicItem : NSObject
 @property (nonatomic,strong)NSString *av_video_url;
@@ -60,6 +64,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *potato_name;
 @property (nonatomic,strong)NSString *potato_url;
 @property (nonatomic,strong)NSString *album_url;
+
+@property (nonatomic,strong)NSArray *bottomTabs;
+@property (nonatomic,strong)NSString *cartoon_url;
+@property (nonatomic,strong)NSString *github;
+@property (nonatomic,strong)NSString *New_user_free_hour;
+@property (nonatomic,strong)NSString *pay_contact;
+@property (nonatomic,strong)NSString *qq;
+@property (nonatomic,strong)NSString *video_cover_url;
+@property (nonatomic,strong)NSString *work_time;
+@property (nonatomic,strong)NSString *yunpan;
 
 @end
 NS_ASSUME_NONNULL_END
