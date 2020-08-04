@@ -13,10 +13,12 @@
 @interface MineCustomHeaderView()
 //头部view
 @property (nonatomic,strong)UIView *header;
+@property (nonatomic,strong)UILabel *nameTipLabel;
 @property (nonatomic,strong)UILabel *nameLabel;
+@property (nonatomic,strong)UILabel *iDTipLable;
 @property (nonatomic,strong)UILabel *iDLable;
-@property (nonatomic,strong)UILabel *ablumVipTipLable;
-@property (nonatomic,strong)UILabel *ablumVipLable;
+//@property (nonatomic,strong)UILabel *ablumVipTipLable;
+//@property (nonatomic,strong)UILabel *ablumVipLable;
 @property (nonatomic,strong)UILabel *cityVipTipLable;
 @property (nonatomic,strong)UILabel *cityVipLable;
 @property (nonatomic,strong)UILabel *shipinVipTipLable;
@@ -80,21 +82,28 @@
 //        }
 //    }
 //    self.timesLable.attributedText = attr;
-    self.iDLable.text = [NSString stringWithFormat:lqLocalized(@"ID:%@", nil),item.sex_id];
-    //写真
-    if (item.is_album_vip) {
-        if (item.is_new_user) {
-            if (item.album_vip_end_time.floatValue > 0 ) {
-                self.ablumVipLable.text =  [self changeStr:item.album_vip_end_time format:@"yyyy-MM-dd"];
-            }else{
-                self.ablumVipLable.text =  lqStrings(@"临时体验卡");
-            }
-        }else{//可能不是新用户 没绑定手机
-            self.ablumVipLable.text = item.album_vip_end_time.floatValue > 0 ? [self changeStr:item.album_vip_end_time format:@"yyyy-MM-dd"] :lqStrings(@"未开通");
-        }
-    }else{
-        self.ablumVipLable.text = item.is_new_user ?  lqStrings(@"临时体验卡") :lqStrings(@"未开通");
+    self.iDLable.text = item.sex_id;
+    if (item.vip_level == 0) {
+        self.nameLabel.text = lqStrings(@"游客");
+    }else if (item.vip_level == 1){
+        self.nameLabel.text = lqStrings(@"普通会员");
+    }else if (item.vip_level == 2){
+        self.nameLabel.text = lqStrings(@"至尊会员");
     }
+//    //写真
+//    if (item.is_album_vip) {
+//        if (item.is_new_user) {
+//            if (item.album_vip_end_time.floatValue > 0 ) {
+//                self.ablumVipLable.text =  [self changeStr:item.album_vip_end_time format:@"yyyy-MM-dd"];
+//            }else{
+//                self.ablumVipLable.text =  lqStrings(@"临时体验卡");
+//            }
+//        }else{//可能不是新用户 没绑定手机
+//            self.ablumVipLable.text = item.album_vip_end_time.floatValue > 0 ? [self changeStr:item.album_vip_end_time format:@"yyyy-MM-dd"] :lqStrings(@"未开通");
+//        }
+//    }else{
+//        self.ablumVipLable.text = item.is_new_user ?  lqStrings(@"临时体验卡") :lqStrings(@"未开通");
+//    }
     //视频
     if (item.is_vip) {
         if (item.is_new_user) {
@@ -109,8 +118,8 @@
     }else{
         self.shipinVipLable.text = item.is_new_user ?  lqStrings(@"临时体验卡") : lqStrings(@"未开通");
     }
-    //同城
-    self.cityVipLable.text = item.is_qm_vip ? [self changeStr:item.qm_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
+    //漫画
+    self.cityVipLable.text = item.is_cartoon_vip ? [self changeStr:item.cartoon_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通");
 //
 //    
 //    if (item.is_new_user ) {
@@ -244,52 +253,88 @@
             make.centerX.mas_equalTo(weakSelf.iconImageV);
         }];
 
-
-        _nameLabel = [UILabel lableWithText:RI.infoInitItem.username.length > 0 ? [NSString stringWithFormat:lqLocalized(@"hello,%@", nil),RI.infoInitItem.username] : lqStrings(@"hello,撸友")  textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
-        [contentV addSubview:_nameLabel];
-        [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        //RI.infoInitItem.username.length > 0 ? [NSString stringWithFormat:lqLocalized(@"hello,%@", nil),RI.infoInitItem.username] : lqStrings(@"hello,撸友")
+        _nameTipLabel = [UILabel lableWithText:lqStrings(@"会员等级:") textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [contentV addSubview:_nameTipLabel];
+        [_nameTipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(weakSelf.iconImageV);
             make.left.mas_equalTo(weakSelf.iconImageV.mas_right).offset(Adaptor_Value(15));
         }];
+        
+        _nameLabel = [UILabel lableWithText:@"" textColor:LightYellowColor fontSize:AdaptedFontSize(17) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        [contentV addSubview:_nameLabel];
+        [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+
+            make.left.mas_equalTo(weakSelf.nameTipLabel.mas_right).offset(Adaptor_Value(5));
+            make.centerY.mas_equalTo(weakSelf.nameTipLabel);
+
+        }];
 
         
-        _iDLable = [UILabel lableWithText:[NSString stringWithFormat:lqLocalized(@"ID:%@", nil),RI.infoInitItem.sex_id] textColor:TitleWhiteColor fontSize:AdaptedFontSize(10) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        _iDTipLable = [UILabel lableWithText:lqStrings(@"用户ID:") textColor:TitleWhiteColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [contentV addSubview:_iDTipLable];
+        [_iDTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerY.mas_equalTo(weakSelf.nameLabel);
+//            make.left.mas_equalTo(weakSelf.nameLabel.mas_right).offset(Adaptor_Value(20));
+            make.left.mas_equalTo(weakSelf.nameTipLabel);
+            make.top.mas_equalTo(weakSelf.nameTipLabel.mas_bottom).offset(Adaptor_Value(10));
+        }];
+        
+        _iDLable = [UILabel lableWithText:RI.infoInitItem.sex_id textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
         [contentV addSubview:_iDLable];
         [_iDLable mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(weakSelf.nameLabel);
-            make.left.mas_equalTo(weakSelf.nameLabel.mas_right).offset(Adaptor_Value(20));
+            make.left.mas_equalTo(weakSelf.iDTipLable.mas_right).offset(Adaptor_Value(5));
+            make.centerY.mas_equalTo(weakSelf.iDTipLable);
         }];
                         
-        _ablumVipTipLable = [UILabel lableWithText:lqStrings(@"写真VIP:") textColor:TitleWhiteColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
-        [contentV addSubview:_ablumVipTipLable];
-        [_ablumVipTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
+//        _ablumVipTipLable = [UILabel lableWithText:lqStrings(@"写真VIP:") textColor:TitleWhiteColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+//        [contentV addSubview:_ablumVipTipLable];
+//        [_ablumVipTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.left.mas_equalTo(weakSelf.nameLabel);
+//            make.top.mas_equalTo(weakSelf.iDLable.mas_bottom).offset(Adaptor_Value(10));
+//
+//
+//        }];
+        
+//        _ablumVipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? [weakSelf changeStr:RI.infoInitItem.album_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+//        [contentV addSubview:_ablumVipLable];
+//        [_ablumVipLable mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.left.mas_equalTo(weakSelf.ablumVipTipLable.mas_right).offset(Adaptor_Value(5));
+//            make.centerY.mas_equalTo(weakSelf.ablumVipTipLable);
+//
+//        }];
+        
+        _shipinVipTipLable = [UILabel lableWithText:lqStrings(@"视频VIP:") textColor:TitleWhiteColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        [contentV addSubview:_shipinVipTipLable];
+        [_shipinVipTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.mas_equalTo(weakSelf.nameLabel);
-            make.top.mas_equalTo(weakSelf.iDLable.mas_bottom).offset(Adaptor_Value(10));
-    
+            make.left.mas_equalTo(weakSelf.nameTipLabel);            make.top.mas_equalTo(weakSelf.iDTipLable.mas_bottom).offset(Adaptor_Value(10));
             
         }];
+//        _shipinVipTipLable.hidden = !RI.infoInitItem.is_vip;
         
-        _ablumVipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? [weakSelf changeStr:RI.infoInitItem.album_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
-        [contentV addSubview:_ablumVipLable];
-        [_ablumVipLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        _shipinVipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? [weakSelf changeStr:RI.infoInitItem.vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        [contentV addSubview:_shipinVipLable];
+        [_shipinVipLable mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.mas_equalTo(weakSelf.ablumVipTipLable.mas_right).offset(Adaptor_Value(5));
-            make.centerY.mas_equalTo(weakSelf.ablumVipTipLable);
+            make.left.mas_equalTo(weakSelf.shipinVipTipLable.mas_right).offset(Adaptor_Value(5));
+            make.centerY.mas_equalTo(weakSelf.shipinVipTipLable);
             
         }];
+//        _shipinVipLable.hidden = !RI.infoInitItem.is_vip;
         
-        _cityVipTipLable = [UILabel lableWithText:lqStrings(@"同城VIP:") textColor:TitleWhiteColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        _cityVipTipLable = [UILabel lableWithText:lqStrings(@"漫画VIP:") textColor:TitleWhiteColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_cityVipTipLable];
         [_cityVipTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
 
-            make.left.mas_equalTo(weakSelf.nameLabel);
-            make.top.mas_equalTo(weakSelf.ablumVipTipLable.mas_bottom).offset(Adaptor_Value(10));
+            make.left.mas_equalTo(weakSelf.nameTipLabel);            make.top.mas_equalTo(weakSelf.shipinVipTipLable.mas_bottom).offset(Adaptor_Value(10));
 
 
         }];
 
-        _cityVipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? [weakSelf changeStr:RI.infoInitItem.qm_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
+        _cityVipLable = [UILabel lableWithText:RI.infoInitItem.is_cartoon_vip ? [weakSelf changeStr:RI.infoInitItem.cartoon_vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_cityVipLable];
         [_cityVipLable mas_makeConstraints:^(MASConstraintMaker *make) {
 
@@ -310,28 +355,7 @@
 //        _timesLable.hidden = RI.infoInitItem.is_vip;
 
         
-        _shipinVipTipLable = [UILabel lableWithText:lqStrings(@"视频VIP:") textColor:TitleWhiteColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
-        [contentV addSubview:_shipinVipTipLable];
-        [_shipinVipTipLable mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.mas_equalTo(weakSelf.nameLabel);
-//            make.centerY.mas_equalTo(weakSelf.timesLable);
-            make.top.mas_equalTo(weakSelf.cityVipTipLable.mas_bottom).offset(Adaptor_Value(10));
 
-    
-            
-        }];
-//        _shipinVipTipLable.hidden = !RI.infoInitItem.is_vip;
-        
-        _shipinVipLable = [UILabel lableWithText:RI.infoInitItem.is_vip ? [weakSelf changeStr:RI.infoInitItem.vip_end_time format:@"yyyy-MM-dd"]:lqStrings(@"未开通") textColor:LightYellowColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
-        [contentV addSubview:_shipinVipLable];
-        [_shipinVipLable mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.mas_equalTo(weakSelf.shipinVipTipLable.mas_right).offset(Adaptor_Value(5));
-            make.centerY.mas_equalTo(weakSelf.shipinVipTipLable);
-            
-        }];
-//        _shipinVipLable.hidden = !RI.infoInitItem.is_vip;
 
         _qiandaoBtn = [[UIButton alloc] init];
         [_qiandaoBtn addTarget:self action:@selector(qiandaoBtnClick:) forControlEvents:UIControlEventTouchUpInside];

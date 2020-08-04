@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign)NSInteger is_vip;//视频
 @property (nonatomic,assign)NSInteger is_qm_vip;//同城
 @property (nonatomic,assign)NSInteger is_album_vip;//写真
+@property (nonatomic,assign)NSInteger is_cartoon_vip;//漫画
 
 @property (nonatomic,strong)NSString *mobile;
 @property (nonatomic,strong)NSString *avatar;
@@ -22,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString *vip_end_time;
 @property (nonatomic,strong)NSString *qm_vip_end_time;
 @property (nonatomic,strong)NSString *album_vip_end_time;
+@property (nonatomic,strong)NSString *cartoon_vip_end_time;
 
 
 @property (nonatomic,strong)NSString *user_id;
