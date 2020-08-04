@@ -22,6 +22,8 @@
 #import "ZhuanTiViewController.h"
 #import "AVViewController.h"
 #import "AblumViewController.h"
+#import "MangHuaViewController.h"
+#import "VedioViewController.h"
 
 @interface LaunchingViewController ()
 @property(nonatomic,strong)UIImageView *imageView;
@@ -36,6 +38,7 @@
 @property (nonatomic,strong)EnlargeTouchSizeButton *chooseBtn;
 @property (nonatomic,strong)EnlargeTouchSizeButton *agreeBtn;
 
+@property (nonatomic,strong)BasicItem *basicItem;
 @end
 
 @implementation LaunchingViewController
@@ -173,29 +176,66 @@
 
 /* 请看这里 */
 -(void)intoApp{
-    HomeViewController *vc1 = [HomeViewController controller];
-    ZhuanTiViewController *vc2 = [[ZhuanTiViewController alloc]init];
-    AVViewController *vc3 = [[AVViewController alloc]init];
-    AblumViewController *vc4 = [[AblumViewController alloc]init];
-    CityViewController *vc5 = [[CityViewController alloc]init];
-    MineViewController *vc6 = [[MineViewController alloc]init];
+    NSMutableArray *navArr = [NSMutableArray array];
+    NSMutableArray *sourceArr = [NSMutableArray array];
+    for (TabItem *tabItem in self.basicItem.bottomTabs) {
+        if ([tabItem.name isEqualToString:lqStrings(@"首页")]) {
+            HomeViewController *vc1 = [HomeViewController controller];
+            BaseNavigationController *navi1 = [[BaseNavigationController alloc]initWithRootViewController:vc1];
+            [navArr addObject:navi1];
+            [sourceArr addObject:@{@"title":lqStrings(@"首页"), @"selImg":@"", @"norImg":@""}];
+        }else if ([tabItem.name isEqualToString:lqStrings(@"短视频")]) {
+            VedioViewController *vc1 = [[VedioViewController alloc] init];
+            BaseNavigationController *navi1 = [[BaseNavigationController alloc]initWithRootViewController:vc1];
+            [navArr addObject:navi1];
+            [sourceArr addObject:@{@"title":lqStrings(@"短视频"), @"selImg":@"", @"norImg":@""}];
+
+        }else if ([tabItem.name isEqualToString:lqStrings(@"专题")]) {
+            ZhuanTiViewController *vc2 = [[ZhuanTiViewController alloc]init];
+            BaseNavigationController *navi2 = [[BaseNavigationController alloc]initWithRootViewController:vc2];
+            [navArr addObject:navi2];
+            [sourceArr addObject:@{@"title":lqStrings(@"专题"), @"selImg":@"", @"norImg":@""}];
+
+        }else if ([tabItem.name isEqualToString:lqStrings(@"AV")]) {
+            AVViewController *vc3 = [[AVViewController alloc]init];
+            BaseNavigationController *navi3 = [[BaseNavigationController alloc]initWithRootViewController:vc3];
+            [navArr addObject:navi3];
+            [sourceArr addObject:@{@"title":lqStrings(@"AV"), @"selImg":@"", @"norImg":@""}];
+
+        }else if ([tabItem.name isEqualToString:lqStrings(@"漫画")]) {
+            MangHuaViewController *vc1 = [[MangHuaViewController alloc] init];
+            BaseNavigationController *navi1 = [[BaseNavigationController alloc]initWithRootViewController:vc1];
+            [navArr addObject:navi1];
+            [sourceArr addObject:@{@"title":lqStrings(@"漫画"), @"selImg":@"", @"norImg":@""}];
+
+        }else if ([tabItem.name isEqualToString:lqStrings(@"写真")]) {
+            AblumViewController *vc4 = [[AblumViewController alloc]init];
+            BaseNavigationController *navi4 = [[BaseNavigationController alloc]initWithRootViewController:vc4];
+            [navArr addObject:navi4];
+            [sourceArr addObject:@{@"title":lqStrings(@"写真"), @"selImg":@"", @"norImg":@""}];
+
+        }else if ([tabItem.name isEqualToString:lqStrings(@"同城")]) {
+            CityViewController *vc5 = [[CityViewController alloc]init];
+            BaseNavigationController *navi5 = [[BaseNavigationController alloc]initWithRootViewController:vc5];
+            [navArr addObject:navi5];
+            [sourceArr addObject:@{@"title":lqStrings(@"同城"), @"selImg":@"", @"norImg":@""}];
+
+        }else if ([tabItem.name isEqualToString:lqStrings(@"我的")]) {
+            MineViewController *vc6 = [[MineViewController alloc]init];
+            BaseNavigationController *navi6 = [[BaseNavigationController alloc]initWithRootViewController:vc6];
+            [navArr addObject:navi6];
+            [sourceArr addObject:@{@"title":lqStrings(@"我的"), @"selImg":@"", @"norImg":@""}];
+
+        }
+        
+    }
     
-    BaseNavigationController *navi1 = [[BaseNavigationController alloc]initWithRootViewController:vc1];
-    BaseNavigationController *navi2 = [[BaseNavigationController alloc]initWithRootViewController:vc2];
-    BaseNavigationController *navi3 = [[BaseNavigationController alloc]initWithRootViewController:vc3];
-    BaseNavigationController *navi4 = [[BaseNavigationController alloc]initWithRootViewController:vc4];
-    BaseNavigationController *navi5 = [[BaseNavigationController alloc]initWithRootViewController:vc5];
-    BaseNavigationController *navi6 = [[BaseNavigationController alloc]initWithRootViewController:vc6];
+    
     
     HSFTabBarController *tabbarC = [[HSFTabBarController alloc]init];
     [AppDelegate shareAppDelegate].tabBarC = tabbarC;
-    tabbarC.childVCArr = @[navi1, navi2, navi3, navi4, navi5, navi6];
-    tabbarC.source = @[@{@"title":lqStrings(@"首页"), @"selImg":@"", @"norImg":@""},
-                              @{@"title":lqStrings(@"专题"), @"selImg":@"", @"norImg":@""},
-                              @{@"title":lqStrings(@"AV"), @"selImg":@"", @"norImg":@""},
-                              @{@"title":lqStrings(@"写真"), @"selImg":@"", @"norImg":@""},
-                              @{@"title":lqStrings(@"同城"), @"selImg":@"", @"norImg":@""},
-                              @{@"title":lqStrings(@"我的"), @"selImg":@"", @"norImg":@""}];
+    tabbarC.childVCArr = navArr;
+    tabbarC.source = sourceArr;
     tabbarC.norColor = TitleGrayColor;
     tabbarC.selColor = TitleWhiteColor;
     tabbarC.isHaveTopline = NO;//是否有顶部的黑线
@@ -245,7 +285,7 @@
     dispatch_group_enter(group);
     [InitApi requestBasicInfoSuccess:^(BasicItem * _Nonnull basicItem, NSString * _Nonnull msg) {
         dispatch_group_leave(group);
-        
+        weakSelf.basicItem = basicItem;
         RI.basicItem = basicItem;
         RI.basicItemJasonStr = [basicItem mj_JSONString];
 

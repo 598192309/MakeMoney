@@ -222,6 +222,8 @@
 		11A0C4DD2446B43D00DC9221 /* VideoRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A0C4DC2446B43D00DC9221 /* VideoRechargeViewController.m */; };
 		11A0C4E02446B44E00DC9221 /* CityRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A0C4DF2446B44E00DC9221 /* CityRechargeViewController.m */; };
 		11A0C4E32446B46000DC9221 /* AblumRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A0C4E22446B46000DC9221 /* AblumRechargeViewController.m */; };
+		11D0076C24D9123900C92EA8 /* MangHuaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D0076B24D9123900C92EA8 /* MangHuaViewController.m */; };
+		11D0076F24D9124A00C92EA8 /* VedioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D0076E24D9124A00C92EA8 /* VedioViewController.m */; };
 		11E860B4240CF27D00719378 /* AllCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B3240CF27D00719378 /* AllCategoryViewController.m */; };
 		11E860B7240D06D100719378 /* NoticeAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B6240D06D100719378 /* NoticeAlertView.m */; };
 		11E860BA240D142700719378 /* SYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E860B8240D142600719378 /* SYPageControl.m */; };
@@ -725,6 +727,10 @@
 		11A0C4DF2446B44E00DC9221 /* CityRechargeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityRechargeViewController.m; sourceTree = "<group>"; };
 		11A0C4E12446B46000DC9221 /* AblumRechargeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AblumRechargeViewController.h; sourceTree = "<group>"; };
 		11A0C4E22446B46000DC9221 /* AblumRechargeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AblumRechargeViewController.m; sourceTree = "<group>"; };
+		11D0076A24D9123900C92EA8 /* MangHuaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MangHuaViewController.h; sourceTree = "<group>"; };
+		11D0076B24D9123900C92EA8 /* MangHuaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MangHuaViewController.m; sourceTree = "<group>"; };
+		11D0076D24D9124A00C92EA8 /* VedioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VedioViewController.h; sourceTree = "<group>"; };
+		11D0076E24D9124A00C92EA8 /* VedioViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VedioViewController.m; sourceTree = "<group>"; };
 		11E860B2240CF27D00719378 /* AllCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllCategoryViewController.h; sourceTree = "<group>"; };
 		11E860B3240CF27D00719378 /* AllCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllCategoryViewController.m; sourceTree = "<group>"; };
 		11E860B5240D06D100719378 /* NoticeAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoticeAlertView.h; sourceTree = "<group>"; };
@@ -1061,9 +1067,11 @@
 				09239A7E2403FEE400A4F727 /* Launch */,
 				09239A742403FEE400A4F727 /* Lorgin */,
 				09239A782403FEE400A4F727 /* Home */,
+				11D0076424D9119900C92EA8 /* Vedio */,
 				11105ACF2406001900521CB2 /* ZhuanTi */,
 				11105AD32406001900521CB2 /* AV */,
 				09239A902403FEE400A4F727 /* City */,
+				11D0076524D911A400C92EA8 /* MangHua */,
 				8B58D0472413552D00FE426E /* Ablum */,
 				09239A8A2403FEE400A4F727 /* Mine */,
 			);
@@ -1875,6 +1883,56 @@
 			path = HSFTabBar;
 			sourceTree = "<group>";
 		};
+		11D0076424D9119900C92EA8 /* Vedio */ = {
+			isa = PBXGroup;
+			children = (
+				11D0076924D9122700C92EA8 /* View */,
+				11D0076824D9122000C92EA8 /* Controller */,
+			);
+			path = Vedio;
+			sourceTree = "<group>";
+		};
+		11D0076524D911A400C92EA8 /* MangHua */ = {
+			isa = PBXGroup;
+			children = (
+				11D0076724D9121500C92EA8 /* View */,
+				11D0076624D911FA00C92EA8 /* Controller */,
+			);
+			path = MangHua;
+			sourceTree = "<group>";
+		};
+		11D0076624D911FA00C92EA8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				11D0076A24D9123900C92EA8 /* MangHuaViewController.h */,
+				11D0076B24D9123900C92EA8 /* MangHuaViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		11D0076724D9121500C92EA8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		11D0076824D9122000C92EA8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				11D0076D24D9124A00C92EA8 /* VedioViewController.h */,
+				11D0076E24D9124A00C92EA8 /* VedioViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		11D0076924D9122700C92EA8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		8B58D0472413552D00FE426E /* Ablum */ = {
 			isa = PBXGroup;
 			children = (
@@ -2213,6 +2271,7 @@
 				11105E8424067C2C00521CB2 /* AVItem.m in Sources */,
 				093E58C02406A87A004E5F72 /* SAMKeychain.m in Sources */,
 				11105E5724066BC900521CB2 /* UIColor+LqExtension.m in Sources */,
+				11D0076F24D9124A00C92EA8 /* VedioViewController.m in Sources */,
 				11105ADF2406006800521CB2 /* CityViewController.m in Sources */,
 				8BD54571240BA80000C90A31 /* HomeSectionHeaderView.m in Sources */,
 				8BE5DC302451590C0087E70A /* CustomerAlignTypeLayout.m in Sources */,
@@ -2395,6 +2454,7 @@
 				11105E5C24066BC900521CB2 /* LqWGS84TOGCJ02.m in Sources */,
 				11105E5824066BC900521CB2 /* UILabel+LqExtension.m in Sources */,
 				8BE5DC2D245157380087E70A /* CityListSearchView.m in Sources */,
+				11D0076C24D9123900C92EA8 /* MangHuaViewController.m in Sources */,
 				8B58D04E241355C500FE426E /* AblumCollectionCell.m in Sources */,
 				117090D92456C7EC00520C4D /* UIButton+Layout.m in Sources */,
 				113980882410DB3C00663E26 /* SaoMaViewController.m in Sources */,
