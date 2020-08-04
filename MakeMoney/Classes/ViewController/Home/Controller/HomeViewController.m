@@ -30,6 +30,7 @@
 #import "RechargeCenterViewController.h"
 #import "BindMobileFirstStepViewController.h"
 #import "ShareInstallSDK.h"
+#import "ZhuanTiViewController.h"
 @interface HomeViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,SDCycleScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -48,7 +49,9 @@
 @implementation HomeViewController
 #pragma mark - 重写
 - (void)navigationRightBtnClick:(UIButton *)button{
-    [LSVProgressHUD showInfoWithStatus:[button titleForState:UIControlStateNormal]];
+//    [LSVProgressHUD showInfoWithStatus:[button titleForState:UIControlStateNormal]];
+    ZhuanTiViewController *vc = [[ZhuanTiViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)navigationRightSecBtnClick:(UIButton*)button{
@@ -128,7 +131,7 @@
     __weak __typeof(self) weakSelf = self;
 
     [self addNavigationView];
-    [self.navigationRightBtn setTitle:lqStrings(@"分类") forState:UIControlStateNormal];
+    [self.navigationRightBtn setTitle:lqStrings(@"专题") forState:UIControlStateNormal];
     [self.navigationRightBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(weakSelf.navigationView).with.offset(-Adaptor_Value(10));
         make.centerY.mas_equalTo(weakSelf.navigationTextLabel);
@@ -141,7 +144,7 @@
     [self.navigationRightSecBtn setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
     [self.navigationRightSecBtn setIconInLeftWithSpacing:5];
     [self.navigationRightSecBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(weakSelf.navigationRightBtn.mas_left).offset(-Adaptor_Value(10));
+        make.right.mas_equalTo(weakSelf.navigationRightBtn.mas_left).offset(-Adaptor_Value(5));
         make.left.mas_equalTo(Adaptor_Value(10));
         make.height.mas_equalTo(Adaptor_Value(30));
         make.centerY.mas_equalTo(weakSelf.navigationRightBtn);
@@ -324,7 +327,7 @@
         };
         return headerView;
     } else {
-        if (indexPath.section % 2 == 0) {
+        if (indexPath.section % 2 == 0 ) {
             AdsItem *item = [_dataSource.ads safeObjectAtIndex:indexPath.section / 2];
             HomeSectionFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:NSStringFromClass([HomeSectionFooterView class]) forIndexPath:indexPath];
             [footerView refreshViewWith:item];
@@ -371,7 +374,11 @@
         if (item.width > 0 && item.height > 0) {
             return CGSizeMake(LQScreemW, LQScreemW * item.height / item.width);
         }
-        return  CGSizeMake(LQScreemW,100);
+        if (item) {
+            return  CGSizeMake(LQScreemW,100);
+        }else{
+            return CGSizeZero;
+        }
     }
     return CGSizeZero;
 }

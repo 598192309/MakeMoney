@@ -69,6 +69,9 @@ typedef NS_ENUM(NSInteger,AdTag) {
 @property (nonatomic,strong)NSString *sort;
 @property (nonatomic,strong)NSString *text;
 
+@property (nonatomic,strong)NSString *cover;
+
+
 @end
 /**广告 */
 @interface AdsItem : NSObject

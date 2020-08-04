@@ -31,13 +31,28 @@
     if (!item) {
         return;
     }
-    [HomeApi downImageWithType:@"v_imgs" paramTitle:@"vId" ID:item.ID key:item.video_url Success:^(UIImage * _Nonnull img,NSString *ID) {
-        if ([weakSelf.item.ID isEqualToString:ID]) {
-            weakSelf.imageV.image = img;
+    //加载图片做个判断，
+    //cover 包含http就直接加载，否则凭借 basic接口的 video_cover_url
+    //如果cover有值 就去加载cover的  否则就走以前的 另外一个借口下载图片。
+    if (item.cover.length > 0) {
+        NSString *imageUrl;
+        if ([item.cover hasPrefix:@"http"]) {
+            imageUrl = item.cover;
+        }else{
+            imageUrl = [NSString stringWithFormat:@"%@%@",RI.basicItem.video_cover_url,item.cover];
         }
-    } error:^(NSError *error, id resultObject) {
+        [self.imageV sd_setImageWithURL:[NSURL URLWithString:imageUrl]];
+
         
-    }];
+    }else{
+        [HomeApi downImageWithType:@"v_imgs" paramTitle:@"vId" ID:item.ID key:item.video_url Success:^(UIImage * _Nonnull img,NSString *ID) {
+            if ([weakSelf.item.ID isEqualToString:ID]) {
+                weakSelf.imageV.image = img;
+            }
+        } error:^(NSError *error, id resultObject) {
+            
+        }];
+    }
     
 }
 @end
