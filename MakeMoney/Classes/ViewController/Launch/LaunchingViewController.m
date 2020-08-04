@@ -19,7 +19,7 @@
 #import "MineViewController.h"
 #import "LorginViewController.h"
 #import "CityViewController.h"
-#import "ZhuanTiViewController.h"
+//#import "ZhuanTiViewController.h"
 #import "AVViewController.h"
 #import "AblumViewController.h"
 #import "MangHuaViewController.h"
@@ -189,12 +189,6 @@
             BaseNavigationController *navi1 = [[BaseNavigationController alloc]initWithRootViewController:vc1];
             [navArr addObject:navi1];
             [sourceArr addObject:@{@"title":lqStrings(@"短视频"), @"selImg":@"", @"norImg":@""}];
-
-        }else if ([tabItem.name isEqualToString:lqStrings(@"专题")]) {
-            ZhuanTiViewController *vc2 = [[ZhuanTiViewController alloc]init];
-            BaseNavigationController *navi2 = [[BaseNavigationController alloc]initWithRootViewController:vc2];
-            [navArr addObject:navi2];
-            [sourceArr addObject:@{@"title":lqStrings(@"专题"), @"selImg":@"", @"norImg":@""}];
 
         }else if ([tabItem.name isEqualToString:lqStrings(@"AV")]) {
             AVViewController *vc3 = [[AVViewController alloc]init];

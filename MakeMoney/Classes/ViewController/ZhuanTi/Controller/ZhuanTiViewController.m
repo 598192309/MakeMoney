@@ -24,6 +24,7 @@
     [super viewDidLoad];
     
     [self configUI];
+    [self setUpNav];
     if (@available(iOS 11.0, *)) {
         _customTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     } else {
@@ -42,12 +43,17 @@
 
     [self.customTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.mas_equalTo(weakSelf.view);
-        make.top.mas_equalTo(TopAdaptor_Value(25));
+        make.top.mas_equalTo(NavMaxY);
     }];
     
     
 }
+- (void)setUpNav{
+    __weak __typeof(self) weakSelf = self;
 
+    [self addNavigationView];
+    self.navigationTextLabel.text = lqStrings(@"专题");
+}
 
 #pragma mark -  net
 -(void)requestData{
