@@ -31,20 +31,20 @@
 }
 
 - (void)createSubviews {
-    self.backgroundColor = [UIColor lightGrayColor];
-    
     self.tableView = [[UITableView alloc] initWithFrame:self.frame style:UITableViewStylePlain];
     self.tableView.rowHeight = 50.0;
     self.tableView.estimatedRowHeight = 0.0;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self addSubview:self.tableView];
+    self.tableView.scrollEnabled = NO;
+    
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return self.dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

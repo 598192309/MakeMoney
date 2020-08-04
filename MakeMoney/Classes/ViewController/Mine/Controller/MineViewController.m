@@ -36,6 +36,8 @@
 
 @property (nonatomic,strong)CommonAlertView *tipAlertView;
 
+@property (nonatomic,strong)UIView *huijiaAlertView;
+
 @end
 
 @implementation MineViewController
@@ -157,6 +159,11 @@
     self.mineCustomHeaderView.mineCustomQiandaoBtnClickBlock = ^(UIButton *sender) {
         [weakSelf qiandao:sender];
     };
+}
+
+- (void)removeTap:(UITapGestureRecognizer *)gest{
+    [self.huijiaAlertView removeFromSuperview];
+    self.huijiaAlertView = nil;
 }
 #pragma mark - notify
 - (void)bingmobileNotify:(NSNotification *)note{
@@ -392,33 +399,10 @@
 //        }
         if (indexPath.row == 0) {
             //回家不迷路 弹框
-            MenuView *menu = [[MenuView alloc] initWithFrame:CGRectMake(0, 0, LQScreemW, 200)];
-            [menu showAlertStyle:GXAlertStyleSheet backgoundTapDismissEnable:YES usingSpring:YES];
-            //切换khost
-            __weak __typeof(menu) weakmenu = menu;
-            menu.cellClickBlock = ^(NSString * _Nonnull str, NSInteger index) {
-                [weakmenu hideToView:YES];
-                if (index == 0) {//土豆福利分享群
-                    NSURL *url = [NSURL URLWithString:RI.basicItem.potato_url];
-                    if ([[UIApplication sharedApplication] canOpenURL:url]) {
-                        [[UIApplication sharedApplication] openURL:url];
-                    }
-                }else if (index == 1) {//云盘回家地址
-                    NSURL *url = [NSURL URLWithString:RI.basicItem.yunpan];
-                    if ([[UIApplication sharedApplication] canOpenURL:url]) {
-                        [[UIApplication sharedApplication] openURL:url];
-                    }
-                }else if (index == 2) {//github回家地址
-                    NSURL *url = [NSURL URLWithString:RI.basicItem.github];
-                    if ([[UIApplication sharedApplication] canOpenURL:url]) {
-                        [[UIApplication sharedApplication] openURL:url];
-                    }
-                }else if (index == 3) {//官方客服QQ
-                    
-                }else if (index == 4) {//官方邮箱
-                    
-                }
-            };
+            [[UIApplication sharedApplication].keyWindow addSubview:self.huijiaAlertView];
+            [self.huijiaAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
+            }];
         }
         
     }else if (indexPath.section == 1){//我的收藏
@@ -661,6 +645,48 @@
     }
     return _tipAlertView;
 }
+- (UIView *)huijiaAlertView{
+    if (!_huijiaAlertView) {
+        _huijiaAlertView = [UIView new];
+        __weak __typeof(self) weakSelf = self;
+        MenuView *menu = [[MenuView alloc] initWithFrame:CGRectMake(0, 0, LQScreemW, 250)];
+//            [menu showAlertStyle:GXAlertStyleAlert backgoundTapDismissEnable:YES usingSpring:YES];
+        [_huijiaAlertView addSubview:menu];
+        [menu mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.mas_equalTo(_huijiaAlertView);
+            make.height.mas_equalTo(250);
+        }];
+        //切换
+        __weak __typeof(menu) weakmenu = menu;
+        menu.cellClickBlock = ^(NSString * _Nonnull str, NSInteger index) {
+            [weakmenu hideToView:YES];
+            if (index == 0) {//土豆福利分享群
+                NSURL *url = [NSURL URLWithString:RI.basicItem.potato_url];
+                if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                    [[UIApplication sharedApplication] openURL:url];
+                }
+            }else if (index == 1) {//云盘回家地址
+                NSURL *url = [NSURL URLWithString:RI.basicItem.yunpan];
+                if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                    [[UIApplication sharedApplication] openURL:url];
+                }
+            }else if (index == 2) {//github回家地址
+                NSURL *url = [NSURL URLWithString:RI.basicItem.github];
+                if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                    [[UIApplication sharedApplication] openURL:url];
+                }
+            }else if (index == 3) {//官方客服QQ
 
+            }else if (index == 4) {//官方邮箱
+
+            }
+            [weakSelf.huijiaAlertView removeFromSuperview];
+            weakSelf.huijiaAlertView = nil;
+        };
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeTap:)];
+        [_huijiaAlertView addGestureRecognizer:tap];
+    }
+    return _huijiaAlertView;
+}
 
 @end

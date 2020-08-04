@@ -141,7 +141,7 @@ object:nil];
 
 
 #ifdef DEBUG
-#define KHOST @"http://n3261i7144.51vip.biz/"
+#define KHOST @"http://i333191g98.zicp.vip/"
 //#define KHOST @"http://51778app.me"
 
 
