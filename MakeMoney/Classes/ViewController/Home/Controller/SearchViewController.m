@@ -48,7 +48,7 @@
     __weak __typeof(self) weakSelf = self;
     [self.view addSubview:self.header];
     [self.header mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.right.top.mas_equalTo(weakSelf.view);
+        make.left.right.top.mas_equalTo(weakSelf.view);
     }];
     
     [self.view addSubview:self.customCollectionView];
@@ -65,11 +65,11 @@
 
 #pragma mark - act
 - (void)backBtnClick:(UIButton *)sender{
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)searchBtnClick:(UIButton *)sender{
-    
+    [self requestData];
 }
 /**
  * 监听textField值的变化
@@ -91,7 +91,7 @@
     }else if (self.searchType == SearchType_cartoon) {
         url = @"/api/cartoon/search";
     }
-    
+    [LSVProgressHUD show];
     [HomeApi searchWithText:self.searchText page_index:@"0" page_size:@"20" url:url Success:^(NSArray * _Nonnull searchArr, NSString * _Nonnull msg) {
         weakSelf.pageIndex = searchArr.count ;
         weakSelf.dataArr = [NSMutableArray arrayWithArray:searchArr];
@@ -106,6 +106,7 @@
         }
         [weakSelf.customCollectionView endHeaderRefreshing];
         [weakSelf.customCollectionView reloadData];
+        [LSVProgressHUD dismiss];
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
         [weakSelf.customCollectionView endHeaderRefreshing];
@@ -115,7 +116,7 @@
 - (void)requestMoreData{
    __weak __typeof(self) weakSelf = self;
     NSString *url;
-    
+    [LSVProgressHUD show];
     [HomeApi searchWithText:self.searchText page_index:IntTranslateStr(self.pageIndex) page_size:@"20" url:url Success:^(NSArray * _Nonnull searchArr, NSString * _Nonnull msg) {
         [weakSelf.dataArr addObjectsFromArray:searchArr];
         [weakSelf.customCollectionView endFooterRefreshing];
@@ -126,6 +127,8 @@
             weakSelf.pageIndex = weakSelf.dataArr.count ;
 
         }
+        [LSVProgressHUD dismiss];
+
     } error:^(NSError *error, id resultObject) {
         [LSVProgressHUD showError:error];
         [weakSelf.customCollectionView endHeaderRefreshing];
@@ -283,12 +286,12 @@
         [contentV addSubview:_textF];
         [_textF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(Adaptor_Value(50));
-            make.left.mas_equalTo(weakSelf.backBtn.mas_right).offset(Adaptor_Value(20));
+            make.left.mas_equalTo(weakSelf.backBtn.mas_right).offset(Adaptor_Value(15));
             make.centerY.mas_equalTo(contentV);
             make.right.mas_equalTo(contentV);
 
         }];
-        _textF.textColor = [UIColor blackColor];
+        _textF.textColor = TitleWhiteColor;
         [_textF addTarget:self action:@selector(textFDidChange:) forControlEvents:UIControlEventEditingChanged];
         _textF.font = AdaptedFontSize(15);
         _textF.text = self.hotArr.firstObject;
@@ -297,6 +300,7 @@
         [_searchBtn addTarget:self action:@selector(searchBtnClick:) forControlEvents:UIControlEventTouchDown];
         [_searchBtn setTitle:lqStrings(@"搜索") forState:UIControlStateNormal];
         [_searchBtn setTitleColor:TitleWhiteColor forState:UIControlStateNormal];
+        _searchBtn.titleLabel.font = AdaptedFontSize(15);
         [contentV addSubview:_searchBtn];
         [_searchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
