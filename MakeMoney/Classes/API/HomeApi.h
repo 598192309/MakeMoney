@@ -89,6 +89,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 计算下载的图片的大小
 + (NSString *)caculatedownloadImageSize;
+
+
+/*******************搜索
+ 
+ *********************/
++ (NetworkTask *)searchWithText:(NSString *)text page_index:(NSString *)page_index page_size:(NSString *)page_size url:(NSString *)url Success:(void(^)(NSArray *searchArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock;
 @end
 
 NS_ASSUME_NONNULL_END

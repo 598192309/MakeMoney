@@ -37,7 +37,9 @@
 @implementation HotItem
 + (NSDictionary *)mj_replacedKeyFromPropertyName{
     return @{
-             @"ID":@"id"
+             @"ID":@"id",
+             @"desc":@"description"
+
              };
 }
 
@@ -55,3 +57,6 @@
              };
 }
 @end
+
+
+

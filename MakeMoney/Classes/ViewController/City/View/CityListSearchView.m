@@ -225,6 +225,11 @@
     self.nameLabel.text = str;
 }
 
+- (void)configUIWithStr:(NSString *)str titleColor:(UIColor *)titleColor{
+    self.nameLabel.text = str;
+    self.nameLabel.textColor = titleColor;
+}
+
 #pragma mark - getters
 -(UIView *)cellBackgroundView{
     if (!_cellBackgroundView) {

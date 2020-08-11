@@ -222,6 +222,8 @@
 		11A0C4DD2446B43D00DC9221 /* VideoRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A0C4DC2446B43D00DC9221 /* VideoRechargeViewController.m */; };
 		11A0C4E02446B44E00DC9221 /* CityRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A0C4DF2446B44E00DC9221 /* CityRechargeViewController.m */; };
 		11A0C4E32446B46000DC9221 /* AblumRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A0C4E22446B46000DC9221 /* AblumRechargeViewController.m */; };
+		11B88D5924E2913200C17C05 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B88D5824E2913200C17C05 /* SearchViewController.m */; };
+		11B88D5C24E2942000C17C05 /* SearchCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B88D5B24E2942000C17C05 /* SearchCollectionHeaderView.m */; };
 		11D0076C24D9123900C92EA8 /* MangHuaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D0076B24D9123900C92EA8 /* MangHuaViewController.m */; };
 		11D0076F24D9124A00C92EA8 /* VedioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D0076E24D9124A00C92EA8 /* VedioViewController.m */; };
 		11D0077924D947DF00C92EA8 /* GXAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D0077524D947DE00C92EA8 /* GXAlertManager.m */; };
@@ -730,6 +732,10 @@
 		11A0C4DF2446B44E00DC9221 /* CityRechargeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityRechargeViewController.m; sourceTree = "<group>"; };
 		11A0C4E12446B46000DC9221 /* AblumRechargeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AblumRechargeViewController.h; sourceTree = "<group>"; };
 		11A0C4E22446B46000DC9221 /* AblumRechargeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AblumRechargeViewController.m; sourceTree = "<group>"; };
+		11B88D5724E2913200C17C05 /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		11B88D5824E2913200C17C05 /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		11B88D5A24E2942000C17C05 /* SearchCollectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchCollectionHeaderView.h; sourceTree = "<group>"; };
+		11B88D5B24E2942000C17C05 /* SearchCollectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchCollectionHeaderView.m; sourceTree = "<group>"; };
 		11D0076A24D9123900C92EA8 /* MangHuaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MangHuaViewController.h; sourceTree = "<group>"; };
 		11D0076B24D9123900C92EA8 /* MangHuaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MangHuaViewController.m; sourceTree = "<group>"; };
 		11D0076D24D9124A00C92EA8 /* VedioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VedioViewController.h; sourceTree = "<group>"; };
@@ -1121,6 +1127,8 @@
 				09239A7A2403FEE400A4F727 /* HomeViewController.m */,
 				11E860B2240CF27D00719378 /* AllCategoryViewController.h */,
 				11E860B3240CF27D00719378 /* AllCategoryViewController.m */,
+				11B88D5724E2913200C17C05 /* SearchViewController.h */,
+				11B88D5824E2913200C17C05 /* SearchViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1153,6 +1161,8 @@
 				8BD545BC240BE71700C90A31 /* HomeVideoCell.xib */,
 				112F56AC2411DD2100CE4715 /* ShareView.h */,
 				112F56AD2411DD2100CE4715 /* ShareView.m */,
+				11B88D5A24E2942000C17C05 /* SearchCollectionHeaderView.h */,
+				11B88D5B24E2942000C17C05 /* SearchCollectionHeaderView.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -2310,6 +2320,7 @@
 				09E72C6424055F770004B25C /* MASViewConstraint.m in Sources */,
 				8BD545AA240BB4CC00C90A31 /* NSBundle+MJRefresh.m in Sources */,
 				11E860BA240D142700719378 /* SYPageControl.m in Sources */,
+				11B88D5924E2913200C17C05 /* SearchViewController.m in Sources */,
 				096C7FC7240C0F6D00914E20 /* AdsHeaderView.m in Sources */,
 				09E72CF424055F8E0004B25C /* NSData+ImageContentType.m in Sources */,
 				8BD545AB240BB4CC00C90A31 /* UIView+MJExtension.m in Sources */,
@@ -2414,6 +2425,7 @@
 				111FD7092412515400E7B419 /* MyLoveCell.m in Sources */,
 				8BD545AF240BB4CC00C90A31 /* MJRefreshAutoStateFooter.m in Sources */,
 				09C51AE724135AC400705DFC /* LqSegmentControl.m in Sources */,
+				11B88D5C24E2942000C17C05 /* SearchCollectionHeaderView.m in Sources */,
 				09E72C8224055F7E0004B25C /* NSObject+MJClass.m in Sources */,
 				1139807D2410A08400663E26 /* YCPresentationController.m in Sources */,
 				09239AD02403FEE400A4F727 /* LorginViewController.m in Sources */,

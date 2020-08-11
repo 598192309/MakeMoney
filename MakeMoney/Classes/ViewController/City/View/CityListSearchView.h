@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LabelCollectionViewCell : UICollectionViewCell
 - (void)configUIWithStr:(NSString *)str;
+- (void)configUIWithStr:(NSString *)str titleColor:(UIColor *)titleColor;
 @end
 
 NS_ASSUME_NONNULL_END

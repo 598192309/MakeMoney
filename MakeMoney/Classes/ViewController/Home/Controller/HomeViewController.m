@@ -31,6 +31,8 @@
 #import "BindMobileFirstStepViewController.h"
 #import "ShareInstallSDK.h"
 #import "ZhuanTiViewController.h"
+#import "SearchViewController.h"
+
 @interface HomeViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,SDCycleScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -55,7 +57,10 @@
 }
 
 -(void)navigationRightSecBtnClick:(UIButton*)button{
-    [LSVProgressHUD showInfoWithStatus:[button titleForState:UIControlStateNormal]];
+//    [LSVProgressHUD showInfoWithStatus:[button titleForState:UIControlStateNormal]];
+    SearchViewController *vc = [SearchViewController new];
+    vc.searchType = SearchType_vedio;
+    [self.navigationController pushViewController:vc animated:YES];
 
 }
 #pragma mark - instance
@@ -140,7 +145,7 @@
 
     }];
     [self.navigationRightSecBtn setTitle:lqStrings(@"搜你想搜看你想看") forState:UIControlStateNormal];
-    [self.navigationRightSecBtn setBackgroundColor:[UIColor lq_colorWithHexString:@"bcbcbc" alpha:0.8]];
+    [self.navigationRightSecBtn setBackgroundColor:TitleWhiteColor];
     [self.navigationRightSecBtn setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
     [self.navigationRightSecBtn setIconInLeftWithSpacing:5];
     [self.navigationRightSecBtn mas_remakeConstraints:^(MASConstraintMaker *make) {

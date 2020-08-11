@@ -72,6 +72,9 @@ typedef NS_ENUM(NSInteger,AdTag) {
 @property (nonatomic,strong)NSString *cover;
 
 
+@property (nonatomic,strong)NSString *desc;
+
+
 @end
 /**广告 */
 @interface AdsItem : NSObject
@@ -120,5 +123,7 @@ typedef NS_ENUM(NSInteger, VideoType) {
 @property (nonatomic,strong)NSArray<HomeVideoList *> *video;
 
 @end
+
+
 
 NS_ASSUME_NONNULL_END

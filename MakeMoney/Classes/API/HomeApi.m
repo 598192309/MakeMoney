@@ -197,5 +197,20 @@
     }];
 }
 
-
+/*******************搜索
+ 
+ *********************/
++ (NetworkTask *)searchWithText:(NSString *)text page_index:(NSString *)page_index page_size:(NSString *)page_size url:(NSString *)url Success:(void(^)(NSArray *searchArr,NSString *msg))successBlock error:(ErrorBlock)errorBlock{
+    return [NET POST:url parameters:@{@"text":SAFE_NIL_STRING(text),@"page_index":SAFE_NIL_STRING(page_index),@"page_size":SAFE_NIL_STRING(page_size)} criticalValue:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull resultObject) {
+        NSArray *searchArr = [HotItem mj_objectArrayWithKeyValuesArray:[resultObject safeObjectForKey:@"data"]];
+        NSString *msg = [resultObject safeObjectForKey:@"msg"];
+        if (successBlock) {
+            successBlock(searchArr,msg);
+        }
+    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error, id _Nonnull resultObject) {
+        if (errorBlock) {
+            errorBlock(error,resultObject);
+        }
+    }];
+}
 @end
