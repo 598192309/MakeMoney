@@ -18,7 +18,7 @@
 @property (strong, nonatomic)  EnlargeTouchSizeButton *seeTimesBtn;
 @property (strong, nonatomic)  UILabel *vedioTimesLable;
 @property (strong, nonatomic)  UILabel *titleLable;
-
+@property (strong, nonatomic)  UILabel *tipLable;
 
 @property (nonatomic, strong) HotItem *item;
 @end
@@ -91,6 +91,9 @@
     } error:^(NSError *error, id resultObject) {
         
     }];
+    
+    self.tipLable.text = [NSString stringWithFormat:@"%@       番号:%@",[LqToolKit avTagString:item.video_tag],item.fan_hao];
+
 }
 
 #pragma mark - act
@@ -118,16 +121,21 @@
         _imageV.backgroundColor = ThemeBlackColor;
         [contentV addSubview:_imageV];
         [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.top.right.mas_equalTo(contentV);
+            make.top.mas_equalTo(contentV);
+            make.left.mas_equalTo(Adaptor_Value(10));
+            make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
             make.height.mas_equalTo(Adaptor_Value(210));
         }];
-        
+        _imageV.contentMode = UIViewContentModeScaleAspectFill;
+        ViewRadius(_imageV, 5);
         _vipLabel = [UILabel lableWithText:lqLocalized(@"VIP",nil) textColor:[UIColor whiteColor] fontSize:AdaptedFontSize(13) lableSize:CGRectZero textAliment:NSTextAlignmentCenter numberofLines:0];
         [contentV addSubview:_vipLabel];
         [_vipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(Adaptor_Value(Adaptor_Value(25)));
             make.width.mas_equalTo(Adaptor_Value(45));
-            make.left.top.mas_equalTo(contentV);
+            make.top.mas_equalTo(contentV);
+            make.top.mas_equalTo(weakSelf.imageV);
+
         }];
         _vipLabel.backgroundColor = CustomPinkColor;
         
@@ -158,7 +166,7 @@
         [contentV addSubview:_timeLable];
         [_timeLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(Adaptor_Value(Adaptor_Value(30)));
-            make.left.mas_equalTo(Adaptor_Value(10));
+            make.left.mas_equalTo(weakSelf.imageV).offset(Adaptor_Value(10));
             make.bottom.mas_equalTo(weakSelf.imageV);
         }];
         
@@ -177,7 +185,7 @@
         [contentV addSubview:_vedioTimesLable];
         [_vedioTimesLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(Adaptor_Value(Adaptor_Value(30)));
-            make.right.mas_equalTo(-Adaptor_Value(10));
+            make.right.mas_equalTo(weakSelf.imageV).offset(-Adaptor_Value(10));
             make.bottom.mas_equalTo(weakSelf.imageV);
         }];
         
@@ -190,7 +198,7 @@
         }];
         
         UIView *titleBackWhiteView = [UIView new];
-        titleBackWhiteView.backgroundColor = TitleWhiteColor;
+        titleBackWhiteView.backgroundColor = ThemeBlackColor;
         [contentV addSubview:titleBackWhiteView];
         [titleBackWhiteView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_greaterThanOrEqualTo(Adaptor_Value(Adaptor_Value(40)));
@@ -199,14 +207,23 @@
             make.bottom.mas_equalTo(contentV);
         }];
         
-        _titleLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleBlackColor fontSize:AdaptedFontSize(16) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        _titleLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleWhiteColor fontSize:AdaptedBoldFontSize(14) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
         [titleBackWhiteView addSubview:_titleLable];
         [_titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
-            make.centerY.mas_equalTo(titleBackWhiteView);
             make.left.mas_equalTo(Adaptor_Value(10));
             make.top.mas_equalTo(Adaptor_Value(5));
         }];
+        
+        _tipLable = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleGrayColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:0];
+        [titleBackWhiteView addSubview:_tipLable];
+        [_tipLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
+            make.bottom.mas_equalTo(titleBackWhiteView).offset(-Adaptor_Value(10));
+            make.left.mas_equalTo(weakSelf.titleLable);
+            make.top.mas_equalTo(weakSelf.titleLable.mas_bottom).offset(Adaptor_Value(5));
+        }];
+        
         
         
 

@@ -208,11 +208,11 @@
             [navArr addObject:navi4];
             [sourceArr addObject:@{@"title":lqStrings(@"写真"), @"selImg":@"", @"norImg":@""}];
 
-        }else if ([tabItem.name isEqualToString:lqStrings(@"同城")]) {
+        }else if ([tabItem.name isEqualToString:lqStrings(@"茶馆")]) {
             CityViewController *vc5 = [[CityViewController alloc]init];
             BaseNavigationController *navi5 = [[BaseNavigationController alloc]initWithRootViewController:vc5];
             [navArr addObject:navi5];
-            [sourceArr addObject:@{@"title":lqStrings(@"同城"), @"selImg":@"", @"norImg":@""}];
+            [sourceArr addObject:@{@"title":lqStrings(@"茶馆"), @"selImg":@"", @"norImg":@""}];
 
         }else if ([tabItem.name isEqualToString:lqStrings(@"我的")]) {
             MineViewController *vc6 = [[MineViewController alloc]init];

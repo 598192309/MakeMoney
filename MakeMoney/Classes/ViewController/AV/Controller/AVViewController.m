@@ -13,7 +13,7 @@
 #import "HomeItem.h"
 #import "AVPlayerController.h"
 #import "AVHeaderAdsImageView.h"
-
+#import "SearchViewController.h"
 @interface AVViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *customTableView;
 @property (nonatomic,assign)NSInteger pageIndex;
@@ -24,11 +24,21 @@
 @end
 
 @implementation AVViewController
+
+-(void)navigationRightSecBtnClick:(UIButton*)button{
+//    [LSVProgressHUD showInfoWithStatus:[button titleForState:UIControlStateNormal]];
+    SearchViewController *vc = [SearchViewController new];
+    vc.searchType = SearchType_vedio;
+    [self.navigationController pushViewController:vc animated:YES];
+
+}
+
 #pragma mark - life
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self configUI];
+    [self setUpNav];
     
     [self reqestTopAds];
     
@@ -43,7 +53,7 @@
 
     [self.customTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.mas_equalTo(weakSelf.view);
-        make.top.mas_equalTo(TopAdaptor_Value(25));
+        make.top.mas_equalTo(NavMaxY);
     }];
     
     if (@available(iOS 11.0, *)) {
@@ -54,6 +64,24 @@
     }
 }
 
+- (void)setUpNav{
+    __weak __typeof(self) weakSelf = self;
+
+    [self addNavigationView];
+ 
+    [self.navigationRightSecBtn setTitle:lqStrings(@"搜你想搜看你想看") forState:UIControlStateNormal];
+    [self.navigationRightSecBtn setBackgroundColor:[UIColor lq_colorWithHexString:@"bcbcbc"]];
+    [self.navigationRightSecBtn setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
+    [self.navigationRightSecBtn setIconInLeftWithSpacing:5];
+    [self.navigationRightSecBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(weakSelf.navigationView).offset(-Adaptor_Value(10));
+        make.left.mas_equalTo(Adaptor_Value(10));
+        make.height.mas_equalTo(Adaptor_Value(30));
+        make.centerY.mas_equalTo(weakSelf.navigationRightBtn);
+    }];
+    ViewRadius(self.navigationRightSecBtn, Adaptor_Value(15));
+    self.navigationBackButton.hidden = YES;
+}
 
 
 
