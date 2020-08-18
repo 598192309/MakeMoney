@@ -123,12 +123,11 @@
             make.top.mas_equalTo(weakSelf.imageV.mas_bottom);
         }];
         
-        _titleLabel = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleWhiteColor fontSize:AdaptedFontSize(12) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:2];
+        _titleLabel = [UILabel lableWithText:lqLocalized(@"",nil) textColor:TitleWhiteColor fontSize:AdaptedFontSize(14) lableSize:CGRectZero textAliment:NSTextAlignmentLeft numberofLines:1];
         [titleBackWhiteView addSubview:_titleLabel];
         [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(contentV).offset(-Adaptor_Value(10));
             make.centerY.mas_equalTo(titleBackWhiteView);
-            make.left.mas_equalTo(contentV);
+            make.left.right.mas_equalTo(contentV);
             make.top.mas_equalTo(Adaptor_Value(5));
         }];
 

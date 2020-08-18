@@ -11,7 +11,7 @@
 #import "ManghuaCell.h"
 #import "SearchViewController.h"
 #import "MangHuaApi.h"
-
+#import "HomeCollectionHeaderView.h"
 @interface MangHuaViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) UICollectionView *collectionView;//容器视图
@@ -67,7 +67,7 @@
     [self.view addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(weakSelf.view);
-        make.top.mas_equalTo(TopAdaptor_Value(25));
+        make.top.mas_equalTo(NavMaxY);
         make.bottom.mas_equalTo(weakSelf.view);
     }];
 
@@ -162,36 +162,54 @@
     [cell refreshWithItem:item];
     return cell;
 }
-////设置顶部视图和底部视图
-//-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-//    __weak __typeof(self) weakSelf = self;
-//    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-//       HomeCollectionTopHeaderView *headerView=[HomeCollectionTopHeaderView headerViewWithCollectionView:collectionView forIndexPath:indexPath];
-//
-//        if (indexPath.section == 0) {
-//            //获取顶部视图
-//            [headerView refreshUIWithTitle:lqStrings(@"大家都在看") titleImageStr:@"" tipBtnTitle:lqStrings(@">") bannerImageUrlArr:self.bannerImageUrlArr];
-//            headerView.headerViewTipBtnClickBlock = ^(UIButton * _Nonnull sender) {
-//
-//            };
-//            //点击banner
-//            headerView.bannerClickBlock = ^(NSInteger index){
-//                AdsItem *item = [self.adsItemArr safeObjectAtIndex:index];
-//                [LqToolKit jumpAdventWithItem:item];
-//            };
-//            return headerView;
-//        }else if(indexPath.section == 1 ){
-//
-//        }else if(indexPath.section == 2 ){
-//
-//        }
-//
-//
-//    }
-//
-//    return nil;
-//
-//}
+//设置顶部视图和底部视图
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    __weak __typeof(self) weakSelf = self;
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+
+        if (indexPath.section == 0) {
+            HomeCollectionTopHeaderView *headerView=[HomeCollectionTopHeaderView headerViewWithCollectionView:collectionView forIndexPath:indexPath];
+
+            //获取顶部视图
+            [headerView refreshUIWithTitle:lqStrings(@"大家都在看") titleImageStr:@"" tipBtnTitle:lqStrings(@">") bannerImageUrlArr:self.bannerImageUrlArr];
+            headerView.headerViewTipBtnClickBlock = ^(UIButton * _Nonnull sender) {
+
+            };
+            //点击banner
+            headerView.bannerClickBlock = ^(NSInteger index){
+                AdsItem *item = [self.adsItemArr safeObjectAtIndex:index];
+                [LqToolKit jumpAdventWithItem:item];
+            };
+            return headerView;
+        }
+         //获取顶部视图
+         NSString *title;
+         NSString *subTitle;
+         NSString *imageStr;
+
+         if (indexPath.section == 1) {
+             title = lqStrings(@"每日更新");
+             subTitle = lqStrings(@">");
+             imageStr = @"";
+         }else{
+             title = lqStrings(@"猜你喜欢");
+             subTitle = lqStrings(@"");
+             imageStr = @"";
+
+         }
+        HomeCollectionHeaderView *headerView=[HomeCollectionHeaderView headerViewWithCollectionView:collectionView forIndexPath:indexPath];
+         [headerView refreshUIWithTitle:title titleImageStr:imageStr tipBtnTitle:subTitle];
+         headerView.headerViewTipBtnClickBlock = ^(UIButton * _Nonnull sender) {
+             
+         };
+        return headerView;
+
+
+    }
+
+    return nil;
+
+}
 #pragma mark - UICollectionViewDelegateFlowLayout
 //设置各个方块的大小尺寸
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -266,6 +284,10 @@
         [_collectionView registerClass:[HomeCollectionTopHeaderView class]
            forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                   withReuseIdentifier:NSStringFromClass([HomeCollectionTopHeaderView class])];
+        [_collectionView registerClass:[HomeCollectionHeaderView class]
+                  forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                         withReuseIdentifier:NSStringFromClass([HomeCollectionHeaderView class])];
+
     
         [_collectionView addHeaderWithRefreshingTarget:self refreshingAction:@selector(requestData)];
     }
