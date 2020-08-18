@@ -24,6 +24,9 @@
 		09239ADA2403FFCE00A4F727 /* LorginApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 09239AD92403FFCE00A4F727 /* LorginApi.m */; };
 		093E58BF2406A87A004E5F72 /* SAMKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 093E58BB2406A879004E5F72 /* SAMKeychainQuery.m */; };
 		093E58C02406A87A004E5F72 /* SAMKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 093E58BD2406A879004E5F72 /* SAMKeychain.m */; };
+		0945CECE24EC2655003903FA /* ManghuaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0945CECD24EC2655003903FA /* ManghuaCell.m */; };
+		0945CED124EC287C003903FA /* MangHuaApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0945CED024EC287C003903FA /* MangHuaApi.m */; };
+		0945CED424EC2A8D003903FA /* MangHuaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0945CED324EC2A8D003903FA /* MangHuaItem.m */; };
 		096C7FC0240BC16800914E20 /* MineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C7FBC240BC16800914E20 /* MineCell.m */; };
 		096C7FC1240BC16800914E20 /* MineCustomHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C7FBF240BC16800914E20 /* MineCustomHeaderView.m */; };
 		096C7FC4240BC3D800914E20 /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C7FC3240BC3D800914E20 /* CustomAlertView.m */; };
@@ -342,6 +345,12 @@
 		093E58BC2406A879004E5F72 /* SAMKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMKeychain.h; sourceTree = "<group>"; };
 		093E58BD2406A879004E5F72 /* SAMKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMKeychain.m; sourceTree = "<group>"; };
 		093E58BE2406A87A004E5F72 /* SAMKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMKeychainQuery.h; sourceTree = "<group>"; };
+		0945CECC24EC2655003903FA /* ManghuaCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManghuaCell.h; sourceTree = "<group>"; };
+		0945CECD24EC2655003903FA /* ManghuaCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManghuaCell.m; sourceTree = "<group>"; };
+		0945CECF24EC287C003903FA /* MangHuaApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MangHuaApi.h; sourceTree = "<group>"; };
+		0945CED024EC287C003903FA /* MangHuaApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MangHuaApi.m; sourceTree = "<group>"; };
+		0945CED224EC2A8D003903FA /* MangHuaItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MangHuaItem.h; sourceTree = "<group>"; };
+		0945CED324EC2A8D003903FA /* MangHuaItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MangHuaItem.m; sourceTree = "<group>"; };
 		09569DB82453299E00CFE519 /* MakeMoney.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MakeMoney.entitlements; sourceTree = "<group>"; };
 		096C7FBC240BC16800914E20 /* MineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineCell.m; sourceTree = "<group>"; };
 		096C7FBD240BC16800914E20 /* MineCustomHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineCustomHeaderView.h; sourceTree = "<group>"; };
@@ -1015,6 +1024,8 @@
 				11105E8924067C4300521CB2 /* MineItem.m */,
 				111FD6F524124B6000E7B419 /* AblumItem.h */,
 				111FD6F624124B6000E7B419 /* AblumItem.m */,
+				0945CED224EC2A8D003903FA /* MangHuaItem.h */,
+				0945CED324EC2A8D003903FA /* MangHuaItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1040,6 +1051,8 @@
 				11105E7A24067BE500521CB2 /* MineApi.m */,
 				111FD6F224124B1800E7B419 /* AblumApi.h */,
 				111FD6F324124B1800E7B419 /* AblumApi.m */,
+				0945CECF24EC287C003903FA /* MangHuaApi.h */,
+				0945CED024EC287C003903FA /* MangHuaApi.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1333,6 +1346,15 @@
 				093E58BB2406A879004E5F72 /* SAMKeychainQuery.m */,
 			);
 			path = Keychain;
+			sourceTree = "<group>";
+		};
+		0945CECB24EC2645003903FA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0945CECC24EC2655003903FA /* ManghuaCell.h */,
+				0945CECD24EC2655003903FA /* ManghuaCell.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		096C7FBB240BC16800914E20 /* Mine */ = {
@@ -1915,7 +1937,7 @@
 		11D0076524D911A400C92EA8 /* MangHua */ = {
 			isa = PBXGroup;
 			children = (
-				11D0076724D9121500C92EA8 /* View */,
+				0945CECB24EC2645003903FA /* View */,
 				11D0076624D911FA00C92EA8 /* Controller */,
 			);
 			path = MangHua;
@@ -1928,13 +1950,6 @@
 				11D0076B24D9123900C92EA8 /* MangHuaViewController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		11D0076724D9121500C92EA8 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		11D0076824D9122000C92EA8 /* Controller */ = {
@@ -2430,6 +2445,7 @@
 				1139807D2410A08400663E26 /* YCPresentationController.m in Sources */,
 				09239AD02403FEE400A4F727 /* LorginViewController.m in Sources */,
 				111FD70C241258B100E7B419 /* NoDataView.m in Sources */,
+				0945CED124EC287C003903FA /* MangHuaApi.m in Sources */,
 				8B9B8C1F240EADDB004B4704 /* MyShareDetailCell.m in Sources */,
 				09E72D35240569920004B25C /* Error+KF.m in Sources */,
 				110DFBF4240F5007002E1C8B /* AVTuijianCell.m in Sources */,
@@ -2446,6 +2462,7 @@
 				09C51AEB24135B5800705DFC /* LqScrollView.m in Sources */,
 				8BD545C1240C101E00C90A31 /* HomeSectionFooterView.m in Sources */,
 				111FD6F424124B1800E7B419 /* AblumApi.m in Sources */,
+				0945CED424EC2A8D003903FA /* MangHuaItem.m in Sources */,
 				8B9B8BF5240D4AED004B4704 /* ZFAVPlayerManager.m in Sources */,
 				8BE5DC24245087260087E70A /* CityDetailViewController.m in Sources */,
 				8B9B8BED240D4AED004B4704 /* UIScrollView+ZFPlayer.m in Sources */,
@@ -2477,6 +2494,7 @@
 				092399C82403FE0F00A4F727 /* AppDelegate.m in Sources */,
 				8B58D05124135E6400FE426E /* AblumDetailViewController.m in Sources */,
 				11105E5B24066BC900521CB2 /* LqNoPasteTextField.m in Sources */,
+				0945CECE24EC2655003903FA /* ManghuaCell.m in Sources */,
 				112C540624513DD1006A91EE /* AxcAE_TabBar.m in Sources */,
 				113980822410A0BB00663E26 /* PopPayWayViewController.m in Sources */,
 				11105E5E24066BC900521CB2 /* SystemAlertViewController.m in Sources */,
