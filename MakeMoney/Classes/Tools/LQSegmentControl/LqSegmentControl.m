@@ -25,6 +25,18 @@
 @implementation LqSegmentControl
 
 #pragma mark - Setter/Getter
+- (void)setFont:(UIFont *)font{
+    _font = font;
+}
+
+- (void)setNormalColor:(UIColor *)normalColor{
+    _normalColor = normalColor;
+}
+- (void)setSelectNormalColor:(UIColor *)selectNormalColor{
+    _selectNormalColor = selectNormalColor;
+}
+
+
 - (NSMutableArray *)buttons
 {
     if (_buttons == nil) {
@@ -93,6 +105,8 @@
     return _gradientLayer;
 }
 
+
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -113,12 +127,12 @@
 
 - (void)_config
 {
-    _font = [UIFont systemFontOfSize:14];
+    _font = AdaptedBoldFontSize(16);
     _showStyle = LqSegmentShowDefaultStyle;
-    _normalColor = [UIColor lq_colorWithHexString:@"#4A4A4A"];
-    _normalHighlightedColor = [UIColor lq_colorWithHexString:@"#4A4A4A"];
-    _selectNormalColor = [UIColor lq_colorWithHexString:@"#4A4A4A"];
-    _selectHighlightedColor = [UIColor lq_colorWithHexString:@"#4A4A4A"];
+    _normalColor = TitleGrayColor;
+    _normalHighlightedColor = TitleGrayColor;
+    _selectNormalColor = [UIColor whiteColor];
+    _selectHighlightedColor = [UIColor whiteColor];
     _normalAlpha = 1;
     _indicatorViewWidth = 24;
 }
@@ -323,7 +337,7 @@
 {
     [btn setTitleColor:_selectNormalColor forState:UIControlStateNormal];
     [btn setTitleColor:_selectHighlightedColor forState:UIControlStateHighlighted];
-    btn.titleLabel.font = [UIFont systemFontOfSize:16];
+    btn.titleLabel.font = _font;
     btn.alpha = 1;
 }
 
@@ -331,7 +345,7 @@
 {
     [btn setTitleColor:_normalColor forState:UIControlStateNormal];
     [btn setTitleColor:_normalHighlightedColor forState:UIControlStateHighlighted];
-    btn.titleLabel.font = [UIFont systemFontOfSize:16];
+    btn.titleLabel.font = _font;
     btn.alpha = _normalAlpha;;
 }
 

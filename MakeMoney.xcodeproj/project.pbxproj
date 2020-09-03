@@ -222,6 +222,12 @@
 		117090D92456C7EC00520C4D /* UIButton+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 117090D62456C7EC00520C4D /* UIButton+Layout.m */; };
 		117090DA2456C7EC00520C4D /* HSFTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 117090D82456C7EC00520C4D /* HSFTabBar.m */; };
 		117090DD2456C7FE00520C4D /* HSFTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 117090DB2456C7FE00520C4D /* HSFTabBarController.m */; };
+		119A7DA6250089A700AB3EA7 /* MangHuaCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 119A7DA5250089A700AB3EA7 /* MangHuaCategoryViewController.m */; };
+		119A7DA925008ACD00AB3EA7 /* ManghuaNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 119A7DA825008ACD00AB3EA7 /* ManghuaNewViewController.m */; };
+		119A7DAC25008ADE00AB3EA7 /* ManghuaLianzaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 119A7DAB25008ADE00AB3EA7 /* ManghuaLianzaiViewController.m */; };
+		119A7DAF25008AEB00AB3EA7 /* ManghuaCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 119A7DAE25008AEB00AB3EA7 /* ManghuaCompleteViewController.m */; };
+		119A7DB225008AF700AB3EA7 /* ManghuaPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 119A7DB125008AF700AB3EA7 /* ManghuaPersonViewController.m */; };
+		119A7DB525008DE600AB3EA7 /* ManghuaCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 119A7DB425008DE600AB3EA7 /* ManghuaCategoryCell.m */; };
 		11A0C4DD2446B43D00DC9221 /* VideoRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A0C4DC2446B43D00DC9221 /* VideoRechargeViewController.m */; };
 		11A0C4E02446B44E00DC9221 /* CityRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A0C4DF2446B44E00DC9221 /* CityRechargeViewController.m */; };
 		11A0C4E32446B46000DC9221 /* AblumRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A0C4E22446B46000DC9221 /* AblumRechargeViewController.m */; };
@@ -735,6 +741,18 @@
 		117090D82456C7EC00520C4D /* HSFTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSFTabBar.m; sourceTree = "<group>"; };
 		117090DB2456C7FE00520C4D /* HSFTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSFTabBarController.m; sourceTree = "<group>"; };
 		117090DC2456C7FE00520C4D /* HSFTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSFTabBarController.h; sourceTree = "<group>"; };
+		119A7DA4250089A700AB3EA7 /* MangHuaCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MangHuaCategoryViewController.h; sourceTree = "<group>"; };
+		119A7DA5250089A700AB3EA7 /* MangHuaCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MangHuaCategoryViewController.m; sourceTree = "<group>"; };
+		119A7DA725008ACD00AB3EA7 /* ManghuaNewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManghuaNewViewController.h; sourceTree = "<group>"; };
+		119A7DA825008ACD00AB3EA7 /* ManghuaNewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManghuaNewViewController.m; sourceTree = "<group>"; };
+		119A7DAA25008ADE00AB3EA7 /* ManghuaLianzaiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManghuaLianzaiViewController.h; sourceTree = "<group>"; };
+		119A7DAB25008ADE00AB3EA7 /* ManghuaLianzaiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManghuaLianzaiViewController.m; sourceTree = "<group>"; };
+		119A7DAD25008AEB00AB3EA7 /* ManghuaCompleteViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManghuaCompleteViewController.h; sourceTree = "<group>"; };
+		119A7DAE25008AEB00AB3EA7 /* ManghuaCompleteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManghuaCompleteViewController.m; sourceTree = "<group>"; };
+		119A7DB025008AF700AB3EA7 /* ManghuaPersonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManghuaPersonViewController.h; sourceTree = "<group>"; };
+		119A7DB125008AF700AB3EA7 /* ManghuaPersonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManghuaPersonViewController.m; sourceTree = "<group>"; };
+		119A7DB325008DE600AB3EA7 /* ManghuaCategoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManghuaCategoryCell.h; sourceTree = "<group>"; };
+		119A7DB425008DE600AB3EA7 /* ManghuaCategoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManghuaCategoryCell.m; sourceTree = "<group>"; };
 		11A0C4DB2446B43D00DC9221 /* VideoRechargeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoRechargeViewController.h; sourceTree = "<group>"; };
 		11A0C4DC2446B43D00DC9221 /* VideoRechargeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoRechargeViewController.m; sourceTree = "<group>"; };
 		11A0C4DE2446B44E00DC9221 /* CityRechargeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityRechargeViewController.h; sourceTree = "<group>"; };
@@ -1353,6 +1371,8 @@
 			children = (
 				0945CECC24EC2655003903FA /* ManghuaCell.h */,
 				0945CECD24EC2655003903FA /* ManghuaCell.m */,
+				119A7DB325008DE600AB3EA7 /* ManghuaCategoryCell.h */,
+				119A7DB425008DE600AB3EA7 /* ManghuaCategoryCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1948,6 +1968,16 @@
 			children = (
 				11D0076A24D9123900C92EA8 /* MangHuaViewController.h */,
 				11D0076B24D9123900C92EA8 /* MangHuaViewController.m */,
+				119A7DA4250089A700AB3EA7 /* MangHuaCategoryViewController.h */,
+				119A7DA5250089A700AB3EA7 /* MangHuaCategoryViewController.m */,
+				119A7DA725008ACD00AB3EA7 /* ManghuaNewViewController.h */,
+				119A7DA825008ACD00AB3EA7 /* ManghuaNewViewController.m */,
+				119A7DAA25008ADE00AB3EA7 /* ManghuaLianzaiViewController.h */,
+				119A7DAB25008ADE00AB3EA7 /* ManghuaLianzaiViewController.m */,
+				119A7DAD25008AEB00AB3EA7 /* ManghuaCompleteViewController.h */,
+				119A7DAE25008AEB00AB3EA7 /* ManghuaCompleteViewController.m */,
+				119A7DB025008AF700AB3EA7 /* ManghuaPersonViewController.h */,
+				119A7DB125008AF700AB3EA7 /* ManghuaPersonViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2328,6 +2358,7 @@
 				09E72AEC240559F40004B25C /* AFHTTPSessionManager.m in Sources */,
 				8B9B8BFD240D4AED004B4704 /* ZFPlayerControlView.m in Sources */,
 				8BE5DC2A24509DE10087E70A /* CityDetailCustomView.m in Sources */,
+				119A7DB525008DE600AB3EA7 /* ManghuaCategoryCell.m in Sources */,
 				09E72C6124055F770004B25C /* NSArray+MASAdditions.m in Sources */,
 				11111693240DF61600E9F781 /* MyShareCustomView.m in Sources */,
 				8B9B8BEA240D4AED004B4704 /* ZFPlayerController.m in Sources */,
@@ -2352,7 +2383,9 @@
 				09E72C7D24055F7E0004B25C /* NSObject+MJKeyValue.m in Sources */,
 				09E72C3724055F6E0004B25C /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				8B9B8BFF240D4AED004B4704 /* ZFLoadingView.m in Sources */,
+				119A7DAC25008ADE00AB3EA7 /* ManghuaLianzaiViewController.m in Sources */,
 				110DFC00240FAE1D002E1C8B /* CommonAlertView.m in Sources */,
+				119A7DA6250089A700AB3EA7 /* MangHuaCategoryViewController.m in Sources */,
 				09E72AF0240559F40004B25C /* AFSecurityPolicy.m in Sources */,
 				09E72D30240565710004B25C /* LSVProgressHUD.m in Sources */,
 				8B9B8BEE240D4AED004B4704 /* ZFPlayerNotification.m in Sources */,
@@ -2432,6 +2465,7 @@
 				8B9B8BF3240D4AED004B4704 /* UIViewController+ZFPlayerRotation.m in Sources */,
 				09E72C7E24055F7E0004B25C /* MJProperty.m in Sources */,
 				09E72C3424055F6E0004B25C /* IQToolbar.m in Sources */,
+				119A7DAF25008AEB00AB3EA7 /* ManghuaCompleteViewController.m in Sources */,
 				11105E5A24066BC900521CB2 /* LqTextView.m in Sources */,
 				09E72CF124055F8E0004B25C /* SDWebImagePrefetcher.m in Sources */,
 				11105AD92406004700521CB2 /* ZhuanTiViewController.m in Sources */,
@@ -2563,9 +2597,11 @@
 				8BE5DC27245087C30087E70A /* CityListViewController.m in Sources */,
 				09E72CEB24055F8E0004B25C /* SDWebImageDecoder.m in Sources */,
 				09E72CF224055F8E0004B25C /* SDImageCache.m in Sources */,
+				119A7DA925008ACD00AB3EA7 /* ManghuaNewViewController.m in Sources */,
 				8B9B8BF2240D4AED004B4704 /* ZFReachabilityManager.m in Sources */,
 				8BD545B6240BB4CC00C90A31 /* MJRefreshHeader.m in Sources */,
 				09E72C4024055F6E0004B25C /* IQUIViewController+Additions.m in Sources */,
+				119A7DB225008AF700AB3EA7 /* ManghuaPersonViewController.m in Sources */,
 				112F56BA2412019100CE4715 /* BindMobileSecStepViewController.m in Sources */,
 				093E58BF2406A87A004E5F72 /* SAMKeychainQuery.m in Sources */,
 				09E72C3F24055F6E0004B25C /* IQUIView+Hierarchy.m in Sources */,

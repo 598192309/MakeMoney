@@ -141,8 +141,8 @@ object:nil];
 
 
 #ifdef DEBUG
-#define KHOST @"http://i333191g98.zicp.vip:55490/"
-//#define KHOST @"http://51778app.me"
+//#define KHOST @"http://i333191g98.zicp.vip:55490/"
+#define KHOST @"http://51778app.me"
 
 
 #else
@@ -207,6 +207,7 @@ alpha:(a)]
 #define TitleGrayColor   [UIColor lq_colorWithHexString:@"#bcbcbc"]
 #define TitleWhiteColor   [UIColor lq_colorWithHexString:@"#ffffff"]
 
+#define LineGrayColor   [UIColor lq_colorWithHexString:@"#f4f4f4" alpha:0.2]
 
 #define CustomRedColor   [UIColor lq_colorWithHexString:@"#e94339"]
 #define CustomBlueColor   [UIColor lq_colorWithHexString:@"#2373f2"]
@@ -221,7 +222,7 @@ alpha:(a)]
 // 主题色
 #define ThemeBlackColor   [UIColor lq_colorWithHexString:@"#0f0f1b"]
 
-#define TitleBarColor   [UIColor lq_colorWithHexString:@"#000000</"]
+#define TitleBarColor   [UIColor lq_colorWithHexString:@"#000000"]
 
 
 

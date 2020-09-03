@@ -12,6 +12,8 @@
 #import "SearchViewController.h"
 #import "MangHuaApi.h"
 #import "HomeCollectionHeaderView.h"
+#import "MangHuaCategoryViewController.h"
+
 @interface MangHuaViewController()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) UICollectionView *collectionView;//容器视图
@@ -29,7 +31,8 @@
 @implementation MangHuaViewController
 #pragma mark - 重写
 - (void)navigationRightBtnClick:(UIButton *)button{
-
+    MangHuaCategoryViewController *vc = [[MangHuaCategoryViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)navigationRightSecBtnClick:(UIButton*)button{
